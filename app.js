@@ -657,7 +657,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 let distY = robot.y - testY;
                 let distance = Math.sqrt((distX * distX) + (distY * distY));
 
-                if (distance <= 14) {
+                if (robot.x >= c.x && robot.x <= c.x + c.w && robot.y >= c.y && robot.y <= c.y + c.h) {
+                    // Robot center is inside the crate, push out to nearest edge
+                    let distLeft = robot.x - c.x;
+                    let distRight = (c.x + c.w) - robot.x;
+                    let distTop = robot.y - c.y;
+                    let distBottom = (c.y + c.h) - robot.y;
+                    
+                    let min = Math.min(distLeft, distRight, distTop, distBottom);
+                    if (min === distLeft) { robot.x = c.x - 14.1; robot.vx *= -0.5; }
+                    else if (min === distRight) { robot.x = c.x + c.w + 14.1; robot.vx *= -0.5; }
+                    else if (min === distTop) { robot.y = c.y - 14.1; robot.vy *= -0.5; }
+                    else if (min === distBottom) { robot.y = c.y + c.h + 14.1; robot.vy *= -0.5; }
+                } else if (distance <= 14) {
                     // Penetration resolution
                     let overlap = 14 - distance;
                     let nx = distance > 0 ? distX / distance : 1;
