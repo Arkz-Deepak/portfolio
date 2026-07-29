@@ -603,6 +603,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (dist > 8) {
                 // Potential field avoidance
+                let attractiveX = (dx / dist) * 40;
+                let attractiveY = (dy / dist) * 40;
+
                 let repelX = 0;
                 let repelY = 0;
                 crates.forEach(c => {
@@ -611,12 +614,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     let cdx = robot.x - cx;
                     let cdy = robot.y - cy;
                     let cdist = Math.sqrt(cdx*cdx + cdy*cdy);
-                    if (cdist < 75) {
-                        repelX += (cdx / cdist) * (75 - cdist) * 1.5;
-                        repelY += (cdy / cdist) * (75 - cdist) * 1.5;
+                    let safeDist = 90;
+                    if (cdist < safeDist) {
+                        repelX += (cdx / cdist) * (safeDist - cdist) * 3.5;
+                        repelY += (cdy / cdist) * (safeDist - cdist) * 3.5;
                     }
                 });
-                const targetAngle = Math.atan2(dy + repelY, dx + repelX);
+                const targetAngle = Math.atan2(attractiveY + repelY, attractiveX + repelX);
                 let angleDiff = targetAngle - robot.angle;
                 while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
                 while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
