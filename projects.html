@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROJECT ARCHIVES // DEEPAK R</title>
+    <meta name="description" content="Robotics, AI, Computer Vision, and Embedded projects developed by Deepak R.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="cyber-theme">
+    <canvas id="bg-canvas"></canvas>
+    <div class="hud-grid-overlay"></div>
+    <div class="hud-scanline"></div>
+
+    <header class="cyber-header">
+        <div class="header-container">
+            <a href="index.html" class="brand-badge" style="text-decoration: none;">
+                <div class="logo-icon"><i class="fa-solid fa-robot"></i></div>
+                <div class="logo-text">
+                    <span class="cyber-name">DEEPAK<span class="highlight">.ROBOTICS</span></span>
+                    <span class="cyber-sub">SYS_ID // 920-DR</span>
+                </div>
+            </a>
+            <div class="telemetry-bar">
+                <div class="tele-item"><span class="tele-label">PROJECTS:</span> <span class="tele-val highlight-cyan">SIH 2025 INNOVATIONS</span></div>
+                <div class="tele-item"><span class="tele-label">AI & CV:</span> <span class="tele-val">YOLO / MEDIAPIPE</span></div>
+            </div>
+            <nav class="cyber-nav">
+                <a href="index.html" class="nav-link" data-sound="hover"><i class="fa-solid fa-house"></i> OVERVIEW</a>
+                <a href="about.html" class="nav-link" data-sound="hover"><i class="fa-solid fa-user-gear"></i> ABOUT & EXP</a>
+                <a href="projects.html" class="nav-link active" data-sound="hover"><i class="fa-solid fa-diagram-project"></i> PROJECTS</a>
+                <a href="labs.html" class="nav-link" data-sound="hover"><i class="fa-solid fa-microchip"></i> SIM LABS</a>
+                <a href="contact.html" class="nav-link" data-sound="hover"><i class="fa-solid fa-satellite-dish"></i> CONTACT & CLI</a>
+                <button id="audio-toggle" class="cyber-btn btn-icon" title="Toggle UI Sound Effects" data-sound="click"><i class="fa-solid fa-volume-high"></i></button>
+            </nav>
+            <button class="mobile-menu-btn" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="section-padding">
+            <div class="section-header">
+                <div class="cyber-tag"><i class="fa-solid fa-cubes"></i> VERIFIED BLUEPRINTS</div>
+                <h2 class="section-title">FEATURED <span class="highlight">PROJECT ARCHIVES</span></h2>
+                <p class="section-subtitle">Real-world AI systems, Smart India Hackathon 2025 entry, computer vision object tracking, and autonomous robotics navigation.</p>
+            </div>
+
+            <!-- Project Filters -->
+            <div class="project-filters">
+                <button class="filter-btn active" data-filter="all" data-sound="click">ALL PROJECTS</button>
+                <button class="filter-btn" data-filter="cv" data-sound="click">AI & VISION</button>
+                <button class="filter-btn" data-filter="ros" data-sound="click">ROS NAVIGATION</button>
+                <button class="filter-btn" data-filter="embedded" data-sound="click">EMBEDDED IOT</button>
+            </div>
+
+            <div class="projects-grid">
+
+                <!-- Project 1: SIH 2025 Smart Traffic Management System -->
+                <div class="project-card" data-category="cv">
+                    <div class="project-media">
+                        <div class="project-svg-graphic">
+                            <svg viewBox="0 0 400 250" class="tech-svg">
+                                <rect width="400" height="250" fill="#060c1a"/>
+                                <!-- Traffic Light -->
+                                <rect x="180" y="40" width="40" height="110" rx="8" fill="#0a152e" stroke="#00f0ff" stroke-width="2"/>
+                                <circle cx="200" cy="65" r="12" fill="#ff0055"/>
+                                <circle cx="200" cy="95" r="12" fill="#ffb800"/>
+                                <circle cx="200" cy="125" r="12" fill="#00ff9d"/>
+                                <!-- AI Bounding box overlays -->
+                                <rect x="80" y="160" width="80" height="50" fill="none" stroke="#00f0ff" stroke-width="2" stroke-dasharray="4,4"/>
+                                <text x="85" y="155" fill="#00f0ff" font-family="Orbitron" font-size="9">CAR [98.4%]</text>
+                                <rect x="240" y="170" width="90" height="45" fill="none" stroke="#00ff9d" stroke-width="2" stroke-dasharray="4,4"/>
+                                <text x="245" y="165" fill="#00ff9d" font-family="Orbitron" font-size="9">BUS [99.1%]</text>
+                                <text x="20" y="235" fill="#00f0ff" font-family="Orbitron" font-size="11">SIH 2025 // SMART TRAFFIC AI (SIH25050)</text>
+                            </svg>
+                        </div>
+                        <div class="project-badge">SIH HACKATHON 2025</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Smart Traffic Management System</h3>
+                        <p class="project-desc">
+                            Developed for Smart India Hackathon 2025 (Problem ID: SIH25050). Uses computer vision to count vehicles and dynamically adjust traffic signal timings in real-time, reducing congestion.
+                        </p>
+                        <div class="project-tech-tags">
+                            <span>Python</span>
+                            <span>OpenCV</span>
+                            <span>YOLO</span>
+                            <span>Computer Vision</span>
+                            <span>Dynamic Control</span>
+                        </div>
+                        <div class="project-actions">
+                            <button class="cyber-btn btn-sm open-modal-btn" data-modal="modal-sih" data-sound="click">
+                                <i class="fa-solid fa-microchip"></i> SPECS & ARCHITECTURE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Real-Time Object Detection -->
+                <div class="project-card" data-category="cv">
+                    <div class="project-media">
+                        <div class="project-svg-graphic">
+                            <svg viewBox="0 0 400 250" class="tech-svg">
+                                <rect width="400" height="250" fill="#060c1a"/>
+                                <circle cx="200" cy="110" r="60" fill="none" stroke="#ff007f" stroke-width="2"/>
+                                <rect x="140" y="60" width="120" height="100" fill="none" stroke="#00f0ff" stroke-width="2"/>
+                                <line x1="200" y1="40" x2="200" y2="180" stroke="#00ff9d" stroke-width="1" stroke-dasharray="2,2"/>
+                                <text x="20" y="235" fill="#ff007f" font-family="Orbitron" font-size="11">YOLO & MEDIAPIPE EDGE PERCEPTION</text>
+                            </svg>
+                        </div>
+                        <div class="project-badge">AI PERCEPTION</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Real-Time Object Detection Engine</h3>
+                        <p class="project-desc">
+                            High-speed vision pipelines combining YOLO and MediaPipe for object detection and gesture tracking optimized for edge computing devices.
+                        </p>
+                        <div class="project-tech-tags">
+                            <span>Python</span>
+                            <span>YOLOv8</span>
+                            <span>MediaPipe</span>
+                            <span>OpenCV</span>
+                            <span>Edge AI</span>
+                        </div>
+                        <div class="project-actions">
+                            <button class="cyber-btn btn-sm open-modal-btn" data-modal="modal-yolo" data-sound="click">
+                                <i class="fa-solid fa-microchip"></i> SPECS & ARCHITECTURE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: ROS Autonomous Navigation Stack -->
+                <div class="project-card" data-category="ros">
+                    <div class="project-media">
+                        <div class="project-svg-graphic">
+                            <svg viewBox="0 0 400 250" class="tech-svg">
+                                <rect width="400" height="250" fill="#060c1a"/>
+                                <circle cx="100" cy="120" r="18" fill="#00f0ff"/>
+                                <path d="M 100 120 Q 200 60 300 140" fill="none" stroke="#00ff9d" stroke-width="3" stroke-dasharray="5,5"/>
+                                <circle cx="300" cy="140" r="8" fill="#ff007f"/>
+                                <text x="20" y="235" fill="#00ff9d" font-family="Orbitron" font-size="11">ROS / ROS 2 NAVIGATION & SLAM STACK</text>
+                            </svg>
+                        </div>
+                        <div class="project-badge">ROS 2</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">ROS Autonomous Vehicle Navigation</h3>
+                        <p class="project-desc">
+                            Explored ROS/ROS 2 navigation stacks, costmaps, 2D LiDAR SLAM, and Kalman filter sensor fusion for autonomous mobile robots.
+                        </p>
+                        <div class="project-tech-tags">
+                            <span>ROS 2</span>
+                            <span>C++</span>
+                            <span>LiDAR SLAM</span>
+                            <span>Costmaps</span>
+                            <span>Sensor Fusion</span>
+                        </div>
+                        <div class="project-actions">
+                            <button class="cyber-btn btn-sm open-modal-btn" data-modal="modal-ros" data-sound="click">
+                                <i class="fa-solid fa-microchip"></i> SPECS & ARCHITECTURE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Smart Mechatronics ESP8266 Controller -->
+                <div class="project-card" data-category="embedded">
+                    <div class="project-media">
+                        <div class="project-svg-graphic">
+                            <svg viewBox="0 0 400 250" class="tech-svg">
+                                <rect width="400" height="250" fill="#060c1a"/>
+                                <rect x="130" y="70" width="140" height="90" fill="#0d1b3a" stroke="#ffb800" stroke-width="2"/>
+                                <circle cx="150" cy="90" r="4" fill="#00ff9d"/>
+                                <circle cx="170" cy="90" r="4" fill="#00f0ff"/>
+                                <text x="20" y="235" fill="#ffb800" font-family="Orbitron" font-size="11">ESP8266 & ARDUINO EMBEDDED IOT</text>
+                            </svg>
+                        </div>
+                        <div class="project-badge">EMBEDDED IOT</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Smart Mechatronics Controller</h3>
+                        <p class="project-desc">
+                            Hardware-software interfacing with ESP8266 (NodeMCU V3) and Arduino microcontrollers for wireless sensor monitoring and actuator control.
+                        </p>
+                        <div class="project-tech-tags">
+                            <span>ESP8266</span>
+                            <span>Arduino C++</span>
+                            <span>Sensors</span>
+                            <span>Fusion 360</span>
+                            <span>IoT</span>
+                        </div>
+                        <div class="project-actions">
+                            <button class="cyber-btn btn-sm open-modal-btn" data-modal="modal-esp" data-sound="click">
+                                <i class="fa-solid fa-microchip"></i> SPECS & ARCHITECTURE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL OVERLAY -->
+    <div id="modal-container" class="cyber-modal-overlay">
+        <div class="cyber-modal-content hud-box">
+            <button class="modal-close-btn" id="modal-close" data-sound="click"><i class="fa-solid fa-xmark"></i></button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <footer class="cyber-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <span class="cyber-name">DEEPAK<span class="highlight">.ROBOTICS</span></span>
+                <p>© 2026 Deepak R. All Project Archives Documented.</p>
+            </div>
+            <div class="social-links">
+                <a href="mailto:deepak121289@outlook.com" class="social-btn" title="Email Deepak" data-sound="hover"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="social-btn" title="LinkedIn" data-sound="hover"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com" target="_blank" class="social-btn" title="GitHub" data-sound="hover"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

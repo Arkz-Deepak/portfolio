@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTACT & CLI TERMINAL // DEEPAK R</title>
+    <meta name="description" content="Connect with Deepak R via Command Line Terminal or encrypted transmission frequency.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="cyber-theme">
+    <canvas id="bg-canvas"></canvas>
+    <div class="hud-grid-overlay"></div>
+    <div class="hud-scanline"></div>
+
+    <header class="cyber-header">
+        <div class="header-container">
+            <a href="index.html" class="brand-badge" style="text-decoration: none;">
+                <div class="logo-icon"><i class="fa-solid fa-robot"></i></div>
+                <div class="logo-text">
+                    <span class="cyber-name">DEEPAK<span class="highlight">.ROBOTICS</span></span>
+                    <span class="cyber-sub">SYS_ID // 920-DR</span>
+                </div>
+            </a>
+            <div class="telemetry-bar">
+                <div class="tele-item"><span class="tele-label">EMAIL:</span> <span class="tele-val highlight-cyan">deepak121289@outlook.com</span></div>
+                <div class="tele-item"><span class="tele-label">PHONE:</span> <span class="tele-val">+91 63696 14424</span></div>
+            </div>
+            <nav class="cyber-nav">
+                <a href="index.html" class="nav-link" data-sound="hover"><i class="fa-solid fa-house"></i> OVERVIEW</a>
+                <a href="about.html" class="nav-link" data-sound="hover"><i class="fa-solid fa-user-gear"></i> ABOUT & EXP</a>
+                <a href="projects.html" class="nav-link" data-sound="hover"><i class="fa-solid fa-diagram-project"></i> PROJECTS</a>
+                <a href="labs.html" class="nav-link" data-sound="hover"><i class="fa-solid fa-microchip"></i> SIM LABS</a>
+                <a href="contact.html" class="nav-link active" data-sound="hover"><i class="fa-solid fa-satellite-dish"></i> CONTACT & CLI</a>
+                <button id="audio-toggle" class="cyber-btn btn-icon" title="Toggle UI Sound Effects" data-sound="click"><i class="fa-solid fa-volume-high"></i></button>
+            </nav>
+            <button class="mobile-menu-btn" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="section-padding">
+            <div class="section-header">
+                <div class="cyber-tag"><i class="fa-solid fa-satellite"></i> ESTABLISH TRANSMISSION</div>
+                <h2 class="section-title">COMMAND TERMINAL & <span class="highlight">CONTACT FREQUENCY</span></h2>
+                <p class="section-subtitle">Interact via cyber CLI terminal or broadcast an encrypted transmission directly to Deepak R.</p>
+            </div>
+
+            <div class="contact-grid">
+                <!-- Cyber CLI Terminal -->
+                <div class="cli-container">
+                    <div class="cli-header">
+                        <span class="cli-title"><i class="fa-solid fa-terminal"></i> DEEPAK-OS TERMINAL v4.2</span>
+                        <div class="cli-window-controls">
+                            <span class="cli-dot red"></span>
+                            <span class="cli-dot yellow"></span>
+                            <span class="cli-dot green"></span>
+                        </div>
+                    </div>
+                    <div class="cli-output" id="cli-output">
+                        <div class="cli-line intro-line">DEEPAK-OS v4.2.0-generic [x86_64-robotics-rt]</div>
+                        <div class="cli-line intro-line">Logged in as: <span class="txt-cyan">Deepak R (B.E. Robotics - 9.2 CGPA)</span></div>
+                        <div class="cli-line intro-line">Type '<span class="txt-cyan">help</span>' or click chips below for quick command queries.</div>
+                    </div>
+                    
+                    <div class="cli-chips">
+                        <button class="cli-chip" data-cmd="help">help</button>
+                        <button class="cli-chip" data-cmd="whoami">whoami</button>
+                        <button class="cli-chip" data-cmd="education">education</button>
+                        <button class="cli-chip" data-cmd="experience">experience</button>
+                        <button class="cli-chip" data-cmd="skills">skills</button>
+                        <button class="cli-chip" data-cmd="projects">projects</button>
+                        <button class="cli-chip" data-cmd="contact">contact</button>
+                        <button class="cli-chip" data-cmd="ping">ping</button>
+                        <button class="cli-chip" data-cmd="clear">clear</button>
+                    </div>
+
+                    <form id="cli-form" class="cli-input-line">
+                        <span class="cli-prompt">deepak@robotics:~$</span>
+                        <input type="text" id="cli-input" placeholder="Type command..." autocomplete="off">
+                        <button type="submit" class="cyber-btn btn-sm" data-sound="click"><i class="fa-solid fa-paper-plane"></i></button>
+                    </form>
+                </div>
+
+                <!-- Direct Contact Card & Form -->
+                <div class="contact-form-box hud-box">
+                    <div class="hud-header">
+                        <span class="hud-title"><i class="fa-solid fa-paper-plane"></i> TRANSMIT DIRECT SIGNAL</span>
+                    </div>
+
+                    <div style="background: rgba(0, 240, 255, 0.05); border: 1px solid var(--border-cyan); padding: 1rem; margin-bottom: 1rem; font-family: var(--font-sub); font-size: 0.85rem;">
+                        <p><i class="fa-solid fa-envelope txt-cyan"></i> <strong>Email:</strong> <a href="mailto:deepak121289@outlook.com" style="color: var(--color-cyan);">deepak121289@outlook.com</a></p>
+                        <p><i class="fa-solid fa-phone txt-green"></i> <strong>Phone:</strong> +91 63696 14424</p>
+                        <p><i class="fa-solid fa-location-dot txt-pink"></i> <strong>Location:</strong> Chennai, Tamil Nadu, India</p>
+                    </div>
+
+                    <form id="cyber-contact-form" class="cyber-form">
+                        <div class="form-group">
+                            <label for="contact-name"><i class="fa-solid fa-user"></i> CALLSIGN / NAME:</label>
+                            <input type="text" id="contact-name" placeholder="Dr. Sarah Connor" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email"><i class="fa-solid fa-envelope"></i> COMM FREQUENCY / EMAIL:</label>
+                            <input type="email" id="contact-email" placeholder="sarah@robotics-lab.org" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-subject"><i class="fa-solid fa-tag"></i> SUBJECT / INTEREST:</label>
+                            <select id="contact-subject">
+                                <option value="hiring">Robotics / Autonomous Systems Opportunity</option>
+                                <option value="collaboration">Research & R&D Project Collaboration</option>
+                                <option value="internship">Internship / Full-time Role</option>
+                                <option value="general">General Engineering Inquiry</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message"><i class="fa-solid fa-message"></i> TRANSMISSION DATA:</label>
+                            <textarea id="contact-message" rows="4" placeholder="Enter transmission message for Deepak..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="cyber-btn btn-primary btn-block" data-sound="click">
+                            <i class="fa-solid fa-broadcast-tower"></i> BROADCAST TRANSMISSION
+                        </button>
+                    </form>
+                    <div id="form-feedback" class="form-feedback"></div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="cyber-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <span class="cyber-name">DEEPAK<span class="highlight">.ROBOTICS</span></span>
+                <p>© 2026 Deepak R. All Transmission Channels Open.</p>
+            </div>
+            <div class="social-links">
+                <a href="mailto:deepak121289@outlook.com" class="social-btn" title="Email Deepak" data-sound="hover"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="social-btn" title="LinkedIn" data-sound="hover"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com" target="_blank" class="social-btn" title="GitHub" data-sound="hover"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

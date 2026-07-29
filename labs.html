@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INTERACTIVE SIM LABS // DEEPAK R</title>
+    <meta name="description" content="Interactive robotics algorithm benchmarks: SLAM LiDAR Navigation, Neural Perception Vision, and PID Dynamics Control.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="cyber-theme">
+    <canvas id="bg-canvas"></canvas>
+    <div class="hud-grid-overlay"></div>
+    <div class="hud-scanline"></div>
+
+    <header class="cyber-header">
+        <div class="header-container">
+            <a href="index.html" class="brand-badge" style="text-decoration: none;">
+                <div class="logo-icon"><i class="fa-solid fa-robot"></i></div>
+                <div class="logo-text">
+                    <span class="cyber-name">DEEPAK<span class="highlight">.ROBOTICS</span></span>
+                    <span class="cyber-sub">SYS_ID // 920-DR</span>
+                </div>
+            </a>
+            <div class="telemetry-bar">
+                <div class="tele-item"><span class="tele-label">SIM BENCHMARKS:</span> <span class="tele-val highlight-cyan">CANVAS RUNTIME ACTIVE</span></div>
+                <div class="tele-item"><span class="tele-label">FPS:</span> <span class="tele-val" id="fps-display">60</span></div>
+            </div>
+            <nav class="cyber-nav">
+                <a href="index.html" class="nav-link" data-sound="hover"><i class="fa-solid fa-house"></i> OVERVIEW</a>
+                <a href="about.html" class="nav-link" data-sound="hover"><i class="fa-solid fa-user-gear"></i> ABOUT & EXP</a>
+                <a href="projects.html" class="nav-link" data-sound="hover"><i class="fa-solid fa-diagram-project"></i> PROJECTS</a>
+                <a href="labs.html" class="nav-link active" data-sound="hover"><i class="fa-solid fa-microchip"></i> SIM LABS</a>
+                <a href="contact.html" class="nav-link" data-sound="hover"><i class="fa-solid fa-satellite-dish"></i> CONTACT & CLI</a>
+                <button id="audio-toggle" class="cyber-btn btn-icon" title="Toggle UI Sound Effects" data-sound="click"><i class="fa-solid fa-volume-high"></i></button>
+            </nav>
+            <button class="mobile-menu-btn" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="section-padding">
+            <div class="section-header">
+                <div class="cyber-tag"><i class="fa-solid fa-flask"></i> INTERACTIVE ALGORITHM BENCHMARKS</div>
+                <h2 class="section-title">ROBOTICS <span class="highlight">SIMULATION LABS</span></h2>
+                <p class="section-subtitle">Simulate real-time robotic algorithms: Autonomous LiDAR Navigation, Computer Vision Object Tracking, and Servo PID Dynamics.</p>
+            </div>
+
+            <!-- Lab Tabs Navigation -->
+            <div class="lab-tabs">
+                <button class="lab-tab-btn active" data-tab="tab-slam" data-sound="click">
+                    <i class="fa-solid fa-route"></i> 1. SLAM & LiDAR Navigation
+                </button>
+                <button class="lab-tab-btn" data-tab="tab-vision" data-sound="click">
+                    <i class="fa-solid fa-eye"></i> 2. Neural Perception & Vision
+                </button>
+                <button class="lab-tab-btn" data-tab="tab-pid" data-sound="click">
+                    <i class="fa-solid fa-chart-line"></i> 3. Servo PID Dynamics
+                </button>
+            </div>
+
+            <div class="lab-content-container">
+                <!-- LAB 1: SLAM & LiDAR NAVIGATION -->
+                <div class="lab-pane active" id="tab-slam">
+                    <div class="lab-grid">
+                        <div class="lab-canvas-wrapper">
+                            <canvas id="slam-canvas"></canvas>
+                            <div class="canvas-instructions">
+                                <i class="fa-solid fa-mouse-pointer"></i> Click anywhere inside map grid to set target navigation goal for the AMR robot!
+                            </div>
+                        </div>
+                        <div class="lab-controls-panel">
+                            <h3 class="panel-title"><i class="fa-solid fa-sliders"></i> AMR Navigation Parameters</h3>
+                            <div class="control-row">
+                                <label>LiDAR Rays Count: <span id="lidar-count-val">36</span></label>
+                                <input type="range" id="lidar-count" min="12" max="72" value="36">
+                            </div>
+                            <div class="control-row">
+                                <label>Robot Speed: <span id="robot-speed-val">3.5</span> m/s</label>
+                                <input type="range" id="robot-speed" min="1" max="8" value="3.5" step="0.5">
+                            </div>
+                            <div class="control-row">
+                                <label>Obstacle Grid Actions:</label>
+                                <button id="gen-obstacles-btn" class="cyber-btn btn-sm" data-sound="click"><i class="fa-solid fa-shuffle"></i> GENERATE MAP</button>
+                                <button id="clear-map-btn" class="cyber-btn btn-sm btn-danger" data-sound="click"><i class="fa-solid fa-trash"></i> CLEAR MAP</button>
+                            </div>
+                            
+                            <div class="telemetry-box">
+                                <div class="tele-line"><span>Status:</span> <strong id="slam-status" class="txt-green">PATH COMPUTED</strong></div>
+                                <div class="tele-line"><span>Dist to Goal:</span> <strong id="slam-dist">0.00 m</strong></div>
+                                <div class="tele-line"><span>Occupancy Grid:</span> <strong>512 / 512 Cells</strong></div>
+                                <div class="tele-line"><span>EKF Pose (X, Y, θ):</span> <strong id="slam-pose">0.0, 0.0, 0.0°</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LAB 2: NEURAL PERCEPTION & VISION -->
+                <div class="lab-pane" id="tab-vision">
+                    <div class="lab-grid">
+                        <div class="lab-canvas-wrapper">
+                            <canvas id="vision-canvas"></canvas>
+                            <div class="vision-overlay-hud">
+                                <div class="vision-mode-badge" id="vision-mode-badge">MODE: RGB PERCEPTION</div>
+                                <div class="vision-fps">TENSORRT: <span id="inference-time">2.4 ms</span></div>
+                            </div>
+                        </div>
+                        <div class="lab-controls-panel">
+                            <h3 class="panel-title"><i class="fa-solid fa-eye"></i> Perception Pipeline Config</h3>
+                            <div class="control-row">
+                                <label>Filter Pipeline:</label>
+                                <div class="btn-group">
+                                    <button class="cyber-btn btn-sm mode-btn active" data-mode="rgb" data-sound="click">RGB</button>
+                                    <button class="cyber-btn btn-sm mode-btn" data-mode="depth" data-sound="click">DEPTH Map</button>
+                                    <button class="cyber-btn btn-sm mode-btn" data-mode="thermal" data-sound="click">THERMAL</button>
+                                </div>
+                            </div>
+                            <div class="control-row">
+                                <label>Confidence Threshold: <span id="conf-val">85%</span></label>
+                                <input type="range" id="conf-threshold" min="50" max="99" value="85">
+                            </div>
+                            <div class="control-row">
+                                <label>Detection Classes:</label>
+                                <div class="checkbox-list">
+                                    <label><input type="checkbox" id="chk-manipulator" checked> Robot Manipulator</label>
+                                    <label><input type="checkbox" id="chk-human" checked> Human Worker (Safety Zone)</label>
+                                    <label><input type="checkbox" id="chk-payload" checked> Target Payload</label>
+                                </div>
+                            </div>
+                            
+                            <div class="telemetry-box">
+                                <div class="tele-line"><span>Detections Count:</span> <strong id="det-count">3 Objects</strong></div>
+                                <div class="tele-line"><span>Safety E-Stop Signal:</span> <strong id="safety-status" class="txt-green">NOMINAL (CLEAR)</strong></div>
+                                <div class="tele-line"><span>Camera Model:</span> <strong>Intel RealSense D435i</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LAB 3: SERVO PID DYNAMICS -->
+                <div class="lab-pane" id="tab-pid">
+                    <div class="lab-grid">
+                        <div class="lab-canvas-wrapper">
+                            <canvas id="pid-canvas"></canvas>
+                            <div class="canvas-instructions">
+                                PID Step Response Oscilloscope — Tuning Gain Coefficients
+                            </div>
+                        </div>
+                        <div class="lab-controls-panel">
+                            <h3 class="panel-title"><i class="fa-solid fa-wave-square"></i> PID Controller Gain Sliders</h3>
+                            <div class="control-row">
+                                <label>Proportional Gain (Kp): <span id="kp-val">1.80</span></label>
+                                <input type="range" id="kp-slider" min="0" max="5" value="1.8" step="0.1">
+                            </div>
+                            <div class="control-row">
+                                <label>Integral Gain (Ki): <span id="ki-val">0.20</span></label>
+                                <input type="range" id="ki-slider" min="0" max="2" value="0.2" step="0.05">
+                            </div>
+                            <div class="control-row">
+                                <label>Derivative Gain (Kd): <span id="kd-val">0.65</span></label>
+                                <input type="range" id="kd-slider" min="0" max="3" value="0.65" step="0.05">
+                            </div>
+                            <div class="control-row">
+                                <button id="step-input-btn" class="cyber-btn btn-sm btn-primary" data-sound="click"><i class="fa-solid fa-bolt"></i> INJECT STEP DISRUPTION</button>
+                                <button id="reset-pid-btn" class="cyber-btn btn-sm" data-sound="click">RESET TUNING</button>
+                            </div>
+
+                            <div class="telemetry-box">
+                                <div class="tele-line"><span>Settling Time:</span> <strong id="pid-settle">0.42 s</strong></div>
+                                <div class="tele-line"><span>Max Overshoot:</span> <strong id="pid-overshoot" class="txt-yellow">4.2%</strong></div>
+                                <div class="tele-line"><span>Steady State Error:</span> <strong id="pid-error">0.001 rad</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="cyber-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <span class="cyber-name">DEEPAK<span class="highlight">.ROBOTICS</span></span>
+                <p>© 2026 Deepak R. All Simulations Running Realtime.</p>
+            </div>
+            <div class="social-links">
+                <a href="mailto:deepak121289@outlook.com" class="social-btn" title="Email Deepak" data-sound="hover"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="social-btn" title="LinkedIn" data-sound="hover"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com" target="_blank" class="social-btn" title="GitHub" data-sound="hover"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
