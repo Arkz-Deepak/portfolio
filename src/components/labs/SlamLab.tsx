@@ -1,0 +1,232 @@
+"use client"
+import { useEffect, useRef, useState } from 'react'
+
+export default function SlamLab() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [speed, setSpeed] = useState(3.5)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    const fitCanvas = () => {
+      const rect = canvas.parentElement?.getBoundingClientRect()
+      if (rect) {
+        canvas.width = rect.width
+        canvas.height = rect.height
+      }
+    }
+    fitCanvas()
+    window.addEventListener('resize', fitCanvas)
+
+    let animationFrameId: number
+
+    let robot = {
+      x: 90, y: 90, angle: 0,
+      vx: 0, vy: 0, omega: 0, friction: 0.88
+    }
+    let goalPos = { x: 320, y: 220 }
+    let crates = [
+      { x: 180, y: 60, w: 50, h: 140, vx: 0, vy: 0 },
+      { x: 280, y: 190, w: 100, h: 45, vx: 0, vy: 0 }
+    ]
+
+    const handleClick = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect()
+      goalPos.x = e.clientX - rect.left
+      goalPos.y = e.clientY - rect.top
+    }
+    canvas.addEventListener('click', handleClick)
+
+    const render = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+      // Grid
+      ctx.strokeStyle = 'rgba(0, 240, 255, 0.05)'
+      ctx.lineWidth = 1
+      for (let x = 0; x < canvas.width; x += 25) {
+        ctx.beginPath()
+        ctx.moveTo(x, 0)
+        ctx.lineTo(x, canvas.height)
+        ctx.stroke()
+      }
+      for (let y = 0; y < canvas.height; y += 25) {
+        ctx.beginPath()
+        ctx.moveTo(0, y)
+        ctx.lineTo(canvas.width, y)
+        ctx.stroke()
+      }
+
+      // Crates Physics (Static)
+      crates.forEach((c) => {
+        c.vx = 0
+        c.vy = 0
+        ctx.fillStyle = 'rgba(10, 18, 38, 0.9)'
+        ctx.strokeStyle = '#00f0ff'
+        ctx.lineWidth = 1.5
+        ctx.fillRect(c.x, c.y, c.w, c.h)
+        ctx.strokeRect(c.x, c.y, c.w, c.h)
+      })
+
+      // Robot Navigation
+      const dx = goalPos.x - robot.x
+      const dy = goalPos.y - robot.y
+      const dist = Math.sqrt(dx * dx + dy * dy)
+      
+      if (dist > 8) {
+        let attractiveX = (dx / dist) * 40
+        let attractiveY = (dy / dist) * 40
+        let repelX = 0
+        let repelY = 0
+        
+        crates.forEach(c => {
+          let cx = c.x + c.w/2
+          let cy = c.y + c.h/2
+          let cdx = robot.x - cx
+          let cdy = robot.y - cy
+          let cdist = Math.sqrt(cdx*cdx + cdy*cdy)
+          let safeDist = 110
+          
+          if (cdist < safeDist) {
+            let force = (safeDist - cdist) * 3.0
+            repelX += (cdx / cdist) * force
+            repelY += (cdy / cdist) * force
+            
+            let cross = dx * cdy - dy * cdx
+            let direction = cross > 0 ? 1 : -1
+            repelX += -(cdy / cdist) * force * direction * 1.5
+            repelY +=  (cdx / cdist) * force * direction * 1.5
+          }
+        })
+        
+        const targetAngle = Math.atan2(attractiveY + repelY, attractiveX + repelX)
+        let angleDiff = targetAngle - robot.angle
+        while (angleDiff > Math.PI) angleDiff -= Math.PI * 2
+        while (angleDiff < -Math.PI) angleDiff += Math.PI * 2
+
+        robot.omega += angleDiff * 0.08
+        robot.omega *= 0.75
+        robot.angle += robot.omega
+
+        robot.vx += Math.cos(robot.angle) * speed * 0.4
+        robot.vy += Math.sin(robot.angle) * speed * 0.4
+      }
+
+      robot.vx *= robot.friction
+      robot.vy *= robot.friction
+      
+      const steps = 4
+      const stepVx = robot.vx / steps
+      const stepVy = robot.vy / steps
+
+      for (let s = 0; s < steps; s++) {
+        robot.x += stepVx
+        robot.y += stepVy
+
+        if (robot.x - 14 < 0) { robot.x = 14; robot.vx *= -0.5 }
+        if (robot.x + 14 > canvas.width) { robot.x = canvas.width - 14; robot.vx *= -0.5 }
+        if (robot.y - 14 < 0) { robot.y = 14; robot.vy *= -0.5 }
+        if (robot.y + 14 > canvas.height) { robot.y = canvas.height - 14; robot.vy *= -0.5 }
+
+        crates.forEach(c => {
+          let testX = robot.x
+          let testY = robot.y
+          if (robot.x < c.x) testX = c.x
+          else if (robot.x > c.x + c.w) testX = c.x + c.w
+          if (robot.y < c.y) testY = c.y
+          else if (robot.y > c.y + c.h) testY = c.y + c.h
+
+          let distX = robot.x - testX
+          let distY = robot.y - testY
+          let distance = Math.sqrt(distX*distX + distY*distY)
+          
+          if (distance <= 14) {
+            if (distance === 0) {
+              distX = 1
+              distY = 0
+              distance = 1
+            }
+            let overlap = 14 - distance
+            let nx = distX / distance
+            let ny = distY / distance
+            robot.x += nx * overlap
+            robot.y += ny * overlap
+            let dot = robot.vx * nx + robot.vy * ny
+            robot.vx -= dot * nx * 1.5
+            robot.vy -= dot * ny * 1.5
+          }
+        })
+      }
+
+      // Render Goal
+      ctx.fillStyle = 'rgba(0, 255, 157, 0.1)'
+      ctx.beginPath()
+      ctx.arc(goalPos.x, goalPos.y, 25, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.fillStyle = '#00ff9d'
+      ctx.beginPath()
+      ctx.arc(goalPos.x, goalPos.y, 5, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.strokeStyle = '#00ff9d'
+      ctx.lineWidth = 1
+      ctx.beginPath()
+      ctx.arc(goalPos.x, goalPos.y, 15, 0, Math.PI * 2)
+      ctx.stroke()
+
+      // Render Robot
+      ctx.save()
+      ctx.translate(robot.x, robot.y)
+      ctx.rotate(robot.angle)
+      ctx.fillStyle = '#000'
+      ctx.beginPath()
+      ctx.arc(0, 0, 14, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.strokeStyle = '#ff007f'
+      ctx.lineWidth = 2
+      ctx.stroke()
+      ctx.beginPath()
+      ctx.moveTo(0, 0)
+      ctx.lineTo(20, 0)
+      ctx.stroke()
+      ctx.fillStyle = '#ff007f'
+      ctx.fillRect(4, -12, 10, 4)
+      ctx.fillRect(4, 8, 10, 4)
+      ctx.fillStyle = '#00f0ff'
+      ctx.beginPath()
+      ctx.arc(5, 0, 4, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.restore()
+
+      animationFrameId = requestAnimationFrame(render)
+    }
+
+    render()
+
+    return () => {
+      cancelAnimationFrame(animationFrameId)
+      window.removeEventListener('resize', fitCanvas)
+      canvas.removeEventListener('click', handleClick)
+    }
+  }, [speed])
+
+  return (
+    <div className="w-full flex flex-col items-center gap-4">
+      <div className="w-full aspect-video border border-cyan-500/30 rounded-lg overflow-hidden bg-black/50 backdrop-blur">
+        <canvas ref={canvasRef} className="w-full h-full cursor-crosshair" />
+      </div>
+      <div className="w-full flex items-center gap-4">
+        <label className="text-cyan-400 font-orbitron text-sm">ROBOT SPEED:</label>
+        <input 
+          type="range" 
+          min="1" max="10" step="0.5" 
+          value={speed} 
+          onChange={(e) => setSpeed(parseFloat(e.target.value))}
+          className="flex-grow accent-cyan-400"
+        />
+        <span className="text-cyan-400 font-space text-sm w-8">{speed}x</span>
+      </div>
+    </div>
+  )
+}
