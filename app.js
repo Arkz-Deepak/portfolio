@@ -614,10 +614,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     let cdx = robot.x - cx;
                     let cdy = robot.y - cy;
                     let cdist = Math.sqrt(cdx*cdx + cdy*cdy);
-                    let safeDist = 90;
+                    let safeDist = 110;
                     if (cdist < safeDist) {
-                        repelX += (cdx / cdist) * (safeDist - cdist) * 3.5;
-                        repelY += (cdy / cdist) * (safeDist - cdist) * 3.5;
+                        let force = (safeDist - cdist) * 3.0;
+                        // Direct repel
+                        repelX += (cdx / cdist) * force;
+                        repelY += (cdy / cdist) * force;
+                        
+                        // Tangential curl force to sweep around the obstacle
+                        let cross = dx * cdy - dy * cdx;
+                        let direction = cross > 0 ? 1 : -1;
+                        repelX += -(cdy / cdist) * force * direction * 1.5;
+                        repelY +=  (cdx / cdist) * force * direction * 1.5;
                     }
                 });
                 const targetAngle = Math.atan2(attractiveY + repelY, attractiveX + repelX);
@@ -801,6 +809,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 visionCtx.fillRect(0, 0, visionCanvas.width, visionCanvas.height);
             }
 
+            // Pseudo-3D Perspective Grid
+            visionCtx.strokeStyle = visionMode === 'thermal' ? 'rgba(255, 184, 0, 0.15)' : 'rgba(0, 240, 255, 0.15)';
+            visionCtx.lineWidth = 1;
+            const time = Date.now() * 0.001;
+            const cx = visionCanvas.width / 2;
+            const cy = visionCanvas.height / 2;
+            for (let z = 1; z < 15; z++) {
+                let scale = 150 / (z + (time % 1));
+                let yLine = cy + scale * 10;
+                if (yLine < visionCanvas.height) {
+                    visionCtx.beginPath(); visionCtx.moveTo(0, yLine); visionCtx.lineTo(visionCanvas.width, yLine); visionCtx.stroke();
+                }
+                let yLineUp = cy - scale * 10;
+                if (yLineUp > 0) {
+                    visionCtx.beginPath(); visionCtx.moveTo(0, yLineUp); visionCtx.lineTo(visionCanvas.width, yLineUp); visionCtx.stroke();
+                }
+            }
+            for (let x = -10; x <= 10; x++) {
+                visionCtx.beginPath(); visionCtx.moveTo(cx, cy); visionCtx.lineTo(cx + (x * 200), visionCanvas.height); visionCtx.stroke();
+                visionCtx.beginPath(); visionCtx.moveTo(cx, cy); visionCtx.lineTo(cx + (x * 200), 0); visionCtx.stroke();
+            }
+
             rigidBodies.forEach((b, idx) => {
                 b.vy += 0.15;
                 b.x += b.vx;
@@ -851,15 +881,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 const bw = b.radius * 2 + 16;
                 const bh = b.radius * 2 + 16;
 
+                // 3D Bounding Box Projection
+                let depth = b.radius * 0.4;
                 visionCtx.strokeStyle = b.color;
-                visionCtx.lineWidth = 2;
+                visionCtx.lineWidth = 1.5;
+                
+                // Back face
+                visionCtx.strokeRect(bx + depth, by - depth, bw, bh);
+                // Front face
                 visionCtx.strokeRect(bx, by, bw, bh);
+                
+                // Connect corners
+                visionCtx.beginPath();
+                visionCtx.moveTo(bx, by); visionCtx.lineTo(bx + depth, by - depth);
+                visionCtx.moveTo(bx + bw, by); visionCtx.lineTo(bx + bw + depth, by - depth);
+                visionCtx.moveTo(bx, by + bh); visionCtx.lineTo(bx + depth, by + bh - depth);
+                visionCtx.moveTo(bx + bw, by + bh); visionCtx.lineTo(bx + bw + depth, by + bh - depth);
+                visionCtx.stroke();
 
                 visionCtx.fillStyle = b.color;
-                visionCtx.fillRect(bx, by - 20, bw, 20);
+                visionCtx.fillRect(bx, by - 24, bw + depth, 20);
                 visionCtx.fillStyle = '#000';
                 visionCtx.font = '10px Orbitron';
-                visionCtx.fillText(`${b.label} [${b.conf}%]`, bx + 4, by - 6);
+                visionCtx.fillText(`${b.label} [${b.conf}%]`, bx + 4, by - 10);
             });
 
             requestAnimationFrame(renderVisionPhysics);
