@@ -4,7 +4,24 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. CUSTOM CYBER CURSOR & MAGNETIC PHYSICS HOVER ---
+    // --- 1. MOBILE MENU TOGGLE ---
+    const mobileBtn = document.getElementById('mobile-toggle');
+    const cyberNav = document.querySelector('.cyber-nav');
+    if (mobileBtn && cyberNav) {
+        mobileBtn.addEventListener('click', () => {
+            cyberNav.classList.toggle('mobile-active');
+            audio.playClick();
+        });
+        
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-link, .spa-link').forEach(link => {
+            link.addEventListener('click', () => {
+                cyberNav.classList.remove('mobile-active');
+            });
+        });
+    }
+
+    // --- 2. CUSTOM CYBER CURSOR & MAGNETIC PHYSICS HOVER ---
     const cursorRing = document.getElementById('cyber-cursor');
     const cursorDot = document.getElementById('cyber-cursor-dot');
 
