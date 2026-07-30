@@ -1166,8 +1166,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (cmd === 'clear') {
                 cliOutput.innerHTML = '';
-            } else if (cmd === 'whoami' && dynamicResponses && dynamicResponses.whoami) {
-                const r = dynamicResponses.whoami[Math.floor(Math.random() * dynamicResponses.whoami.length)];
+            } else if (dynamicResponses && dynamicResponses[cmd]) {
+                const r = dynamicResponses[cmd][Math.floor(Math.random() * dynamicResponses[cmd].length)];
                 appendCliLine(r);
             } else if (cliCommands[cmd]) {
                 appendCliLine(cliCommands[cmd]);
