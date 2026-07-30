@@ -1024,7 +1024,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const tabId = btn.dataset.tab;
             btn.classList.add('active');
             const pane = document.getElementById(tabId);
-            if (pane) pane.classList.add('active');
+            if (pane) {
+                pane.classList.add('active');
+                // Trigger a resize event to fix canvas dimensions if they were hidden on load
+                window.dispatchEvent(new Event('resize'));
+            }
         });
     });
 
