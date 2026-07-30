@@ -1153,6 +1153,9 @@ document.addEventListener('DOMContentLoaded', () => {
             cliOutput.scrollTop = cliOutput.scrollHeight;
         }
 
+        let dynamicResponses = null;
+        fetch('responses.json').then(res => res.json()).then(data => dynamicResponses = data).catch(err => console.log("AI Offline"));
+
         cliForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const cmd = cliInput.value.trim().toLowerCase();
@@ -1163,10 +1166,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (cmd === 'clear') {
                 cliOutput.innerHTML = '';
+            } else if (cmd === 'whoami' && dynamicResponses && dynamicResponses.whoami) {
+                const r = dynamicResponses.whoami[Math.floor(Math.random() * dynamicResponses.whoami.length)];
+                appendCliLine(r);
             } else if (cliCommands[cmd]) {
                 appendCliLine(cliCommands[cmd]);
             } else {
-                appendCliLine(`<span style="color:#ff3366;">Command not recognized: '${cmd}'. Type 'help' for available menu.</span>`);
+                if (dynamicResponses && dynamicResponses.unknown) {
+                    const ru = dynamicResponses.unknown[Math.floor(Math.random() * dynamicResponses.unknown.length)];
+                    appendCliLine(`<span style="color:#ff3366;">${ru} [Input: ${cmd}]</span>`);
+                } else {
+                    appendCliLine(`<span style="color:#ff3366;">Command not recognized: '${cmd}'. Type 'help' for available menu.</span>`);
+                }
             }
             audio.playClick();
         });
