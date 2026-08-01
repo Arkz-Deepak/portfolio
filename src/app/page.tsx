@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import ParticleBackground from '@/components/ParticleBackground'
+import Terminal from '@/components/Terminal'
 import Link from 'next/link'
 import ArmLab from '@/components/labs/ArmLab'
 
@@ -72,12 +73,32 @@ export default function Home() {
               Specializing in ROS2, Deep Reinforcement Learning, and Edge AI.
               Building autonomous systems and smart architecture for the future.
             </p>
-            <div className="flex gap-4 justify-center md:justify-start">
+            <div className="flex gap-4 justify-center md:justify-start mb-12">
               <a href="#projects" className="px-6 py-3 bg-cyan-500/10 border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(0,240,255,0.2)] hover:shadow-[0_0_25px_rgba(0,240,255,0.6)] font-bold tracking-wider inline-block">
                 VIEW LABS
               </a>
             </div>
+
+            {/* Terminal Component */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="w-full"
+            >
+              <Terminal />
+            </motion.div>
           </motion.div>
+          
+          {/* Floating Telemetry Stats */}
+          <div className="absolute top-24 right-4 hidden lg:flex flex-col gap-4 font-space text-xs text-cyan-400/50 pointer-events-none text-right">
+            <div>SYS.MEM: 64.2TB / 128TB</div>
+            <div>NET.UPLINK: 42.1 Gbps</div>
+            <div>CORE.TEMP: 42°C</div>
+            <div>ACTIVE_AGENTS: 4</div>
+            <div className="w-24 h-px bg-cyan-400/30 ml-auto mt-2 mb-2"></div>
+            <div className="animate-pulse">RUNNING KINEMATICS...</div>
+          </div>
         </div>
         
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-cyan-400/50 hidden md:block">
