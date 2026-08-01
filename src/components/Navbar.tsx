@@ -16,11 +16,12 @@ export default function Navbar() {
           
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8 font-space">
-            <Link href="/#hero" className="hover:text-cyan-400 text-gray-300 transition-colors text-sm">HOME</Link>
-            <Link href="/#labs" className="hover:text-cyan-400 text-gray-300 transition-colors text-sm">LABS</Link>
-            <Link href="/#projects" className="hover:text-cyan-400 text-gray-300 transition-colors text-sm">ARCHIVES</Link>
-            <Link href="/#timeline" className="hover:text-cyan-400 text-gray-300 transition-colors text-sm">TIMELINE</Link>
-            <Link href="/#terminal" className="hover:text-cyan-400 text-gray-300 transition-colors text-sm">TERMINAL</Link>
+            <Link href="/" className="hover:text-cyan-400 text-gray-300 transition-colors text-sm">HOME</Link>
+            <Link href="/about" className="hover:text-cyan-400 text-gray-300 transition-colors text-sm">ABOUT</Link>
+            <Link href="/labs" className="hover:text-cyan-400 text-gray-300 transition-colors text-sm">LABS</Link>
+            <Link href="/projects" className="hover:text-cyan-400 text-gray-300 transition-colors text-sm">ARCHIVES</Link>
+            <Link href="/internships" className="hover:text-cyan-400 text-gray-300 transition-colors text-sm">TIMELINE</Link>
+            <Link href="/contact" className="hover:text-cyan-400 text-gray-300 transition-colors text-sm">TERMINAL</Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -36,11 +37,12 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden bg-black/95 border-b border-cyan-500/30">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col font-space">
-            <Link href="/#hero" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-gray-300 hover:bg-cyan-900/50 hover:text-cyan-400">HOME</Link>
-            <Link href="/#labs" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-gray-300 hover:bg-cyan-900/50 hover:text-cyan-400">LABS</Link>
-            <Link href="/#projects" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-gray-300 hover:bg-cyan-900/50 hover:text-cyan-400">ARCHIVES</Link>
-            <Link href="/#timeline" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-gray-300 hover:bg-cyan-900/50 hover:text-cyan-400">TIMELINE</Link>
-            <Link href="/#terminal" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-gray-300 hover:bg-cyan-900/50 hover:text-cyan-400">TERMINAL</Link>
+            <Link href="/" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-gray-300 hover:bg-cyan-900/50 hover:text-cyan-400">HOME</Link>
+            <Link href="/about" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-gray-300 hover:bg-cyan-900/50 hover:text-cyan-400">ABOUT</Link>
+            <Link href="/labs" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-gray-300 hover:bg-cyan-900/50 hover:text-cyan-400">LABS</Link>
+            <Link href="/projects" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-gray-300 hover:bg-cyan-900/50 hover:text-cyan-400">ARCHIVES</Link>
+            <Link href="/internships" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-gray-300 hover:bg-cyan-900/50 hover:text-cyan-400">TIMELINE</Link>
+            <Link href="/contact" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-gray-300 hover:bg-cyan-900/50 hover:text-cyan-400">TERMINAL</Link>
           </div>
         </div>
       )}
