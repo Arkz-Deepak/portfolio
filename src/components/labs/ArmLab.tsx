@@ -34,10 +34,22 @@ export default function ArmLab() {
 
     let animationFrameId: number
 
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = (e: MouseEvent | TouchEvent) => {
+      // Prevent default scrolling when interacting with canvas
+      if (e.type === 'touchmove') e.preventDefault()
+      
       const rect = canvas.getBoundingClientRect()
-      targetPos.current.x = e.clientX - rect.left - canvas.width / 2
-      targetPos.current.y = e.clientY - rect.top - (canvas.height * 0.85)
+      let clientX, clientY
+      if (window.TouchEvent && e instanceof TouchEvent) {
+        clientX = e.touches[0].clientX
+        clientY = e.touches[0].clientY
+      } else {
+        clientX = (e as MouseEvent).clientX
+        clientY = (e as MouseEvent).clientY
+      }
+      
+      targetPos.current.x = clientX - rect.left - canvas.width / 2
+      targetPos.current.y = clientY - rect.top - (canvas.height * 0.85)
       if (targetPos.current.y > 0) targetPos.current.y = 0
 
       if (Math.random() < 0.4) {
@@ -51,6 +63,8 @@ export default function ArmLab() {
       }
     }
     canvas.addEventListener('mousemove', handleMouseMove)
+    canvas.addEventListener('touchmove', handleMouseMove, { passive: false })
+    canvas.addEventListener('touchstart', handleMouseMove, { passive: false })
 
     const calculateIK = (tx: number, ty: number) => {
       const dist = Math.sqrt(tx * tx + ty * ty)
@@ -192,6 +206,8 @@ export default function ArmLab() {
       cancelAnimationFrame(animationFrameId)
       window.removeEventListener('resize', fitCanvas)
       canvas.removeEventListener('mousemove', handleMouseMove)
+      canvas.removeEventListener('touchmove', handleMouseMove)
+      canvas.removeEventListener('touchstart', handleMouseMove)
     }
   }, [])
 

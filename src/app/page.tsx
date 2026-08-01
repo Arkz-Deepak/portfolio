@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import ParticleBackground from '@/components/ParticleBackground'
 import Link from 'next/link'
+import ArmLab from '@/components/labs/ArmLab'
 
 export default function Home() {
   const [booting, setBooting] = useState(true)
@@ -38,11 +39,11 @@ export default function Home() {
   }
 
   return (
-    <main className="snap-y snap-mandatory h-screen w-full overflow-y-scroll scroll-smooth">
+    <main className="w-full overflow-x-hidden scroll-smooth">
       <ParticleBackground />
 
       {/* SECTION 1: HERO */}
-      <section className="snap-start h-screen w-full flex items-center justify-center relative px-4">
+      <section className="min-h-screen w-full flex flex-col md:flex-row items-center justify-center relative px-4 pt-20 pb-10">
         <div className="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center pt-16">
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
@@ -50,11 +51,8 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="flex justify-center"
           >
-            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-2 border-cyan-400/50 hover:border-cyan-400 transition-colors duration-300">
-              {/* Profile Photo - Replace src with actual path */}
-              <div className="w-full h-full bg-gray-800 grayscale hover:grayscale-0 transition-all duration-500 cursor-pointer flex items-center justify-center text-gray-500">
-                [Profile Photo]
-              </div>
+            <div className="relative w-full max-w-md mx-auto z-10">
+              <ArmLab />
             </div>
           </motion.div>
           
@@ -75,9 +73,9 @@ export default function Home() {
               Building autonomous systems and smart architecture for the future.
             </p>
             <div className="flex gap-4 justify-center md:justify-start">
-              <button className="px-6 py-3 bg-cyan-500/10 border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(0,240,255,0.2)] hover:shadow-[0_0_25px_rgba(0,240,255,0.6)] font-bold tracking-wider">
+              <a href="#projects" className="px-6 py-3 bg-cyan-500/10 border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(0,240,255,0.2)] hover:shadow-[0_0_25px_rgba(0,240,255,0.6)] font-bold tracking-wider inline-block">
                 VIEW LABS
-              </button>
+              </a>
             </div>
           </motion.div>
         </div>
@@ -88,7 +86,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 2: PROJECTS HUB */}
-      <section className="snap-start min-h-screen w-full flex items-center justify-center relative px-4 py-20 bg-black/40 backdrop-blur-sm">
+      <section id="projects" className="min-h-screen w-full flex items-center justify-center relative px-4 py-20 bg-black/40 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto w-full">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-orbitron font-bold text-white mb-4">

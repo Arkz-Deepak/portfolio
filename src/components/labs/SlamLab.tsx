@@ -33,12 +33,24 @@ export default function SlamLab() {
       { x: 280, y: 190, w: 100, h: 45, vx: 0, vy: 0 }
     ]
 
-    const handleClick = (e: MouseEvent) => {
+    const handleClick = (e: MouseEvent | TouchEvent) => {
+      // Prevent default scrolling when interacting with canvas
+      if (e.type === 'touchstart') e.preventDefault()
+      
       const rect = canvas.getBoundingClientRect()
-      goalPos.x = e.clientX - rect.left
-      goalPos.y = e.clientY - rect.top
+      let clientX, clientY
+      if (window.TouchEvent && e instanceof TouchEvent) {
+        clientX = e.touches[0].clientX
+        clientY = e.touches[0].clientY
+      } else {
+        clientX = (e as MouseEvent).clientX
+        clientY = (e as MouseEvent).clientY
+      }
+      goalPos.x = clientX - rect.left
+      goalPos.y = clientY - rect.top
     }
     canvas.addEventListener('click', handleClick)
+    canvas.addEventListener('touchstart', handleClick, { passive: false })
 
     const render = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -208,6 +220,7 @@ export default function SlamLab() {
       cancelAnimationFrame(animationFrameId)
       window.removeEventListener('resize', fitCanvas)
       canvas.removeEventListener('click', handleClick)
+      canvas.removeEventListener('touchstart', handleClick)
     }
   }, [speed])
 
