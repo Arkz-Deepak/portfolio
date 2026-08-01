@@ -2,9 +2,12 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import ParticleBackground from '@/components/ParticleBackground'
-import Terminal from '@/components/Terminal'
 import Link from 'next/link'
 import ArmLab from '@/components/labs/ArmLab'
+import SlamLab from '@/components/labs/SlamLab'
+import VisionLab from '@/components/labs/VisionLab'
+import PidLab from '@/components/labs/PidLab'
+import Terminal from '@/components/Terminal'
 
 export default function Home() {
   const [booting, setBooting] = useState(true)
@@ -23,9 +26,9 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, repeat: Infinity, repeatType: 'reverse' }}
-          className="text-2xl tracking-widest"
+          className="text-2xl tracking-widest text-center px-4"
         >
-          INITIALIZING DEEPAK.OS...
+          INITIALIZING DEEPAK.OS V2.0...
         </motion.div>
         <div className="mt-4 w-64 h-1 bg-gray-900 overflow-hidden">
           <motion.div
@@ -40,74 +43,97 @@ export default function Home() {
   }
 
   return (
-    <main className="w-full overflow-x-hidden scroll-smooth">
-      <ParticleBackground />
+    <main className="snap-y snap-proximity h-screen w-full overflow-y-scroll overflow-x-hidden scroll-smooth relative">
+      <div className="fixed inset-0 z-[-1]">
+        <ParticleBackground />
+      </div>
 
-      {/* SECTION 1: HERO */}
-      <section className="min-h-screen w-full flex flex-col md:flex-row items-center justify-center relative px-4 pt-20 pb-10">
-        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center pt-16">
+      {/* SECTION 01: HERO & KINEMATICS */}
+      <section id="hero" className="snap-start min-h-screen w-full flex items-center justify-center relative px-4 py-20">
+        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="flex justify-center"
+            className="flex flex-col items-center lg:items-start text-center lg:text-left font-orbitron"
           >
-            <div className="relative w-full max-w-md mx-auto z-10">
-              <ArmLab />
+            <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-2 border-cyan-400/50 hover:border-cyan-400 transition-colors duration-300 mb-8">
+              <img src="/profile.jpg" alt="Deepak R." className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
             </div>
+            <h1 className="text-4xl md:text-6xl font-black text-white mb-2 tracking-tight drop-shadow-lg">
+              DEEPAK <span className="text-cyan-400">R.</span>
+            </h1>
+            <h2 className="text-xl md:text-2xl text-cyan-200 mb-6 font-space tracking-wide">
+              Autonomous Systems Architect
+            </h2>
+            <p className="text-gray-400 mb-8 max-w-lg font-space text-sm md:text-base leading-relaxed">
+              Robotics engineering student at Anna University. Specializing in ROS2 Navigation, YOLO Vision, and Embedded IoT.
+              Bridging the gap between theoretical AI and raw physical actuation.
+            </p>
           </motion.div>
           
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-center md:text-left font-orbitron"
+            className="flex flex-col items-center justify-center w-full"
           >
-            <h1 className="text-4xl md:text-6xl font-black text-white mb-4 tracking-tight drop-shadow-lg">
-              DEEPAK <span className="text-cyan-400">R.</span>
-            </h1>
-            <h2 className="text-xl md:text-2xl text-cyan-200 mb-6 font-space tracking-wide">
-              Aspiring Robotics & ML Engineer
-            </h2>
-            <p className="text-gray-400 mb-8 max-w-lg mx-auto md:mx-0 font-space text-sm md:text-base leading-relaxed">
-              Specializing in ROS2, Deep Reinforcement Learning, and Edge AI.
-              Building autonomous systems and smart architecture for the future.
-            </p>
-            <div className="flex gap-4 justify-center md:justify-start mb-12">
-              <a href="#projects" className="px-6 py-3 bg-cyan-500/10 border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(0,240,255,0.2)] hover:shadow-[0_0_25px_rgba(0,240,255,0.6)] font-bold tracking-wider inline-block">
-                VIEW LABS
-              </a>
+            <h3 className="text-cyan-400 font-orbitron mb-4 text-center">[ 6-DOF KINEMATICS SIMULATION CANVAS ]</h3>
+            <div className="w-full max-w-md mx-auto z-10 bg-black/40 p-2 rounded-lg border border-cyan-500/20 backdrop-blur-sm">
+              <ArmLab />
             </div>
-
-            {/* Terminal Component */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="w-full"
-            >
-              <Terminal />
-            </motion.div>
           </motion.div>
-          
-          {/* Floating Telemetry Stats */}
-          <div className="absolute top-24 right-4 hidden lg:flex flex-col gap-4 font-space text-xs text-cyan-400/50 pointer-events-none text-right">
-            <div>SYS.MEM: 64.2TB / 128TB</div>
-            <div>NET.UPLINK: 42.1 Gbps</div>
-            <div>CORE.TEMP: 42°C</div>
-            <div>ACTIVE_AGENTS: 4</div>
-            <div className="w-24 h-px bg-cyan-400/30 ml-auto mt-2 mb-2"></div>
-            <div className="animate-pulse">RUNNING KINEMATICS...</div>
-          </div>
         </div>
-        
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-cyan-400/50 hidden md:block">
-          ↓ SCROLL TO EXPLORE
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce text-cyan-400/50 text-xs font-space tracking-widest hidden md:block">
+          ↓ SYSTEM OVERRIDE ↓
         </div>
       </section>
 
-      {/* SECTION 2: PROJECTS HUB */}
-      <section id="projects" className="min-h-screen w-full flex items-center justify-center relative px-4 py-20 bg-black/40 backdrop-blur-sm">
+      {/* SECTION 02: CORE PHYSICS LABS */}
+      <section id="labs" className="snap-start min-h-screen w-full flex items-center justify-center relative px-4 py-20 bg-black/60 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto w-full">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-5xl font-orbitron font-bold text-white mb-4">
+              CORE <span className="text-cyan-400">PHYSICS LABS</span>
+            </h2>
+            <div className="h-1 w-24 bg-cyan-400 mx-auto rounded-full shadow-[0_0_10px_#00f0ff]" />
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Lab 1 */}
+            <div className="flex flex-col w-full max-w-md mx-auto">
+              <h3 className="text-xl font-orbitron text-cyan-300 mb-2">{'>'} LiDAR SLAM Navigation</h3>
+              <p className="text-gray-400 font-space text-sm mb-4">Responsive canvas showing raycasting and path computation.</p>
+              <div className="w-full bg-black/40 p-2 rounded-lg border border-cyan-500/20">
+                <SlamLab />
+              </div>
+            </div>
+            
+            <div className="flex flex-col gap-12 w-full max-w-md mx-auto">
+              {/* Lab 2 */}
+              <div>
+                <h3 className="text-xl font-orbitron text-cyan-300 mb-2">{'>'} Neural Perception</h3>
+                <p className="text-gray-400 font-space text-sm mb-4">Vision grid with target payload bounding boxes.</p>
+                <div className="w-full bg-black/40 p-2 rounded-lg border border-cyan-500/20">
+                  <VisionLab />
+                </div>
+              </div>
+              
+              {/* Lab 3 */}
+              <div>
+                <h3 className="text-xl font-orbitron text-cyan-300 mb-2">{'>'} PID Dynamics</h3>
+                <p className="text-gray-400 font-space text-sm mb-4">Oscilloscope slider for Mass-Spring-Damper tuning.</p>
+                <div className="w-full bg-black/40 p-2 rounded-lg border border-cyan-500/20">
+                  <PidLab />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 03: FEATURED ARCHIVES */}
+      <section id="projects" className="snap-start min-h-screen w-full flex items-center justify-center relative px-4 py-20">
         <div className="max-w-7xl mx-auto w-full">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-orbitron font-bold text-white mb-4">
@@ -117,50 +143,107 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Project 1 */}
             <Link href="/projects/aura">
-              <motion.div 
-                whileHover={{ scale: 1.02 }}
-                className="bg-gray-900/50 border border-cyan-500/20 hover:border-cyan-400 p-6 rounded-lg backdrop-blur-md transition-all duration-300 group cursor-pointer"
-              >
-                <div className="h-40 bg-black border border-gray-800 mb-4 rounded flex items-center justify-center text-cyan-400/30 group-hover:text-cyan-400/80 font-orbitron">
-                  [AURA VECTOR]
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2 font-orbitron">AURA</h3>
-                <p className="text-sm text-gray-400 font-space mb-4">Deep Reinforcement Learning & SUMO Traffic Routing</p>
-                <span className="text-cyan-400 text-sm font-bold tracking-wider group-hover:underline">VIEW SPECS →</span>
+              <motion.div whileHover={{ scale: 1.02 }} className="h-full bg-gray-900/50 border border-cyan-500/20 hover:border-cyan-400 p-6 rounded-lg backdrop-blur-md transition-all duration-300 group cursor-pointer flex flex-col">
+                <h3 className="text-2xl font-bold text-white mb-2 font-orbitron">AURA</h3>
+                <p className="text-xs text-cyan-400 font-orbitron tracking-widest mb-4">[ DEEP REINFORCEMENT LEARNING ]</p>
+                <p className="text-sm text-gray-400 font-space mb-6 flex-grow">Acoustic-visual Urban Routing Architecture using SUMO traffic simulator and neural networks.</p>
+                <span className="text-cyan-400 text-sm font-bold tracking-wider group-hover:underline mt-auto">VIEW SPECS →</span>
               </motion.div>
             </Link>
 
-            {/* Project 2 */}
             <Link href="/projects/sih">
-              <motion.div 
-                whileHover={{ scale: 1.02 }}
-                className="bg-gray-900/50 border border-cyan-500/20 hover:border-cyan-400 p-6 rounded-lg backdrop-blur-md transition-all duration-300 group cursor-pointer"
-              >
-                <div className="h-40 bg-black border border-gray-800 mb-4 rounded flex items-center justify-center text-cyan-400/30 group-hover:text-cyan-400/80 font-orbitron">
-                  [SIH VISION]
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2 font-orbitron">SIH 2025 AI</h3>
-                <p className="text-sm text-gray-400 font-space mb-4">Smart Traffic Management System & Edge Analytics</p>
-                <span className="text-cyan-400 text-sm font-bold tracking-wider group-hover:underline">VIEW SPECS →</span>
+              <motion.div whileHover={{ scale: 1.02 }} className="h-full bg-gray-900/50 border border-cyan-500/20 hover:border-cyan-400 p-6 rounded-lg backdrop-blur-md transition-all duration-300 group cursor-pointer flex flex-col">
+                <h3 className="text-2xl font-bold text-white mb-2 font-orbitron">SIH 2025 AI</h3>
+                <p className="text-xs text-cyan-400 font-orbitron tracking-widest mb-4">[ SMART TRAFFIC MANAGEMENT ]</p>
+                <p className="text-sm text-gray-400 font-space mb-6 flex-grow">Dynamic signal optimization using OpenCV, YOLO, and real-time vehicle counting architectures.</p>
+                <span className="text-cyan-400 text-sm font-bold tracking-wider group-hover:underline mt-auto">VIEW SPECS →</span>
               </motion.div>
             </Link>
 
-            {/* Project 3 */}
             <Link href="/projects/edge-ai">
-              <motion.div 
-                whileHover={{ scale: 1.02 }}
-                className="bg-gray-900/50 border border-cyan-500/20 hover:border-cyan-400 p-6 rounded-lg backdrop-blur-md transition-all duration-300 group cursor-pointer"
-              >
-                <div className="h-40 bg-black border border-gray-800 mb-4 rounded flex items-center justify-center text-cyan-400/30 group-hover:text-cyan-400/80 font-orbitron">
-                  [YOLO PIPELINE]
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2 font-orbitron">Edge Perception</h3>
-                <p className="text-sm text-gray-400 font-space mb-4">Real-Time Object Detection with YOLOv8 & MediaPipe</p>
-                <span className="text-cyan-400 text-sm font-bold tracking-wider group-hover:underline">VIEW SPECS →</span>
+              <motion.div whileHover={{ scale: 1.02 }} className="h-full bg-gray-900/50 border border-cyan-500/20 hover:border-cyan-400 p-6 rounded-lg backdrop-blur-md transition-all duration-300 group cursor-pointer flex flex-col">
+                <h3 className="text-2xl font-bold text-white mb-2 font-orbitron">EDGE PERCEPTION</h3>
+                <p className="text-xs text-cyan-400 font-orbitron tracking-widest mb-4">[ COMPUTER VISION ]</p>
+                <p className="text-sm text-gray-400 font-space mb-6 flex-grow">High-speed vision pipelines combining YOLOv8 and MediaPipe optimized for edge computing.</p>
+                <span className="text-cyan-400 text-sm font-bold tracking-wider group-hover:underline mt-auto">VIEW SPECS →</span>
               </motion.div>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 04: ENGINEERING TIMELINE */}
+      <section id="timeline" className="snap-start min-h-screen w-full flex items-center justify-center relative px-4 py-20 bg-black/60 backdrop-blur-md">
+        <div className="max-w-6xl mx-auto w-full">
+          <div className="text-center mb-24">
+            <h2 className="text-3xl md:text-5xl font-orbitron font-bold text-white mb-4">
+              ENGINEERING <span className="text-cyan-400">TIMELINE</span>
+            </h2>
+            <div className="h-1 w-24 bg-cyan-400 mx-auto rounded-full shadow-[0_0_10px_#00f0ff]" />
+          </div>
+          
+          <div className="relative w-full">
+            {/* Horizontal Line */}
+            <div className="absolute top-1/2 left-0 w-full h-0.5 bg-cyan-900/50 -translate-y-1/2 hidden md:block"></div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+              {/* Timeline 1 */}
+              <div className="flex flex-col items-center text-center relative">
+                <div className="w-6 h-6 rounded-full border-4 border-cyan-400 bg-black z-10 mb-6 shadow-[0_0_15px_#00f0ff]"></div>
+                <h3 className="text-xl font-orbitron text-white mb-2">TAMIZHAN SKILLS</h3>
+                <p className="text-cyan-400 font-space text-sm mb-4">RISE Program</p>
+                <p className="text-gray-400 font-space text-sm">Core robotics foundation and autonomous systems architecture.</p>
+              </div>
+              
+              {/* Timeline 2 */}
+              <div className="flex flex-col items-center text-center relative md:-mt-16">
+                <div className="w-6 h-6 rounded-full border-4 border-cyan-400 bg-black z-10 mb-6 shadow-[0_0_15px_#00f0ff] md:absolute md:top-16"></div>
+                <h3 className="text-xl font-orbitron text-white mb-2 md:mt-24">CODEALPHA</h3>
+                <p className="text-cyan-400 font-space text-sm mb-4">Software Engineering</p>
+                <p className="text-gray-400 font-space text-sm">Development of algorithmic pipelines and data structures.</p>
+              </div>
+              
+              {/* Timeline 3 */}
+              <div className="flex flex-col items-center text-center relative">
+                <div className="w-6 h-6 rounded-full border-4 border-cyan-400 bg-black z-10 mb-6 shadow-[0_0_15px_#00f0ff]"></div>
+                <h3 className="text-xl font-orbitron text-white mb-2">CHENNAI PORT</h3>
+                <p className="text-cyan-400 font-space text-sm mb-4">Authority Intern</p>
+                <p className="text-gray-400 font-space text-sm">Industrial automation and heavy mechatronics observation.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 05: DEEPAK-OS TERMINAL & CONTACT */}
+      <section id="terminal" className="snap-start min-h-screen w-full flex items-center justify-center relative px-4 py-20">
+        <div className="max-w-7xl mx-auto w-full">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-orbitron font-bold text-white mb-4">
+              DEEPAK-OS <span className="text-cyan-400">TERMINAL</span>
+            </h2>
+            <div className="h-1 w-24 bg-cyan-400 mx-auto rounded-full shadow-[0_0_10px_#00f0ff]" />
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="w-full">
+              <Terminal />
+            </div>
+            <div className="w-full bg-gray-900/40 p-8 rounded-lg border border-cyan-500/20 backdrop-blur-md">
+              <h3 className="text-2xl font-orbitron text-white mb-6">ENCRYPTED TRANSMISSION</h3>
+              <p className="text-gray-400 font-space text-sm mb-8">
+                Final scroll-snap section containing the interactive CLI terminal and the secure contact form to transmit direct signals to my inbox.
+              </p>
+              <form className="flex flex-col gap-4 font-space" onSubmit={(e) => e.preventDefault()}>
+                <input type="text" placeholder="IDENTITY (NAME)" className="w-full bg-black/50 border border-cyan-900 focus:border-cyan-400 rounded p-3 text-cyan-400 outline-none transition-colors" />
+                <input type="email" placeholder="RETURN_PATH (EMAIL)" className="w-full bg-black/50 border border-cyan-900 focus:border-cyan-400 rounded p-3 text-cyan-400 outline-none transition-colors" />
+                <textarea placeholder="PAYLOAD (MESSAGE)" rows={4} className="w-full bg-black/50 border border-cyan-900 focus:border-cyan-400 rounded p-3 text-cyan-400 outline-none transition-colors resize-none"></textarea>
+                <button type="submit" className="w-full py-3 bg-cyan-500/10 border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition-all font-bold tracking-widest mt-2">
+                  TRANSMIT SIGNAL
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </section>
