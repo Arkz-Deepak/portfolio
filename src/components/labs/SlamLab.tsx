@@ -4,6 +4,30 @@ import { useEffect, useRef, useState } from 'react'
 export default function SlamLab() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [speed, setSpeed] = useState(3.5)
+  const cratesRef = useRef([
+    { x: 180, y: 60, w: 50, h: 140, vx: 0, vy: 0 },
+    { x: 280, y: 190, w: 100, h: 45, vx: 0, vy: 0 }
+  ])
+
+  const generateObstacles = () => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const newCrates = []
+    for(let i = 0; i < 5; i++) {
+      newCrates.push({
+        x: Math.random() * (canvas.width - 100) + 20,
+        y: Math.random() * (canvas.height - 100) + 20,
+        w: Math.random() * 80 + 30,
+        h: Math.random() * 80 + 30,
+        vx: 0, vy: 0
+      })
+    }
+    cratesRef.current = newCrates
+  }
+
+  const clearObstacles = () => {
+    cratesRef.current = []
+  }
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -28,10 +52,6 @@ export default function SlamLab() {
       vx: 0, vy: 0, omega: 0, friction: 0.88
     }
     let goalPos = { x: 320, y: 220 }
-    let crates = [
-      { x: 180, y: 60, w: 50, h: 140, vx: 0, vy: 0 },
-      { x: 280, y: 190, w: 100, h: 45, vx: 0, vy: 0 }
-    ]
 
     const handleClick = (e: MouseEvent | TouchEvent) => {
       // Prevent default scrolling when interacting with canvas
@@ -72,7 +92,7 @@ export default function SlamLab() {
       }
 
       // Crates Physics (Static)
-      crates.forEach((c) => {
+      cratesRef.current.forEach((c) => {
         c.vx = 0
         c.vy = 0
         ctx.fillStyle = 'rgba(10, 18, 38, 0.9)'
@@ -93,23 +113,33 @@ export default function SlamLab() {
         let repelX = 0
         let repelY = 0
         
-        crates.forEach(c => {
-          let cx = c.x + c.w/2
-          let cy = c.y + c.h/2
-          let cdx = robot.x - cx
-          let cdy = robot.y - cy
+        cratesRef.current.forEach(c => {
+          let testX = robot.x
+          let testY = robot.y
+          if (robot.x < c.x) testX = c.x
+          else if (robot.x > c.x + c.w) testX = c.x + c.w
+          if (robot.y < c.y) testY = c.y
+          else if (robot.y > c.y + c.h) testY = c.y + c.h
+
+          let cdx = robot.x - testX
+          let cdy = robot.y - testY
           let cdist = Math.sqrt(cdx*cdx + cdy*cdy)
-          let safeDist = 110
+          let safeDist = 60
           
           if (cdist < safeDist) {
-            let force = (safeDist - cdist) * 3.0
+            // Prevent division by zero
+            if (cdist === 0) {
+              cdist = 1; cdx = 1; cdy = 0;
+            }
+            let force = (safeDist - cdist) * 4.5
             repelX += (cdx / cdist) * force
             repelY += (cdy / cdist) * force
             
+            // Tangential (curl) field to slide around obstacles
             let cross = dx * cdy - dy * cdx
             let direction = cross > 0 ? 1 : -1
-            repelX += -(cdy / cdist) * force * direction * 1.5
-            repelY +=  (cdx / cdist) * force * direction * 1.5
+            repelX += -(cdy / cdist) * force * direction * 2.5
+            repelY +=  (cdx / cdist) * force * direction * 2.5
           }
         })
         
@@ -142,7 +172,7 @@ export default function SlamLab() {
         if (robot.y - 14 < 0) { robot.y = 14; robot.vy *= -0.5 }
         if (robot.y + 14 > canvas.height) { robot.y = canvas.height - 14; robot.vy *= -0.5 }
 
-        crates.forEach(c => {
+        cratesRef.current.forEach(c => {
           let testX = robot.x
           let testY = robot.y
           if (robot.x < c.x) testX = c.x
@@ -229,16 +259,26 @@ export default function SlamLab() {
       <div className="w-full aspect-video border border-cyan-500/30 rounded-lg overflow-hidden bg-black/50 backdrop-blur">
         <canvas ref={canvasRef} className="w-full h-full cursor-crosshair" />
       </div>
-      <div className="w-full flex items-center gap-4">
-        <label className="text-cyan-400 font-orbitron text-sm">ROBOT SPEED:</label>
-        <input 
-          type="range" 
-          min="1" max="10" step="0.5" 
-          value={speed} 
-          onChange={(e) => setSpeed(parseFloat(e.target.value))}
-          className="flex-grow accent-cyan-400"
-        />
-        <span className="text-cyan-400 font-space text-sm w-8">{speed}x</span>
+      <div className="w-full flex items-center justify-between gap-4">
+        <div className="flex items-center gap-4 flex-grow">
+          <label className="text-cyan-400 font-orbitron text-sm whitespace-nowrap">ROBOT SPEED:</label>
+          <input 
+            type="range" 
+            min="1" max="10" step="0.5" 
+            value={speed} 
+            onChange={(e) => setSpeed(parseFloat(e.target.value))}
+            className="flex-grow accent-cyan-400 max-w-[200px]"
+          />
+          <span className="text-cyan-400 font-space text-sm w-8">{speed}x</span>
+        </div>
+        <div className="flex gap-2">
+          <button onClick={generateObstacles} className="px-4 py-2 bg-cyan-900/40 border border-cyan-500/50 text-cyan-400 hover:bg-cyan-500 hover:text-black transition-colors font-orbitron text-xs">
+            GENERATE OBS
+          </button>
+          <button onClick={clearObstacles} className="px-4 py-2 bg-pink-900/40 border border-pink-500/50 text-pink-400 hover:bg-pink-500 hover:text-black transition-colors font-orbitron text-xs">
+            CLEAR
+          </button>
+        </div>
       </div>
     </div>
   )
