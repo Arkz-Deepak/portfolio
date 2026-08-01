@@ -1,6 +1,11 @@
-"use client"
+import type { Metadata } from 'next'
 import ArmLab from '@/components/labs/ArmLab'
 import PidLab from '@/components/labs/PidLab'
+
+export const metadata: Metadata = {
+  title: 'Edge AI & Robotics | Deepak R.',
+  description: 'Real-Time Object Detection, Inverse Kinematics, and PID control loops.',
+}
 
 export default function EdgeAiProject() {
   return (

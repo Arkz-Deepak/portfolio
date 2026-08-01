@@ -1,4 +1,9 @@
-"use client"
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Operational History | Deepak R.',
+  description: 'Internships and Experience timeline.',
+}
 
 export default function InternshipsPage() {
   return (

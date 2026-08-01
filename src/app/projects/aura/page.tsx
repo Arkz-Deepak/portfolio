@@ -1,5 +1,10 @@
-"use client"
+import type { Metadata } from 'next'
 import SlamLab from '@/components/labs/SlamLab'
+
+export const metadata: Metadata = {
+  title: 'AURA Project | Deepak R.',
+  description: 'Deep Reinforcement Learning & SUMO Traffic Routing Simulation.',
+}
 
 export default function AuraProject() {
   return (

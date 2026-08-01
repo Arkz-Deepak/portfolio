@@ -17,6 +17,7 @@ export default function Navbar() {
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <Link href="/#projects" className="hover:text-white transition-colors">Labs</Link>
             <Link href="/about" className="hover:text-white transition-colors">About</Link>
             <Link href="/internships" className="hover:text-white transition-colors">Experience</Link>
           </div>
@@ -35,6 +36,7 @@ export default function Navbar() {
         <div className="md:hidden bg-black/95 border-b border-cyan-500/30">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
             <Link href="/" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium hover:bg-cyan-900/50">Home</Link>
+            <Link href="/#projects" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium hover:bg-cyan-900/50">Labs</Link>
             <Link href="/about" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium hover:bg-cyan-900/50">About</Link>
             <Link href="/internships" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium hover:bg-cyan-900/50">Experience</Link>
           </div>

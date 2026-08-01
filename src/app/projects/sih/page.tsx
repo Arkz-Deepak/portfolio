@@ -1,5 +1,10 @@
-"use client"
+import type { Metadata } from 'next'
 import VisionLab from '@/components/labs/VisionLab'
+
+export const metadata: Metadata = {
+  title: 'SIH 2025 AI | Deepak R.',
+  description: 'Smart Traffic Management System & Edge Analytics.',
+}
 
 export default function SihProject() {
   return (

@@ -1,4 +1,9 @@
-"use client"
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'About System Identity | Deepak R.',
+  description: 'Biography and Core Competencies in Robotics and Machine Learning.',
+}
 
 export default function AboutPage() {
   return (
