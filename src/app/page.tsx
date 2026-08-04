@@ -107,69 +107,129 @@ export default function Home() {
       {/* SLIDE 2: FEATURED ARCHIVES (PROJECTS) */}
       <section id="projects" className="snap-center h-screen w-full flex flex-col justify-center items-center relative px-4 md:px-8 py-6 bg-black/50 backdrop-blur-md">
         <div className="w-full max-w-7xl mx-auto">
-          <div className="text-center mb-8">
+          <div className="text-center mb-6">
             <h2 className="text-3xl md:text-4xl font-orbitron font-bold text-white mb-2">
               FEATURED <span className="text-cyan-400">ARCHIVES</span>
             </h2>
-            <p className="text-xs font-space text-cyan-300 tracking-widest uppercase">Autonomous Navigation & Vision Pipelines</p>
+            <p className="text-xs font-space text-cyan-300 tracking-widest uppercase">Autonomous Navigation, Edge AI & Robotics Repositories</p>
             <div className="h-1 w-20 bg-cyan-400 mx-auto mt-2 rounded-full shadow-[0_0_10px_#00f0ff]" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Card 1 */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[68vh] overflow-y-auto pr-1">
+            {/* Project 1 */}
             <Link href="/projects/aura" className="h-full">
-              <motion.div whileHover={{ scale: 1.02 }} className="h-full bg-gray-900/60 border border-cyan-500/30 hover:border-cyan-400 p-6 rounded-xl backdrop-blur-md transition-all duration-300 group cursor-pointer flex flex-col justify-between shadow-[0_0_15px_rgba(0,240,255,0.05)]">
+              <motion.div whileHover={{ scale: 1.01 }} className="h-full bg-gray-900/60 border border-cyan-500/30 hover:border-cyan-400 p-5 rounded-xl backdrop-blur-md transition-all duration-300 group cursor-pointer flex flex-col justify-between shadow-[0_0_15px_rgba(0,240,255,0.05)]">
                 <div>
-                  <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-xl font-bold text-white font-orbitron group-hover:text-cyan-400 transition-colors">VisionX (AURA)</h3>
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-lg font-bold text-white font-orbitron group-hover:text-cyan-400 transition-colors">VisionX (AURA)</h3>
                     <span className="text-[10px] font-orbitron bg-cyan-950 text-cyan-400 border border-cyan-500/40 px-2 py-0.5 rounded">RL & SUMO</span>
                   </div>
-                  <p className="text-xs text-cyan-400 font-orbitron tracking-wider mb-3">[ TRAFFIC SIGNAL OPTIMIZATION ]</p>
-                  <p className="text-xs md:text-sm text-gray-300 font-space leading-relaxed">
+                  <p className="text-[11px] text-cyan-400 font-orbitron tracking-wider mb-2">[ TRAFFIC SIGNAL OPTIMIZATION ]</p>
+                  <p className="text-xs text-gray-300 font-space leading-relaxed">
                     Sensor-Fusion Deep Reinforcement Learning for Dynamic Traffic Signal Optimization & Emergency Routing using SUMO traffic simulator and YOLO edge computing.
                   </p>
                 </div>
-                <div className="mt-6 pt-4 border-t border-cyan-500/20 flex justify-between items-center text-xs font-orbitron font-bold text-cyan-400">
+                <div className="mt-4 pt-3 border-t border-cyan-500/20 flex justify-between items-center text-xs font-orbitron font-bold text-cyan-400">
                   <span>SPECS & LOGS</span>
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </div>
               </motion.div>
             </Link>
 
-            {/* Card 2 */}
+            {/* Project 2 */}
             <Link href="/projects/sih" className="h-full">
-              <motion.div whileHover={{ scale: 1.02 }} className="h-full bg-gray-900/60 border border-cyan-500/30 hover:border-cyan-400 p-6 rounded-xl backdrop-blur-md transition-all duration-300 group cursor-pointer flex flex-col justify-between shadow-[0_0_15px_rgba(0,240,255,0.05)]">
+              <motion.div whileHover={{ scale: 1.01 }} className="h-full bg-gray-900/60 border border-cyan-500/30 hover:border-cyan-400 p-5 rounded-xl backdrop-blur-md transition-all duration-300 group cursor-pointer flex flex-col justify-between shadow-[0_0_15px_rgba(0,240,255,0.05)]">
                 <div>
-                  <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-xl font-bold text-white font-orbitron group-hover:text-cyan-400 transition-colors">Autonomous ROS 2 Rover</h3>
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-lg font-bold text-white font-orbitron group-hover:text-cyan-400 transition-colors">Autonomous ROS 2 Rover</h3>
                     <span className="text-[10px] font-orbitron bg-cyan-950 text-cyan-400 border border-cyan-500/40 px-2 py-0.5 rounded">ROS 2 & NAV2</span>
                   </div>
-                  <p className="text-xs text-cyan-400 font-orbitron tracking-wider mb-3">[ SKID-STEER AUTONOMY ]</p>
-                  <p className="text-xs md:text-sm text-gray-300 font-space leading-relaxed">
+                  <p className="text-[11px] text-cyan-400 font-orbitron tracking-wider mb-2">[ SKID-STEER AUTONOMY ]</p>
+                  <p className="text-xs text-gray-300 font-space leading-relaxed">
                     Custom 4-wheel skid-steer rover built from scratch using ROS 2 Jazzy, Gazebo Harmonic, SLAM Toolbox, and Nav2 with EKF sensor fusion.
                   </p>
                 </div>
-                <div className="mt-6 pt-4 border-t border-cyan-500/20 flex justify-between items-center text-xs font-orbitron font-bold text-cyan-400">
+                <div className="mt-4 pt-3 border-t border-cyan-500/20 flex justify-between items-center text-xs font-orbitron font-bold text-cyan-400">
                   <span>SPECS & LOGS</span>
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </div>
               </motion.div>
             </Link>
 
-            {/* Card 3 */}
+            {/* Project 3 */}
             <Link href="/projects/edge-ai" className="h-full">
-              <motion.div whileHover={{ scale: 1.02 }} className="h-full bg-gray-900/60 border border-cyan-500/30 hover:border-cyan-400 p-6 rounded-xl backdrop-blur-md transition-all duration-300 group cursor-pointer flex flex-col justify-between shadow-[0_0_15px_rgba(0,240,255,0.05)]">
+              <motion.div whileHover={{ scale: 1.01 }} className="h-full bg-gray-900/60 border border-cyan-500/30 hover:border-cyan-400 p-5 rounded-xl backdrop-blur-md transition-all duration-300 group cursor-pointer flex flex-col justify-between shadow-[0_0_15px_rgba(0,240,255,0.05)]">
                 <div>
-                  <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-xl font-bold text-white font-orbitron group-hover:text-cyan-400 transition-colors">CV Autonomous Robot</h3>
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-lg font-bold text-white font-orbitron group-hover:text-cyan-400 transition-colors">CV Autonomous Robot</h3>
                     <span className="text-[10px] font-orbitron bg-cyan-950 text-cyan-400 border border-cyan-500/40 px-2 py-0.5 rounded">OPENCV & PD</span>
                   </div>
-                  <p className="text-xs text-cyan-400 font-orbitron tracking-wider mb-3">[ EDGE PERCEPTION ]</p>
-                  <p className="text-xs md:text-sm text-gray-300 font-space leading-relaxed">
-                    Custom line-following & obstacle avoidance robot using OpenCV, ROS 2, and dynamic PD Control logic optimized for real-time edge embedded execution.
+                  <p className="text-[11px] text-cyan-400 font-orbitron tracking-wider mb-2">[ EDGE PERCEPTION ]</p>
+                  <p className="text-xs text-gray-300 font-space leading-relaxed">
+                    Custom line-following & obstacle avoidance robot using OpenCV, ROS 2, and dynamic PD Control logic.
                   </p>
                 </div>
-                <div className="mt-6 pt-4 border-t border-cyan-500/20 flex justify-between items-center text-xs font-orbitron font-bold text-cyan-400">
+                <div className="mt-4 pt-3 border-t border-cyan-500/20 flex justify-between items-center text-xs font-orbitron font-bold text-cyan-400">
+                  <span>SPECS & LOGS</span>
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+              </motion.div>
+            </Link>
+
+            {/* Project 4 */}
+            <Link href="/projects/sih" className="h-full">
+              <motion.div whileHover={{ scale: 1.01 }} className="h-full bg-gray-900/60 border border-cyan-500/30 hover:border-cyan-400 p-5 rounded-xl backdrop-blur-md transition-all duration-300 group cursor-pointer flex flex-col justify-between shadow-[0_0_15px_rgba(0,240,255,0.05)]">
+                <div>
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-lg font-bold text-white font-orbitron group-hover:text-cyan-400 transition-colors">Reactive Obstacle Avoidance Skid-Steer</h3>
+                    <span className="text-[10px] font-orbitron bg-cyan-950 text-cyan-400 border border-cyan-500/40 px-2 py-0.5 rounded">LIDAR SLICING</span>
+                  </div>
+                  <p className="text-[11px] text-cyan-400 font-orbitron tracking-wider mb-2">[ ROS 2 & GAZEBO ]</p>
+                  <p className="text-xs text-gray-300 font-space leading-relaxed">
+                    High-speed obstacle evasion rover using ROS 2, Gazebo Harmonic simulation, and custom 360° LiDAR scan slicing algorithm.
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-cyan-500/20 flex justify-between items-center text-xs font-orbitron font-bold text-cyan-400">
+                  <span>SPECS & LOGS</span>
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+              </motion.div>
+            </Link>
+
+            {/* Project 5 */}
+            <Link href="/projects/edge-ai" className="h-full">
+              <motion.div whileHover={{ scale: 1.01 }} className="h-full bg-gray-900/60 border border-cyan-500/30 hover:border-cyan-400 p-5 rounded-xl backdrop-blur-md transition-all duration-300 group cursor-pointer flex flex-col justify-between shadow-[0_0_15px_rgba(0,240,255,0.05)]">
+                <div>
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-lg font-bold text-white font-orbitron group-hover:text-cyan-400 transition-colors">Decentralized Motor Control System</h3>
+                    <span className="text-[10px] font-orbitron bg-cyan-950 text-cyan-400 border border-cyan-500/40 px-2 py-0.5 rounded">PUB/SUB</span>
+                  </div>
+                  <p className="text-[11px] text-cyan-400 font-orbitron tracking-wider mb-2">[ MULTI-ACTUATOR TELEMETRY ]</p>
+                  <p className="text-xs text-gray-300 font-space leading-relaxed">
+                    High-concurrency Python & ROS 2 Pub/Sub node architecture for multi-actuator telemetry synchronization.
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-cyan-500/20 flex justify-between items-center text-xs font-orbitron font-bold text-cyan-400">
+                  <span>SPECS & LOGS</span>
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </div>
+              </motion.div>
+            </Link>
+
+            {/* Project 6 */}
+            <Link href="/projects/aura" className="h-full">
+              <motion.div whileHover={{ scale: 1.01 }} className="h-full bg-gray-900/60 border border-cyan-500/30 hover:border-cyan-400 p-5 rounded-xl backdrop-blur-md transition-all duration-300 group cursor-pointer flex flex-col justify-between shadow-[0_0_15px_rgba(0,240,255,0.05)]">
+                <div>
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-lg font-bold text-white font-orbitron group-hover:text-cyan-400 transition-colors">Hybrid AI Scholarship Bot</h3>
+                    <span className="text-[10px] font-orbitron bg-cyan-950 text-cyan-400 border border-cyan-500/40 px-2 py-0.5 rounded">SCIKIT & STREAMLIT</span>
+                  </div>
+                  <p className="text-[11px] text-cyan-400 font-orbitron tracking-wider mb-2">[ ANOMALY DETECTION ]</p>
+                  <p className="text-xs text-gray-300 font-space leading-relaxed">
+                    Intelligent automated filtering bot built using Python, Scikit-Learn Isolation Forest, and Streamlit dashboard interface.
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-cyan-500/20 flex justify-between items-center text-xs font-orbitron font-bold text-cyan-400">
                   <span>SPECS & LOGS</span>
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </div>
@@ -186,11 +246,11 @@ export default function Home() {
             <h2 className="text-3xl md:text-4xl font-orbitron font-bold text-white mb-2">
               FIELD <span className="text-cyan-400">OPERATIONS</span>
             </h2>
-            <p className="text-xs font-space text-cyan-300 tracking-widest uppercase">Industrial Experience & Applied Robotics Programs</p>
+            <p className="text-xs font-space text-cyan-300 tracking-widest uppercase">Complete Industrial Experience & Internship History</p>
             <div className="h-1 w-20 bg-cyan-400 mx-auto mt-2 rounded-full shadow-[0_0_10px_#00f0ff]" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 max-h-[65vh] overflow-y-auto pr-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-h-[68vh] overflow-y-auto pr-1">
             {/* Op 1 */}
             <div className="bg-gray-900/50 border border-cyan-500/30 p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm hover:border-cyan-400 transition-colors">
               <div>
@@ -218,11 +278,11 @@ export default function Home() {
             {/* Op 3 */}
             <div className="bg-gray-900/50 border border-cyan-500/30 p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm hover:border-cyan-400 transition-colors">
               <div>
-                <span className="text-[10px] font-orbitron text-cyan-400 tracking-wider">[ 03 :: EDP & LOCO ]</span>
-                <h3 className="text-base font-bold text-white font-orbitron mt-1">Chennai Port</h3>
-                <p className="text-xs text-cyan-300 font-space mb-2">Authority Inplant</p>
+                <span className="text-[10px] font-orbitron text-cyan-400 tracking-wider">[ 03 :: ML PIPELINES ]</span>
+                <h3 className="text-base font-bold text-white font-orbitron mt-1">CodeAlpha</h3>
+                <p className="text-xs text-cyan-300 font-space mb-2">ML Intern</p>
                 <p className="text-xs text-gray-300 font-space leading-normal">
-                  Vocational Inplant Training (Locomotives, Diesel Engines, Mechanical/Electrical EDP).
+                  Development of machine learning models using XGBoost, CNNs, and PyTorch.
                 </p>
               </div>
             </div>
@@ -230,7 +290,19 @@ export default function Home() {
             {/* Op 4 */}
             <div className="bg-gray-900/50 border border-cyan-500/30 p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm hover:border-cyan-400 transition-colors">
               <div>
-                <span className="text-[10px] font-orbitron text-cyan-400 tracking-wider">[ 04 :: ROS 2 NAV ]</span>
+                <span className="text-[10px] font-orbitron text-cyan-400 tracking-wider">[ 04 :: EDP & LOCO ]</span>
+                <h3 className="text-base font-bold text-white font-orbitron mt-1">Chennai Port</h3>
+                <p className="text-xs text-cyan-300 font-space mb-2">Authority Inplant</p>
+                <p className="text-xs text-gray-300 font-space leading-normal">
+                  Vocational Inplant Training (Locomotives, Diesel Engines, Heavy Machinery).
+                </p>
+              </div>
+            </div>
+
+            {/* Op 5 */}
+            <div className="bg-gray-900/50 border border-cyan-500/30 p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm hover:border-cyan-400 transition-colors">
+              <div>
+                <span className="text-[10px] font-orbitron text-cyan-400 tracking-wider">[ 05 :: ROS 2 NAV ]</span>
                 <h3 className="text-base font-bold text-white font-orbitron mt-1">KarthiKesh</h3>
                 <p className="text-xs text-cyan-300 font-space mb-2">Robotics Program</p>
                 <p className="text-xs text-gray-300 font-space leading-normal">
@@ -239,14 +311,26 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Op 5 */}
-            <div className="bg-gray-900/50 border border-cyan-500/30 p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm hover:border-cyan-400 transition-colors sm:col-span-2 lg:col-span-1">
+            {/* Op 6 */}
+            <div className="bg-gray-900/50 border border-cyan-500/30 p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm hover:border-cyan-400 transition-colors">
               <div>
-                <span className="text-[10px] font-orbitron text-cyan-400 tracking-wider">[ 05 :: MANUFACTURING ]</span>
+                <span className="text-[10px] font-orbitron text-cyan-400 tracking-wider">[ 06 :: MANUFACTURING ]</span>
                 <h3 className="text-base font-bold text-white font-orbitron mt-1">MK Auto</h3>
                 <p className="text-xs text-cyan-300 font-space mb-2">Industrial Intern</p>
                 <p className="text-xs text-gray-300 font-space leading-normal">
                   CNC/VMC Operations, Cold Forging, Casting & precision manufacturing.
+                </p>
+              </div>
+            </div>
+
+            {/* Op 7 */}
+            <div className="bg-gray-900/50 border border-cyan-500/30 p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm hover:border-cyan-400 transition-colors sm:col-span-2 lg:col-span-2">
+              <div>
+                <span className="text-[10px] font-orbitron text-cyan-400 tracking-wider">[ 07 :: VIRTUAL SPRINT ]</span>
+                <h3 className="text-base font-bold text-white font-orbitron mt-1">Kodacy</h3>
+                <p className="text-xs text-cyan-300 font-space mb-2">Virtual Robotics Intern</p>
+                <p className="text-xs text-gray-300 font-space leading-normal">
+                  15-Day Virtual Robotics Intern focusing on embedded systems & robotics simulations.
                 </p>
               </div>
             </div>

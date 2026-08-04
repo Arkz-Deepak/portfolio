@@ -2,48 +2,92 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Operational History | Deepak R.',
-  description: 'Internships and Experience timeline.',
+  description: 'Internships and Industrial Experience timeline.',
 }
 
 export default function InternshipsPage() {
+  const experiences = [
+    {
+      id: 'precise3dm',
+      title: 'Precise3DM',
+      role: 'Intern',
+      domain: '[ 3D SCANNING & METROLOGY ]',
+      description: '3D Scan Based Solutions & Metrology inspection pipelines.',
+    },
+    {
+      id: 'tamizhan-skills',
+      title: 'Tamizhan Skills',
+      role: 'RISE AI Intern',
+      domain: '[ AUTONOMOUS SYSTEMS & AI ]',
+      description: 'RISE AI for Autonomous Systems Intern (Computer Vision, YOLOv8, Path Planning).',
+    },
+    {
+      id: 'codealpha',
+      title: 'CodeAlpha',
+      role: 'ML Intern',
+      domain: '[ MACHINE LEARNING PIPELINES ]',
+      description: 'Development of machine learning models using XGBoost, CNNs, and PyTorch.',
+    },
+    {
+      id: 'chennai-port',
+      title: 'Chennai Port Authority',
+      role: 'Vocational Inplant Trainee',
+      domain: '[ HEAVY MACHINERY & EDP ]',
+      description: 'Vocational Inplant Training (Locomotives, Diesel Engines, Mechanical/Electrical EDP).',
+    },
+    {
+      id: 'karthikesh',
+      title: 'KarthiKesh Robotics',
+      role: 'Robotics Trainee',
+      domain: '[ ADVANCED ROS 2 SPRINT ]',
+      description: '20-Day Industrial Career Uplifting Program (Advanced ROS 2 & Autonomous Navigation).',
+    },
+    {
+      id: 'mk-auto',
+      title: 'MK Auto Components',
+      role: 'Industrial Intern',
+      domain: '[ CNC / VMC MANUFACTURING ]',
+      description: 'CNC/VMC Operations, Cold Forging, Casting & precision manufacturing.',
+    },
+    {
+      id: 'kodacy',
+      title: 'Kodacy',
+      role: 'Virtual Robotics Intern',
+      domain: '[ VIRTUAL ROBOTICS SPRINT ]',
+      description: '15-Day Virtual Robotics Intern focusing on embedded systems & robotics simulations.',
+    },
+  ]
+
   return (
-    <main className="min-h-screen pt-24 pb-12 px-4 max-w-6xl mx-auto">
-      <div className="text-center mb-24">
-        <h1 className="text-4xl md:text-5xl font-orbitron font-bold text-white mb-4">
-          ENGINEERING <span className="text-cyan-400">TIMELINE</span>
+    <main className="min-h-screen pt-24 pb-16 px-4 md:px-8 max-w-7xl mx-auto">
+      <div className="text-center mb-16">
+        <h1 className="text-4xl md:text-5xl font-orbitron font-bold text-white mb-3">
+          FIELD <span className="text-cyan-400">OPERATIONS</span>
         </h1>
-        <div className="h-1 w-24 bg-cyan-400 mx-auto rounded-full shadow-[0_0_10px_#00f0ff]" />
+        <p className="text-xs md:text-sm font-space text-cyan-300 tracking-widest uppercase">Complete Industrial & Internship Timeline</p>
+        <div className="h-1 w-24 bg-cyan-400 mx-auto mt-3 rounded-full shadow-[0_0_10px_#00f0ff]" />
       </div>
-      
-      <div className="relative w-full">
-        {/* Horizontal Line */}
-        <div className="absolute top-1/2 left-0 w-full h-0.5 bg-cyan-900/50 -translate-y-1/2 hidden md:block"></div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-          {/* Timeline 1 */}
-          <div className="flex flex-col items-center text-center relative">
-            <div className="w-6 h-6 rounded-full border-4 border-cyan-400 bg-black z-10 mb-6 shadow-[0_0_15px_#00f0ff]"></div>
-            <h3 className="text-xl font-orbitron text-white mb-2">TAMIZHAN SKILLS</h3>
-            <p className="text-cyan-400 font-space text-sm mb-4">RISE Program</p>
-            <p className="text-gray-400 font-space text-sm">Core robotics foundation and autonomous systems architecture.</p>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {experiences.map((exp, index) => (
+          <div 
+            key={exp.id} 
+            className="bg-gray-900/60 border border-cyan-500/30 hover:border-cyan-400 p-6 rounded-xl backdrop-blur-md transition-all duration-300 flex flex-col justify-between hover:shadow-[0_0_20px_rgba(0,240,255,0.1)] group"
+          >
+            <div>
+              <div className="flex justify-between items-center mb-3">
+                <span className="text-xs font-mono text-cyan-400 tracking-wider">0{index + 1} :: EXP</span>
+                <span className="text-[10px] font-orbitron bg-cyan-950 text-cyan-300 border border-cyan-500/40 px-2 py-0.5 rounded">{exp.role}</span>
+              </div>
+              <h3 className="text-xl font-bold font-orbitron text-white group-hover:text-cyan-400 transition-colors mb-1">{exp.title}</h3>
+              <p className="text-xs font-orbitron text-cyan-400/80 mb-4">{exp.domain}</p>
+              <p className="text-sm font-space text-gray-300 leading-relaxed">{exp.description}</p>
+            </div>
+            <div className="mt-6 pt-4 border-t border-cyan-500/20 text-right">
+              <span className="text-xs font-mono text-cyan-400/60">VERIFIED ENTRY</span>
+            </div>
           </div>
-          
-          {/* Timeline 2 */}
-          <div className="flex flex-col items-center text-center relative md:-mt-16">
-            <div className="w-6 h-6 rounded-full border-4 border-cyan-400 bg-black z-10 mb-6 shadow-[0_0_15px_#00f0ff] md:absolute md:top-16"></div>
-            <h3 className="text-xl font-orbitron text-white mb-2 md:mt-24">CODEALPHA</h3>
-            <p className="text-cyan-400 font-space text-sm mb-4">Software Engineering</p>
-            <p className="text-gray-400 font-space text-sm">Development of algorithmic pipelines and data structures.</p>
-          </div>
-          
-          {/* Timeline 3 */}
-          <div className="flex flex-col items-center text-center relative">
-            <div className="w-6 h-6 rounded-full border-4 border-cyan-400 bg-black z-10 mb-6 shadow-[0_0_15px_#00f0ff]"></div>
-            <h3 className="text-xl font-orbitron text-white mb-2">CHENNAI PORT</h3>
-            <p className="text-cyan-400 font-space text-sm mb-4">Authority Intern</p>
-            <p className="text-gray-400 font-space text-sm">Industrial automation and heavy mechatronics observation.</p>
-          </div>
-        </div>
+        ))}
       </div>
     </main>
   )

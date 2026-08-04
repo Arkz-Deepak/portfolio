@@ -12,11 +12,13 @@ export default function SlamLab() {
   const generateObstacles = () => {
     const canvas = canvasRef.current
     if (!canvas) return
+    const w = canvas.width || 500
+    const h = canvas.height || 300
     const newCrates = []
-    for(let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i++) {
       newCrates.push({
-        x: Math.random() * (canvas.width - 100) + 20,
-        y: Math.random() * (canvas.height - 100) + 20,
+        x: Math.random() * (w - 100) + 20,
+        y: Math.random() * (h - 100) + 20,
         w: Math.random() * 80 + 30,
         h: Math.random() * 80 + 30,
         vx: 0, vy: 0
@@ -36,32 +38,46 @@ export default function SlamLab() {
     if (!ctx) return
 
     const fitCanvas = () => {
-      const rect = canvas.parentElement?.getBoundingClientRect()
-      if (rect) {
-        canvas.width = rect.width
-        canvas.height = rect.height
+      const parent = canvas.parentElement
+      if (!parent) return
+      const rect = parent.getBoundingClientRect()
+      const w = Math.floor(rect.width > 0 ? rect.width : (parent.clientWidth || 500))
+      const h = Math.floor(rect.height > 0 ? rect.height : (parent.clientHeight || 300))
+      if (canvas.width !== w || canvas.height !== h) {
+        canvas.width = w
+        canvas.height = h
       }
     }
+
     fitCanvas()
+
+    const resizeObserver = new ResizeObserver(() => {
+      fitCanvas()
+    })
+    if (canvas.parentElement) {
+      resizeObserver.observe(canvas.parentElement)
+    }
+
     window.addEventListener('resize', fitCanvas)
 
     let animationFrameId: number
 
-    let robot = {
+    const robot = {
       x: 90, y: 90, angle: 0,
       vx: 0, vy: 0, omega: 0, friction: 0.88
     }
-    let goalPos = { x: 320, y: 220 }
+    const goalPos = { x: 320, y: 220 }
 
     const handleClick = (e: MouseEvent | TouchEvent) => {
-      // Prevent default scrolling when interacting with canvas
       if (e.type === 'touchstart') e.preventDefault()
-      
       const rect = canvas.getBoundingClientRect()
-      let clientX, clientY
+      let clientX = 0
+      let clientY = 0
       if (window.TouchEvent && e instanceof TouchEvent) {
-        clientX = e.touches[0].clientX
-        clientY = e.touches[0].clientY
+        if (e.touches && e.touches.length > 0) {
+          clientX = e.touches[0].clientX
+          clientY = e.touches[0].clientY
+        }
       } else {
         clientX = (e as MouseEvent).clientX
         clientY = (e as MouseEvent).clientY
@@ -69,25 +85,33 @@ export default function SlamLab() {
       goalPos.x = clientX - rect.left
       goalPos.y = clientY - rect.top
     }
+
     canvas.addEventListener('click', handleClick)
     canvas.addEventListener('touchstart', handleClick, { passive: false })
 
     const render = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      if (canvas.width === 0 || canvas.height === 0) {
+        fitCanvas()
+      }
+
+      const cw = canvas.width || 500
+      const ch = canvas.height || 300
+
+      ctx.clearRect(0, 0, cw, ch)
 
       // Grid
-      ctx.strokeStyle = 'rgba(0, 240, 255, 0.05)'
+      ctx.strokeStyle = 'rgba(0, 240, 255, 0.08)'
       ctx.lineWidth = 1
-      for (let x = 0; x < canvas.width; x += 25) {
+      for (let x = 0; x < cw; x += 25) {
         ctx.beginPath()
         ctx.moveTo(x, 0)
-        ctx.lineTo(x, canvas.height)
+        ctx.lineTo(x, ch)
         ctx.stroke()
       }
-      for (let y = 0; y < canvas.height; y += 25) {
+      for (let y = 0; y < ch; y += 25) {
         ctx.beginPath()
         ctx.moveTo(0, y)
-        ctx.lineTo(canvas.width, y)
+        ctx.lineTo(cw, y)
         ctx.stroke()
       }
 
@@ -106,13 +130,13 @@ export default function SlamLab() {
       const dx = goalPos.x - robot.x
       const dy = goalPos.y - robot.y
       const dist = Math.sqrt(dx * dx + dy * dy)
-      
+
       if (dist > 8) {
-        let attractiveX = (dx / dist) * 40
-        let attractiveY = (dy / dist) * 40
+        const attractiveX = (dx / dist) * 40
+        const attractiveY = (dy / dist) * 40
         let repelX = 0
         let repelY = 0
-        
+
         cratesRef.current.forEach(c => {
           let testX = robot.x
           let testY = robot.y
@@ -123,26 +147,24 @@ export default function SlamLab() {
 
           let cdx = robot.x - testX
           let cdy = robot.y - testY
-          let cdist = Math.sqrt(cdx*cdx + cdy*cdy)
-          let safeDist = 60
-          
+          let cdist = Math.sqrt(cdx * cdx + cdy * cdy)
+          const safeDist = 60
+
           if (cdist < safeDist) {
-            // Prevent division by zero
             if (cdist === 0) {
-              cdist = 1; cdx = 1; cdy = 0;
+              cdist = 1; cdx = 1; cdy = 0
             }
-            let force = (safeDist - cdist) * 4.5
+            const force = (safeDist - cdist) * 4.5
             repelX += (cdx / cdist) * force
             repelY += (cdy / cdist) * force
-            
-            // Tangential (curl) field to slide around obstacles
-            let cross = dx * cdy - dy * cdx
-            let direction = cross > 0 ? 1 : -1
+
+            const cross = dx * cdy - dy * cdx
+            const direction = cross > 0 ? 1 : -1
             repelX += -(cdy / cdist) * force * direction * 2.5
-            repelY +=  (cdx / cdist) * force * direction * 2.5
+            repelY += (cdx / cdist) * force * direction * 2.5
           }
         })
-        
+
         const targetAngle = Math.atan2(attractiveY + repelY, attractiveX + repelX)
         let angleDiff = targetAngle - robot.angle
         while (angleDiff > Math.PI) angleDiff -= Math.PI * 2
@@ -158,7 +180,7 @@ export default function SlamLab() {
 
       robot.vx *= robot.friction
       robot.vy *= robot.friction
-      
+
       const steps = 4
       const stepVx = robot.vx / steps
       const stepVy = robot.vy / steps
@@ -168,9 +190,9 @@ export default function SlamLab() {
         robot.y += stepVy
 
         if (robot.x - 14 < 0) { robot.x = 14; robot.vx *= -0.5 }
-        if (robot.x + 14 > canvas.width) { robot.x = canvas.width - 14; robot.vx *= -0.5 }
+        if (robot.x + 14 > cw) { robot.x = cw - 14; robot.vx *= -0.5 }
         if (robot.y - 14 < 0) { robot.y = 14; robot.vy *= -0.5 }
-        if (robot.y + 14 > canvas.height) { robot.y = canvas.height - 14; robot.vy *= -0.5 }
+        if (robot.y + 14 > ch) { robot.y = ch - 14; robot.vy *= -0.5 }
 
         cratesRef.current.forEach(c => {
           let testX = robot.x
@@ -182,20 +204,18 @@ export default function SlamLab() {
 
           let distX = robot.x - testX
           let distY = robot.y - testY
-          let distance = Math.sqrt(distX*distX + distY*distY)
-          
+          let distance = Math.sqrt(distX * distX + distY * distY)
+
           if (distance <= 14) {
             if (distance === 0) {
-              distX = 1
-              distY = 0
-              distance = 1
+              distX = 1; distY = 0; distance = 1
             }
-            let overlap = 14 - distance
-            let nx = distX / distance
-            let ny = distY / distance
+            const overlap = 14 - distance
+            const nx = distX / distance
+            const ny = distY / distance
             robot.x += nx * overlap
             robot.y += ny * overlap
-            let dot = robot.vx * nx + robot.vy * ny
+            const dot = robot.vx * nx + robot.vy * ny
             robot.vx -= dot * nx * 1.5
             robot.vy -= dot * ny * 1.5
           }
@@ -203,7 +223,7 @@ export default function SlamLab() {
       }
 
       // Render Goal
-      ctx.fillStyle = 'rgba(0, 255, 157, 0.1)'
+      ctx.fillStyle = 'rgba(0, 255, 157, 0.15)'
       ctx.beginPath()
       ctx.arc(goalPos.x, goalPos.y, 25, 0, Math.PI * 2)
       ctx.fill()
@@ -248,6 +268,7 @@ export default function SlamLab() {
 
     return () => {
       cancelAnimationFrame(animationFrameId)
+      resizeObserver.disconnect()
       window.removeEventListener('resize', fitCanvas)
       canvas.removeEventListener('click', handleClick)
       canvas.removeEventListener('touchstart', handleClick)
@@ -256,8 +277,8 @@ export default function SlamLab() {
 
   return (
     <div className="w-full flex flex-col items-center gap-4">
-      <div className="w-full aspect-video border border-cyan-500/30 rounded-lg overflow-hidden bg-black/50 backdrop-blur">
-        <canvas ref={canvasRef} className="w-full h-full cursor-crosshair" />
+      <div className="w-full aspect-video border border-cyan-500/30 rounded-lg overflow-hidden bg-black/50 backdrop-blur min-h-[220px]">
+        <canvas ref={canvasRef} className="w-full h-full cursor-crosshair block" />
       </div>
       <div className="w-full flex items-center justify-between gap-4">
         <div className="flex items-center gap-4 flex-grow">
