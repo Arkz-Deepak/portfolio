@@ -19,7 +19,7 @@ describe('Portfolio Home Page', () => {
 
   it('should render the boot sequence initially', () => {
     render(<Home />)
-    expect(screen.getByText('INITIALIZING DEEPAK.OS...')).toBeInTheDocument()
+    expect(screen.getByText('INITIALIZING DEEPAK.OS V2.0...')).toBeInTheDocument()
   })
 
   it('should reveal the hero section after booting', () => {
@@ -31,7 +31,7 @@ describe('Portfolio Home Page', () => {
     
     // Check if hero title is rendered
     expect(screen.getByText('DEEPAK')).toBeInTheDocument()
-    expect(screen.getByText('Aspiring Robotics & ML Engineer')).toBeInTheDocument()
+    expect(screen.getByText('Autonomous Systems Architect')).toBeInTheDocument()
     
     // Check if the mock background is rendered
     expect(screen.getByTestId('particle-bg')).toBeInTheDocument()
@@ -39,6 +39,6 @@ describe('Portfolio Home Page', () => {
     // Check if project grids are present
     expect(screen.getByText('AURA')).toBeInTheDocument()
     expect(screen.getByText('SIH 2025 AI')).toBeInTheDocument()
-    expect(screen.getByText('Edge Perception')).toBeInTheDocument()
+    expect(screen.getByText('EDGE PERCEPTION')).toBeInTheDocument()
   })
 })

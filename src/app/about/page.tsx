@@ -12,7 +12,7 @@ export default function AboutPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left font-orbitron">
           <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-2 border-cyan-400/50 hover:border-cyan-400 transition-colors duration-300 mb-8">
-            <img src="/profile.jpg" alt="Deepak R." className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
+            <img src="/profile.jpg" alt="Deepak R." className="w-full h-full object-cover transition-all duration-500" />
           </div>
           <h1 className="text-4xl md:text-6xl font-black text-white mb-2 tracking-tight drop-shadow-lg">
             DEEPAK <span className="text-cyan-400">R.</span>
