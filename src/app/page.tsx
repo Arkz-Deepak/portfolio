@@ -491,22 +491,18 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-            {/* Left Column: Network Uplink Placeholder */}
+            {/* Left Column: Network Uplink LinkedIn Feed */}
             <div className="border p-6 rounded-xl backdrop-blur-md flex flex-col justify-center items-center text-center relative overflow-hidden group shadow-md bg-white border-slate-200 dark:bg-gray-900/60 dark:border-cyan-500/30">
-              <div className="w-16 h-16 rounded-full border-2 flex items-center justify-center mb-4 border-blue-600 text-blue-700 shadow-sm dark:border-cyan-400/60 dark:text-cyan-400 dark:shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+              <div className="w-16 h-16 rounded-full border-2 flex items-center justify-center mb-4 border-blue-600 text-blue-700 shadow-sm dark:border-cyan-400/60 dark:text-cyan-400 dark:shadow-[0_0_15px_rgba(0,240,255,0.2)] flex-shrink-0">
                 <span className="text-2xl font-orbitron">📡</span>
               </div>
               <h3 className="text-xl font-orbitron font-bold mb-2 text-slate-900 dark:text-white">NETWORK UPLINK</h3>
               <p className="text-xs font-mono tracking-wider mb-4 text-amber-700 dark:text-cyan-400 font-semibold">
                 [ LINKEDIN INTEGRATION NODE ]
               </p>
-              <div className="border p-6 rounded-lg max-w-md w-full bg-slate-50 border-slate-200 dark:bg-black/70 dark:border-cyan-500/40">
-                <p className="text-sm font-space leading-relaxed italic text-slate-700 dark:text-gray-300">
-                  &quot;Live LinkedIn Feed integration pending...&quot;
-                </p>
-                <p className="text-xs font-mono mt-3 text-blue-700 dark:text-cyan-400/80 font-semibold">
-                  (I will embed the iframe later)
-                </p>
+              <div className="w-full flex flex-col gap-6 overflow-y-auto max-h-[60vh] pr-2 rounded-lg overflow-x-hidden">
+                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7487740372673232896" className="w-full h-[450px] md:h-[650px] rounded-xl border-none bg-white/5" frameBorder="0" allowFullScreen title="20-Day ROS 2 Training"></iframe>
+                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7464295823774736384" className="w-full h-[450px] md:h-[650px] rounded-xl border-none bg-white/5" frameBorder="0" allowFullScreen title="DEFTECH Bharat"></iframe>
               </div>
             </div>
 
