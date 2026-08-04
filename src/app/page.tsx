@@ -35,12 +35,18 @@ export default function Home() {
       return
     }
 
+    const apiKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
+    if (!apiKey) {
+      setStatus('error')
+      setStatusMessage('WEB3FORMS ACCESS KEY MISSING IN ENVIRONMENT (NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY).')
+      return
+    }
+
     setStatus('submitting')
     setStatusMessage('ESTABLISHING ENCRYPTED LINK...')
 
     try {
-      // WEB3FORMS INTEGRATION
-      // Replace 'YOUR_WEB3FORMS_ACCESS_KEY' with your actual key from https://web3forms.com
+      // WEB3FORMS INTEGRATION VIA ENV VARIABLE
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
@@ -48,7 +54,7 @@ export default function Home() {
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          access_key: 'YOUR_WEB3FORMS_ACCESS_KEY', // <-- PASTE YOUR WEB3FORMS ACCESS KEY HERE
+          access_key: apiKey,
           subject: `DEEPAK-OS Transmission from ${formState.name}`,
           from_name: 'DEEPAK-OS Portfolio',
           to_email: 'wssedd18@gmail.com',
