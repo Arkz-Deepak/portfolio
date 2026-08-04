@@ -11,7 +11,7 @@ export default function Home() {
   const { theme } = useTheme()
   const isDark = theme === 'dark'
 
-  // Web3Forms state
+  // Web3Forms State
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -46,7 +46,6 @@ export default function Home() {
     setStatusMessage('ESTABLISHING ENCRYPTED LINK...')
 
     try {
-      // WEB3FORMS INTEGRATION VIA ENV VARIABLE
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
@@ -81,9 +80,7 @@ export default function Home() {
 
   if (booting) {
     return (
-      <div className={`h-screen w-full flex flex-col items-center justify-center font-orbitron transition-colors ${
-        isDark ? 'bg-black text-cyan-400' : 'bg-slate-50 text-blue-900'
-      }`}>
+      <div className="h-[100dvh] w-full max-w-[100vw] overflow-x-hidden flex flex-col items-center justify-center font-orbitron transition-colors bg-slate-50 dark:bg-black text-blue-900 dark:text-cyan-400">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -92,12 +89,12 @@ export default function Home() {
         >
           INITIALIZING DEEPAK.OS V2.0...
         </motion.div>
-        <div className={`mt-4 w-64 h-1 overflow-hidden ${isDark ? 'bg-gray-900' : 'bg-slate-200'}`}>
+        <div className="mt-4 w-64 h-1 overflow-hidden bg-slate-200 dark:bg-gray-900">
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: '100%' }}
             transition={{ duration: 1.8, ease: 'linear' }}
-            className={`h-full ${isDark ? 'bg-cyan-400 shadow-[0_0_10px_#00f0ff]' : 'bg-blue-600'}`}
+            className="h-full bg-blue-600 dark:bg-cyan-400 dark:shadow-[0_0_10px_#00f0ff]"
           />
         </div>
       </div>
@@ -105,10 +102,7 @@ export default function Home() {
   }
 
   return (
-    <main className={`snap-y snap-mandatory h-screen w-full overflow-y-scroll overflow-x-hidden scroll-smooth relative transition-colors duration-300 ${
-      isDark ? 'bg-black text-cyan-400' : 'bg-slate-50 text-slate-900'
-    }`}>
-      {/* Particle space background in Dark Mode */}
+    <main className="snap-y snap-mandatory h-[100dvh] w-full max-w-[100vw] overflow-y-scroll overflow-x-hidden scroll-smooth relative transition-colors duration-300 bg-slate-50 dark:bg-black text-slate-900 dark:text-cyan-400">
       {isDark && (
         <div className="fixed inset-0 z-[-1]">
           <ParticleBackground />
@@ -116,9 +110,8 @@ export default function Home() {
       )}
 
       {/* SLIDE 1: SYSTEM INITIATION (HERO) */}
-      <section id="hero" className="snap-center h-screen w-full flex flex-col justify-center items-center relative px-4 md:px-8 py-6">
+      <section id="hero" className="snap-center h-[100dvh] w-full max-w-[100vw] overflow-x-hidden flex flex-col justify-center items-center relative px-4 md:px-8 py-6">
         <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          {/* Left/Top: 6-DOF Robot Arm impulse test canvas */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -126,24 +119,15 @@ export default function Home() {
             className="flex flex-col items-center justify-center w-full order-2 lg:order-1"
           >
             <div className="w-full text-center mb-3">
-              <span className={`text-xs font-orbitron tracking-widest px-3 py-1 rounded-full border ${
-                isDark 
-                  ? 'text-cyan-400 bg-cyan-950/40 border-cyan-500/30' 
-                  : 'text-blue-900 bg-blue-50 border-blue-200 font-semibold'
-              }`}>
+              <span className="text-xs font-orbitron tracking-widest px-3 py-1 rounded-full border text-blue-900 bg-blue-50 border-blue-200 dark:text-cyan-400 dark:bg-cyan-950/40 dark:border-cyan-500/30 font-semibold">
                 [ 6-DOF KINEMATICS SIMULATION CANVAS ]
               </span>
             </div>
-            <div className={`w-full max-w-lg mx-auto z-10 p-3 rounded-xl border backdrop-blur-md transition-colors ${
-              isDark 
-                ? 'bg-black/60 border-cyan-500/30 shadow-[0_0_25px_rgba(0,240,255,0.15)]' 
-                : 'bg-white border-slate-200 shadow-xl'
-            }`}>
+            <div className="w-full max-w-lg mx-auto z-10 p-3 rounded-xl border backdrop-blur-md transition-colors bg-white border-slate-200 shadow-xl dark:bg-black/60 dark:border-cyan-500/30 dark:shadow-[0_0_25px_rgba(0,240,255,0.15)]">
               <ArmLab />
             </div>
           </motion.div>
 
-          {/* Right/Bottom: Identity & DEEPAK.OS Status */}
           <motion.div 
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -151,47 +135,33 @@ export default function Home() {
             className="flex flex-col items-center lg:items-start text-center lg:text-left font-orbitron order-1 lg:order-2"
           >
             <div className="flex items-center gap-4 mb-4">
-              <div className={`relative w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden border-2 flex-shrink-0 ${
-                isDark ? 'border-cyan-400 shadow-[0_0_15px_#00f0ff]' : 'border-blue-700 shadow-md'
-              }`}>
+              <div className="relative w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden border-2 flex-shrink-0 border-blue-700 shadow-md dark:border-cyan-400 dark:shadow-[0_0_15px_#00f0ff]">
                 <img src="/profile.jpg" alt="Deepak R." className="w-full h-full object-cover transition-all duration-500" />
               </div>
               <div className="flex flex-col text-left">
-                <span className={`text-xs font-mono tracking-widest ${isDark ? 'text-cyan-400' : 'text-amber-600 font-semibold'}`}>
+                <span className="text-xs font-mono tracking-widest text-amber-600 dark:text-cyan-400 font-semibold">
                   DEEPAK.OS :: ONLINE
                 </span>
-                <h1 className={`text-3xl md:text-5xl font-black tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                  DEEPAK <span className={isDark ? 'text-cyan-400' : 'text-blue-700'}>R.</span>
+                <h1 className="text-3xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
+                  DEEPAK <span className="text-blue-700 dark:text-cyan-400">R.</span>
                 </h1>
               </div>
             </div>
 
-            <h2 className={`text-xl md:text-2xl mb-2 font-space tracking-wide ${isDark ? 'text-cyan-200' : 'text-blue-900 font-bold'}`}>
+            <h2 className="text-xl md:text-2xl mb-2 font-space tracking-wide text-blue-900 dark:text-cyan-200 font-bold">
               Autonomous Systems Architect
             </h2>
-            <p className={`text-xs md:text-sm font-orbitron mb-4 tracking-widest ${isDark ? 'text-cyan-400/90' : 'text-amber-700 font-semibold'}`}>
+            <p className="text-xs md:text-sm font-orbitron mb-4 tracking-widest text-amber-700 dark:text-cyan-400/90 font-semibold">
               Deepak R. | Robotics & ML Engineer
             </p>
-            <p className={`font-space text-xs md:text-sm leading-relaxed max-w-lg mb-6 p-4 rounded-lg border backdrop-blur-sm ${
-              isDark 
-                ? 'text-gray-300 bg-black/40 border-cyan-500/20' 
-                : 'text-slate-700 bg-white border-slate-200 shadow-sm'
-            }`}>
+            <p className="font-space text-xs md:text-sm leading-relaxed max-w-lg mb-6 p-4 rounded-lg border backdrop-blur-sm text-slate-700 bg-white border-slate-200 shadow-sm dark:text-gray-300 dark:bg-black/40 dark:border-cyan-500/20">
               Robotics engineering student at Anna University. Specializing in ROS2 Navigation, YOLO Vision, and Embedded IoT. Bridging theoretical AI with raw physical actuation.
             </p>
             <div className="flex flex-wrap gap-3">
-              <a href="#projects" className={`px-5 py-2.5 text-xs font-bold font-orbitron rounded tracking-wider transition-all border ${
-                isDark 
-                  ? 'bg-cyan-500/20 hover:bg-cyan-400 hover:text-black border-cyan-400 text-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.2)]' 
-                  : 'bg-blue-700 hover:bg-blue-800 text-white border-blue-700 shadow-md'
-              }`}>
+              <a href="#projects" className="px-5 py-2.5 text-xs font-bold font-orbitron rounded tracking-wider transition-all border bg-blue-700 hover:bg-blue-800 text-white border-blue-700 shadow-md dark:bg-cyan-500/20 dark:hover:bg-cyan-400 dark:hover:text-black dark:border-cyan-400 dark:text-cyan-400 dark:shadow-[0_0_15px_rgba(0,240,255,0.2)]">
                 EXPLORE ARCHIVES →
               </a>
-              <a href="#contact" className={`px-5 py-2.5 text-xs font-bold font-orbitron rounded tracking-wider transition-all border ${
-                isDark 
-                  ? 'bg-black/60 hover:bg-cyan-950 border-cyan-500/40 text-cyan-300' 
-                  : 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-800'
-              }`}>
+              <a href="#contact" className="px-5 py-2.5 text-xs font-bold font-orbitron rounded tracking-wider transition-all border bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-800 dark:bg-black/60 dark:hover:bg-cyan-950 dark:border-cyan-500/40 dark:text-cyan-300">
                 COMM-LINK
               </a>
             </div>
@@ -200,43 +170,33 @@ export default function Home() {
       </section>
 
       {/* SLIDE 2: FEATURED ARCHIVES (PROJECTS) */}
-      <section id="projects" className={`snap-center h-screen w-full flex flex-col justify-center items-center relative px-4 md:px-8 py-6 transition-colors ${
-        isDark ? 'bg-black/50 backdrop-blur-md' : 'bg-slate-100/80'
-      }`}>
+      <section id="projects" className="snap-center h-[100dvh] w-full max-w-[100vw] overflow-x-hidden flex flex-col justify-center items-center relative px-4 md:px-8 py-6 transition-colors bg-slate-100/80 dark:bg-black/50 backdrop-blur-md">
         <div className="w-full max-w-7xl mx-auto">
           <div className="text-center mb-6">
-            <h2 className={`text-3xl md:text-4xl font-orbitron font-bold mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-              FEATURED <span className={isDark ? 'text-cyan-400' : 'text-blue-700'}>ARCHIVES</span>
+            <h2 className="text-3xl md:text-4xl font-orbitron font-bold mb-2 text-slate-900 dark:text-white">
+              FEATURED <span className="text-blue-700 dark:text-cyan-400">ARCHIVES</span>
             </h2>
-            <p className={`text-xs font-space tracking-widest uppercase ${isDark ? 'text-cyan-300' : 'text-slate-600 font-semibold'}`}>
+            <p className="text-xs font-space tracking-widest uppercase text-slate-600 dark:text-cyan-300 font-semibold">
               Autonomous Navigation, Edge AI & Robotics Repositories
             </p>
-            <div className={`h-1 w-20 mx-auto mt-2 rounded-full ${isDark ? 'bg-cyan-400 shadow-[0_0_10px_#00f0ff]' : 'bg-blue-600'}`} />
+            <div className="h-1 w-20 mx-auto mt-2 rounded-full bg-blue-600 dark:bg-cyan-400 dark:shadow-[0_0_10px_#00f0ff]" />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[68vh] overflow-y-auto pr-1">
             {/* Project 1 */}
             <Link href="/projects/aura" className="h-full">
-              <motion.div whileHover={{ scale: 1.01 }} className={`h-full border p-5 rounded-xl transition-all duration-300 group cursor-pointer flex flex-col justify-between ${
-                isDark 
-                  ? 'bg-gray-900/60 border-cyan-500/30 hover:border-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.05)]' 
-                  : 'bg-white border-slate-200 hover:border-blue-500 shadow-md hover:shadow-lg'
-              }`}>
+              <motion.div whileHover={{ scale: 1.01 }} className="h-full border p-5 rounded-xl transition-all duration-300 group cursor-pointer flex flex-col justify-between bg-white border-slate-200 hover:border-blue-500 shadow-md hover:shadow-lg dark:bg-gray-900/60 dark:border-cyan-500/30 dark:hover:border-cyan-400 dark:shadow-[0_0_15px_rgba(0,240,255,0.05)]">
                 <div>
                   <div className="flex justify-between items-start mb-2">
-                    <h3 className={`text-lg font-bold font-orbitron transition-colors ${isDark ? 'text-white group-hover:text-cyan-400' : 'text-slate-900 group-hover:text-blue-700'}`}>VisionX (AURA)</h3>
-                    <span className={`text-[10px] font-orbitron border px-2 py-0.5 rounded ${
-                      isDark ? 'bg-cyan-950 text-cyan-400 border-cyan-500/40' : 'bg-blue-50 text-blue-800 border-blue-200 font-semibold'
-                    }`}>RL & SUMO</span>
+                    <h3 className="text-lg font-bold font-orbitron transition-colors text-slate-900 group-hover:text-blue-700 dark:text-white dark:group-hover:text-cyan-400">VisionX (AURA)</h3>
+                    <span className="text-[10px] font-orbitron border px-2 py-0.5 rounded bg-blue-50 text-blue-800 border-blue-200 dark:bg-cyan-950 dark:text-cyan-400 dark:border-cyan-500/40 font-semibold">RL & SUMO</span>
                   </div>
-                  <p className={`text-[11px] font-orbitron tracking-wider mb-2 ${isDark ? 'text-cyan-400' : 'text-amber-700 font-semibold'}`}>[ TRAFFIC SIGNAL OPTIMIZATION ]</p>
-                  <p className={`text-xs font-space leading-relaxed ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
+                  <p className="text-[11px] font-orbitron tracking-wider mb-2 text-amber-700 dark:text-cyan-400 font-semibold">[ TRAFFIC SIGNAL OPTIMIZATION ]</p>
+                  <p className="text-xs font-space leading-relaxed text-slate-600 dark:text-gray-300">
                     Sensor-Fusion Deep Reinforcement Learning for Dynamic Traffic Signal Optimization & Emergency Routing using SUMO traffic simulator and YOLO edge computing.
                   </p>
                 </div>
-                <div className={`mt-4 pt-3 border-t flex justify-between items-center text-xs font-orbitron font-bold ${
-                  isDark ? 'border-cyan-500/20 text-cyan-400' : 'border-slate-200 text-blue-700'
-                }`}>
+                <div className="mt-4 pt-3 border-t flex justify-between items-center text-xs font-orbitron font-bold border-slate-200 text-blue-700 dark:border-cyan-500/20 dark:text-cyan-400">
                   <span>SPECS & LOGS</span>
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </div>
@@ -245,26 +205,18 @@ export default function Home() {
 
             {/* Project 2 */}
             <Link href="/projects/sih" className="h-full">
-              <motion.div whileHover={{ scale: 1.01 }} className={`h-full border p-5 rounded-xl transition-all duration-300 group cursor-pointer flex flex-col justify-between ${
-                isDark 
-                  ? 'bg-gray-900/60 border-cyan-500/30 hover:border-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.05)]' 
-                  : 'bg-white border-slate-200 hover:border-blue-500 shadow-md hover:shadow-lg'
-              }`}>
+              <motion.div whileHover={{ scale: 1.01 }} className="h-full border p-5 rounded-xl transition-all duration-300 group cursor-pointer flex flex-col justify-between bg-white border-slate-200 hover:border-blue-500 shadow-md hover:shadow-lg dark:bg-gray-900/60 dark:border-cyan-500/30 dark:hover:border-cyan-400 dark:shadow-[0_0_15px_rgba(0,240,255,0.05)]">
                 <div>
                   <div className="flex justify-between items-start mb-2">
-                    <h3 className={`text-lg font-bold font-orbitron transition-colors ${isDark ? 'text-white group-hover:text-cyan-400' : 'text-slate-900 group-hover:text-blue-700'}`}>Autonomous ROS 2 Rover</h3>
-                    <span className={`text-[10px] font-orbitron border px-2 py-0.5 rounded ${
-                      isDark ? 'bg-cyan-950 text-cyan-400 border-cyan-500/40' : 'bg-blue-50 text-blue-800 border-blue-200 font-semibold'
-                    }`}>ROS 2 & NAV2</span>
+                    <h3 className="text-lg font-bold font-orbitron transition-colors text-slate-900 group-hover:text-blue-700 dark:text-white dark:group-hover:text-cyan-400">Autonomous ROS 2 Rover</h3>
+                    <span className="text-[10px] font-orbitron border px-2 py-0.5 rounded bg-blue-50 text-blue-800 border-blue-200 dark:bg-cyan-950 dark:text-cyan-400 dark:border-cyan-500/40 font-semibold">ROS 2 & NAV2</span>
                   </div>
-                  <p className={`text-[11px] font-orbitron tracking-wider mb-2 ${isDark ? 'text-cyan-400' : 'text-amber-700 font-semibold'}`}>[ SKID-STEER AUTONOMY ]</p>
-                  <p className={`text-xs font-space leading-relaxed ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
+                  <p className="text-[11px] font-orbitron tracking-wider mb-2 text-amber-700 dark:text-cyan-400 font-semibold">[ SKID-STEER AUTONOMY ]</p>
+                  <p className="text-xs font-space leading-relaxed text-slate-600 dark:text-gray-300">
                     Custom 4-wheel skid-steer rover built from scratch using ROS 2 Jazzy, Gazebo Harmonic, SLAM Toolbox, and Nav2 with EKF sensor fusion.
                   </p>
                 </div>
-                <div className={`mt-4 pt-3 border-t flex justify-between items-center text-xs font-orbitron font-bold ${
-                  isDark ? 'border-cyan-500/20 text-cyan-400' : 'border-slate-200 text-blue-700'
-                }`}>
+                <div className="mt-4 pt-3 border-t flex justify-between items-center text-xs font-orbitron font-bold border-slate-200 text-blue-700 dark:border-cyan-500/20 dark:text-cyan-400">
                   <span>SPECS & LOGS</span>
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </div>
@@ -273,26 +225,18 @@ export default function Home() {
 
             {/* Project 3 */}
             <Link href="/projects/edge-ai" className="h-full">
-              <motion.div whileHover={{ scale: 1.01 }} className={`h-full border p-5 rounded-xl transition-all duration-300 group cursor-pointer flex flex-col justify-between ${
-                isDark 
-                  ? 'bg-gray-900/60 border-cyan-500/30 hover:border-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.05)]' 
-                  : 'bg-white border-slate-200 hover:border-blue-500 shadow-md hover:shadow-lg'
-              }`}>
+              <motion.div whileHover={{ scale: 1.01 }} className="h-full border p-5 rounded-xl transition-all duration-300 group cursor-pointer flex flex-col justify-between bg-white border-slate-200 hover:border-blue-500 shadow-md hover:shadow-lg dark:bg-gray-900/60 dark:border-cyan-500/30 dark:hover:border-cyan-400 dark:shadow-[0_0_15px_rgba(0,240,255,0.05)]">
                 <div>
                   <div className="flex justify-between items-start mb-2">
-                    <h3 className={`text-lg font-bold font-orbitron transition-colors ${isDark ? 'text-white group-hover:text-cyan-400' : 'text-slate-900 group-hover:text-blue-700'}`}>CV Autonomous Robot</h3>
-                    <span className={`text-[10px] font-orbitron border px-2 py-0.5 rounded ${
-                      isDark ? 'bg-cyan-950 text-cyan-400 border-cyan-500/40' : 'bg-blue-50 text-blue-800 border-blue-200 font-semibold'
-                    }`}>OPENCV & PD</span>
+                    <h3 className="text-lg font-bold font-orbitron transition-colors text-slate-900 group-hover:text-blue-700 dark:text-white dark:group-hover:text-cyan-400">CV Autonomous Robot</h3>
+                    <span className="text-[10px] font-orbitron border px-2 py-0.5 rounded bg-blue-50 text-blue-800 border-blue-200 dark:bg-cyan-950 dark:text-cyan-400 dark:border-cyan-500/40 font-semibold">OPENCV & PD</span>
                   </div>
-                  <p className={`text-[11px] font-orbitron tracking-wider mb-2 ${isDark ? 'text-cyan-400' : 'text-amber-700 font-semibold'}`}>[ EDGE PERCEPTION ]</p>
-                  <p className={`text-xs font-space leading-relaxed ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
+                  <p className="text-[11px] font-orbitron tracking-wider mb-2 text-amber-700 dark:text-cyan-400 font-semibold">[ EDGE PERCEPTION ]</p>
+                  <p className="text-xs font-space leading-relaxed text-slate-600 dark:text-gray-300">
                     Custom line-following & obstacle avoidance robot using OpenCV, ROS 2, and dynamic PD Control logic.
                   </p>
                 </div>
-                <div className={`mt-4 pt-3 border-t flex justify-between items-center text-xs font-orbitron font-bold ${
-                  isDark ? 'border-cyan-500/20 text-cyan-400' : 'border-slate-200 text-blue-700'
-                }`}>
+                <div className="mt-4 pt-3 border-t flex justify-between items-center text-xs font-orbitron font-bold border-slate-200 text-blue-700 dark:border-cyan-500/20 dark:text-cyan-400">
                   <span>SPECS & LOGS</span>
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </div>
@@ -301,26 +245,18 @@ export default function Home() {
 
             {/* Project 4 */}
             <Link href="/projects/sih" className="h-full">
-              <motion.div whileHover={{ scale: 1.01 }} className={`h-full border p-5 rounded-xl transition-all duration-300 group cursor-pointer flex flex-col justify-between ${
-                isDark 
-                  ? 'bg-gray-900/60 border-cyan-500/30 hover:border-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.05)]' 
-                  : 'bg-white border-slate-200 hover:border-blue-500 shadow-md hover:shadow-lg'
-              }`}>
+              <motion.div whileHover={{ scale: 1.01 }} className="h-full border p-5 rounded-xl transition-all duration-300 group cursor-pointer flex flex-col justify-between bg-white border-slate-200 hover:border-blue-500 shadow-md hover:shadow-lg dark:bg-gray-900/60 dark:border-cyan-500/30 dark:hover:border-cyan-400 dark:shadow-[0_0_15px_rgba(0,240,255,0.05)]">
                 <div>
                   <div className="flex justify-between items-start mb-2">
-                    <h3 className={`text-lg font-bold font-orbitron transition-colors ${isDark ? 'text-white group-hover:text-cyan-400' : 'text-slate-900 group-hover:text-blue-700'}`}>Reactive Obstacle Avoidance Skid-Steer</h3>
-                    <span className={`text-[10px] font-orbitron border px-2 py-0.5 rounded ${
-                      isDark ? 'bg-cyan-950 text-cyan-400 border-cyan-500/40' : 'bg-blue-50 text-blue-800 border-blue-200 font-semibold'
-                    }`}>LIDAR SLICING</span>
+                    <h3 className="text-lg font-bold font-orbitron transition-colors text-slate-900 group-hover:text-blue-700 dark:text-white dark:group-hover:text-cyan-400">Reactive Obstacle Avoidance Skid-Steer</h3>
+                    <span className="text-[10px] font-orbitron border px-2 py-0.5 rounded bg-blue-50 text-blue-800 border-blue-200 dark:bg-cyan-950 dark:text-cyan-400 dark:border-cyan-500/40 font-semibold">LIDAR SLICING</span>
                   </div>
-                  <p className={`text-[11px] font-orbitron tracking-wider mb-2 ${isDark ? 'text-cyan-400' : 'text-amber-700 font-semibold'}`}>[ ROS 2 & GAZEBO ]</p>
-                  <p className={`text-xs font-space leading-relaxed ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
+                  <p className="text-[11px] font-orbitron tracking-wider mb-2 text-amber-700 dark:text-cyan-400 font-semibold">[ ROS 2 & GAZEBO ]</p>
+                  <p className="text-xs font-space leading-relaxed text-slate-600 dark:text-gray-300">
                     High-speed obstacle evasion rover using ROS 2, Gazebo Harmonic simulation, and custom 360° LiDAR scan slicing algorithm.
                   </p>
                 </div>
-                <div className={`mt-4 pt-3 border-t flex justify-between items-center text-xs font-orbitron font-bold ${
-                  isDark ? 'border-cyan-500/20 text-cyan-400' : 'border-slate-200 text-blue-700'
-                }`}>
+                <div className="mt-4 pt-3 border-t flex justify-between items-center text-xs font-orbitron font-bold border-slate-200 text-blue-700 dark:border-cyan-500/20 dark:text-cyan-400">
                   <span>SPECS & LOGS</span>
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </div>
@@ -329,26 +265,18 @@ export default function Home() {
 
             {/* Project 5 */}
             <Link href="/projects/edge-ai" className="h-full">
-              <motion.div whileHover={{ scale: 1.01 }} className={`h-full border p-5 rounded-xl transition-all duration-300 group cursor-pointer flex flex-col justify-between ${
-                isDark 
-                  ? 'bg-gray-900/60 border-cyan-500/30 hover:border-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.05)]' 
-                  : 'bg-white border-slate-200 hover:border-blue-500 shadow-md hover:shadow-lg'
-              }`}>
+              <motion.div whileHover={{ scale: 1.01 }} className="h-full border p-5 rounded-xl transition-all duration-300 group cursor-pointer flex flex-col justify-between bg-white border-slate-200 hover:border-blue-500 shadow-md hover:shadow-lg dark:bg-gray-900/60 dark:border-cyan-500/30 dark:hover:border-cyan-400 dark:shadow-[0_0_15px_rgba(0,240,255,0.05)]">
                 <div>
                   <div className="flex justify-between items-start mb-2">
-                    <h3 className={`text-lg font-bold font-orbitron transition-colors ${isDark ? 'text-white group-hover:text-cyan-400' : 'text-slate-900 group-hover:text-blue-700'}`}>Decentralized Motor Control System</h3>
-                    <span className={`text-[10px] font-orbitron border px-2 py-0.5 rounded ${
-                      isDark ? 'bg-cyan-950 text-cyan-400 border-cyan-500/40' : 'bg-blue-50 text-blue-800 border-blue-200 font-semibold'
-                    }`}>PUB/SUB</span>
+                    <h3 className="text-lg font-bold font-orbitron transition-colors text-slate-900 group-hover:text-blue-700 dark:text-white dark:group-hover:text-cyan-400">Decentralized Motor Control System</h3>
+                    <span className="text-[10px] font-orbitron border px-2 py-0.5 rounded bg-blue-50 text-blue-800 border-blue-200 dark:bg-cyan-950 dark:text-cyan-400 dark:border-cyan-500/40 font-semibold">PUB/SUB</span>
                   </div>
-                  <p className={`text-[11px] font-orbitron tracking-wider mb-2 ${isDark ? 'text-cyan-400' : 'text-amber-700 font-semibold'}`}>[ MULTI-ACTUATOR TELEMETRY ]</p>
-                  <p className={`text-xs font-space leading-relaxed ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
+                  <p className="text-[11px] font-orbitron tracking-wider mb-2 text-amber-700 dark:text-cyan-400 font-semibold">[ MULTI-ACTUATOR TELEMETRY ]</p>
+                  <p className="text-xs font-space leading-relaxed text-slate-600 dark:text-gray-300">
                     High-concurrency Python & ROS 2 Pub/Sub node architecture for multi-actuator telemetry synchronization.
                   </p>
                 </div>
-                <div className={`mt-4 pt-3 border-t flex justify-between items-center text-xs font-orbitron font-bold ${
-                  isDark ? 'border-cyan-500/20 text-cyan-400' : 'border-slate-200 text-blue-700'
-                }`}>
+                <div className="mt-4 pt-3 border-t flex justify-between items-center text-xs font-orbitron font-bold border-slate-200 text-blue-700 dark:border-cyan-500/20 dark:text-cyan-400">
                   <span>SPECS & LOGS</span>
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </div>
@@ -357,26 +285,18 @@ export default function Home() {
 
             {/* Project 6 */}
             <Link href="/projects/aura" className="h-full">
-              <motion.div whileHover={{ scale: 1.01 }} className={`h-full border p-5 rounded-xl transition-all duration-300 group cursor-pointer flex flex-col justify-between ${
-                isDark 
-                  ? 'bg-gray-900/60 border-cyan-500/30 hover:border-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.05)]' 
-                  : 'bg-white border-slate-200 hover:border-blue-500 shadow-md hover:shadow-lg'
-              }`}>
+              <motion.div whileHover={{ scale: 1.01 }} className="h-full border p-5 rounded-xl transition-all duration-300 group cursor-pointer flex flex-col justify-between bg-white border-slate-200 hover:border-blue-500 shadow-md hover:shadow-lg dark:bg-gray-900/60 dark:border-cyan-500/30 dark:hover:border-cyan-400 dark:shadow-[0_0_15px_rgba(0,240,255,0.05)]">
                 <div>
                   <div className="flex justify-between items-start mb-2">
-                    <h3 className={`text-lg font-bold font-orbitron transition-colors ${isDark ? 'text-white group-hover:text-cyan-400' : 'text-slate-900 group-hover:text-blue-700'}`}>Hybrid AI Scholarship Bot</h3>
-                    <span className={`text-[10px] font-orbitron border px-2 py-0.5 rounded ${
-                      isDark ? 'bg-cyan-950 text-cyan-400 border-cyan-500/40' : 'bg-blue-50 text-blue-800 border-blue-200 font-semibold'
-                    }`}>SCIKIT & STREAMLIT</span>
+                    <h3 className="text-lg font-bold font-orbitron transition-colors text-slate-900 group-hover:text-blue-700 dark:text-white dark:group-hover:text-cyan-400">Hybrid AI Scholarship Bot</h3>
+                    <span className="text-[10px] font-orbitron border px-2 py-0.5 rounded bg-blue-50 text-blue-800 border-blue-200 dark:bg-cyan-950 dark:text-cyan-400 dark:border-cyan-500/40 font-semibold">SCIKIT & STREAMLIT</span>
                   </div>
-                  <p className={`text-[11px] font-orbitron tracking-wider mb-2 ${isDark ? 'text-cyan-400' : 'text-amber-700 font-semibold'}`}>[ ANOMALY DETECTION ]</p>
-                  <p className={`text-xs font-space leading-relaxed ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
+                  <p className="text-[11px] font-orbitron tracking-wider mb-2 text-amber-700 dark:text-cyan-400 font-semibold">[ ANOMALY DETECTION ]</p>
+                  <p className="text-xs font-space leading-relaxed text-slate-600 dark:text-gray-300">
                     Intelligent automated filtering bot built using Python, Scikit-Learn Isolation Forest, and Streamlit dashboard interface.
                   </p>
                 </div>
-                <div className={`mt-4 pt-3 border-t flex justify-between items-center text-xs font-orbitron font-bold ${
-                  isDark ? 'border-cyan-500/20 text-cyan-400' : 'border-slate-200 text-blue-700'
-                }`}>
+                <div className="mt-4 pt-3 border-t flex justify-between items-center text-xs font-orbitron font-bold border-slate-200 text-blue-700 dark:border-cyan-500/20 dark:text-cyan-400">
                   <span>SPECS & LOGS</span>
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </div>
@@ -387,114 +307,98 @@ export default function Home() {
       </section>
 
       {/* SLIDE 3: FIELD OPERATIONS (INTERNSHIPS & TRAINING) */}
-      <section id="experience" className={`snap-center h-screen w-full flex flex-col justify-center items-center relative px-4 md:px-8 py-6 transition-colors ${
-        isDark ? 'bg-black/70 backdrop-blur-md' : 'bg-slate-200/60'
-      }`}>
+      <section id="experience" className="snap-center h-[100dvh] w-full max-w-[100vw] overflow-x-hidden flex flex-col justify-center items-center relative px-4 md:px-8 py-6 transition-colors bg-slate-200/60 dark:bg-black/70 backdrop-blur-md">
         <div className="w-full max-w-7xl mx-auto">
           <div className="text-center mb-6">
-            <h2 className={`text-3xl md:text-4xl font-orbitron font-bold mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-              FIELD <span className={isDark ? 'text-cyan-400' : 'text-blue-700'}>OPERATIONS</span>
+            <h2 className="text-3xl md:text-4xl font-orbitron font-bold mb-2 text-slate-900 dark:text-white">
+              FIELD <span className="text-blue-700 dark:text-cyan-400">OPERATIONS</span>
             </h2>
-            <p className={`text-xs font-space tracking-widest uppercase ${isDark ? 'text-cyan-300' : 'text-slate-600 font-semibold'}`}>
+            <p className="text-xs font-space tracking-widest uppercase text-slate-600 dark:text-cyan-300 font-semibold">
               Complete Industrial Experience & Internship History
             </p>
-            <div className={`h-1 w-20 mx-auto mt-2 rounded-full ${isDark ? 'bg-cyan-400 shadow-[0_0_10px_#00f0ff]' : 'bg-blue-600'}`} />
+            <div className="h-1 w-20 mx-auto mt-2 rounded-full bg-blue-600 dark:bg-cyan-400 dark:shadow-[0_0_10px_#00f0ff]" />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-h-[68vh] overflow-y-auto pr-1">
             {/* Op 1 */}
-            <div className={`border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors ${
-              isDark ? 'bg-gray-900/50 border-cyan-500/30 hover:border-cyan-400' : 'bg-white border-slate-200 shadow-sm hover:border-blue-400'
-            }`}>
+            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
               <div>
-                <span className={`text-[10px] font-orbitron tracking-wider ${isDark ? 'text-cyan-400' : 'text-amber-700 font-semibold'}`}>[ 01 :: METROLOGY ]</span>
-                <h3 className={`text-base font-bold font-orbitron mt-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>Precise3DM</h3>
-                <p className={`text-xs font-space mb-2 ${isDark ? 'text-cyan-300' : 'text-blue-800 font-semibold'}`}>Intern</p>
-                <p className={`text-xs font-space leading-normal ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
+                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 01 :: METROLOGY ]</span>
+                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">Precise3DM</h3>
+                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Intern</p>
+                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
                   3D Scan Based Solutions & Metrology inspection pipelines.
                 </p>
               </div>
             </div>
 
             {/* Op 2 */}
-            <div className={`border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors ${
-              isDark ? 'bg-gray-900/50 border-cyan-500/30 hover:border-cyan-400' : 'bg-white border-slate-200 shadow-sm hover:border-blue-400'
-            }`}>
+            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
               <div>
-                <span className={`text-[10px] font-orbitron tracking-wider ${isDark ? 'text-cyan-400' : 'text-amber-700 font-semibold'}`}>[ 02 :: AI & CV ]</span>
-                <h3 className={`text-base font-bold font-orbitron mt-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>Tamizhan Skills</h3>
-                <p className={`text-xs font-space mb-2 ${isDark ? 'text-cyan-300' : 'text-blue-800 font-semibold'}`}>RISE AI Intern</p>
-                <p className={`text-xs font-space leading-normal ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
+                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 02 :: AI & CV ]</span>
+                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">Tamizhan Skills</h3>
+                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">RISE AI Intern</p>
+                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
                   RISE AI for Autonomous Systems Intern (Computer Vision, YOLOv8, Path Planning).
                 </p>
               </div>
             </div>
 
             {/* Op 3 */}
-            <div className={`border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors ${
-              isDark ? 'bg-gray-900/50 border-cyan-500/30 hover:border-cyan-400' : 'bg-white border-slate-200 shadow-sm hover:border-blue-400'
-            }`}>
+            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
               <div>
-                <span className={`text-[10px] font-orbitron tracking-wider ${isDark ? 'text-cyan-400' : 'text-amber-700 font-semibold'}`}>[ 03 :: ML PIPELINES ]</span>
-                <h3 className={`text-base font-bold font-orbitron mt-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>CodeAlpha</h3>
-                <p className={`text-xs font-space mb-2 ${isDark ? 'text-cyan-300' : 'text-blue-800 font-semibold'}`}>ML Intern</p>
-                <p className={`text-xs font-space leading-normal ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
+                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 03 :: ML PIPELINES ]</span>
+                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">CodeAlpha</h3>
+                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">ML Intern</p>
+                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
                   Development of machine learning models using XGBoost, CNNs, and PyTorch.
                 </p>
               </div>
             </div>
 
             {/* Op 4 */}
-            <div className={`border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors ${
-              isDark ? 'bg-gray-900/50 border-cyan-500/30 hover:border-cyan-400' : 'bg-white border-slate-200 shadow-sm hover:border-blue-400'
-            }`}>
+            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
               <div>
-                <span className={`text-[10px] font-orbitron tracking-wider ${isDark ? 'text-cyan-400' : 'text-amber-700 font-semibold'}`}>[ 04 :: EDP & LOCO ]</span>
-                <h3 className={`text-base font-bold font-orbitron mt-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>Chennai Port</h3>
-                <p className={`text-xs font-space mb-2 ${isDark ? 'text-cyan-300' : 'text-blue-800 font-semibold'}`}>Authority Inplant</p>
-                <p className={`text-xs font-space leading-normal ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
+                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 04 :: EDP & LOCO ]</span>
+                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">Chennai Port</h3>
+                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Authority Inplant</p>
+                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
                   Vocational Inplant Training (Locomotives, Diesel Engines, Heavy Machinery).
                 </p>
               </div>
             </div>
 
             {/* Op 5 */}
-            <div className={`border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors ${
-              isDark ? 'bg-gray-900/50 border-cyan-500/30 hover:border-cyan-400' : 'bg-white border-slate-200 shadow-sm hover:border-blue-400'
-            }`}>
+            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
               <div>
-                <span className={`text-[10px] font-orbitron tracking-wider ${isDark ? 'text-cyan-400' : 'text-amber-700 font-semibold'}`}>[ 05 :: ROS 2 NAV ]</span>
-                <h3 className={`text-base font-bold font-orbitron mt-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>KarthiKesh</h3>
-                <p className={`text-xs font-space mb-2 ${isDark ? 'text-cyan-300' : 'text-blue-800 font-semibold'}`}>Robotics Program</p>
-                <p className={`text-xs font-space leading-normal ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
+                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 05 :: ROS 2 NAV ]</span>
+                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">KarthiKesh</h3>
+                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Robotics Program</p>
+                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
                   20-Day Industrial Career Uplifting Program (Advanced ROS 2 & Autonomous Navigation).
                 </p>
               </div>
             </div>
 
             {/* Op 6 */}
-            <div className={`border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors ${
-              isDark ? 'bg-gray-900/50 border-cyan-500/30 hover:border-cyan-400' : 'bg-white border-slate-200 shadow-sm hover:border-blue-400'
-            }`}>
+            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
               <div>
-                <span className={`text-[10px] font-orbitron tracking-wider ${isDark ? 'text-cyan-400' : 'text-amber-700 font-semibold'}`}>[ 06 :: MANUFACTURING ]</span>
-                <h3 className={`text-base font-bold font-orbitron mt-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>MK Auto</h3>
-                <p className={`text-xs font-space mb-2 ${isDark ? 'text-cyan-300' : 'text-blue-800 font-semibold'}`}>Industrial Intern</p>
-                <p className={`text-xs font-space leading-normal ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
+                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 06 :: MANUFACTURING ]</span>
+                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">MK Auto</h3>
+                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Industrial Intern</p>
+                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
                   CNC/VMC Operations, Cold Forging, Casting & precision manufacturing.
                 </p>
               </div>
             </div>
 
             {/* Op 7 */}
-            <div className={`border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors sm:col-span-2 lg:col-span-2 ${
-              isDark ? 'bg-gray-900/50 border-cyan-500/30 hover:border-cyan-400' : 'bg-white border-slate-200 shadow-sm hover:border-blue-400'
-            }`}>
+            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors sm:col-span-2 lg:col-span-2 bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
               <div>
-                <span className={`text-[10px] font-orbitron tracking-wider ${isDark ? 'text-cyan-400' : 'text-amber-700 font-semibold'}`}>[ 07 :: VIRTUAL SPRINT ]</span>
-                <h3 className={`text-base font-bold font-orbitron mt-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>Kodacy</h3>
-                <p className={`text-xs font-space mb-2 ${isDark ? 'text-cyan-300' : 'text-blue-800 font-semibold'}`}>Virtual Robotics Intern</p>
-                <p className={`text-xs font-space leading-normal ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
+                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 07 :: VIRTUAL SPRINT ]</span>
+                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">Kodacy</h3>
+                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Virtual Robotics Intern</p>
+                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
                   15-Day Virtual Robotics Intern focusing on embedded systems & robotics simulations.
                 </p>
               </div>
@@ -504,45 +408,41 @@ export default function Home() {
       </section>
 
       {/* SLIDE 4: GLOBAL EXPOS & CERTIFICATIONS */}
-      <section id="expos-certs" className={`snap-center h-screen w-full flex flex-col justify-center items-center relative px-4 md:px-8 py-6 transition-colors ${
-        isDark ? 'bg-black/50 backdrop-blur-md' : 'bg-slate-100/80'
-      }`}>
+      <section id="expos-certs" className="snap-center h-[100dvh] w-full max-w-[100vw] overflow-x-hidden flex flex-col justify-center items-center relative px-4 md:px-8 py-6 transition-colors bg-slate-100/80 dark:bg-black/50 backdrop-blur-md">
         <div className="w-full max-w-7xl mx-auto">
           <div className="text-center mb-8">
-            <h2 className={`text-3xl md:text-4xl font-orbitron font-bold mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-              GLOBAL EXPOS & <span className={isDark ? 'text-cyan-400' : 'text-blue-700'}>CERTIFICATIONS</span>
+            <h2 className="text-3xl md:text-4xl font-orbitron font-bold mb-2 text-slate-900 dark:text-white">
+              GLOBAL EXPOS & <span className="text-blue-700 dark:text-cyan-400">CERTIFICATIONS</span>
             </h2>
-            <p className={`text-xs font-space tracking-widest uppercase ${isDark ? 'text-cyan-300' : 'text-slate-600 font-semibold'}`}>
+            <p className="text-xs font-space tracking-widest uppercase text-slate-600 dark:text-cyan-300 font-semibold">
               Defense Expo Analysis & Verified Technical Badges
             </p>
-            <div className={`h-1 w-20 mx-auto mt-2 rounded-full ${isDark ? 'bg-cyan-400 shadow-[0_0_10px_#00f0ff]' : 'bg-blue-600'}`} />
+            <div className="h-1 w-20 mx-auto mt-2 rounded-full bg-blue-600 dark:bg-cyan-400 dark:shadow-[0_0_10px_#00f0ff]" />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Left: EXPOS */}
-            <div className={`border p-6 rounded-xl backdrop-blur-md shadow-md ${
-              isDark ? 'bg-gray-900/60 border-cyan-500/30' : 'bg-white border-slate-200'
-            }`}>
-              <h3 className={`text-lg font-orbitron font-bold mb-4 flex items-center gap-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                <span className={isDark ? 'text-cyan-400' : 'text-amber-600'}>❖</span> INDUSTRIAL EXPOS & DEFENSE ANALYSIS
+            <div className="border p-6 rounded-xl backdrop-blur-md shadow-md bg-white border-slate-200 dark:bg-gray-900/60 dark:border-cyan-500/30">
+              <h3 className="text-lg font-orbitron font-bold mb-4 flex items-center gap-2 text-slate-900 dark:text-white">
+                <span className="text-amber-600 dark:text-cyan-400">❖</span> INDUSTRIAL EXPOS & DEFENSE ANALYSIS
               </h3>
               <div className="space-y-4 font-space">
-                <div className={`border p-4 rounded-lg ${isDark ? 'bg-black/50 border-cyan-500/20' : 'bg-slate-50 border-slate-200'}`}>
+                <div className="border p-4 rounded-lg bg-slate-50 border-slate-200 dark:bg-black/50 dark:border-cyan-500/20">
                   <div className="flex justify-between items-center mb-1">
-                    <h4 className={`text-sm font-bold font-orbitron ${isDark ? 'text-cyan-300' : 'text-blue-900'}`}>Automation India Expo 2026</h4>
-                    <span className={`text-[10px] font-mono ${isDark ? 'text-cyan-400' : 'text-amber-700 font-bold'}`}>CHENNAI</span>
+                    <h4 className="text-sm font-bold font-orbitron text-blue-900 dark:text-cyan-300">Automation India Expo 2026</h4>
+                    <span className="text-[10px] font-mono text-amber-700 dark:text-cyan-400 font-bold">CHENNAI</span>
                   </div>
-                  <p className={`text-xs ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
+                  <p className="text-xs text-slate-600 dark:text-gray-300">
                     Chennai Trade Centre — Explored industrial robotics, smart sensors, and factory automation architectures.
                   </p>
                 </div>
 
-                <div className={`border p-4 rounded-lg ${isDark ? 'bg-black/50 border-cyan-500/20' : 'bg-slate-50 border-slate-200'}`}>
+                <div className="border p-4 rounded-lg bg-slate-50 border-slate-200 dark:bg-black/50 dark:border-cyan-500/20">
                   <div className="flex justify-between items-center mb-1">
-                    <h4 className={`text-sm font-bold font-orbitron ${isDark ? 'text-cyan-300' : 'text-blue-900'}`}>DEFTECH Bharat Bengaluru 2026</h4>
-                    <span className={`text-[10px] font-mono ${isDark ? 'text-cyan-400' : 'text-amber-700 font-bold'}`}>BENGALURU</span>
+                    <h4 className="text-sm font-bold font-orbitron text-blue-900 dark:text-cyan-300">DEFTECH Bharat Bengaluru 2026</h4>
+                    <span className="text-[10px] font-mono text-amber-700 dark:text-cyan-400 font-bold">BENGALURU</span>
                   </div>
-                  <p className={`text-xs ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>
+                  <p className="text-xs text-slate-600 dark:text-gray-300">
                     Defense Technology Expo — Specialized T-90 Bhishma tank propulsion & heavy mechatronics analysis.
                   </p>
                 </div>
@@ -550,28 +450,26 @@ export default function Home() {
             </div>
 
             {/* Right: CERTIFICATIONS */}
-            <div className={`border p-6 rounded-xl backdrop-blur-md shadow-md ${
-              isDark ? 'bg-gray-900/60 border-cyan-500/30' : 'bg-white border-slate-200'
-            }`}>
-              <h3 className={`text-lg font-orbitron font-bold mb-4 flex items-center gap-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                <span className={isDark ? 'text-cyan-400' : 'text-amber-600'}>◈</span> VERIFIED CERTIFICATIONS
+            <div className="border p-6 rounded-xl backdrop-blur-md shadow-md bg-white border-slate-200 dark:bg-gray-900/60 dark:border-cyan-500/30">
+              <h3 className="text-lg font-orbitron font-bold mb-4 flex items-center gap-2 text-slate-900 dark:text-white">
+                <span className="text-amber-600 dark:text-cyan-400">◈</span> VERIFIED CERTIFICATIONS
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 font-space">
-                <div className={`border p-3 rounded-lg ${isDark ? 'bg-black/50 border-cyan-500/20' : 'bg-slate-50 border-slate-200'}`}>
-                  <h4 className={`text-xs font-bold font-orbitron ${isDark ? 'text-cyan-300' : 'text-blue-900'}`}>IBM SkillsBuild</h4>
-                  <p className={`text-[11px] mt-1 ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>AI Fundamentals & Advanced Python Data Analysis</p>
+                <div className="border p-3 rounded-lg bg-slate-50 border-slate-200 dark:bg-black/50 dark:border-cyan-500/20">
+                  <h4 className="text-xs font-bold font-orbitron text-blue-900 dark:text-cyan-300">IBM SkillsBuild</h4>
+                  <p className="text-[11px] mt-1 text-slate-600 dark:text-gray-300">AI Fundamentals & Advanced Python Data Analysis</p>
                 </div>
-                <div className={`border p-3 rounded-lg ${isDark ? 'bg-black/50 border-cyan-500/20' : 'bg-slate-50 border-slate-200'}`}>
-                  <h4 className={`text-xs font-bold font-orbitron ${isDark ? 'text-cyan-300' : 'text-blue-900'}`}>Cisco</h4>
-                  <p className={`text-[11px] mt-1 ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>Computer Hardware Basics</p>
+                <div className="border p-3 rounded-lg bg-slate-50 border-slate-200 dark:bg-black/50 dark:border-cyan-500/20">
+                  <h4 className="text-xs font-bold font-orbitron text-blue-900 dark:text-cyan-300">Cisco</h4>
+                  <p className="text-[11px] mt-1 text-slate-600 dark:text-gray-300">Computer Hardware Basics</p>
                 </div>
-                <div className={`border p-3 rounded-lg ${isDark ? 'bg-black/50 border-cyan-500/20' : 'bg-slate-50 border-slate-200'}`}>
-                  <h4 className={`text-xs font-bold font-orbitron ${isDark ? 'text-cyan-300' : 'text-blue-900'}`}>NPTEL</h4>
-                  <p className={`text-[11px] mt-1 ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>Industrial Robotics & Joy of Computing using Python</p>
+                <div className="border p-3 rounded-lg bg-slate-50 border-slate-200 dark:bg-black/50 dark:border-cyan-500/20">
+                  <h4 className="text-xs font-bold font-orbitron text-blue-900 dark:text-cyan-300">NPTEL</h4>
+                  <p className="text-[11px] mt-1 text-slate-600 dark:text-gray-300">Industrial Robotics & Joy of Computing using Python</p>
                 </div>
-                <div className={`border p-3 rounded-lg ${isDark ? 'bg-black/50 border-cyan-500/20' : 'bg-slate-50 border-slate-200'}`}>
-                  <h4 className={`text-xs font-bold font-orbitron ${isDark ? 'text-cyan-300' : 'text-blue-900'}`}>NoviTech</h4>
-                  <p className={`text-[11px] mt-1 ${isDark ? 'text-gray-300' : 'text-slate-600'}`}>Full Stack Web Development</p>
+                <div className="border p-3 rounded-lg bg-slate-50 border-slate-200 dark:bg-black/50 dark:border-cyan-500/20">
+                  <h4 className="text-xs font-bold font-orbitron text-blue-900 dark:text-cyan-300">NoviTech</h4>
+                  <p className="text-[11px] mt-1 text-slate-600 dark:text-gray-300">Full Stack Web Development</p>
                 </div>
               </div>
             </div>
@@ -580,52 +478,42 @@ export default function Home() {
       </section>
 
       {/* SLIDE 5: LIVE COMM-LINK (NETWORK & CONTACT) */}
-      <section id="contact" className={`snap-center h-screen w-full flex flex-col justify-center items-center relative px-4 md:px-8 py-6 transition-colors ${
-        isDark ? 'bg-black/70 backdrop-blur-md' : 'bg-slate-200/60'
-      }`}>
+      <section id="contact" className="snap-center h-[100dvh] w-full max-w-[100vw] overflow-x-hidden flex flex-col justify-center items-center relative px-4 md:px-8 py-6 transition-colors bg-slate-200/60 dark:bg-black/70 backdrop-blur-md">
         <div className="w-full max-w-7xl mx-auto">
           <div className="text-center mb-8">
-            <h2 className={`text-3xl md:text-4xl font-orbitron font-bold mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>
-              LIVE <span className={isDark ? 'text-cyan-400' : 'text-blue-700'}>COMM-LINK</span>
+            <h2 className="text-3xl md:text-4xl font-orbitron font-bold mb-2 text-slate-900 dark:text-white">
+              LIVE <span className="text-blue-700 dark:text-cyan-400">COMM-LINK</span>
             </h2>
-            <p className={`text-xs font-space tracking-widest uppercase ${isDark ? 'text-cyan-300' : 'text-slate-600 font-semibold'}`}>
+            <p className="text-xs font-space tracking-widest uppercase text-slate-600 dark:text-cyan-300 font-semibold">
               Network Feed & Encrypted Transmission
             </p>
-            <div className={`h-1 w-20 mx-auto mt-2 rounded-full ${isDark ? 'bg-cyan-400 shadow-[0_0_10px_#00f0ff]' : 'bg-blue-600'}`} />
+            <div className="h-1 w-20 mx-auto mt-2 rounded-full bg-blue-600 dark:bg-cyan-400 dark:shadow-[0_0_10px_#00f0ff]" />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
             {/* Left Column: Network Uplink Placeholder */}
-            <div className={`border p-6 rounded-xl backdrop-blur-md flex flex-col justify-center items-center text-center relative overflow-hidden group shadow-md ${
-              isDark ? 'bg-gray-900/60 border-cyan-500/30' : 'bg-white border-slate-200'
-            }`}>
-              <div className={`w-16 h-16 rounded-full border-2 flex items-center justify-center mb-4 ${
-                isDark ? 'border-cyan-400/60 text-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.2)]' : 'border-blue-600 text-blue-700 shadow-sm'
-              }`}>
+            <div className="border p-6 rounded-xl backdrop-blur-md flex flex-col justify-center items-center text-center relative overflow-hidden group shadow-md bg-white border-slate-200 dark:bg-gray-900/60 dark:border-cyan-500/30">
+              <div className="w-16 h-16 rounded-full border-2 flex items-center justify-center mb-4 border-blue-600 text-blue-700 shadow-sm dark:border-cyan-400/60 dark:text-cyan-400 dark:shadow-[0_0_15px_rgba(0,240,255,0.2)]">
                 <span className="text-2xl font-orbitron">📡</span>
               </div>
-              <h3 className={`text-xl font-orbitron font-bold mb-2 ${isDark ? 'text-white' : 'text-slate-900'}`}>NETWORK UPLINK</h3>
-              <p className={`text-xs font-mono tracking-wider mb-4 ${isDark ? 'text-cyan-400' : 'text-amber-700 font-semibold'}`}>
+              <h3 className="text-xl font-orbitron font-bold mb-2 text-slate-900 dark:text-white">NETWORK UPLINK</h3>
+              <p className="text-xs font-mono tracking-wider mb-4 text-amber-700 dark:text-cyan-400 font-semibold">
                 [ LINKEDIN INTEGRATION NODE ]
               </p>
-              <div className={`border p-6 rounded-lg max-w-md w-full ${
-                isDark ? 'bg-black/70 border-cyan-500/40' : 'bg-slate-50 border-slate-200'
-              }`}>
-                <p className={`text-sm font-space leading-relaxed italic ${isDark ? 'text-gray-300' : 'text-slate-700'}`}>
+              <div className="border p-6 rounded-lg max-w-md w-full bg-slate-50 border-slate-200 dark:bg-black/70 dark:border-cyan-500/40">
+                <p className="text-sm font-space leading-relaxed italic text-slate-700 dark:text-gray-300">
                   &quot;Live LinkedIn Feed integration pending...&quot;
                 </p>
-                <p className={`text-xs font-mono mt-3 ${isDark ? 'text-cyan-400/80' : 'text-blue-700 font-semibold'}`}>
+                <p className="text-xs font-mono mt-3 text-blue-700 dark:text-cyan-400/80 font-semibold">
                   (I will embed the iframe later)
                 </p>
               </div>
             </div>
 
             {/* Right Column: Web3Forms Cyberpunk Contact Form */}
-            <div className={`border p-6 rounded-xl backdrop-blur-md flex flex-col justify-center shadow-md ${
-              isDark ? 'bg-gray-900/60 border-cyan-500/30' : 'bg-white border-slate-200'
-            }`}>
-              <h3 className={`text-xl font-orbitron font-bold mb-1 ${isDark ? 'text-white' : 'text-slate-900'}`}>TRANSMIT SIGNAL</h3>
-              <p className={`text-xs font-mono mb-4 tracking-wider ${isDark ? 'text-cyan-400' : 'text-amber-700 font-semibold'}`}>
+            <div className="border p-6 rounded-xl backdrop-blur-md flex flex-col justify-center shadow-md bg-white border-slate-200 dark:bg-gray-900/60 dark:border-cyan-500/30">
+              <h3 className="text-xl font-orbitron font-bold mb-1 text-slate-900 dark:text-white">TRANSMIT SIGNAL</h3>
+              <p className="text-xs font-mono mb-4 tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">
                 [ ENCRYPTED DIRECT CHANNEL ]
               </p>
 
@@ -644,7 +532,7 @@ export default function Home() {
 
               <form className="flex flex-col gap-3 font-space" onSubmit={handleFormSubmit}>
                 <div>
-                  <label className={`text-[10px] font-orbitron mb-1 block ${isDark ? 'text-cyan-400' : 'text-blue-900 font-semibold'}`}>
+                  <label className="text-[10px] font-orbitron mb-1 block text-blue-900 dark:text-cyan-400 font-semibold">
                     IDENTITY (NAME)
                   </label>
                   <input 
@@ -653,15 +541,11 @@ export default function Home() {
                     value={formState.name}
                     onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                     placeholder="e.g. Commander Sheppard" 
-                    className={`w-full border rounded p-2.5 text-xs outline-none transition-colors ${
-                      isDark 
-                        ? 'bg-black/60 border-cyan-900 focus:border-cyan-400 text-cyan-300' 
-                        : 'bg-slate-50 border-slate-300 focus:border-blue-600 text-slate-900'
-                    }`} 
+                    className="w-full border rounded p-2.5 text-xs outline-none transition-colors bg-slate-50 border-slate-300 focus:border-blue-600 text-slate-900 dark:bg-black/60 dark:border-cyan-900 dark:focus:border-cyan-400 dark:text-cyan-300" 
                   />
                 </div>
                 <div>
-                  <label className={`text-[10px] font-orbitron mb-1 block ${isDark ? 'text-cyan-400' : 'text-blue-900 font-semibold'}`}>
+                  <label className="text-[10px] font-orbitron mb-1 block text-blue-900 dark:text-cyan-400 font-semibold">
                     COMM FREQUENCY (EMAIL)
                   </label>
                   <input 
@@ -670,15 +554,11 @@ export default function Home() {
                     value={formState.email}
                     onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                     placeholder="e.g. signal@domain.com" 
-                    className={`w-full border rounded p-2.5 text-xs outline-none transition-colors ${
-                      isDark 
-                        ? 'bg-black/60 border-cyan-900 focus:border-cyan-400 text-cyan-300' 
-                        : 'bg-slate-50 border-slate-300 focus:border-blue-600 text-slate-900'
-                    }`} 
+                    className="w-full border rounded p-2.5 text-xs outline-none transition-colors bg-slate-50 border-slate-300 focus:border-blue-600 text-slate-900 dark:bg-black/60 dark:border-cyan-900 dark:focus:border-cyan-400 dark:text-cyan-300" 
                   />
                 </div>
                 <div>
-                  <label className={`text-[10px] font-orbitron mb-1 block ${isDark ? 'text-cyan-400' : 'text-blue-900 font-semibold'}`}>
+                  <label className="text-[10px] font-orbitron mb-1 block text-blue-900 dark:text-cyan-400 font-semibold">
                     TRANSMISSION DATA (MESSAGE)
                   </label>
                   <textarea 
@@ -687,21 +567,13 @@ export default function Home() {
                     onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                     placeholder="Write encrypted message body..." 
                     rows={3} 
-                    className={`w-full border rounded p-2.5 text-xs outline-none transition-colors resize-none ${
-                      isDark 
-                        ? 'bg-black/60 border-cyan-900 focus:border-cyan-400 text-cyan-300' 
-                        : 'bg-slate-50 border-slate-300 focus:border-blue-600 text-slate-900'
-                    }`}
+                    className="w-full border rounded p-2.5 text-xs outline-none transition-colors resize-none bg-slate-50 border-slate-300 focus:border-blue-600 text-slate-900 dark:bg-black/60 dark:border-cyan-900 dark:focus:border-cyan-400 dark:text-cyan-300"
                   ></textarea>
                 </div>
                 <button 
                   type="submit" 
                   disabled={status === 'submitting'}
-                  className={`w-full py-3 border font-bold font-orbitron text-xs tracking-widest rounded mt-1 transition-all ${
-                    isDark 
-                      ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300 hover:bg-cyan-400 hover:text-black shadow-[0_0_15px_rgba(0,240,255,0.2)]' 
-                      : 'bg-blue-700 border-blue-700 text-white hover:bg-blue-800 shadow-md'
-                  } ${status === 'submitting' ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  className={`w-full py-3 border font-bold font-orbitron text-xs tracking-widest rounded mt-1 transition-all bg-blue-700 border-blue-700 text-white hover:bg-blue-800 shadow-md dark:bg-cyan-500/20 dark:border-cyan-400 dark:text-cyan-300 dark:hover:bg-cyan-400 dark:hover:text-black dark:shadow-[0_0_15px_rgba(0,240,255,0.2)] ${status === 'submitting' ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                   {status === 'submitting' ? 'TRANSMITTING...' : 'BROADCAST TRANSMISSION'}
                 </button>

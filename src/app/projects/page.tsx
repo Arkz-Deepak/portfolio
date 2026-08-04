@@ -59,28 +59,28 @@ export default function ProjectsPage() {
   ]
 
   return (
-    <main className="min-h-screen pt-24 pb-16 px-4 md:px-8 max-w-7xl mx-auto">
+    <main className="min-h-[100dvh] w-full max-w-[100vw] overflow-x-hidden pt-24 pb-16 px-4 md:px-8 max-w-7xl mx-auto transition-colors duration-300 bg-slate-50 dark:bg-black text-slate-900 dark:text-cyan-400">
       <div className="text-center mb-16">
-        <h1 className="text-4xl md:text-5xl font-orbitron font-bold text-white mb-3">
-          FEATURED <span className="text-cyan-400">ARCHIVES</span>
+        <h1 className="text-4xl md:text-5xl font-orbitron font-bold text-slate-900 dark:text-white mb-3">
+          FEATURED <span className="text-blue-700 dark:text-cyan-400">ARCHIVES</span>
         </h1>
-        <p className="text-xs md:text-sm font-space text-cyan-300 tracking-widest uppercase">Autonomous Systems, Robotics & AI Repositories</p>
-        <div className="h-1 w-24 bg-cyan-400 mx-auto mt-3 rounded-full shadow-[0_0_10px_#00f0ff]" />
+        <p className="text-xs md:text-sm font-space text-slate-600 dark:text-cyan-300 tracking-widest uppercase font-semibold">Autonomous Systems, Robotics & AI Repositories</p>
+        <div className="h-1 w-24 bg-blue-600 dark:bg-cyan-400 mx-auto mt-3 rounded-full dark:shadow-[0_0_10px_#00f0ff]" />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((p) => (
           <Link key={p.id} href={p.link} className="h-full">
-            <div className="h-full bg-gray-900/60 border border-cyan-500/30 hover:border-cyan-400 p-6 rounded-xl backdrop-blur-md transition-all duration-300 group cursor-pointer flex flex-col justify-between shadow-[0_0_15px_rgba(0,240,255,0.05)]">
+            <div className="h-full border p-6 rounded-xl backdrop-blur-md transition-all duration-300 group cursor-pointer flex flex-col justify-between bg-white border-slate-200 hover:border-blue-500 shadow-md hover:shadow-lg dark:bg-gray-900/60 dark:border-cyan-500/30 dark:hover:border-cyan-400 dark:shadow-[0_0_15px_rgba(0,240,255,0.05)]">
               <div>
                 <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-xl font-bold text-white font-orbitron group-hover:text-cyan-400 transition-colors">{p.title}</h3>
-                  <span className="text-[10px] font-orbitron bg-cyan-950 text-cyan-400 border border-cyan-500/40 px-2 py-0.5 rounded whitespace-nowrap">{p.badge}</span>
+                  <h3 className="text-xl font-bold font-orbitron text-slate-900 group-hover:text-blue-700 dark:text-white dark:group-hover:text-cyan-400 transition-colors">{p.title}</h3>
+                  <span className="text-[10px] font-orbitron border px-2 py-0.5 rounded whitespace-nowrap bg-blue-50 text-blue-800 border-blue-200 dark:bg-cyan-950 dark:text-cyan-400 dark:border-cyan-500/40 font-semibold">{p.badge}</span>
                 </div>
-                <p className="text-xs text-cyan-400 font-orbitron tracking-wider mb-3">{p.subtitle}</p>
-                <p className="text-sm text-gray-300 font-space leading-relaxed">{p.description}</p>
+                <p className="text-xs font-orbitron tracking-wider mb-3 text-amber-700 dark:text-cyan-400 font-semibold">{p.subtitle}</p>
+                <p className="text-sm font-space leading-relaxed text-slate-600 dark:text-gray-300">{p.description}</p>
               </div>
-              <div className="mt-6 pt-4 border-t border-cyan-500/20 flex justify-between items-center text-xs font-orbitron font-bold text-cyan-400">
+              <div className="mt-6 pt-4 border-t flex justify-between items-center text-xs font-orbitron font-bold border-slate-200 text-blue-700 dark:border-cyan-500/20 dark:text-cyan-400">
                 <span>VIEW SPECS</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </div>

@@ -59,32 +59,32 @@ export default function InternshipsPage() {
   ]
 
   return (
-    <main className="min-h-screen pt-24 pb-16 px-4 md:px-8 max-w-7xl mx-auto">
+    <main className="min-h-[100dvh] w-full max-w-[100vw] overflow-x-hidden pt-24 pb-16 px-4 md:px-8 max-w-7xl mx-auto transition-colors duration-300 bg-slate-50 dark:bg-black text-slate-900 dark:text-cyan-400">
       <div className="text-center mb-16">
-        <h1 className="text-4xl md:text-5xl font-orbitron font-bold text-white mb-3">
-          FIELD <span className="text-cyan-400">OPERATIONS</span>
+        <h1 className="text-4xl md:text-5xl font-orbitron font-bold text-slate-900 dark:text-white mb-3">
+          FIELD <span className="text-blue-700 dark:text-cyan-400">OPERATIONS</span>
         </h1>
-        <p className="text-xs md:text-sm font-space text-cyan-300 tracking-widest uppercase">Complete Industrial & Internship Timeline</p>
-        <div className="h-1 w-24 bg-cyan-400 mx-auto mt-3 rounded-full shadow-[0_0_10px_#00f0ff]" />
+        <p className="text-xs md:text-sm font-space text-slate-600 dark:text-cyan-300 tracking-widest uppercase font-semibold">Complete Industrial & Internship Timeline</p>
+        <div className="h-1 w-24 bg-blue-600 dark:bg-cyan-400 mx-auto mt-3 rounded-full dark:shadow-[0_0_10px_#00f0ff]" />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {experiences.map((exp, index) => (
           <div 
             key={exp.id} 
-            className="bg-gray-900/60 border border-cyan-500/30 hover:border-cyan-400 p-6 rounded-xl backdrop-blur-md transition-all duration-300 flex flex-col justify-between hover:shadow-[0_0_20px_rgba(0,240,255,0.1)] group"
+            className="border p-6 rounded-xl backdrop-blur-md transition-all duration-300 flex flex-col justify-between group bg-white border-slate-200 shadow-md hover:shadow-lg dark:bg-gray-900/60 dark:border-cyan-500/30 dark:hover:border-cyan-400 dark:hover:shadow-[0_0_20px_rgba(0,240,255,0.1)]"
           >
             <div>
               <div className="flex justify-between items-center mb-3">
-                <span className="text-xs font-mono text-cyan-400 tracking-wider">0{index + 1} :: EXP</span>
-                <span className="text-[10px] font-orbitron bg-cyan-950 text-cyan-300 border border-cyan-500/40 px-2 py-0.5 rounded">{exp.role}</span>
+                <span className="text-xs font-mono text-amber-700 dark:text-cyan-400 font-bold">0{index + 1} :: EXP</span>
+                <span className="text-[10px] font-orbitron border px-2 py-0.5 rounded bg-blue-50 text-blue-800 border-blue-200 dark:bg-cyan-950 dark:text-cyan-300 dark:border-cyan-500/40 font-semibold">{exp.role}</span>
               </div>
-              <h3 className="text-xl font-bold font-orbitron text-white group-hover:text-cyan-400 transition-colors mb-1">{exp.title}</h3>
-              <p className="text-xs font-orbitron text-cyan-400/80 mb-4">{exp.domain}</p>
-              <p className="text-sm font-space text-gray-300 leading-relaxed">{exp.description}</p>
+              <h3 className="text-xl font-bold font-orbitron text-slate-900 group-hover:text-blue-700 dark:text-white dark:group-hover:text-cyan-400 transition-colors mb-1">{exp.title}</h3>
+              <p className="text-xs font-orbitron text-amber-700 dark:text-cyan-400/80 mb-4 font-semibold">{exp.domain}</p>
+              <p className="text-sm font-space text-slate-600 dark:text-gray-300 leading-relaxed">{exp.description}</p>
             </div>
-            <div className="mt-6 pt-4 border-t border-cyan-500/20 text-right">
-              <span className="text-xs font-mono text-cyan-400/60">VERIFIED ENTRY</span>
+            <div className="mt-6 pt-4 border-t border-slate-200 dark:border-cyan-500/20 text-right">
+              <span className="text-xs font-mono text-slate-400 dark:text-cyan-400/60 font-semibold">VERIFIED ENTRY</span>
             </div>
           </div>
         ))}

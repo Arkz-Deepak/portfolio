@@ -73,15 +73,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${orbitron.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" className={`${orbitron.variable} ${spaceGrotesk.variable} dark`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-black text-cyan-400 font-sans antialiased selection:bg-cyan-500/30 transition-colors duration-300">
-        <ThemeProvider>
+      <body className="bg-slate-50 text-slate-900 dark:bg-black dark:text-cyan-400 transition-colors duration-300 overflow-x-hidden w-full max-w-[100vw] font-sans antialiased selection:bg-cyan-500/30">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <Navbar />
           {children}
         </ThemeProvider>
