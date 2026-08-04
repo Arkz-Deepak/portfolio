@@ -126,7 +126,7 @@ export default function SlamLab() {
         ctx.strokeRect(c.x, c.y, c.w, c.h)
       })
 
-      // Robot Navigation
+      // Robot Navigation Logic
       const dx = goalPos.x - robot.x
       const dy = goalPos.y - robot.y
       const dist = Math.sqrt(dx * dx + dy * dy)
@@ -166,13 +166,16 @@ export default function SlamLab() {
         })
 
         const targetAngle = Math.atan2(attractiveY + repelY, attractiveX + repelX)
-        let angleDiff = targetAngle - robot.angle
-        while (angleDiff > Math.PI) angleDiff -= Math.PI * 2
-        while (angleDiff < -Math.PI) angleDiff += Math.PI * 2
 
-        robot.omega += angleDiff * 0.08
-        robot.omega *= 0.75
+        // STRICT ANGULAR NORMALIZATION: shortest rotational distance between [-PI, PI]
+        const angleDiff = Math.atan2(Math.sin(targetAngle - robot.angle), Math.cos(targetAngle - robot.angle))
+
+        robot.omega += angleDiff * 0.12
+        robot.omega *= 0.65
         robot.angle += robot.omega
+
+        // Keep robot.angle bounded in [-PI, PI] to prevent angular drift
+        robot.angle = Math.atan2(Math.sin(robot.angle), Math.cos(robot.angle))
 
         robot.vx += Math.cos(robot.angle) * speed * 0.4
         robot.vy += Math.sin(robot.angle) * speed * 0.4

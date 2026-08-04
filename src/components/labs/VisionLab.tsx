@@ -5,6 +5,19 @@ export default function VisionLab() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [visionMode, setVisionMode] = useState<'rgb' | 'depth' | 'thermal'>('rgb')
   const mousePos = useRef({ x: 250, y: 150 })
+  const [activeTarget, setActiveTarget] = useState<{
+    id: number
+    label: string
+    confidence: string
+    distance: string
+    status: 'TRACKING' | 'SEARCHING'
+  }>({
+    id: 0,
+    label: 'SEARCHING...',
+    confidence: '0.0%',
+    distance: '0.00m',
+    status: 'SEARCHING'
+  })
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -70,7 +83,6 @@ export default function VisionLab() {
       }
     }
 
-    // Dynamic targets ratio relative to canvas size
     const targetRatios = [
       { rx: 0.3, ry: 0.4, w: 60, h: 40, label: 'vehicle_sedan', id: 1 },
       { rx: 0.6, ry: 0.7, w: 80, h: 50, label: 'vehicle_suv', id: 2 },
@@ -89,7 +101,7 @@ export default function VisionLab() {
 
       ctx.clearRect(0, 0, cw, ch)
 
-      // Draw Drone Feed Background
+      // Background Feed Mode
       if (visionMode === 'rgb') {
         ctx.fillStyle = '#0a101d'
         ctx.fillRect(0, 0, cw, ch)
@@ -107,7 +119,7 @@ export default function VisionLab() {
         drawGrid('rgba(255, 0, 127, 0.05)', cw, ch)
       }
 
-      // Draw Drone Crosshair
+      // Drone Crosshair
       const { x: mx, y: my } = mousePos.current
       ctx.strokeStyle = visionMode === 'thermal' ? '#ff007f' : '#00f0ff'
       ctx.lineWidth = 1.5
@@ -121,9 +133,8 @@ export default function VisionLab() {
       ctx.moveTo(mx - 50, my); ctx.lineTo(mx + 50, my)
       ctx.stroke()
 
-      // Calculate targeting and draw boxes
       let lockedOn = false
-      let telemetryData = 'SEARCHING...'
+      let closestTarget = null
 
       targetRatios.forEach(t => {
         const drift = Math.sin(Date.now() * 0.001 + t.id) * 0.5
@@ -142,8 +153,15 @@ export default function VisionLab() {
           boxColor = visionMode === 'thermal' ? 'rgba(255, 0, 127, 0.2)' : 'rgba(0, 255, 157, 0.2)'
           lockedOn = true
 
-          const confidence = (90 + Math.random() * 9).toFixed(1)
-          telemetryData = `TRK ID: ${t.id} | TYPE: ${t.label.toUpperCase()} | CONF: ${confidence}% | DIST: ${dist.toFixed(1)}m`
+          const confVal = (92 + (t.id * 1.5)).toFixed(1)
+          const distVal = (dist * 0.03).toFixed(2)
+          closestTarget = {
+            id: t.id,
+            label: t.label.toUpperCase(),
+            confidence: `${confVal}%`,
+            distance: `${distVal}m`,
+            status: 'TRACKING' as const
+          }
 
           ctx.strokeStyle = color
           ctx.setLineDash([5, 5])
@@ -170,23 +188,21 @@ export default function VisionLab() {
         ctx.moveTo(bx + t.w - l, by + t.h); ctx.lineTo(bx + t.w, by + t.h); ctx.lineTo(bx + t.w, by + t.h - l)
         ctx.stroke()
 
-        if (dist < 90) {
-          ctx.fillStyle = color
-          ctx.font = '10px sans-serif'
-          ctx.fillText(t.label, bx, by - 5)
-        }
+        ctx.fillStyle = color
+        ctx.font = '10px monospace'
+        ctx.fillText(`${t.label} (id:${t.id})`, bx, by - 5)
       })
 
-      // Draw HUD text
-      ctx.fillStyle = lockedOn ? (visionMode === 'thermal' ? '#ff007f' : '#00ff9d') : '#00f0ff'
-      ctx.font = '12px sans-serif'
-      ctx.fillText(`MODE: ${visionMode.toUpperCase()}`, 15, 25)
-      ctx.fillText(`STATUS: ${lockedOn ? 'TRACKING' : 'IDLE'}`, 15, 45)
-      ctx.fillText(telemetryData, 15, 65)
-
-      if (Math.random() < 0.08) {
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.04)'
-        ctx.fillRect(0, Math.random() * ch, cw, 2)
+      if (closestTarget) {
+        setActiveTarget(closestTarget)
+      } else {
+        setActiveTarget({
+          id: 0,
+          label: 'SEARCHING AREA...',
+          confidence: '---',
+          distance: '---',
+          status: 'SEARCHING'
+        })
       }
 
       animationFrameId = requestAnimationFrame(render)
@@ -205,25 +221,70 @@ export default function VisionLab() {
   }, [visionMode])
 
   return (
-    <div className="w-full flex flex-col items-center gap-4">
-      <div className="flex gap-2">
-        {(['rgb', 'depth', 'thermal'] as const).map(mode => (
-          <button
-            key={mode}
-            onClick={() => setVisionMode(mode)}
-            className={`px-4 py-2 text-sm font-bold font-orbitron border ${
-              visionMode === mode 
-                ? 'bg-cyan-500/20 border-cyan-400 text-cyan-400' 
-                : 'bg-transparent border-cyan-900 text-cyan-700 hover:border-cyan-500 hover:text-cyan-500'
-            }`}
-          >
-            {mode.toUpperCase()}
-          </button>
-        ))}
+    <div className="w-full flex flex-col gap-4">
+      {/* Mode Selector Buttons */}
+      <div className="flex justify-between items-center flex-wrap gap-2">
+        <div className="flex gap-2">
+          {(['rgb', 'depth', 'thermal'] as const).map(mode => (
+            <button
+              key={mode}
+              onClick={() => setVisionMode(mode)}
+              className={`px-3 py-1.5 text-xs font-bold font-orbitron border rounded transition-all ${
+                visionMode === mode 
+                  ? 'bg-cyan-500/20 border-cyan-400 text-cyan-300 shadow-[0_0_10px_rgba(0,240,255,0.2)]' 
+                  : 'bg-black/40 border-cyan-900 text-cyan-600 hover:border-cyan-500 hover:text-cyan-400'
+              }`}
+            >
+              {mode.toUpperCase()} PIPELINE
+            </button>
+          ))}
+        </div>
+        <span className="text-[11px] font-mono text-cyan-400/80">
+          [ INFERENCE ENGINE: YOLOv8-NANO ]
+        </span>
       </div>
+
+      {/* Main Canvas View */}
       <div className="w-full aspect-video border border-cyan-500/30 rounded-lg overflow-hidden bg-black/50 backdrop-blur relative min-h-[220px]">
         <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%] z-10 opacity-40"></div>
         <canvas ref={canvasRef} className="w-full h-full cursor-crosshair relative z-0 block" />
+      </div>
+
+      {/* Terminal Readout & Legend Overlay Panel */}
+      <div className="bg-black/70 border border-cyan-500/30 rounded-lg p-4 font-mono text-xs">
+        <div className="flex justify-between items-center mb-2 pb-2 border-b border-cyan-500/20">
+          <span className="text-cyan-400 font-bold font-orbitron">
+            💡 SIMULATION INSTRUCTIONS & LEGEND
+          </span>
+          <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+            activeTarget.status === 'TRACKING' ? 'bg-emerald-950 text-emerald-400 border border-emerald-500/40' : 'bg-cyan-950 text-cyan-400 border border-cyan-500/40'
+          }`}>
+            {activeTarget.status}
+          </span>
+        </div>
+
+        <p className="text-gray-300 text-[11px] mb-3 leading-relaxed">
+          Hover or move your cursor across the canvas to simulate YOLOv8 bounding box detection, real-time confidence scores, and stereo depth perception.
+        </p>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-gray-900/60 p-3 rounded border border-cyan-500/20">
+          <div>
+            <span className="text-cyan-500 text-[10px] block font-orbitron">TARGET IDENT:</span>
+            <span className="text-white font-bold text-xs">{activeTarget.label}</span>
+          </div>
+          <div>
+            <span className="text-cyan-500 text-[10px] block font-orbitron">YOLO CONFIDENCE:</span>
+            <span className="text-emerald-400 font-bold text-xs">{activeTarget.confidence}</span>
+          </div>
+          <div>
+            <span className="text-cyan-500 text-[10px] block font-orbitron">ESTIMATED DEPTH:</span>
+            <span className="text-cyan-300 font-bold text-xs">{activeTarget.distance}</span>
+          </div>
+          <div>
+            <span className="text-cyan-500 text-[10px] block font-orbitron">STREAM MODE:</span>
+            <span className="text-amber-400 font-bold text-xs">{visionMode.toUpperCase()}</span>
+          </div>
+        </div>
       </div>
     </div>
   )
