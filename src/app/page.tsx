@@ -4,10 +4,6 @@ import { motion } from 'framer-motion'
 import ParticleBackground from '@/components/ParticleBackground'
 import Link from 'next/link'
 import ArmLab from '@/components/labs/ArmLab'
-import SlamLab from '@/components/labs/SlamLab'
-import VisionLab from '@/components/labs/VisionLab'
-import PidLab from '@/components/labs/PidLab'
-import Terminal from '@/components/Terminal'
 
 export default function Home() {
   const [booting, setBooting] = useState(true)
@@ -43,204 +39,338 @@ export default function Home() {
   }
 
   return (
-    <main className="snap-y snap-proximity h-screen w-full overflow-y-scroll overflow-x-hidden scroll-smooth relative">
+    <main className="snap-y snap-mandatory h-screen w-full overflow-y-scroll overflow-x-hidden scroll-smooth relative">
       <div className="fixed inset-0 z-[-1]">
         <ParticleBackground />
       </div>
 
-      {/* SECTION 01: HERO & KINEMATICS */}
-      <section id="hero" className="snap-start min-h-screen w-full flex items-center justify-center relative px-4 py-20">
-        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
+      {/* SLIDE 1: SYSTEM INITIATION (HERO) */}
+      <section id="hero" className="snap-center h-screen w-full flex flex-col justify-center items-center relative px-4 md:px-8 py-6">
+        <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          {/* Left/Top: 6-DOF Robot Arm impulse test canvas */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="flex flex-col items-center lg:items-start text-center lg:text-left font-orbitron"
+            className="flex flex-col items-center justify-center w-full order-2 lg:order-1"
           >
-            <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-2 border-cyan-400/50 hover:border-cyan-400 transition-colors duration-300 mb-8">
-              <img src="/profile.jpg" alt="Deepak R." className="w-full h-full object-cover transition-all duration-500" />
+            <div className="w-full text-center mb-3">
+              <span className="text-xs font-orbitron text-cyan-400 tracking-widest bg-cyan-950/40 border border-cyan-500/30 px-3 py-1 rounded-full">
+                [ 6-DOF KINEMATICS SIMULATION CANVAS ]
+              </span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-black text-white mb-2 tracking-tight drop-shadow-lg">
-              DEEPAK <span className="text-cyan-400">R.</span>
-            </h1>
-            <h2 className="text-xl md:text-2xl text-cyan-200 mb-6 font-space tracking-wide">
-              Autonomous Systems Architect
-            </h2>
-            <p className="text-gray-400 mb-8 max-w-lg font-space text-sm md:text-base leading-relaxed">
-              Robotics engineering student at Anna University. Specializing in ROS2 Navigation, YOLO Vision, and Embedded IoT.
-              Bridging the gap between theoretical AI and raw physical actuation.
-            </p>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col items-center justify-center w-full"
-          >
-            <h3 className="text-cyan-400 font-orbitron mb-4 text-center">[ 6-DOF KINEMATICS SIMULATION CANVAS ]</h3>
-            <div className="w-full max-w-md mx-auto z-10 bg-black/40 p-2 rounded-lg border border-cyan-500/20 backdrop-blur-sm">
+            <div className="w-full max-w-lg mx-auto z-10 bg-black/60 p-3 rounded-xl border border-cyan-500/30 shadow-[0_0_25px_rgba(0,240,255,0.15)] backdrop-blur-md">
               <ArmLab />
             </div>
           </motion.div>
-        </div>
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce text-cyan-400/50 text-xs font-space tracking-widest hidden md:block">
-          ↓ SYSTEM OVERRIDE ↓
-        </div>
-      </section>
 
-      {/* SECTION 02: CORE PHYSICS LABS */}
-      <section id="labs" className="snap-start min-h-screen w-full flex items-center justify-center relative px-4 py-20 bg-black/60 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto w-full">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-orbitron font-bold text-white mb-4">
-              CORE <span className="text-cyan-400">PHYSICS LABS</span>
+          {/* Right/Bottom: Identity & DEEPAK.OS Status */}
+          <motion.div 
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="flex flex-col items-center lg:items-start text-center lg:text-left font-orbitron order-1 lg:order-2"
+          >
+            <div className="flex items-center gap-4 mb-4">
+              <div className="relative w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden border-2 border-cyan-400 shadow-[0_0_15px_#00f0ff] flex-shrink-0">
+                <img src="/profile.jpg" alt="Deepak R." className="w-full h-full object-cover transition-all duration-500" />
+              </div>
+              <div className="flex flex-col text-left">
+                <span className="text-xs font-mono text-cyan-400 tracking-widest">DEEPAK.OS :: ONLINE</span>
+                <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight">
+                  DEEPAK <span className="text-cyan-400">R.</span>
+                </h1>
+              </div>
+            </div>
+
+            <h2 className="text-xl md:text-2xl text-cyan-200 mb-2 font-space tracking-wide">
+              Autonomous Systems Architect
             </h2>
-            <div className="h-1 w-24 bg-cyan-400 mx-auto rounded-full shadow-[0_0_10px_#00f0ff]" />
-          </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Lab 1 */}
-            <div className="flex flex-col w-full max-w-md mx-auto">
-              <h3 className="text-xl font-orbitron text-cyan-300 mb-2">{'>'} LiDAR SLAM Navigation</h3>
-              <p className="text-gray-400 font-space text-sm mb-4">Responsive canvas showing raycasting and path computation.</p>
-              <div className="w-full bg-black/40 p-2 rounded-lg border border-cyan-500/20">
-                <SlamLab />
-              </div>
+            <p className="text-xs md:text-sm text-cyan-400/90 font-orbitron mb-4 tracking-widest">
+              Deepak R. | Robotics & ML Engineer
+            </p>
+            <p className="text-gray-300 font-space text-xs md:text-sm leading-relaxed max-w-lg mb-6 bg-black/40 p-4 rounded-lg border border-cyan-500/20 backdrop-blur-sm">
+              Robotics engineering student at Anna University. Specializing in ROS2 Navigation, YOLO Vision, and Embedded IoT. Bridging theoretical AI with raw physical actuation.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <a href="#projects" className="px-5 py-2.5 bg-cyan-500/20 hover:bg-cyan-400 hover:text-black border border-cyan-400 text-cyan-400 text-xs font-bold font-orbitron rounded tracking-wider transition-all shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+                EXPLORE ARCHIVES →
+              </a>
+              <a href="#contact" className="px-5 py-2.5 bg-black/60 hover:bg-cyan-950 border border-cyan-500/40 text-cyan-300 text-xs font-bold font-orbitron rounded tracking-wider transition-all">
+                COMM-LINK
+              </a>
             </div>
-            
-            <div className="flex flex-col gap-12 w-full max-w-md mx-auto">
-              {/* Lab 2 */}
-              <div>
-                <h3 className="text-xl font-orbitron text-cyan-300 mb-2">{'>'} Neural Perception</h3>
-                <p className="text-gray-400 font-space text-sm mb-4">Vision grid with target payload bounding boxes.</p>
-                <div className="w-full bg-black/40 p-2 rounded-lg border border-cyan-500/20">
-                  <VisionLab />
-                </div>
-              </div>
-              
-              {/* Lab 3 */}
-              <div>
-                <h3 className="text-xl font-orbitron text-cyan-300 mb-2">{'>'} PID Dynamics</h3>
-                <p className="text-gray-400 font-space text-sm mb-4">Oscilloscope slider for Mass-Spring-Damper tuning.</p>
-                <div className="w-full bg-black/40 p-2 rounded-lg border border-cyan-500/20">
-                  <PidLab />
-                </div>
-              </div>
-            </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* SECTION 03: FEATURED ARCHIVES */}
-      <section id="projects" className="snap-start min-h-screen w-full flex items-center justify-center relative px-4 py-20">
-        <div className="max-w-7xl mx-auto w-full">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-orbitron font-bold text-white mb-4">
+      {/* SLIDE 2: FEATURED ARCHIVES (PROJECTS) */}
+      <section id="projects" className="snap-center h-screen w-full flex flex-col justify-center items-center relative px-4 md:px-8 py-6 bg-black/50 backdrop-blur-md">
+        <div className="w-full max-w-7xl mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-orbitron font-bold text-white mb-2">
               FEATURED <span className="text-cyan-400">ARCHIVES</span>
             </h2>
-            <div className="h-1 w-24 bg-cyan-400 mx-auto rounded-full shadow-[0_0_10px_#00f0ff]" />
+            <p className="text-xs font-space text-cyan-300 tracking-widest uppercase">Autonomous Navigation & Vision Pipelines</p>
+            <div className="h-1 w-20 bg-cyan-400 mx-auto mt-2 rounded-full shadow-[0_0_10px_#00f0ff]" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Link href="/projects/aura">
-              <motion.div whileHover={{ scale: 1.02 }} className="h-full bg-gray-900/50 border border-cyan-500/20 hover:border-cyan-400 p-6 rounded-lg backdrop-blur-md transition-all duration-300 group cursor-pointer flex flex-col">
-                <h3 className="text-2xl font-bold text-white mb-2 font-orbitron">AURA</h3>
-                <p className="text-xs text-cyan-400 font-orbitron tracking-widest mb-4">[ DEEP REINFORCEMENT LEARNING ]</p>
-                <p className="text-sm text-gray-400 font-space mb-6 flex-grow">Acoustic-visual Urban Routing Architecture using SUMO traffic simulator and neural networks.</p>
-                <span className="text-cyan-400 text-sm font-bold tracking-wider group-hover:underline mt-auto">VIEW SPECS →</span>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Card 1 */}
+            <Link href="/projects/aura" className="h-full">
+              <motion.div whileHover={{ scale: 1.02 }} className="h-full bg-gray-900/60 border border-cyan-500/30 hover:border-cyan-400 p-6 rounded-xl backdrop-blur-md transition-all duration-300 group cursor-pointer flex flex-col justify-between shadow-[0_0_15px_rgba(0,240,255,0.05)]">
+                <div>
+                  <div className="flex justify-between items-start mb-3">
+                    <h3 className="text-xl font-bold text-white font-orbitron group-hover:text-cyan-400 transition-colors">VisionX (AURA)</h3>
+                    <span className="text-[10px] font-orbitron bg-cyan-950 text-cyan-400 border border-cyan-500/40 px-2 py-0.5 rounded">RL & SUMO</span>
+                  </div>
+                  <p className="text-xs text-cyan-400 font-orbitron tracking-wider mb-3">[ TRAFFIC SIGNAL OPTIMIZATION ]</p>
+                  <p className="text-xs md:text-sm text-gray-300 font-space leading-relaxed">
+                    Sensor-Fusion Deep Reinforcement Learning for Dynamic Traffic Signal Optimization & Emergency Routing using SUMO traffic simulator and YOLO edge computing.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-cyan-500/20 flex justify-between items-center text-xs font-orbitron font-bold text-cyan-400">
+                  <span>SPECS & LOGS</span>
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </div>
               </motion.div>
             </Link>
 
-            <Link href="/projects/sih">
-              <motion.div whileHover={{ scale: 1.02 }} className="h-full bg-gray-900/50 border border-cyan-500/20 hover:border-cyan-400 p-6 rounded-lg backdrop-blur-md transition-all duration-300 group cursor-pointer flex flex-col">
-                <h3 className="text-2xl font-bold text-white mb-2 font-orbitron">SIH 2025 AI</h3>
-                <p className="text-xs text-cyan-400 font-orbitron tracking-widest mb-4">[ SMART TRAFFIC MANAGEMENT ]</p>
-                <p className="text-sm text-gray-400 font-space mb-6 flex-grow">Dynamic signal optimization using OpenCV, YOLO, and real-time vehicle counting architectures.</p>
-                <span className="text-cyan-400 text-sm font-bold tracking-wider group-hover:underline mt-auto">VIEW SPECS →</span>
+            {/* Card 2 */}
+            <Link href="/projects/sih" className="h-full">
+              <motion.div whileHover={{ scale: 1.02 }} className="h-full bg-gray-900/60 border border-cyan-500/30 hover:border-cyan-400 p-6 rounded-xl backdrop-blur-md transition-all duration-300 group cursor-pointer flex flex-col justify-between shadow-[0_0_15px_rgba(0,240,255,0.05)]">
+                <div>
+                  <div className="flex justify-between items-start mb-3">
+                    <h3 className="text-xl font-bold text-white font-orbitron group-hover:text-cyan-400 transition-colors">Autonomous ROS 2 Rover</h3>
+                    <span className="text-[10px] font-orbitron bg-cyan-950 text-cyan-400 border border-cyan-500/40 px-2 py-0.5 rounded">ROS 2 & NAV2</span>
+                  </div>
+                  <p className="text-xs text-cyan-400 font-orbitron tracking-wider mb-3">[ SKID-STEER AUTONOMY ]</p>
+                  <p className="text-xs md:text-sm text-gray-300 font-space leading-relaxed">
+                    Custom 4-wheel skid-steer rover built from scratch using ROS 2 Jazzy, Gazebo Harmonic, SLAM Toolbox, and Nav2 with EKF sensor fusion.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-cyan-500/20 flex justify-between items-center text-xs font-orbitron font-bold text-cyan-400">
+                  <span>SPECS & LOGS</span>
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </div>
               </motion.div>
             </Link>
 
-            <Link href="/projects/edge-ai">
-              <motion.div whileHover={{ scale: 1.02 }} className="h-full bg-gray-900/50 border border-cyan-500/20 hover:border-cyan-400 p-6 rounded-lg backdrop-blur-md transition-all duration-300 group cursor-pointer flex flex-col">
-                <h3 className="text-2xl font-bold text-white mb-2 font-orbitron">EDGE PERCEPTION</h3>
-                <p className="text-xs text-cyan-400 font-orbitron tracking-widest mb-4">[ COMPUTER VISION ]</p>
-                <p className="text-sm text-gray-400 font-space mb-6 flex-grow">High-speed vision pipelines combining YOLOv8 and MediaPipe optimized for edge computing.</p>
-                <span className="text-cyan-400 text-sm font-bold tracking-wider group-hover:underline mt-auto">VIEW SPECS →</span>
+            {/* Card 3 */}
+            <Link href="/projects/edge-ai" className="h-full">
+              <motion.div whileHover={{ scale: 1.02 }} className="h-full bg-gray-900/60 border border-cyan-500/30 hover:border-cyan-400 p-6 rounded-xl backdrop-blur-md transition-all duration-300 group cursor-pointer flex flex-col justify-between shadow-[0_0_15px_rgba(0,240,255,0.05)]">
+                <div>
+                  <div className="flex justify-between items-start mb-3">
+                    <h3 className="text-xl font-bold text-white font-orbitron group-hover:text-cyan-400 transition-colors">CV Autonomous Robot</h3>
+                    <span className="text-[10px] font-orbitron bg-cyan-950 text-cyan-400 border border-cyan-500/40 px-2 py-0.5 rounded">OPENCV & PD</span>
+                  </div>
+                  <p className="text-xs text-cyan-400 font-orbitron tracking-wider mb-3">[ EDGE PERCEPTION ]</p>
+                  <p className="text-xs md:text-sm text-gray-300 font-space leading-relaxed">
+                    Custom line-following & obstacle avoidance robot using OpenCV, ROS 2, and dynamic PD Control logic optimized for real-time edge embedded execution.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-cyan-500/20 flex justify-between items-center text-xs font-orbitron font-bold text-cyan-400">
+                  <span>SPECS & LOGS</span>
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </div>
               </motion.div>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* SECTION 04: ENGINEERING TIMELINE */}
-      <section id="timeline" className="snap-start min-h-screen w-full flex items-center justify-center relative px-4 py-20 bg-black/60 backdrop-blur-md">
-        <div className="max-w-6xl mx-auto w-full">
-          <div className="text-center mb-24">
-            <h2 className="text-3xl md:text-5xl font-orbitron font-bold text-white mb-4">
-              ENGINEERING <span className="text-cyan-400">TIMELINE</span>
+      {/* SLIDE 3: FIELD OPERATIONS (INTERNSHIPS & TRAINING) */}
+      <section id="experience" className="snap-center h-screen w-full flex flex-col justify-center items-center relative px-4 md:px-8 py-6 bg-black/70 backdrop-blur-md">
+        <div className="w-full max-w-7xl mx-auto">
+          <div className="text-center mb-6">
+            <h2 className="text-3xl md:text-4xl font-orbitron font-bold text-white mb-2">
+              FIELD <span className="text-cyan-400">OPERATIONS</span>
             </h2>
-            <div className="h-1 w-24 bg-cyan-400 mx-auto rounded-full shadow-[0_0_10px_#00f0ff]" />
+            <p className="text-xs font-space text-cyan-300 tracking-widest uppercase">Industrial Experience & Applied Robotics Programs</p>
+            <div className="h-1 w-20 bg-cyan-400 mx-auto mt-2 rounded-full shadow-[0_0_10px_#00f0ff]" />
           </div>
-          
-          <div className="relative w-full">
-            {/* Horizontal Line */}
-            <div className="absolute top-1/2 left-0 w-full h-0.5 bg-cyan-900/50 -translate-y-1/2 hidden md:block"></div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-              {/* Timeline 1 */}
-              <div className="flex flex-col items-center text-center relative">
-                <div className="w-6 h-6 rounded-full border-4 border-cyan-400 bg-black z-10 mb-6 shadow-[0_0_15px_#00f0ff]"></div>
-                <h3 className="text-xl font-orbitron text-white mb-2">TAMIZHAN SKILLS</h3>
-                <p className="text-cyan-400 font-space text-sm mb-4">RISE Program</p>
-                <p className="text-gray-400 font-space text-sm">Core robotics foundation and autonomous systems architecture.</p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 max-h-[65vh] overflow-y-auto pr-1">
+            {/* Op 1 */}
+            <div className="bg-gray-900/50 border border-cyan-500/30 p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm hover:border-cyan-400 transition-colors">
+              <div>
+                <span className="text-[10px] font-orbitron text-cyan-400 tracking-wider">[ 01 :: METROLOGY ]</span>
+                <h3 className="text-base font-bold text-white font-orbitron mt-1">Precise3DM</h3>
+                <p className="text-xs text-cyan-300 font-space mb-2">Intern</p>
+                <p className="text-xs text-gray-300 font-space leading-normal">
+                  3D Scan Based Solutions & Metrology inspection pipelines.
+                </p>
               </div>
-              
-              {/* Timeline 2 */}
-              <div className="flex flex-col items-center text-center relative md:-mt-16">
-                <div className="w-6 h-6 rounded-full border-4 border-cyan-400 bg-black z-10 mb-6 shadow-[0_0_15px_#00f0ff] md:absolute md:top-16"></div>
-                <h3 className="text-xl font-orbitron text-white mb-2 md:mt-24">CODEALPHA</h3>
-                <p className="text-cyan-400 font-space text-sm mb-4">Software Engineering</p>
-                <p className="text-gray-400 font-space text-sm">Development of algorithmic pipelines and data structures.</p>
+            </div>
+
+            {/* Op 2 */}
+            <div className="bg-gray-900/50 border border-cyan-500/30 p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm hover:border-cyan-400 transition-colors">
+              <div>
+                <span className="text-[10px] font-orbitron text-cyan-400 tracking-wider">[ 02 :: AI & CV ]</span>
+                <h3 className="text-base font-bold text-white font-orbitron mt-1">Tamizhan Skills</h3>
+                <p className="text-xs text-cyan-300 font-space mb-2">RISE AI Intern</p>
+                <p className="text-xs text-gray-300 font-space leading-normal">
+                  RISE AI for Autonomous Systems Intern (Computer Vision, YOLOv8, Path Planning).
+                </p>
               </div>
-              
-              {/* Timeline 3 */}
-              <div className="flex flex-col items-center text-center relative">
-                <div className="w-6 h-6 rounded-full border-4 border-cyan-400 bg-black z-10 mb-6 shadow-[0_0_15px_#00f0ff]"></div>
-                <h3 className="text-xl font-orbitron text-white mb-2">CHENNAI PORT</h3>
-                <p className="text-cyan-400 font-space text-sm mb-4">Authority Intern</p>
-                <p className="text-gray-400 font-space text-sm">Industrial automation and heavy mechatronics observation.</p>
+            </div>
+
+            {/* Op 3 */}
+            <div className="bg-gray-900/50 border border-cyan-500/30 p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm hover:border-cyan-400 transition-colors">
+              <div>
+                <span className="text-[10px] font-orbitron text-cyan-400 tracking-wider">[ 03 :: EDP & LOCO ]</span>
+                <h3 className="text-base font-bold text-white font-orbitron mt-1">Chennai Port</h3>
+                <p className="text-xs text-cyan-300 font-space mb-2">Authority Inplant</p>
+                <p className="text-xs text-gray-300 font-space leading-normal">
+                  Vocational Inplant Training (Locomotives, Diesel Engines, Mechanical/Electrical EDP).
+                </p>
+              </div>
+            </div>
+
+            {/* Op 4 */}
+            <div className="bg-gray-900/50 border border-cyan-500/30 p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm hover:border-cyan-400 transition-colors">
+              <div>
+                <span className="text-[10px] font-orbitron text-cyan-400 tracking-wider">[ 04 :: ROS 2 NAV ]</span>
+                <h3 className="text-base font-bold text-white font-orbitron mt-1">KarthiKesh</h3>
+                <p className="text-xs text-cyan-300 font-space mb-2">Robotics Program</p>
+                <p className="text-xs text-gray-300 font-space leading-normal">
+                  20-Day Industrial Career Uplifting Program (Advanced ROS 2 & Autonomous Navigation).
+                </p>
+              </div>
+            </div>
+
+            {/* Op 5 */}
+            <div className="bg-gray-900/50 border border-cyan-500/30 p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm hover:border-cyan-400 transition-colors sm:col-span-2 lg:col-span-1">
+              <div>
+                <span className="text-[10px] font-orbitron text-cyan-400 tracking-wider">[ 05 :: MANUFACTURING ]</span>
+                <h3 className="text-base font-bold text-white font-orbitron mt-1">MK Auto</h3>
+                <p className="text-xs text-cyan-300 font-space mb-2">Industrial Intern</p>
+                <p className="text-xs text-gray-300 font-space leading-normal">
+                  CNC/VMC Operations, Cold Forging, Casting & precision manufacturing.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SECTION 05: DEEPAK-OS TERMINAL & CONTACT */}
-      <section id="terminal" className="snap-start min-h-screen w-full flex items-center justify-center relative px-4 py-20">
-        <div className="max-w-7xl mx-auto w-full">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-orbitron font-bold text-white mb-4">
-              DEEPAK-OS <span className="text-cyan-400">TERMINAL</span>
+      {/* SLIDE 4: GLOBAL EXPOS & CERTIFICATIONS */}
+      <section id="expos-certs" className="snap-center h-screen w-full flex flex-col justify-center items-center relative px-4 md:px-8 py-6 bg-black/50 backdrop-blur-md">
+        <div className="w-full max-w-7xl mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-orbitron font-bold text-white mb-2">
+              GLOBAL EXPOS & <span className="text-cyan-400">CERTIFICATIONS</span>
             </h2>
-            <div className="h-1 w-24 bg-cyan-400 mx-auto rounded-full shadow-[0_0_10px_#00f0ff]" />
+            <p className="text-xs font-space text-cyan-300 tracking-widest uppercase">Defense Expo Analysis & Verified Technical Badges</p>
+            <div className="h-1 w-20 bg-cyan-400 mx-auto mt-2 rounded-full shadow-[0_0_10px_#00f0ff]" />
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="w-full">
-              <Terminal />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Left: EXPOS */}
+            <div className="bg-gray-900/60 border border-cyan-500/30 p-6 rounded-xl backdrop-blur-md shadow-[0_0_20px_rgba(0,240,255,0.05)]">
+              <h3 className="text-lg font-orbitron font-bold text-white mb-4 flex items-center gap-2">
+                <span className="text-cyan-400">❖</span> INDUSTRIAL EXPOS & DEFENSE ANALYSIS
+              </h3>
+              <div className="space-y-4 font-space">
+                <div className="bg-black/50 border border-cyan-500/20 p-4 rounded-lg">
+                  <div className="flex justify-between items-center mb-1">
+                    <h4 className="text-sm font-bold text-cyan-300 font-orbitron">Automation India Expo 2026</h4>
+                    <span className="text-[10px] text-cyan-400 font-mono">CHENNAI</span>
+                  </div>
+                  <p className="text-xs text-gray-300">
+                    Chennai Trade Centre — Explored industrial robotics, smart sensors, and factory automation architectures.
+                  </p>
+                </div>
+
+                <div className="bg-black/50 border border-cyan-500/20 p-4 rounded-lg">
+                  <div className="flex justify-between items-center mb-1">
+                    <h4 className="text-sm font-bold text-cyan-300 font-orbitron">DEFTECH Bharat Bengaluru 2026</h4>
+                    <span className="text-[10px] text-cyan-400 font-mono">BENGALURU</span>
+                  </div>
+                  <p className="text-xs text-gray-300">
+                    Defense Technology Expo — Specialized T-90 Bhishma tank propulsion & heavy mechatronics analysis.
+                  </p>
+                </div>
+              </div>
             </div>
-            <div className="w-full bg-gray-900/40 p-8 rounded-lg border border-cyan-500/20 backdrop-blur-md">
-              <h3 className="text-2xl font-orbitron text-white mb-6">ENCRYPTED TRANSMISSION</h3>
-              <p className="text-gray-400 font-space text-sm mb-8">
-                Final scroll-snap section containing the interactive CLI terminal and the secure contact form to transmit direct signals to my inbox.
-              </p>
-              <form className="flex flex-col gap-4 font-space" onSubmit={(e) => e.preventDefault()}>
-                <input type="text" placeholder="IDENTITY (NAME)" className="w-full bg-black/50 border border-cyan-900 focus:border-cyan-400 rounded p-3 text-cyan-400 outline-none transition-colors" />
-                <input type="email" placeholder="RETURN_PATH (EMAIL)" className="w-full bg-black/50 border border-cyan-900 focus:border-cyan-400 rounded p-3 text-cyan-400 outline-none transition-colors" />
-                <textarea placeholder="PAYLOAD (MESSAGE)" rows={4} className="w-full bg-black/50 border border-cyan-900 focus:border-cyan-400 rounded p-3 text-cyan-400 outline-none transition-colors resize-none"></textarea>
-                <button type="submit" className="w-full py-3 bg-cyan-500/10 border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition-all font-bold tracking-widest mt-2">
-                  TRANSMIT SIGNAL
+
+            {/* Right: CERTIFICATIONS */}
+            <div className="bg-gray-900/60 border border-cyan-500/30 p-6 rounded-xl backdrop-blur-md shadow-[0_0_20px_rgba(0,240,255,0.05)]">
+              <h3 className="text-lg font-orbitron font-bold text-white mb-4 flex items-center gap-2">
+                <span className="text-cyan-400">◈</span> VERIFIED CERTIFICATIONS
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 font-space">
+                <div className="bg-black/50 border border-cyan-500/20 p-3 rounded-lg">
+                  <h4 className="text-xs font-bold text-cyan-300 font-orbitron">IBM SkillsBuild</h4>
+                  <p className="text-[11px] text-gray-300 mt-1">AI Fundamentals & Advanced Python Data Analysis</p>
+                </div>
+                <div className="bg-black/50 border border-cyan-500/20 p-3 rounded-lg">
+                  <h4 className="text-xs font-bold text-cyan-300 font-orbitron">Cisco</h4>
+                  <p className="text-[11px] text-gray-300 mt-1">Computer Hardware Basics</p>
+                </div>
+                <div className="bg-black/50 border border-cyan-500/20 p-3 rounded-lg">
+                  <h4 className="text-xs font-bold text-cyan-300 font-orbitron">NPTEL</h4>
+                  <p className="text-[11px] text-gray-300 mt-1">Industrial Robotics & Joy of Computing using Python</p>
+                </div>
+                <div className="bg-black/50 border border-cyan-500/20 p-3 rounded-lg">
+                  <h4 className="text-xs font-bold text-cyan-300 font-orbitron">NoviTech</h4>
+                  <p className="text-[11px] text-gray-300 mt-1">Full Stack Web Development</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SLIDE 5: LIVE COMM-LINK (NETWORK & CONTACT) */}
+      <section id="contact" className="snap-center h-screen w-full flex flex-col justify-center items-center relative px-4 md:px-8 py-6 bg-black/70 backdrop-blur-md">
+        <div className="w-full max-w-7xl mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-orbitron font-bold text-white mb-2">
+              LIVE <span className="text-cyan-400">COMM-LINK</span>
+            </h2>
+            <p className="text-xs font-space text-cyan-300 tracking-widest uppercase">Network Feed & Encrypted Transmission</p>
+            <div className="h-1 w-20 bg-cyan-400 mx-auto mt-2 rounded-full shadow-[0_0_10px_#00f0ff]" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+            {/* Left Column: Network Uplink Placeholder */}
+            <div className="bg-gray-900/60 border border-cyan-500/30 p-6 rounded-xl backdrop-blur-md flex flex-col justify-center items-center text-center relative overflow-hidden group">
+              <div className="absolute inset-0 bg-cyan-500/5 opacity-50 group-hover:opacity-100 transition-opacity pointer-events-none" />
+              <div className="w-16 h-16 rounded-full border-2 border-cyan-400/60 flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+                <span className="text-cyan-400 text-2xl font-orbitron">📡</span>
+              </div>
+              <h3 className="text-xl font-orbitron font-bold text-white mb-2">NETWORK UPLINK</h3>
+              <p className="text-xs text-cyan-400 font-mono tracking-wider mb-4">[ LINKEDIN INTEGRATION NODE ]</p>
+              <div className="bg-black/70 border border-cyan-500/40 p-6 rounded-lg max-w-md w-full">
+                <p className="text-sm font-space text-gray-300 leading-relaxed italic">
+                  &quot;Live LinkedIn Feed integration pending...&quot;
+                </p>
+                <p className="text-xs font-mono text-cyan-400/80 mt-3">
+                  (I will embed the iframe later)
+                </p>
+              </div>
+            </div>
+
+            {/* Right Column: Cyberpunk Contact Form */}
+            <div className="bg-gray-900/60 border border-cyan-500/30 p-6 rounded-xl backdrop-blur-md flex flex-col justify-center shadow-[0_0_25px_rgba(0,240,255,0.05)]">
+              <h3 className="text-xl font-orbitron font-bold text-white mb-1">TRANSMIT SIGNAL</h3>
+              <p className="text-xs text-cyan-400 font-mono mb-4 tracking-wider">[ ENCRYPTED DIRECT CHANNEL ]</p>
+              <form className="flex flex-col gap-3 font-space" onSubmit={(e) => e.preventDefault()}>
+                <div>
+                  <label className="text-[10px] font-orbitron text-cyan-400 mb-1 block">IDENTITY (NAME)</label>
+                  <input type="text" placeholder="e.g. Commander Sheppard" className="w-full bg-black/60 border border-cyan-900 focus:border-cyan-400 rounded p-2.5 text-xs text-cyan-300 outline-none transition-colors" />
+                </div>
+                <div>
+                  <label className="text-[10px] font-orbitron text-cyan-400 mb-1 block">COMM FREQUENCY (EMAIL)</label>
+                  <input type="email" placeholder="e.g. signal@domain.com" className="w-full bg-black/60 border border-cyan-900 focus:border-cyan-400 rounded p-2.5 text-xs text-cyan-300 outline-none transition-colors" />
+                </div>
+                <div>
+                  <label className="text-[10px] font-orbitron text-cyan-400 mb-1 block">TRANSMISSION DATA (MESSAGE)</label>
+                  <textarea placeholder="Write encrypted message body..." rows={3} className="w-full bg-black/60 border border-cyan-900 focus:border-cyan-400 rounded p-2.5 text-xs text-cyan-300 outline-none transition-colors resize-none"></textarea>
+                </div>
+                <button type="submit" className="w-full py-3 bg-cyan-500/20 border border-cyan-400 text-cyan-300 hover:bg-cyan-400 hover:text-black transition-all font-bold font-orbitron text-xs tracking-widest rounded mt-1 shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+                  BROADCAST TRANSMISSION
                 </button>
               </form>
             </div>
@@ -250,3 +380,4 @@ export default function Home() {
     </main>
   )
 }
+

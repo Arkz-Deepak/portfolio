@@ -37,8 +37,8 @@ describe('Portfolio Home Page', () => {
     expect(screen.getByTestId('particle-bg')).toBeInTheDocument()
     
     // Check if project grids are present
-    expect(screen.getByText('AURA')).toBeInTheDocument()
-    expect(screen.getByText('SIH 2025 AI')).toBeInTheDocument()
-    expect(screen.getByText('EDGE PERCEPTION')).toBeInTheDocument()
+    expect(screen.getByText('VisionX (AURA)')).toBeInTheDocument()
+    expect(screen.getByText('Autonomous ROS 2 Rover')).toBeInTheDocument()
+    expect(screen.getByText('CV Autonomous Robot')).toBeInTheDocument()
   })
 })
