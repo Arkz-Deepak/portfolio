@@ -109,12 +109,12 @@ export default function Home() {
       )}
 
       {/* SLIDE 1: SYSTEM INITIATION (HERO - PERSONAL PROFILE ONLY) */}
-      <section id="hero" className="snap-center h-[100dvh] w-full max-w-[100vw] overflow-x-hidden flex flex-col justify-center items-center relative px-4 md:px-8 py-6">
+      <section id="hero" className="snap-start min-h-[100dvh] w-full max-w-[100vw] overflow-x-hidden flex flex-col justify-center items-center relative px-4 md:px-8 pt-24 pb-8 md:pt-28 md:pb-12">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="flex flex-col items-center justify-center text-center w-full h-full max-w-4xl mx-auto gap-6 font-orbitron"
+          className="flex flex-col items-center justify-center text-center w-full h-full max-w-4xl mx-auto gap-5 font-orbitron"
         >
           {/* Profile Picture */}
           <div className="relative w-32 h-32 md:w-44 md:h-44 rounded-full overflow-hidden border-2 shrink-0 border-blue-700 shadow-xl dark:border-cyan-400 dark:shadow-[0_0_20px_#00f0ff]">
@@ -165,7 +165,7 @@ export default function Home() {
       </section>
 
       {/* SLIDE 2: FEATURED ARCHIVES (PROJECTS) */}
-      <section id="projects" className="snap-center h-[100dvh] w-full max-w-[100vw] overflow-x-hidden flex flex-col justify-center items-center relative px-4 md:px-8 py-6 transition-colors bg-slate-100/80 dark:bg-black/50 backdrop-blur-md">
+      <section id="projects" className="snap-start min-h-[100dvh] w-full max-w-[100vw] overflow-x-hidden flex flex-col justify-center items-center relative px-4 md:px-8 pt-20 md:pt-24 pb-8 transition-colors bg-slate-100/80 dark:bg-black/50 backdrop-blur-md">
         <div className="w-full max-w-7xl mx-auto">
           <div className="text-center mb-6">
             <h2 className="text-3xl md:text-4xl font-orbitron font-bold mb-2 text-slate-900 dark:text-white">
@@ -302,7 +302,7 @@ export default function Home() {
       </section>
 
       {/* SLIDE 3: FIELD OPERATIONS (INTERNSHIPS & TRAINING) */}
-      <section id="experience" className="snap-center h-[100dvh] w-full max-w-[100vw] overflow-x-hidden flex flex-col justify-center items-center relative px-4 md:px-8 py-6 transition-colors bg-slate-200/60 dark:bg-black/70 backdrop-blur-md">
+      <section id="experience" className="snap-start min-h-[100dvh] w-full max-w-[100vw] overflow-x-hidden flex flex-col justify-center items-center relative px-4 md:px-8 pt-20 md:pt-24 pb-8 transition-colors bg-slate-200/60 dark:bg-black/70 backdrop-blur-md">
         <div className="w-full max-w-7xl mx-auto">
           <div className="text-center mb-6">
             <h2 className="text-3xl md:text-4xl font-orbitron font-bold mb-2 text-slate-900 dark:text-white">
@@ -403,7 +403,7 @@ export default function Home() {
       </section>
 
       {/* SLIDE 4: GLOBAL EXPOS & CERTIFICATIONS */}
-      <section id="expos-certs" className="snap-center h-[100dvh] w-full max-w-[100vw] overflow-x-hidden flex flex-col justify-center items-center relative px-4 md:px-8 py-6 transition-colors bg-slate-100/80 dark:bg-black/50 backdrop-blur-md">
+      <section id="expos-certs" className="snap-start min-h-[100dvh] w-full max-w-[100vw] overflow-x-hidden flex flex-col justify-center items-center relative px-4 md:px-8 pt-20 md:pt-24 pb-8 transition-colors bg-slate-100/80 dark:bg-black/50 backdrop-blur-md">
         <div className="w-full max-w-7xl mx-auto">
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-orbitron font-bold mb-2 text-slate-900 dark:text-white">
@@ -473,7 +473,7 @@ export default function Home() {
       </section>
 
       {/* SLIDE 5: LIVE COMM-LINK (NETWORK & CONTACT) */}
-      <section id="contact" className="snap-center h-[100dvh] w-full max-w-[100vw] overflow-x-hidden flex flex-col justify-center items-center relative px-4 md:px-8 py-6 transition-colors bg-slate-200/60 dark:bg-black/70 backdrop-blur-md">
+      <section id="contact" className="snap-start min-h-[100dvh] w-full max-w-[100vw] overflow-x-hidden flex flex-col justify-center items-center relative px-4 md:px-8 pt-20 md:pt-24 pb-8 transition-colors bg-slate-200/60 dark:bg-black/70 backdrop-blur-md">
         <div className="w-full max-w-7xl mx-auto">
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-orbitron font-bold mb-2 text-slate-900 dark:text-white">

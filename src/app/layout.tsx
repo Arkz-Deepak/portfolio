@@ -69,7 +69,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${orbitron.variable} ${spaceGrotesk.variable} dark`} suppressHydrationWarning>
+    <html lang="en" className={`${orbitron.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"

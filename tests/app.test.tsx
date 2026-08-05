@@ -1,4 +1,5 @@
 import { render, screen, act } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import Home from '@/app/page'
 
 // Mock the ParticleBackground because Three.js canvas in jsdom can be problematic

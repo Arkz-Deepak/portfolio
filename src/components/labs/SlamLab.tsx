@@ -295,23 +295,23 @@ export default function SlamLab() {
       <div className="w-full aspect-video border border-cyan-500/30 rounded-lg overflow-hidden bg-black/50 backdrop-blur min-h-[220px]">
         <canvas ref={canvasRef} className="w-full h-full cursor-crosshair block" />
       </div>
-      <div className="w-full flex items-center justify-between gap-4">
-        <div className="flex items-center gap-4 flex-grow">
-          <label className="text-cyan-400 font-orbitron text-sm whitespace-nowrap">ROBOT SPEED:</label>
+      <div className="w-full flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center gap-3 flex-grow">
+          <label className="text-cyan-400 font-orbitron text-xs sm:text-sm whitespace-nowrap">ROBOT SPEED:</label>
           <input 
             type="range" 
             min="1" max="10" step="0.5" 
             value={speed} 
             onChange={(e) => setSpeed(parseFloat(e.target.value))}
-            className="flex-grow accent-cyan-400 max-w-[200px]"
+            className="flex-grow accent-cyan-400 min-w-[100px] max-w-[200px]"
           />
-          <span className="text-cyan-400 font-space text-sm w-8">{speed}x</span>
+          <span className="text-cyan-400 font-space text-xs sm:text-sm w-8">{speed}x</span>
         </div>
         <div className="flex gap-2">
-          <button onClick={generateObstacles} className="px-4 py-2 bg-cyan-900/40 border border-cyan-500/50 text-cyan-400 hover:bg-cyan-500 hover:text-black transition-colors font-orbitron text-xs">
+          <button onClick={generateObstacles} className="px-3 py-1.5 sm:px-4 sm:py-2 bg-cyan-900/40 border border-cyan-500/50 text-cyan-400 hover:bg-cyan-500 hover:text-black transition-colors font-orbitron text-xs">
             GENERATE OBS
           </button>
-          <button onClick={clearObstacles} className="px-4 py-2 bg-pink-900/40 border border-pink-500/50 text-pink-400 hover:bg-pink-500 hover:text-black transition-colors font-orbitron text-xs">
+          <button onClick={clearObstacles} className="px-3 py-1.5 sm:px-4 sm:py-2 bg-pink-900/40 border border-pink-500/50 text-pink-400 hover:bg-pink-500 hover:text-black transition-colors font-orbitron text-xs">
             CLEAR
           </button>
         </div>
