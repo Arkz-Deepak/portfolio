@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import ParticleBackground from '@/components/ParticleBackground'
 import Link from 'next/link'
-import ArmLab from '@/components/labs/ArmLab'
 import { useTheme } from '@/components/ThemeProvider'
 
 export default function Home() {
@@ -80,7 +79,7 @@ export default function Home() {
 
   if (booting) {
     return (
-      <div className="h-[100dvh] w-full max-w-[100vw] overflow-x-hidden flex flex-col items-center justify-center font-orbitron transition-colors bg-slate-50 dark:bg-black text-blue-900 dark:text-cyan-400">
+      <div className="h-[100dvh] w-full max-w-[100vw] overflow-x-hidden flex flex-col items-center justify-center font-orbitron transition-colors bg-slate-50 dark:bg-slate-950 text-blue-900 dark:text-cyan-400">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -102,72 +101,57 @@ export default function Home() {
   }
 
   return (
-    <main className="snap-y snap-mandatory h-[100dvh] w-full max-w-[100vw] overflow-y-scroll overflow-x-hidden scroll-smooth relative transition-colors duration-300 bg-slate-50 dark:bg-black text-slate-900 dark:text-cyan-400">
+    <main className="snap-y snap-mandatory h-[100dvh] w-full max-w-[100vw] overflow-y-scroll overflow-x-hidden scroll-smooth relative transition-colors duration-300 bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-white">
       {isDark && (
         <div className="fixed inset-0 z-[-1]">
           <ParticleBackground />
         </div>
       )}
 
-      {/* SLIDE 1: SYSTEM INITIATION (HERO) */}
+      {/* SLIDE 1: SYSTEM INITIATION (HERO - PERSONAL PROFILE ONLY) */}
       <section id="hero" className="snap-center h-[100dvh] w-full max-w-[100vw] overflow-x-hidden flex flex-col justify-center items-center relative px-4 md:px-8 py-6">
-        <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex flex-col items-center justify-center w-full order-2 lg:order-1"
-          >
-            <div className="w-full text-center mb-3">
-              <span className="text-xs font-orbitron tracking-widest px-3 py-1 rounded-full border text-blue-900 bg-blue-50 border-blue-200 dark:text-cyan-400 dark:bg-cyan-950/40 dark:border-cyan-500/30 font-semibold">
-                [ 6-DOF KINEMATICS SIMULATION CANVAS ]
-              </span>
-            </div>
-            <div className="w-full max-w-lg mx-auto z-10 p-3 rounded-xl border backdrop-blur-md transition-colors bg-white border-slate-200 shadow-xl dark:bg-black/60 dark:border-cyan-500/30 dark:shadow-[0_0_25px_rgba(0,240,255,0.15)]">
-              <ArmLab />
-            </div>
-          </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="flex flex-col items-center justify-center text-center w-full h-full max-w-4xl mx-auto gap-6 font-orbitron"
+        >
+          {/* Profile Picture */}
+          <div className="relative w-32 h-32 md:w-44 md:h-44 rounded-full overflow-hidden border-2 shrink-0 border-blue-700 shadow-xl dark:border-cyan-400 dark:shadow-[0_0_20px_#00f0ff]">
+            <img src="/profile.jpg" alt="Deepak R." className="w-full h-full object-cover transition-all duration-500 hover:scale-105" />
+          </div>
 
-          <motion.div 
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="flex flex-col items-center lg:items-start text-center lg:text-left font-orbitron order-1 lg:order-2"
-          >
-            <div className="flex flex-col md:flex-row items-center md:items-start gap-4 mb-4 text-center md:text-left">
-              <div className="relative w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-2 shrink-0 border-blue-700 shadow-md dark:border-cyan-400 dark:shadow-[0_0_15px_#00f0ff]">
-                <img src="/profile.jpg" alt="Deepak R." className="w-full h-full object-cover transition-all duration-500" />
-              </div>
-              <div className="flex flex-col items-center md:items-start text-center md:text-left">
-                <span className="text-xs font-mono tracking-widest text-blue-600 dark:text-cyan-400 font-semibold">
-                  DEEPAK.OS :: ONLINE
-                </span>
-                <h1 className="text-3xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
-                  <span className="sr-only">Deepak R</span>
-                  <span>DEEPAK</span> <span className="text-blue-600 dark:text-cyan-400">R.</span>
-                </h1>
-              </div>
-            </div>
+          {/* Identity Header & Titles */}
+          <div className="flex flex-col items-center text-center gap-2">
+            <span className="text-xs font-mono tracking-widest text-blue-600 dark:text-cyan-400 font-semibold px-3 py-1 rounded-full border border-blue-200 bg-blue-50 dark:bg-cyan-950/40 dark:border-cyan-500/30">
+              DEEPAK.OS :: ONLINE
+            </span>
 
-            <h2 className="text-xl md:text-2xl mb-2 font-space tracking-wide text-blue-900 dark:text-cyan-200 font-bold">
-              Autonomous Systems Architect
+            <h1 className="text-4xl md:text-6xl font-black tracking-tight text-slate-900 dark:text-white">
+              <span className="sr-only">Deepak R</span>
+              <span>DEEPAK</span> <span className="text-blue-600 dark:text-cyan-400">R.</span>
+            </h1>
+
+            <h2 className="text-xl md:text-3xl font-space tracking-wide text-blue-900 dark:text-cyan-200 font-bold">
+              Autonomous Systems Architect & Robotics Engineer
             </h2>
-            <p className="text-xs md:text-sm font-orbitron mb-4 tracking-widest text-amber-700 dark:text-cyan-400/90 font-semibold">
-              Deepak R. | Robotics & ML Engineer
-            </p>
-            <p className="font-space text-xs md:text-sm leading-relaxed max-w-lg mb-6 p-4 rounded-lg border backdrop-blur-sm text-slate-700 bg-white border-slate-200 shadow-sm dark:text-gray-300 dark:bg-black/40 dark:border-cyan-500/20">
-              Robotics engineering student at Anna University. Specializing in ROS2 Navigation, YOLO Vision, and Embedded IoT. Bridging theoretical AI with raw physical actuation.
-            </p>
-            <div className="flex flex-wrap justify-center lg:justify-start gap-3">
-              <a href="#projects" className="px-5 py-2.5 text-xs font-bold font-orbitron rounded tracking-wider transition-all border bg-blue-700 hover:bg-blue-800 text-white border-blue-700 shadow-md dark:bg-cyan-500/20 dark:hover:bg-cyan-400 dark:hover:text-black dark:border-cyan-400 dark:text-cyan-400 dark:shadow-[0_0_15px_rgba(0,240,255,0.2)]">
-                EXPLORE ARCHIVES →
-              </a>
-              <a href="#contact" className="px-5 py-2.5 text-xs font-bold font-orbitron rounded tracking-wider transition-all border bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-800 dark:bg-black/60 dark:hover:bg-cyan-950 dark:border-cyan-500/40 dark:text-cyan-300">
-                COMM-LINK
-              </a>
-            </div>
-          </motion.div>
-        </div>
+          </div>
+
+          {/* Intro Paragraph */}
+          <p className="font-space text-sm md:text-base leading-relaxed max-w-2xl text-slate-700 bg-white border border-slate-200 p-5 rounded-2xl shadow-md dark:text-gray-300 dark:bg-black/50 dark:border-cyan-500/20">
+            Robotics engineering student at Anna University. Specializing in ROS 2 Navigation, YOLO Vision, and Embedded IoT. Bridging theoretical AI with raw physical actuation.
+          </p>
+
+          {/* Call to Action Buttons */}
+          <div className="flex flex-wrap justify-center gap-4">
+            <a href="#projects" className="px-6 py-3 text-xs md:text-sm font-bold font-orbitron rounded-xl tracking-wider transition-all border bg-blue-700 hover:bg-blue-800 text-white border-blue-700 shadow-lg dark:bg-cyan-500/20 dark:hover:bg-cyan-400 dark:hover:text-black dark:border-cyan-400 dark:text-cyan-400 dark:shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+              EXPLORE ARCHIVES →
+            </a>
+            <a href="#contact" className="px-6 py-3 text-xs md:text-sm font-bold font-orbitron rounded-xl tracking-wider transition-all border bg-white hover:bg-slate-100 border-slate-300 text-slate-900 shadow-md dark:bg-black/60 dark:hover:bg-cyan-950 dark:border-cyan-500/40 dark:text-cyan-300">
+              COMM-LINK
+            </a>
+          </div>
+        </motion.div>
       </section>
 
       {/* SLIDE 2: FEATURED ARCHIVES (PROJECTS) */}

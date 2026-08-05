@@ -10,7 +10,7 @@ const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Deepak R.',
+  name: 'Deepak R',
   jobTitle: 'Robotics & Autonomous Systems Architect',
   description: 'Official portfolio of Deepak R, a Robotics & Automation Engineering student specializing in ROS 2, YOLO computer vision, and embedded machine learning.',
   knowsAbout: ['ROS 2', 'YOLO Vision', 'Embedded IoT', 'Machine Learning', 'Robotics', 'Control Systems', 'Computer Vision', 'Autonomous Systems'],
@@ -21,10 +21,8 @@ const jsonLd = {
 }
 
 export const metadata: Metadata = {
-  title: {
-    default: 'Deepak R | Robotics & Autonomous Systems Architect',
-    template: '%s | Deepak R',
-  },
+  metadataBase: new URL('https://arkz-deepak-portfolio.vercel.app'),
+  title: 'Deepak R',
   description: 'Official portfolio of Deepak R, a Robotics & Automation Engineering student specializing in ROS 2, YOLO computer vision, and embedded machine learning.',
   keywords: [
     'Deepak R',
@@ -37,7 +35,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Deepak R' }],
   creator: 'Deepak R',
   openGraph: {
-    title: 'Deepak R | Robotics & Autonomous Systems Architect',
+    title: 'Deepak R',
     description: 'Official portfolio of Deepak R, a Robotics & Automation Engineering student specializing in ROS 2, YOLO computer vision, and embedded machine learning.',
     type: 'website',
     locale: 'en_US',
@@ -45,7 +43,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Deepak R | Robotics & Autonomous Systems Architect',
+    title: 'Deepak R',
     description: 'Official portfolio of Deepak R, a Robotics & Automation Engineering student specializing in ROS 2, YOLO computer vision, and embedded machine learning.',
   },
   verification: {
@@ -77,7 +75,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-slate-50 text-slate-900 dark:bg-black dark:text-cyan-400 transition-colors duration-300 overflow-x-hidden w-full max-w-[100vw] font-sans antialiased selection:bg-cyan-500/30">
+      <body className="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-white transition-colors duration-300 overflow-x-hidden w-full max-w-[100vw] font-sans antialiased selection:bg-cyan-500/30">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <Navbar />
           {children}

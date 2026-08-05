@@ -31,7 +31,7 @@ describe('Portfolio Home Page', () => {
     
     // Check if hero title is rendered
     expect(screen.getByText('DEEPAK')).toBeInTheDocument()
-    expect(screen.getByText('Autonomous Systems Architect')).toBeInTheDocument()
+    expect(screen.getByText(/Autonomous Systems Architect/)).toBeInTheDocument()
     
     // Check if the mock background is rendered
     expect(screen.getByTestId('particle-bg')).toBeInTheDocument()
