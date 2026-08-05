@@ -143,7 +143,8 @@ export default function Home() {
                   DEEPAK.OS :: ONLINE
                 </span>
                 <h1 className="text-3xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
-                  DEEPAK <span className="text-blue-600 dark:text-cyan-400">R.</span>
+                  <span className="sr-only">Deepak R</span>
+                  <span>DEEPAK</span> <span className="text-blue-600 dark:text-cyan-400">R.</span>
                 </h1>
               </div>
             </div>

@@ -11,45 +11,42 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Deepak R.',
-  jobTitle: 'Autonomous Systems Architect & Robotics Engineer',
-  description: 'Robotics engineering student at Anna University specializing in ROS2 Navigation, YOLO Vision, and Embedded IoT.',
-  knowsAbout: ['ROS2', 'YOLO Vision', 'Embedded IoT', 'Machine Learning', 'Robotics', 'Control Systems', 'Computer Vision'],
+  jobTitle: 'Robotics & Autonomous Systems Architect',
+  description: 'Official portfolio of Deepak R, a Robotics & Automation Engineering student specializing in ROS 2, YOLO computer vision, and embedded machine learning.',
+  knowsAbout: ['ROS 2', 'YOLO Vision', 'Embedded IoT', 'Machine Learning', 'Robotics', 'Control Systems', 'Computer Vision', 'Autonomous Systems'],
   almaMater: {
     '@type': 'EducationalOrganization',
-    name: 'Anna University',
+    name: 'Dhaanish Ahmed College of Engineering',
   },
 }
 
 export const metadata: Metadata = {
   title: {
-    default: 'Deepak R. | Robotics & ML Engineer',
-    template: '%s | Deepak R.',
+    default: 'Deepak R | Robotics & Autonomous Systems Architect',
+    template: '%s | Deepak R',
   },
-  description: 'Portfolio of Deepak R., an Autonomous Systems Architect & Robotics Engineering student specializing in ROS2, computer vision, YOLO, and autonomous systems.',
+  description: 'Official portfolio of Deepak R, a Robotics & Automation Engineering student specializing in ROS 2, YOLO computer vision, and embedded machine learning.',
   keywords: [
     'Deepak R',
+    'Deepak R portfolio',
     'Robotics Engineer',
-    'Machine Learning Engineer',
-    'ROS2',
-    'YOLO',
-    'Computer Vision',
-    'Autonomous Systems Architect',
-    'Anna University',
-    'Robotics Portfolio'
+    'ROS 2',
+    'Chennai',
+    'Autonomous Systems'
   ],
-  authors: [{ name: 'Deepak R.' }],
-  creator: 'Deepak R.',
+  authors: [{ name: 'Deepak R' }],
+  creator: 'Deepak R',
   openGraph: {
-    title: 'Deepak R. | Robotics & ML Engineer',
-    description: 'Autonomous Systems Architect specializing in ROS2, YOLO Vision, and Embedded IoT.',
+    title: 'Deepak R | Robotics & Autonomous Systems Architect',
+    description: 'Official portfolio of Deepak R, a Robotics & Automation Engineering student specializing in ROS 2, YOLO computer vision, and embedded machine learning.',
     type: 'website',
     locale: 'en_US',
-    siteName: 'Deepak R. Portfolio',
+    siteName: 'Deepak R Portfolio',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Deepak R. | Robotics & ML Engineer',
-    description: 'Autonomous Systems Architect specializing in ROS2, YOLO Vision, and Embedded IoT.',
+    title: 'Deepak R | Robotics & Autonomous Systems Architect',
+    description: 'Official portfolio of Deepak R, a Robotics & Automation Engineering student specializing in ROS 2, YOLO computer vision, and embedded machine learning.',
   },
   verification: {
     google: 'EKpIS6UNRNpVPF-jDOJP4EqSZTAx_5HKQ-0QaxpFwRo',
