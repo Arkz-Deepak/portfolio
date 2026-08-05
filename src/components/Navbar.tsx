@@ -40,6 +40,18 @@ export default function Navbar() {
             <Link href="/internships" className="text-sm font-semibold transition-colors text-slate-700 hover:text-blue-800 dark:text-gray-300 dark:hover:text-cyan-400">TIMELINE</Link>
             <Link href="/contact" className="text-sm font-semibold transition-colors text-slate-700 hover:text-blue-800 dark:text-gray-300 dark:hover:text-cyan-400">TERMINAL</Link>
 
+            {/* Resume Download Button */}
+            <a
+              href="/resume.pdf"
+              download="Deepak_R_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 rounded-lg border font-orbitron text-xs font-bold transition-all flex items-center gap-1.5 bg-emerald-600 text-white border-emerald-600 hover:bg-emerald-700 shadow-sm dark:bg-emerald-500/20 dark:border-emerald-400 dark:text-emerald-300 dark:hover:bg-emerald-400 dark:hover:text-black dark:shadow-[0_0_10px_rgba(16,185,129,0.2)]"
+            >
+              <span>RESUME</span>
+              <span className="text-[10px]">⤓</span>
+            </a>
+
             {/* Theme Toggle Button */}
             {mounted && (
               <button
@@ -64,6 +76,16 @@ export default function Navbar() {
 
           {/* Mobile Buttons */}
           <div className="md:hidden flex items-center space-x-2">
+            <a
+              href="/resume.pdf"
+              download="Deepak_R_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-2.5 py-1.5 rounded-lg border font-orbitron text-xs font-bold transition-all flex items-center gap-1 bg-emerald-600 text-white border-emerald-600 dark:bg-emerald-500/20 dark:border-emerald-400 dark:text-emerald-300"
+            >
+              <span>CV</span>
+              <span className="text-[10px]">⤓</span>
+            </a>
             {mounted && (
               <button
                 onClick={handleToggle}
@@ -90,6 +112,16 @@ export default function Navbar() {
             <Link href="/projects" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-800 hover:bg-slate-100 hover:text-blue-900 dark:text-gray-300 dark:hover:bg-cyan-900/50 dark:hover:text-cyan-400">ARCHIVES</Link>
             <Link href="/internships" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-800 hover:bg-slate-100 hover:text-blue-900 dark:text-gray-300 dark:hover:bg-cyan-900/50 dark:hover:text-cyan-400">TIMELINE</Link>
             <Link href="/contact" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-800 hover:bg-slate-100 hover:text-blue-900 dark:text-gray-300 dark:hover:bg-cyan-900/50 dark:hover:text-cyan-400">TERMINAL</Link>
+            <a
+              href="/resume.pdf"
+              download="Deepak_R_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsOpen(false)}
+              className="block px-3 py-2 text-sm font-bold font-orbitron text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40"
+            >
+              DOWNLOAD RESUME (PDF) ⤓
+            </a>
           </div>
         </div>
       )}

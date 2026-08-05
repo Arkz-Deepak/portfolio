@@ -144,6 +144,16 @@ export default function Home() {
 
           {/* Call to Action Buttons */}
           <div className="flex flex-wrap justify-center gap-4">
+            <a 
+              href="/resume.pdf" 
+              download="Deepak_R_Resume.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="px-6 py-3 text-xs md:text-sm font-bold font-orbitron rounded-xl tracking-wider transition-all border bg-emerald-600 hover:bg-emerald-700 text-white border-emerald-600 shadow-lg dark:bg-emerald-500/20 dark:hover:bg-emerald-400 dark:hover:text-black dark:border-emerald-400 dark:text-emerald-300 dark:shadow-[0_0_15px_rgba(16,185,129,0.3)] flex items-center gap-2"
+            >
+              <span>DOWNLOAD RESUME</span>
+              <span>⤓</span>
+            </a>
             <a href="#projects" className="px-6 py-3 text-xs md:text-sm font-bold font-orbitron rounded-xl tracking-wider transition-all border bg-blue-700 hover:bg-blue-800 text-white border-blue-700 shadow-lg dark:bg-cyan-500/20 dark:hover:bg-cyan-400 dark:hover:text-black dark:border-cyan-400 dark:text-cyan-400 dark:shadow-[0_0_15px_rgba(0,240,255,0.2)]">
               EXPLORE ARCHIVES →
             </a>
