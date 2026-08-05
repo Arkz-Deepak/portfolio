@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Orbitron, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 import { ThemeProvider } from '@/components/ThemeProvider'
 
 const orbitron = Orbitron({ subsets: ['latin'], variable: '--font-orbitron' })
@@ -75,10 +76,13 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-white transition-colors duration-300 overflow-x-hidden w-full max-w-[100vw] font-sans antialiased selection:bg-cyan-500/30">
+      <body className="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-white transition-colors duration-300 overflow-x-hidden w-full max-w-[100vw] font-sans antialiased selection:bg-cyan-500/30 flex flex-col min-h-screen">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <Navbar />
-          {children}
+          <div className="flex-grow">
+            {children}
+          </div>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

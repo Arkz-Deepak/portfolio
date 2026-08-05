@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 export default function SlamLab() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [speed, setSpeed] = useState(3.5)
+  const [isOffline, setIsOffline] = useState(false)
   const cratesRef = useRef([
     { x: 180, y: 60, w: 50, h: 140, vx: 0, vy: 0 },
     { x: 280, y: 190, w: 100, h: 45, vx: 0, vy: 0 }
@@ -34,8 +35,18 @@ export default function SlamLab() {
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
+    let ctx: CanvasRenderingContext2D | null = null
+    try {
+      ctx = canvas.getContext('2d')
+    } catch (e) {
+      setIsOffline(true)
+      return
+    }
+
+    if (!ctx) {
+      setIsOffline(true)
+      return
+    }
 
     const fitCanvas = () => {
       const parent = canvas.parentElement
@@ -90,6 +101,7 @@ export default function SlamLab() {
     canvas.addEventListener('touchstart', handleClick, { passive: false })
 
     const render = () => {
+      if (!ctx) return
       if (canvas.width === 0 || canvas.height === 0) {
         fitCanvas()
       }
@@ -115,7 +127,7 @@ export default function SlamLab() {
         ctx.stroke()
       }
 
-      // Crates Physics (Static)
+      // Crates Physics
       cratesRef.current.forEach((c) => {
         c.vx = 0
         c.vy = 0
@@ -126,7 +138,7 @@ export default function SlamLab() {
         ctx.strokeRect(c.x, c.y, c.w, c.h)
       })
 
-      // Robot Navigation Logic
+      // Navigation Math
       const dx = goalPos.x - robot.x
       const dy = goalPos.y - robot.y
       const dist = Math.sqrt(dx * dx + dy * dy)
@@ -166,15 +178,11 @@ export default function SlamLab() {
         })
 
         const targetAngle = Math.atan2(attractiveY + repelY, attractiveX + repelX)
-
-        // STRICT ANGULAR NORMALIZATION: shortest rotational distance between [-PI, PI]
         const angleDiff = Math.atan2(Math.sin(targetAngle - robot.angle), Math.cos(targetAngle - robot.angle))
 
         robot.omega += angleDiff * 0.12
         robot.omega *= 0.65
         robot.angle += robot.omega
-
-        // Keep robot.angle bounded in [-PI, PI] to prevent angular drift
         robot.angle = Math.atan2(Math.sin(robot.angle), Math.cos(robot.angle))
 
         robot.vx += Math.cos(robot.angle) * speed * 0.4
@@ -234,11 +242,6 @@ export default function SlamLab() {
       ctx.beginPath()
       ctx.arc(goalPos.x, goalPos.y, 5, 0, Math.PI * 2)
       ctx.fill()
-      ctx.strokeStyle = '#00ff9d'
-      ctx.lineWidth = 1
-      ctx.beginPath()
-      ctx.arc(goalPos.x, goalPos.y, 15, 0, Math.PI * 2)
-      ctx.stroke()
 
       // Render Robot
       ctx.save()
@@ -255,13 +258,6 @@ export default function SlamLab() {
       ctx.moveTo(0, 0)
       ctx.lineTo(20, 0)
       ctx.stroke()
-      ctx.fillStyle = '#ff007f'
-      ctx.fillRect(4, -12, 10, 4)
-      ctx.fillRect(4, 8, 10, 4)
-      ctx.fillStyle = '#00f0ff'
-      ctx.beginPath()
-      ctx.arc(5, 0, 4, 0, Math.PI * 2)
-      ctx.fill()
       ctx.restore()
 
       animationFrameId = requestAnimationFrame(render)
@@ -277,6 +273,22 @@ export default function SlamLab() {
       canvas.removeEventListener('touchstart', handleClick)
     }
   }, [speed])
+
+  if (isOffline) {
+    return (
+      <div className="w-full aspect-video border border-amber-500/40 rounded-lg bg-black/80 flex flex-col items-center justify-center p-6 text-center font-mono">
+        <div className="w-12 h-12 rounded-full border border-amber-400/60 flex items-center justify-center mb-3 animate-pulse text-amber-400 text-xl font-bold">
+          ⚠️
+        </div>
+        <h3 className="text-amber-400 font-orbitron font-bold text-sm tracking-wider mb-1">
+          SLAM ROVER: AWAITING CALIBRATION / OFFLINE
+        </h3>
+        <p className="text-gray-400 text-xs max-w-sm">
+          Hardware acceleration context unavailable. Re-initializing LiDAR raycasting telemetry stream...
+        </p>
+      </div>
+    )
+  }
 
   return (
     <div className="w-full flex flex-col items-center gap-4">

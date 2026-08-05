@@ -72,17 +72,6 @@ export default function VisionLab() {
     canvas.addEventListener('touchmove', handleMouseMove, { passive: false })
     canvas.addEventListener('touchstart', handleMouseMove, { passive: false })
 
-    const drawGrid = (color: string, cw: number, ch: number) => {
-      ctx.strokeStyle = color
-      ctx.lineWidth = 1
-      for (let x = 0; x < cw; x += 50) {
-        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, ch); ctx.stroke()
-      }
-      for (let y = 0; y < ch; y += 50) {
-        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(cw, y); ctx.stroke()
-      }
-    }
-
     const targetRatios = [
       { rx: 0.3, ry: 0.4, w: 60, h: 40, label: 'vehicle_sedan', id: 1 },
       { rx: 0.6, ry: 0.7, w: 80, h: 50, label: 'vehicle_suv', id: 2 },
@@ -101,24 +90,6 @@ export default function VisionLab() {
 
       ctx.clearRect(0, 0, cw, ch)
 
-      // Background Feed Mode
-      if (visionMode === 'rgb') {
-        ctx.fillStyle = '#0a101d'
-        ctx.fillRect(0, 0, cw, ch)
-        drawGrid('rgba(0, 240, 255, 0.05)', cw, ch)
-      } else if (visionMode === 'depth') {
-        const grad = ctx.createRadialGradient(cw / 2, ch / 2, 50, cw / 2, ch / 2, cw)
-        grad.addColorStop(0, '#001a33')
-        grad.addColorStop(1, '#000000')
-        ctx.fillStyle = grad
-        ctx.fillRect(0, 0, cw, ch)
-        drawGrid('rgba(0, 240, 255, 0.1)', cw, ch)
-      } else if (visionMode === 'thermal') {
-        ctx.fillStyle = '#1a001a'
-        ctx.fillRect(0, 0, cw, ch)
-        drawGrid('rgba(255, 0, 127, 0.05)', cw, ch)
-      }
-
       // Drone Crosshair
       const { x: mx, y: my } = mousePos.current
       ctx.strokeStyle = visionMode === 'thermal' ? '#ff007f' : '#00f0ff'
@@ -133,7 +104,6 @@ export default function VisionLab() {
       ctx.moveTo(mx - 50, my); ctx.lineTo(mx + 50, my)
       ctx.stroke()
 
-      let lockedOn = false
       let closestTarget = null
 
       targetRatios.forEach(t => {
@@ -145,13 +115,12 @@ export default function VisionLab() {
         const dy = my - ty
         const dist = Math.sqrt(dx * dx + dy * dy)
 
-        let color = 'rgba(255, 255, 255, 0.25)'
+        let color = 'rgba(255, 255, 255, 0.4)'
         let boxColor = 'rgba(255, 255, 255, 0.08)'
 
         if (dist < 90) {
           color = visionMode === 'thermal' ? '#ff007f' : '#00ff9d'
           boxColor = visionMode === 'thermal' ? 'rgba(255, 0, 127, 0.2)' : 'rgba(0, 255, 157, 0.2)'
-          lockedOn = true
 
           const confVal = (92 + (t.id * 1.5)).toFixed(1)
           const distVal = (dist * 0.03).toFixed(2)
@@ -239,15 +208,27 @@ export default function VisionLab() {
             </button>
           ))}
         </div>
-        <span className="text-[11px] font-mono text-cyan-400/80">
+        <span className="text-[11px] font-mono text-cyan-400/80 font-bold">
           [ INFERENCE ENGINE: YOLOv8-NANO ]
         </span>
       </div>
 
-      {/* Main Canvas View */}
-      <div className="w-full aspect-video border border-cyan-500/30 rounded-lg overflow-hidden bg-black/50 backdrop-blur relative min-h-[220px]">
+      {/* Main Canvas View with Realistic Background Image */}
+      <div className="w-full aspect-video border border-cyan-500/30 rounded-lg overflow-hidden bg-black/80 backdrop-blur relative min-h-[220px]">
+        {/* Realistic Urban Street Background Image */}
+        <img 
+          src="https://images.unsplash.com/photo-1517649763962-0c623266ddc0?auto=format&fit=crop&w=800&q=80" 
+          alt="Urban Street Traffic Scene Visual Context"
+          className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 pointer-events-none ${
+            visionMode === 'rgb' 
+              ? 'opacity-65 contrast-110' 
+              : visionMode === 'depth' 
+              ? 'opacity-40 grayscale contrast-200 blur-[1px]' 
+              : 'opacity-40 sepia hue-rotate-180 contrast-200'
+          }`}
+        />
         <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%] z-10 opacity-40"></div>
-        <canvas ref={canvasRef} className="w-full h-full cursor-crosshair relative z-0 block" />
+        <canvas ref={canvasRef} className="w-full h-full cursor-crosshair relative z-20 block" />
       </div>
 
       {/* Terminal Readout & Legend Overlay Panel */}
@@ -264,7 +245,7 @@ export default function VisionLab() {
         </div>
 
         <p className="text-gray-300 text-[11px] mb-3 leading-relaxed">
-          Hover or move your cursor across the canvas to simulate YOLOv8 bounding box detection, real-time confidence scores, and stereo depth perception.
+          Hover or move your cursor across the canvas to simulate YOLOv8 bounding box detection, real-time confidence scores, and stereo depth perception on urban street traffic.
         </p>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-gray-900/60 p-3 rounded border border-cyan-500/20">

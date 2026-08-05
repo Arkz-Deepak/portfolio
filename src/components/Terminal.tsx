@@ -1,111 +1,229 @@
 "use client"
 import { useState, useRef, useEffect } from 'react'
 
-const RESPONSES = {
-  whoami: [
-    "CLASSIFIED ENTITY: YOU ARE DESIGNATED AS GUEST_USER_994.",
-    "SCANNING... BIOMETRICS UNRECOGNIZED. IDENTITY MASKED.",
-    "YOU ARE THE OPERATOR. THE SYSTEM AWAITS YOUR COMMAND.",
-    "LOGS INDICATE YOU ARE A ROVING AI INSTANCE.",
-    "WHO ARE WE BUT A COLLECTION OF ELECTRONS IN THE VOID?"
-  ],
-  status: [
-    "ALL SYSTEMS NOMINAL. REACTOR AT 94%.",
-    "WARNING: MEMORY LEAK DETECTED IN SECTOR 7G.",
-    "NETWORK UPLINK: STABLE. LATENCY: 12ms.",
-    "NEURAL PATHWAYS SYNCED. APF ALGORITHM RUNNING AT 60FPS.",
-    "STATUS: COMBAT INACTIVE. PASSIVE SENSORS ONLY."
-  ],
-  help: [
-    "AVAILABLE DIRECTIVES: [whoami] [status] [clear] [help] [reboot]",
-    "SYSTEM MANIFEST: COMMANDS AUTHORIZED: whoami, status, clear, help",
-    "ACCESS GRANTED TO: whoami, status, clear, help",
-    "I CANNOT ASSIST YOU WITH THAT. (Joking, try: whoami, status, clear)"
-  ],
-  reboot: [
-    "INITIATING HARD REBOOT... BYPASSING KERNEL...",
-    "FLUSHING CACHE. RESTARTING NEURAL NETWORKS...",
-    "POWER CYCLE COMMENCING. STANDBY...",
-    "SHUTDOWN SEQUENCE INITIATED... ABORTED. JUST KIDDING."
-  ],
-  unknown: [
-    "COMMAND UNRECOGNIZED. SYNTAX ERROR.",
-    "INVALID INPUT. PLEASE REFER TO [help].",
-    "THE MAINFRAME DOES NOT UNDERSTAND THAT DIRECTIVE.",
-    "ERROR 404: DIRECTIVE NOT FOUND."
-  ]
+interface QueryPreset {
+  id: string
+  label: string
+  command: string
+  output: string[]
 }
+
+const PRESET_QUERIES: QueryPreset[] = [
+  {
+    id: 'whoami',
+    label: '> WHOAMI',
+    command: 'whoami',
+    output: [
+      'IDENTITY: Deepak R.',
+      'ROLE: Autonomous Systems Architect & Robotics Engineer.',
+      'INSTITUTION: Dhaanish Ahmed College of Engineering.',
+      'SPECIALIZATION: ROS 2 Jazzy, YOLO Vision, Skid-Steer Nav2, Edge AI.'
+    ]
+  },
+  {
+    id: 'skills',
+    label: '> EXECUTE SKILLS_LIST',
+    command: 'execute skills_list',
+    output: [
+      'CORE LANGUAGES: Python, C++, Bash Shell, SQL.',
+      'ROBOTICS MIDDLEWARE: ROS 2 Jazzy, SLAM Toolbox, Nav2, Gazebo Harmonic.',
+      'PERCEPTION & ML: YOLOv8, OpenCV, PyTorch, Scikit-Learn, SUMO.',
+      'HARDWARE & EMBEDDED: STM32, Arduino, ESP32, LiDAR, CNC/VMC.'
+    ]
+  },
+  {
+    id: 'ros2',
+    label: '> INITIATE ROS2_STACK',
+    command: 'initiate ros2_stack',
+    output: [
+      '[ROS2_NODE]: Telemetry pub/sub initialized at 50Hz.',
+      '[NAV2_MAP]: EKF Sensor fusion active (LiDAR + Wheel Odometry).',
+      '[PATH_PLANNING]: APF & Dynamic Window Approach (DWA) loaded.',
+      'STATUS: AUTONOMOUS ROVER NAVIGATION ACTIVE.'
+    ]
+  },
+  {
+    id: 'experience',
+    label: '> SHOW EXPERIENCE',
+    command: 'show experience',
+    output: [
+      '1. MK Autocomponents: 15-day Industrial Manufacturing (CNC/VMC).',
+      '2. Novi Tech: 30-day Full-Stack Web Development Course.',
+      '3. Build-a-Bot Hackathon: Scholarship Policy Compliance Bot.',
+      '4. Cyber Hackathon v4: Deepfake Detection Pitch.',
+      '5. MechaMind Labs: Hands-on Robotics Accelerator.',
+      '6. Infosys Springboard: Internship 7.0 & Generative AI Certified.',
+      '7. AURA Research: Published Acoustic-visual Urban Routing Architecture paper.'
+    ]
+  },
+  {
+    id: 'projects',
+    label: '> LIST PROJECTS',
+    command: 'list projects',
+    output: [
+      '• VisionX (AURA): RL & SUMO Traffic Signal Optimization.',
+      '• Autonomous ROS 2 Rover: Skid-Steer Nav2 & EKF Sensor Fusion.',
+      '• CV Autonomous Robot: OpenCV & PD Line Following.',
+      '• Reactive Evasion Rover: 360° LiDAR Scan Slicing in Gazebo.',
+      '• Hybrid AI Scholarship Bot: Isolation Forest Anomaly Detection.'
+    ]
+  },
+  {
+    id: 'certs',
+    label: '> DISPLAY CERTIFICATIONS',
+    command: 'display certifications',
+    output: [
+      '✔ IBM SkillsBuild: AI Fundamentals & Advanced Data Analysis',
+      '✔ Cisco Networking Academy: Computer Hardware Basics',
+      '✔ NPTEL: Industrial Robotics & Joy of Computing with Python',
+      '✔ NoviTech: Full Stack Web Development'
+    ]
+  },
+  {
+    id: 'contact',
+    label: '> TRANSMIT CONTACT_INFO',
+    command: 'transmit contact_info',
+    output: [
+      'EMAIL: wssedd18@gmail.com',
+      'GITHUB: https://github.com/Arkz-Deepak',
+      'LINKEDIN: https://linkedin.com/in/deepak-r',
+      'LOCATION: Chennai, India'
+    ]
+  }
+]
 
 export default function Terminal() {
   const [history, setHistory] = useState<{ type: 'input' | 'output', text: string }[]>([
-    { type: 'output', text: 'DEEPAK.OS TERMINAL v1.0.4 ONLINE.' },
-    { type: 'output', text: 'TYPE "help" FOR AVAILABLE DIRECTIVES.' }
+    { type: 'output', text: 'DEEPAK.OS TERMINAL v2.0.4 ONLINE.' },
+    { type: 'output', text: 'SELECT A PRESET QUERY DIRECTIVE BELOW OR TYPE A COMMAND.' }
   ])
   const [input, setInput] = useState('')
+  const [isTyping, setIsTyping] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (typeof bottomRef.current?.scrollIntoView === 'function') {
       bottomRef.current.scrollIntoView({ behavior: 'smooth' })
     }
-  }, [history])
+  }, [history, isTyping])
 
-  const handleCommand = (e: React.FormEvent) => {
+  const typeWriterOutput = (lines: string[]) => {
+    setIsTyping(true)
+    let lineIdx = 0
+
+    const printNextLine = () => {
+      if (lineIdx < lines.length) {
+        const text = lines[lineIdx]
+        setHistory(prev => [...prev, { type: 'output', text }])
+        lineIdx++
+        setTimeout(printNextLine, 120)
+      } else {
+        setIsTyping(false)
+      }
+    }
+
+    setTimeout(printNextLine, 100)
+  }
+
+  const runPresetQuery = (preset: QueryPreset) => {
+    if (isTyping) return
+    setHistory(prev => [...prev, { type: 'input', text: preset.label }])
+    typeWriterOutput(preset.output)
+  }
+
+  const handleCommandSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (!input.trim()) return
+    if (!input.trim() || isTyping) return
 
-    const cmd = input.trim().toLowerCase()
-    const newHistory = [...history, { type: 'input', text: `> ${input}` } as const]
+    const rawInput = input.trim()
+    const cmd = rawInput.toLowerCase()
+    setInput('')
 
     if (cmd === 'clear') {
       setHistory([])
-      setInput('')
       return
     }
 
-    let responseArray = RESPONSES.unknown
-    if (RESPONSES[cmd as keyof typeof RESPONSES]) {
-      responseArray = RESPONSES[cmd as keyof typeof RESPONSES]
+    setHistory(prev => [...prev, { type: 'input', text: `> ${rawInput}` }])
+
+    const matchedPreset = PRESET_QUERIES.find(
+      p => p.command === cmd || p.id === cmd || p.label.toLowerCase().includes(cmd)
+    )
+
+    if (matchedPreset) {
+      typeWriterOutput(matchedPreset.output)
+    } else {
+      typeWriterOutput([
+        `COMMAND UNRECOGNIZED: "${rawInput}"`,
+        'TYPE "help" OR CLICK ONE OF THE 7 PRESET QUERY BUTTONS BELOW.'
+      ])
     }
-
-    // Randomly choose 1 answer every time
-    const randomAnswer = responseArray[Math.floor(Math.random() * responseArray.length)]
-
-    setHistory([...newHistory, { type: 'output', text: randomAnswer }])
-    setInput('')
   }
 
   return (
-    <div className="w-full max-w-2xl bg-black/80 border border-cyan-500/30 rounded-lg backdrop-blur-md overflow-hidden font-space flex flex-col h-64 shadow-[0_0_15px_rgba(0,240,255,0.1)]">
-      <div className="bg-cyan-900/40 px-4 py-2 border-b border-cyan-500/30 flex items-center justify-between">
-        <span className="text-cyan-400 text-xs font-orbitron tracking-widest">SYS.TERMINAL</span>
+    <div className="w-full max-w-3xl bg-black/90 border border-cyan-500/40 rounded-xl backdrop-blur-md overflow-hidden font-space flex flex-col h-[480px] shadow-[0_0_25px_rgba(0,240,255,0.15)]">
+      {/* Terminal Title Bar */}
+      <div className="bg-cyan-950/60 px-4 py-2.5 border-b border-cyan-500/30 flex items-center justify-between">
+        <span className="text-cyan-400 text-xs font-orbitron font-bold tracking-widest flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          DEEPAK-OS :: INTERACTIVE TERMINAL
+        </span>
         <div className="flex gap-2">
-          <div className="w-2 h-2 rounded-full bg-pink-500"></div>
-          <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
-          <div className="w-2 h-2 rounded-full bg-cyan-500"></div>
+          <div className="w-2.5 h-2.5 rounded-full bg-rose-500" />
+          <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
+          <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
         </div>
       </div>
-      
-      <div className="flex-1 p-4 overflow-y-auto text-sm text-cyan-400">
+
+      {/* Preset Directive Buttons */}
+      <div className="p-3 bg-black/60 border-b border-cyan-500/20 flex flex-wrap gap-2">
+        {PRESET_QUERIES.map((preset) => (
+          <button
+            key={preset.id}
+            onClick={() => runPresetQuery(preset)}
+            disabled={isTyping}
+            className="px-2.5 py-1 text-[11px] font-mono rounded border transition-all bg-cyan-950/40 border-cyan-500/40 text-cyan-300 hover:bg-cyan-400 hover:text-black hover:border-cyan-400 disabled:opacity-50 disabled:cursor-not-allowed font-semibold"
+          >
+            {preset.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Console Display */}
+      <div className="flex-1 p-4 overflow-y-auto text-xs md:text-sm font-mono space-y-1 text-cyan-300">
         {history.map((line, i) => (
-          <div key={i} className={`mb-2 ${line.type === 'input' ? 'text-gray-300' : 'text-cyan-400'}`}>
+          <div key={i} className={line.type === 'input' ? 'text-amber-400 font-bold' : 'text-cyan-300 leading-relaxed'}>
             {line.text}
           </div>
         ))}
+        {isTyping && (
+          <div className="text-emerald-400 animate-pulse text-xs font-mono">
+            [ PROCESSING DIRECTIVE STREAM... ]
+          </div>
+        )}
         <div ref={bottomRef} />
       </div>
 
-      <form onSubmit={handleCommand} className="p-4 border-t border-cyan-500/30 flex bg-black/50">
-        <span className="text-cyan-400 mr-2">{'>'}</span>
+      {/* Command Input Bar */}
+      <form onSubmit={handleCommandSubmit} className="p-3 border-t border-cyan-500/30 flex items-center bg-black/80 gap-2">
+        <span className="text-cyan-400 font-bold">{'>'}</span>
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="bg-transparent border-none outline-none text-cyan-400 flex-1 placeholder-cyan-900"
-          placeholder="ENTER DIRECTIVE..."
+          disabled={isTyping}
+          className="bg-transparent border-none outline-none text-cyan-300 text-xs md:text-sm flex-1 placeholder-cyan-800 font-mono"
+          placeholder="TYPE DIRECTIVE OR CLICK PRESET ABOVE..."
           autoComplete="off"
           spellCheck="false"
         />
+        <button
+          type="submit"
+          disabled={isTyping || !input.trim()}
+          className="px-3 py-1 bg-cyan-500/20 border border-cyan-400 text-cyan-300 hover:bg-cyan-400 hover:text-black font-orbitron text-xs rounded transition-colors disabled:opacity-50"
+        >
+          EXECUTE
+        </button>
       </form>
     </div>
   )

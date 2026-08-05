@@ -1,69 +1,22 @@
 "use client"
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import * as React from 'react'
+import { ThemeProvider as NextThemesProvider, useTheme as useNextTheme } from 'next-themes'
 
-type Theme = 'dark' | 'light'
-
-interface ThemeContextType {
-  theme: Theme
-  toggleTheme: () => void
-  setTheme: (theme: Theme) => void
+export function ThemeProvider({ children, ...props }: React.ComponentProps<typeof NextThemesProvider>) {
+  return <NextThemesProvider {...props}>{children}</NextThemesProvider>
 }
 
-const ThemeContext = createContext<ThemeContextType>({
-  theme: 'dark',
-  toggleTheme: () => {},
-  setTheme: () => {},
-})
-
-export function ThemeProvider({ 
-  children,
-  defaultTheme = 'dark'
-}: { 
-  children: React.ReactNode
-  attribute?: string
-  defaultTheme?: string
-  enableSystem?: boolean
-}) {
-  const [theme, setThemeState] = useState<Theme>((defaultTheme as Theme) || 'dark')
-
-  useEffect(() => {
-    const saved = localStorage.getItem('deepak-os-theme') as Theme | null
-    if (saved === 'light' || saved === 'dark') {
-      setThemeState(saved)
-      if (saved === 'light') {
-        document.documentElement.classList.add('light')
-        document.documentElement.classList.remove('dark')
-      } else {
-        document.documentElement.classList.add('dark')
-        document.documentElement.classList.remove('light')
-      }
-    } else {
-      document.documentElement.classList.add('dark')
-      document.documentElement.classList.remove('light')
-    }
-  }, [])
-
-  const setTheme = (nextTheme: Theme) => {
-    setThemeState(nextTheme)
-    localStorage.setItem('deepak-os-theme', nextTheme)
-    if (nextTheme === 'light') {
-      document.documentElement.classList.add('light')
-      document.documentElement.classList.remove('dark')
-    } else {
-      document.documentElement.classList.add('dark')
-      document.documentElement.classList.remove('light')
-    }
-  }
+export function useTheme() {
+  const { theme, setTheme, resolvedTheme } = useNextTheme()
+  const currentTheme = theme || resolvedTheme || 'dark'
 
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
+    setTheme(currentTheme === 'dark' ? 'light' : 'dark')
   }
 
-  return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  )
+  return {
+    theme: currentTheme,
+    setTheme,
+    toggleTheme
+  }
 }
-
-export const useTheme = () => useContext(ThemeContext)

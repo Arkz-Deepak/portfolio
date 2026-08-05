@@ -305,86 +305,86 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-h-[68vh] overflow-y-auto pr-1">
-            {/* Op 1 */}
+            {/* Op 1: MK Autocomponents */}
             <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
               <div>
-                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 01 :: METROLOGY ]</span>
-                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">Precise3DM</h3>
-                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Intern</p>
-                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
-                  3D Scan Based Solutions & Metrology inspection pipelines.
-                </p>
-              </div>
-            </div>
-
-            {/* Op 2 */}
-            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
-              <div>
-                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 02 :: AI & CV ]</span>
-                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">Tamizhan Skills</h3>
-                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">RISE AI Intern</p>
-                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
-                  RISE AI for Autonomous Systems Intern (Computer Vision, YOLOv8, Path Planning).
-                </p>
-              </div>
-            </div>
-
-            {/* Op 3 */}
-            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
-              <div>
-                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 03 :: ML PIPELINES ]</span>
-                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">CodeAlpha</h3>
-                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">ML Intern</p>
-                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
-                  Development of machine learning models using XGBoost, CNNs, and PyTorch.
-                </p>
-              </div>
-            </div>
-
-            {/* Op 4 */}
-            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
-              <div>
-                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 04 :: EDP & LOCO ]</span>
-                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">Chennai Port</h3>
-                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Authority Inplant</p>
-                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
-                  Vocational Inplant Training (Locomotives, Diesel Engines, Heavy Machinery).
-                </p>
-              </div>
-            </div>
-
-            {/* Op 5 */}
-            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
-              <div>
-                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 05 :: ROS 2 NAV ]</span>
-                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">KarthiKesh</h3>
-                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Robotics Program</p>
-                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
-                  20-Day Industrial Career Uplifting Program (Advanced ROS 2 & Autonomous Navigation).
-                </p>
-              </div>
-            </div>
-
-            {/* Op 6 */}
-            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
-              <div>
-                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 06 :: MANUFACTURING ]</span>
-                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">MK Auto</h3>
+                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 01 :: MANUFACTURING ]</span>
+                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">MK Autocomponents</h3>
                 <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Industrial Intern</p>
                 <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
-                  CNC/VMC Operations, Cold Forging, Casting & precision manufacturing.
+                  15-day Industrial Manufacturing Internship (CNC/VMC Operations, Cold Forging, Casting).
                 </p>
               </div>
             </div>
 
-            {/* Op 7 */}
+            {/* Op 2: Novi Tech */}
+            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
+              <div>
+                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 02 :: WEB DEV ]</span>
+                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">Novi Tech</h3>
+                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Web Dev Trainee</p>
+                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
+                  30-day Basic Full-Stack Web Dev Course (HTML, CSS, JS & responsive UI).
+                </p>
+              </div>
+            </div>
+
+            {/* Op 3: Build-a-Bot */}
+            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
+              <div>
+                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 03 :: HACKATHON ]</span>
+                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">Build-a-Bot</h3>
+                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Bot Developer</p>
+                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
+                  Scholarship Policy Compliance Bot (Anomaly detection & automated filtering).
+                </p>
+              </div>
+            </div>
+
+            {/* Op 4: Cyber Hackathon v4 */}
+            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
+              <div>
+                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 04 :: CYBER SECURITY ]</span>
+                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">Cyber Hackathon v4</h3>
+                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Pitch Specialist</p>
+                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
+                  Multi-modal Deepfake Detection Pitch & media authenticity platform architecture.
+                </p>
+              </div>
+            </div>
+
+            {/* Op 5: MechaMind Labs */}
+            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
+              <div>
+                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 05 :: ROBOTICS ACCELERATOR ]</span>
+                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">MechaMind Labs</h3>
+                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Robotics Accelerator</p>
+                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
+                  Hands-on Robotics Accelerator (Advanced ROS 2 Jazzy & Autonomous Navigation).
+                </p>
+              </div>
+            </div>
+
+            {/* Op 6: Infosys Springboard */}
+            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
+              <div>
+                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 06 :: INFOSYS AI ]</span>
+                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">Infosys Springboard</h3>
+                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Internship 7.0</p>
+                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
+                  Completed Internship 7.0 & Generative AI / Deep Learning certification.
+                </p>
+              </div>
+            </div>
+
+            {/* Op 7: AURA Research */}
             <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors sm:col-span-2 lg:col-span-2 bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
               <div>
-                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 07 :: VIRTUAL SPRINT ]</span>
-                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">Kodacy</h3>
-                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Virtual Robotics Intern</p>
+                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 07 :: PUBLISHED PAPER ]</span>
+                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">AURA Research</h3>
+                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Lead Researcher</p>
                 <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
-                  15-Day Virtual Robotics Intern focusing on embedded systems & robotics simulations.
+                  Published paper on Acoustic-visual Urban Routing Architecture (AURA) using DRL & SUMO.
                 </p>
               </div>
             </div>
