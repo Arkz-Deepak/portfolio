@@ -134,16 +134,16 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="flex flex-col items-center lg:items-start text-center lg:text-left font-orbitron order-1 lg:order-2"
           >
-            <div className="flex items-center gap-4 mb-4">
-              <div className="relative w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden border-2 flex-shrink-0 border-blue-700 shadow-md dark:border-cyan-400 dark:shadow-[0_0_15px_#00f0ff]">
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-4 mb-4 text-center md:text-left">
+              <div className="relative w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-2 shrink-0 border-blue-700 shadow-md dark:border-cyan-400 dark:shadow-[0_0_15px_#00f0ff]">
                 <img src="/profile.jpg" alt="Deepak R." className="w-full h-full object-cover transition-all duration-500" />
               </div>
-              <div className="flex flex-col text-left">
-                <span className="text-xs font-mono tracking-widest text-amber-600 dark:text-cyan-400 font-semibold">
+              <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                <span className="text-xs font-mono tracking-widest text-blue-600 dark:text-cyan-400 font-semibold">
                   DEEPAK.OS :: ONLINE
                 </span>
                 <h1 className="text-3xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
-                  DEEPAK <span className="text-blue-700 dark:text-cyan-400">R.</span>
+                  DEEPAK <span className="text-blue-600 dark:text-cyan-400">R.</span>
                 </h1>
               </div>
             </div>
@@ -157,7 +157,7 @@ export default function Home() {
             <p className="font-space text-xs md:text-sm leading-relaxed max-w-lg mb-6 p-4 rounded-lg border backdrop-blur-sm text-slate-700 bg-white border-slate-200 shadow-sm dark:text-gray-300 dark:bg-black/40 dark:border-cyan-500/20">
               Robotics engineering student at Anna University. Specializing in ROS2 Navigation, YOLO Vision, and Embedded IoT. Bridging theoretical AI with raw physical actuation.
             </p>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-3">
               <a href="#projects" className="px-5 py-2.5 text-xs font-bold font-orbitron rounded tracking-wider transition-all border bg-blue-700 hover:bg-blue-800 text-white border-blue-700 shadow-md dark:bg-cyan-500/20 dark:hover:bg-cyan-400 dark:hover:text-black dark:border-cyan-400 dark:text-cyan-400 dark:shadow-[0_0_15px_rgba(0,240,255,0.2)]">
                 EXPLORE ARCHIVES →
               </a>
