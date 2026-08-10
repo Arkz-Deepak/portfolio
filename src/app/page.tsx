@@ -375,22 +375,10 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Op 6: Infosys Springboard */}
-            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
+            {/* Op 6: AURA Research */}
+            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors sm:col-span-2 lg:col-span-3 bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
               <div>
-                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 06 :: INFOSYS AI ]</span>
-                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">Infosys Springboard</h3>
-                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Internship 7.0</p>
-                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
-                  Completed Internship 7.0 & Generative AI / Deep Learning certification.
-                </p>
-              </div>
-            </div>
-
-            {/* Op 7: AURA Research */}
-            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors sm:col-span-2 lg:col-span-2 bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
-              <div>
-                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 07 :: PUBLISHED PAPER ]</span>
+                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 06 :: PUBLISHED PAPER ]</span>
                 <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">AURA Research</h3>
                 <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Lead Researcher</p>
                 <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">

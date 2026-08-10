@@ -8,7 +8,7 @@ export function ThemeProvider({ children, ...props }: React.ComponentProps<typeo
 
 export function useTheme() {
   const { theme, setTheme, resolvedTheme } = useNextTheme()
-  const currentTheme = theme || resolvedTheme || 'dark'
+  const currentTheme = theme || resolvedTheme || 'light'
 
   const toggleTheme = () => {
     setTheme(currentTheme === 'dark' ? 'light' : 'dark')

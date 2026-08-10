@@ -43,13 +43,6 @@ export default function InternshipsPage() {
       description: 'Hands-on Robotics Accelerator program mastering ROS 2 Jazzy, Gazebo Harmonic, and skid-steer navigation.',
     },
     {
-      id: 'infosys-springboard',
-      title: 'Infosys Springboard',
-      role: 'AI Intern & Certified',
-      domain: '[ INTERNSHIP 7.0 & GEN AI ]',
-      description: 'Completed Internship 7.0 alongside Generative AI & Deep Learning certification programs.',
-    },
-    {
       id: 'aura-research',
       title: 'AURA Research',
       role: 'Lead Researcher',
