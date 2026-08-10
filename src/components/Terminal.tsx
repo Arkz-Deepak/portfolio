@@ -47,11 +47,18 @@ const PRESET_QUERIES: QueryPreset[] = [
     label: '> SHOW EXPERIENCE',
     command: 'show experience',
     output: [
-      '1. MK Autocomponents: 15-day Industrial Manufacturing (CNC/VMC).',
-      '2. Novi Tech: 30-day Full-Stack Web Development Course.',
-      '3. Build-a-Bot Hackathon: Scholarship Policy Compliance Bot.',
-      '4. Cyber Hackathon v4: Deepfake Detection Pitch.',
-      '5. AURA Research: Published Acoustic-visual Urban Routing Architecture paper.'
+      '1. Wildplant Terrestrial Solutions: Artificial Intelligence Intern (Jul 2026 - Present).',
+      '2. KarthiKesh Robotics: 20-Day ROS 2 Industrial Program (Aug 2026).',
+      '3. Precise3DM: Artificial Intelligence Intern - Data Engineering (Jun 2026 - Jul 2026).',
+      '4. Tamizhan Skills: AI for Autonomous System Intern - RISE Program (Dec 2025).',
+      '5. Kodacy: Robotics Intern (Dec 2025).',
+      '6. Chennai Port Authority: Engineering Intern (Dec 2025).',
+      '7. MK Autocomponents: Industrial Manufacturing Intern - CNC/VMC (15-Days).',
+      '8. Build-a-Bot Hackathon: Scholarship Policy Compliance Bot.',
+      '9. Cyber Hackathon v4: Deepfake Detection Pitch.',
+      '10. AURA Research: Published Acoustic-visual Urban Routing Architecture paper.',
+      '11. Infosys Springboard: Internship 7.0 & Generative AI Certified.',
+      '12. Novi Tech: 30-day Full-Stack Web Development Course.'
     ]
   },
   {

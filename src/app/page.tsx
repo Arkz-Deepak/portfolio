@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import ParticleBackground from '@/components/ParticleBackground'
 import Link from 'next/link'
 import { useTheme } from '@/components/ThemeProvider'
+import { TIMELINE_DATA } from '@/data/timeline'
 
 export default function Home() {
   const [booting, setBooting] = useState(true)
@@ -314,66 +315,30 @@ export default function Home() {
             <div className="h-1 w-20 mx-auto mt-2 rounded-full bg-blue-600 dark:bg-cyan-400 dark:shadow-[0_0_10px_#00f0ff]" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-h-[68vh] overflow-y-auto pr-1">
-            {/* Op 1: MK Autocomponents */}
-            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
-              <div>
-                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 01 :: MANUFACTURING ]</span>
-                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">MK Autocomponents</h3>
-                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Industrial Intern</p>
-                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
-                  15-day Industrial Manufacturing Internship (CNC/VMC Operations, Cold Forging, Casting).
-                </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[68vh] overflow-y-auto pr-1">
+            {TIMELINE_DATA.map((exp, index) => (
+              <div 
+                key={exp.id} 
+                className="border p-4 rounded-xl flex flex-col justify-between backdrop-blur-sm transition-all duration-300 bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400 hover:shadow-md"
+              >
+                <div>
+                  <div className="flex justify-between items-center mb-1 flex-wrap gap-1">
+                    <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">
+                      [ {index < 9 ? `0${index + 1}` : index + 1} :: {exp.domain.replace(/^\[\s*|\s*\]$/g, '')} ]
+                    </span>
+                  </div>
+                  <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">
+                    {exp.title}
+                  </h3>
+                  <p className="text-xs font-space text-blue-800 dark:text-cyan-300 font-semibold mb-1">
+                    {exp.role} <span className="text-slate-500 dark:text-cyan-400/70 font-normal">({exp.period})</span>
+                  </p>
+                  <p className="text-xs font-space leading-relaxed text-slate-600 dark:text-gray-300">
+                    {exp.description}
+                  </p>
+                </div>
               </div>
-            </div>
-
-            {/* Op 2: Novi Tech */}
-            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
-              <div>
-                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 02 :: WEB DEV ]</span>
-                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">Novi Tech</h3>
-                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Web Dev Trainee</p>
-                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
-                  30-day Basic Full-Stack Web Dev Course (HTML, CSS, JS & responsive UI).
-                </p>
-              </div>
-            </div>
-
-            {/* Op 3: Build-a-Bot */}
-            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
-              <div>
-                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 03 :: HACKATHON ]</span>
-                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">Build-a-Bot</h3>
-                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Bot Developer</p>
-                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
-                  Scholarship Policy Compliance Bot (Anomaly detection & automated filtering).
-                </p>
-              </div>
-            </div>
-
-            {/* Op 4: Cyber Hackathon v4 */}
-            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
-              <div>
-                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 04 :: CYBER SECURITY ]</span>
-                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">Cyber Hackathon v4</h3>
-                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Pitch Specialist</p>
-                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
-                  Multi-modal Deepfake Detection Pitch & media authenticity platform architecture.
-                </p>
-              </div>
-            </div>
-
-            {/* Op 5: AURA Research */}
-            <div className="border p-4 rounded-lg flex flex-col justify-between backdrop-blur-sm transition-colors sm:col-span-2 lg:col-span-4 bg-white border-slate-200 shadow-sm hover:border-blue-400 dark:bg-gray-900/50 dark:border-cyan-500/30 dark:hover:border-cyan-400">
-              <div>
-                <span className="text-[10px] font-orbitron tracking-wider text-amber-700 dark:text-cyan-400 font-semibold">[ 05 :: PUBLISHED PAPER ]</span>
-                <h3 className="text-base font-bold font-orbitron mt-1 text-slate-900 dark:text-white">AURA Research</h3>
-                <p className="text-xs font-space mb-2 text-blue-800 dark:text-cyan-300 font-semibold">Lead Researcher</p>
-                <p className="text-xs font-space leading-normal text-slate-600 dark:text-gray-300">
-                  Published paper on Acoustic-visual Urban Routing Architecture (AURA) using DRL & SUMO.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
