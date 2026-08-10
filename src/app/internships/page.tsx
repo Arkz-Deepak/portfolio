@@ -36,13 +36,6 @@ export default function InternshipsPage() {
       description: 'Designed and pitched an AI-driven multi-modal Deepfake Detection platform for media authenticity.',
     },
     {
-      id: 'mechamind',
-      title: 'MechaMind Labs',
-      role: 'Robotics Accelerator',
-      domain: '[ HANDS-ON ROBOTICS ]',
-      description: 'Hands-on Robotics Accelerator program mastering ROS 2 Jazzy, Gazebo Harmonic, and skid-steer navigation.',
-    },
-    {
       id: 'aura-research',
       title: 'AURA Research',
       role: 'Lead Researcher',

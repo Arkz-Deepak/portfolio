@@ -51,8 +51,7 @@ const PRESET_QUERIES: QueryPreset[] = [
       '2. Novi Tech: 30-day Full-Stack Web Development Course.',
       '3. Build-a-Bot Hackathon: Scholarship Policy Compliance Bot.',
       '4. Cyber Hackathon v4: Deepfake Detection Pitch.',
-      '5. MechaMind Labs: Hands-on Robotics Accelerator.',
-      '6. AURA Research: Published Acoustic-visual Urban Routing Architecture paper.'
+      '5. AURA Research: Published Acoustic-visual Urban Routing Architecture paper.'
     ]
   },
   {
