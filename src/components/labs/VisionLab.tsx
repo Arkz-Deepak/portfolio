@@ -217,7 +217,7 @@ export default function VisionLab() {
       <div className="w-full aspect-video border border-cyan-500/30 rounded-lg overflow-hidden bg-black/80 backdrop-blur relative min-h-[220px]">
         {/* Realistic Urban Street Background Image */}
         <img 
-          src="https://images.unsplash.com/photo-1517649763962-0c623266ddc0?auto=format&fit=crop&w=800&q=80" 
+          src="/urban-traffic.jpg" 
           alt="Urban Street Traffic Scene Visual Context"
           className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 pointer-events-none ${
             visionMode === 'rgb' 
