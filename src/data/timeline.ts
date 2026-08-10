@@ -97,14 +97,6 @@ export const TIMELINE_DATA: TimelineItem[] = [
     description: 'Published paper on "Acoustic-visual Urban Routing Architecture" (AURA) using Deep Reinforcement Learning & SUMO traffic simulation.',
   },
   {
-    id: 'infosys-springboard',
-    title: 'Infosys Springboard',
-    role: 'AI Intern & Certified',
-    period: 'Virtual Internship',
-    domain: '[ INTERNSHIP 7.0 & GEN AI ]',
-    description: 'Completed Internship 7.0 alongside Generative AI & Deep Learning certification programs.',
-  },
-  {
     id: 'novitech',
     title: 'Novi Tech',
     role: 'Web Dev Trainee',
