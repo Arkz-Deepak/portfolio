@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Certifications from '@/components/Certifications'
 
 export const metadata: Metadata = {
-  title: 'Featured Archives | Deepak R.',
-  description: 'Projects and Engineering Case Studies in ROS 2, Edge AI, and Autonomous Systems.',
+  title: 'Featured Archives & Certifications | Deepak R.',
+  description: 'Projects, Engineering Case Studies, and Verified Technical Credentials in ROS 2, Edge AI, and Autonomous Systems.',
 }
 
 export default function ProjectsPage() {
@@ -60,7 +61,7 @@ export default function ProjectsPage() {
 
   return (
     <main className="min-h-[100dvh] w-full max-w-[100vw] overflow-x-hidden pt-24 pb-16 px-4 md:px-8 max-w-7xl mx-auto transition-colors duration-300 bg-slate-50 dark:bg-black text-slate-900 dark:text-cyan-400">
-      <div className="text-center mb-16">
+      <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-orbitron font-bold text-slate-900 dark:text-white mb-3">
           FEATURED <span className="text-blue-700 dark:text-cyan-400">ARCHIVES</span>
         </h1>
@@ -68,7 +69,7 @@ export default function ProjectsPage() {
         <div className="h-1 w-24 bg-blue-600 dark:bg-cyan-400 mx-auto mt-3 rounded-full dark:shadow-[0_0_10px_#00f0ff]" />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
         {projects.map((p) => (
           <Link key={p.id} href={p.link} className="h-full">
             <div className="h-full border p-6 rounded-xl backdrop-blur-md transition-all duration-300 group cursor-pointer flex flex-col justify-between bg-white border-slate-200 hover:border-blue-500 shadow-md hover:shadow-lg dark:bg-gray-900/60 dark:border-cyan-500/30 dark:hover:border-cyan-400 dark:shadow-[0_0_15px_rgba(0,240,255,0.05)]">
@@ -87,6 +88,20 @@ export default function ProjectsPage() {
             </div>
           </Link>
         ))}
+      </div>
+
+      {/* Certifications Section */}
+      <div className="pt-10 border-t border-slate-200 dark:border-cyan-500/20">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-orbitron font-bold text-slate-900 dark:text-white mb-2">
+            TECHNICAL <span className="text-blue-700 dark:text-cyan-400">LICENSES & CREDENTIALS</span>
+          </h2>
+          <p className="text-xs md:text-sm font-space text-slate-600 dark:text-cyan-300 tracking-widest uppercase font-semibold">
+            Verified Certifications in AI, Machine Learning, Robotics & Systems
+          </p>
+          <div className="h-1 w-20 bg-blue-600 dark:bg-cyan-400 mx-auto mt-3 rounded-full dark:shadow-[0_0_10px_#00f0ff]" />
+        </div>
+        <Certifications />
       </div>
     </main>
   )
