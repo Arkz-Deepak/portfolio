@@ -1,0 +1,16 @@
+Placeholder locations found in the portfolio:
+
+1) /home/runner/work/portfolio/portfolio/src/app/page.tsx:38
+   - Uses `process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` as the Web3Forms access key placeholder (real key is not hardcoded).
+
+2) /home/runner/work/portfolio/portfolio/src/app/page.tsx:475
+   - Contact form name field placeholder: "e.g. Commander Sheppard"
+
+3) /home/runner/work/portfolio/portfolio/src/app/page.tsx:488
+   - Contact form email field placeholder: "e.g. signal@domain.com"
+
+4) /home/runner/work/portfolio/portfolio/src/app/page.tsx:500
+   - Contact form message field placeholder: "Write encrypted message body..."
+
+5) /home/runner/work/portfolio/portfolio/src/app/contact/page.tsx:29-31
+   - Contact page placeholders: "IDENTITY (NAME)", "RETURN_PATH (EMAIL)", "PAYLOAD (MESSAGE)"
