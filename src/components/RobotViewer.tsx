@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import { FaCube, FaSyncAlt } from 'react-icons/fa'
+import { FaCube, FaSyncAlt, FaRedo, FaUndo } from 'react-icons/fa'
 
 interface RobotViewerProps {
   modelUrl?: string
@@ -14,19 +14,24 @@ interface RobotViewerProps {
 export default function RobotViewer({
   modelUrl = '/models/vortex-crawler.glb',
   autoRotateSpeed = 1.2,
-  height = '420px'
+  height = '440px'
 }: RobotViewerProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [loading, setLoading] = useState(true)
   const [modelType, setModelType] = useState<'glb' | 'procedural-cad'>('procedural-cad')
   const [isRotating, setIsRotating] = useState(true)
+  const [rotX, setRotX] = useState<number>(-Math.PI / 2) // Default -90 deg to lay flat horizontally
+  const [rotY, setRotY] = useState<number>(0)
+  const [rotZ, setRotZ] = useState<number>(0)
+
+  const loadedModelRef = useRef<THREE.Group | null>(null)
 
   useEffect(() => {
     const container = containerRef.current
     if (!container) return
 
-    const width = container.clientWidth || 500
-    const heightPx = container.clientHeight || 420
+    const width = container.clientWidth || 520
+    const heightPx = container.clientHeight || 440
 
     // Scene
     const scene = new THREE.Scene()
@@ -34,7 +39,7 @@ export default function RobotViewer({
 
     // Camera
     const camera = new THREE.PerspectiveCamera(45, width / heightPx, 0.1, 100)
-    camera.position.set(3.2, 2.4, 3.8)
+    camera.position.set(3.4, 2.5, 3.6)
 
     // Renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
@@ -51,28 +56,28 @@ export default function RobotViewer({
     controls.autoRotate = isRotating
     controls.autoRotateSpeed = autoRotateSpeed
     controls.maxPolarAngle = Math.PI / 2 + 0.1
-    controls.minDistance = 1.2
+    controls.minDistance = 1.0
     controls.maxDistance = 12
 
     // Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.0)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2)
     scene.add(ambientLight)
 
-    const mainLight = new THREE.DirectionalLight(0x00f0ff, 2.5)
+    const mainLight = new THREE.DirectionalLight(0x00f0ff, 2.8)
     mainLight.position.set(5, 8, 5)
     mainLight.castShadow = true
     scene.add(mainLight)
 
-    const rimLight = new THREE.DirectionalLight(0xff007f, 2.0)
-    rimLight.position.set(-5, 4, -4)
+    const rimLight = new THREE.DirectionalLight(0xff007f, 2.2)
+    rimLight.position.set(-5, 5, -4)
     scene.add(rimLight)
 
-    const fillLight = new THREE.DirectionalLight(0xffffff, 1.2)
-    fillLight.position.set(0, -4, 4)
+    const fillLight = new THREE.DirectionalLight(0xffffff, 1.4)
+    fillLight.position.set(0, -3, 4)
     scene.add(fillLight)
 
-    const pointLight = new THREE.PointLight(0x00ff9d, 1.5, 6)
-    pointLight.position.set(0, 1.5, 0)
+    const pointLight = new THREE.PointLight(0x00ff9d, 1.8, 8)
+    pointLight.position.set(0, 2, 0)
     scene.add(pointLight)
 
     // Ground Grid
@@ -168,28 +173,38 @@ export default function RobotViewer({
       robotGroup.add(led)
     }
 
-    // Try loading GLTF model or fallback to procedural CAD
+    // Load Autodesk Fusion GLB model with Horizontal Placement
     const loader = new GLTFLoader()
     loader.load(
       modelUrl,
       (gltf) => {
         const loadedScene = gltf.scene
-        
-        // Auto-calculate bounding box and normalize scale & position
-        const box = new THREE.Box3().setFromObject(loadedScene)
-        const center = box.getCenter(new THREE.Vector3())
-        const size = box.getSize(new THREE.Vector3())
-        
+        loadedModelRef.current = loadedScene
+
+        // 1. Apply Horizontal Orientation (Convert Fusion 360 Z-Up to Three.js Y-Up)
+        loadedScene.rotation.set(rotX, rotY, rotZ)
+        loadedScene.updateMatrixWorld(true)
+
+        // 2. Normalize and Center Bounding Box
+        const initialBox = new THREE.Box3().setFromObject(loadedScene)
+        const size = initialBox.getSize(new THREE.Vector3())
         const maxAxis = Math.max(size.x, size.y, size.z)
+
         if (maxAxis > 0) {
-          const scaleFactor = 2.4 / maxAxis
-          loadedScene.scale.setScalar(scaleFactor)
-          loadedScene.position.sub(center.clone().multiplyScalar(scaleFactor))
-          
+          const targetScale = 2.6 / maxAxis
+          loadedScene.scale.setScalar(targetScale)
+          loadedScene.updateMatrixWorld(true)
+
           const scaledBox = new THREE.Box3().setFromObject(loadedScene)
+          const scaledCenter = scaledBox.getCenter(new THREE.Vector3())
+
+          // Center horizontally on X-Z plane and sit cleanly on Y=0
+          loadedScene.position.x -= scaledCenter.x
+          loadedScene.position.z -= scaledCenter.z
           loadedScene.position.y -= scaledBox.min.y
         }
 
+        // 3. Enable shadows & specular highlights
         loadedScene.traverse((child) => {
           if ((child as THREE.Mesh).isMesh) {
             const mesh = child as THREE.Mesh
@@ -227,8 +242,8 @@ export default function RobotViewer({
     // Resize Handler
     const handleResize = () => {
       if (!container) return
-      const w = container.clientWidth || 500
-      const h = container.clientHeight || 420
+      const w = container.clientWidth || 520
+      const h = container.clientHeight || 440
       camera.aspect = w / h
       camera.updateProjectionMatrix()
       renderer.setSize(w, h)
@@ -243,7 +258,26 @@ export default function RobotViewer({
       }
       renderer.dispose()
     }
-  }, [modelUrl, autoRotateSpeed, isRotating])
+  }, [modelUrl, autoRotateSpeed, isRotating, rotX, rotY, rotZ])
+
+  // Quick Orientation Toggles
+  const setHorizontalFlat = () => {
+    setRotX(-Math.PI / 2)
+    setRotY(0)
+    setRotZ(0)
+  }
+
+  const rotate90X = () => {
+    setRotX((prev) => (prev + Math.PI / 2) % (Math.PI * 2))
+  }
+
+  const rotate90Y = () => {
+    setRotY((prev) => (prev + Math.PI / 2) % (Math.PI * 2))
+  }
+
+  const rotate90Z = () => {
+    setRotZ((prev) => (prev + Math.PI / 2) % (Math.PI * 2))
+  }
 
   return (
     <div className="w-full flex flex-col gap-3 font-space">
@@ -256,14 +290,38 @@ export default function RobotViewer({
         {/* Top-Left Telemetry Badge */}
         <div className="absolute top-3 left-3 z-10 flex items-center gap-2 bg-slate-900/90 border border-slate-700 dark:border-cyan-500/40 px-3 py-1.5 rounded-lg text-xs font-mono text-cyan-300 backdrop-blur-md">
           <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="font-bold text-white font-orbitron">3D ROBOT VIEWPORT:</span>
+          <span className="font-bold text-white font-orbitron">3D DIGITAL TWIN:</span>
           <span className="text-cyan-300">
-            {modelType === 'glb' ? 'AUTODESK FUSION GLB (15.9 MB)' : 'PROCEDURAL FUSION MODEL'}
+            {modelType === 'glb' ? 'HORIZONTAL CAD ALIGNED' : 'PROCEDURAL FUSION MODEL'}
           </span>
         </div>
 
         {/* Top-Right Controls */}
-        <div className="absolute top-3 right-3 z-10 flex items-center gap-2">
+        <div className="absolute top-3 right-3 z-10 flex items-center gap-1.5 flex-wrap">
+          <button
+            onClick={setHorizontalFlat}
+            className="px-2.5 py-1.5 rounded-lg border bg-slate-900/90 border-slate-700 text-xs font-orbitron font-bold text-cyan-300 hover:border-cyan-400 hover:bg-cyan-950/50 transition-all flex items-center gap-1"
+            title="Reset to Horizontal Belly Placement"
+          >
+            <span>FLAT (HORIZONTAL)</span>
+          </button>
+
+          <button
+            onClick={rotate90X}
+            className="p-1.5 px-2 rounded-lg border bg-slate-900/90 border-slate-700 text-xs font-orbitron font-bold text-slate-300 hover:border-cyan-400 hover:text-white transition-all"
+            title="Rotate +90° Pitch (X)"
+          >
+            PITCH 90°
+          </button>
+
+          <button
+            onClick={rotate90Y}
+            className="p-1.5 px-2 rounded-lg border bg-slate-900/90 border-slate-700 text-xs font-orbitron font-bold text-slate-300 hover:border-cyan-400 hover:text-white transition-all"
+            title="Rotate +90° Yaw (Y)"
+          >
+            YAW 90°
+          </button>
+
           <button
             onClick={() => setIsRotating((prev) => !prev)}
             className={`p-2 rounded-lg border text-xs font-orbitron font-bold transition-all ${
@@ -281,7 +339,7 @@ export default function RobotViewer({
         {loading && (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/80 text-cyan-400 font-orbitron text-xs gap-3">
             <FaCube className="text-3xl animate-bounce text-cyan-400" />
-            <span>INITIALIZING 3D WEBGL VIEWPORT & GLTF MESH...</span>
+            <span>ALIGNING HORIZONTAL CAD MESH...</span>
           </div>
         )}
 

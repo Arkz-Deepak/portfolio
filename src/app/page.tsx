@@ -130,7 +130,11 @@ export default function Home() {
               alt={profileData.name} 
               onError={(e) => {
                 const target = e.target as HTMLImageElement
-                target.src = '/profile.jpg'
+                if (!target.src.includes('googleusercontent')) {
+                  target.src = profileData.driveAvatarUrl
+                } else {
+                  target.src = '/profile.jpg'
+                }
               }}
               className="w-full h-full object-cover transition-all duration-500 hover:scale-105" 
             />

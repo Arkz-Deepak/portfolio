@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
 import { 
   PythonLogo, 
   CppLogo, 
@@ -8,15 +9,11 @@ import {
   PyTorchLogo 
 } from '@/components/TechLogos'
 import { profileData } from '@/data/profile'
-import { skillsData } from '@/data/skills'
 import SkillsSection from '@/components/SkillsSection'
 
-export const metadata = {
-  title: 'About System Identity | Deepak R.',
-  description: 'Biography, Academic background, and Tech Stack of Deepak R. (B.E. Robotics & Automation, Anna University).',
-}
-
 export default function AboutPage() {
+  const [imgSrc, setImgSrc] = useState(profileData.avatarUrl || '/deepak.png')
+
   const techStack = [
     { name: 'Python', category: 'Core Language & AI Engine', logo: <PythonLogo className="w-9 h-9" /> },
     { name: 'C++', category: 'Real-Time Control & Embedded', logo: <CppLogo className="w-9 h-9" /> },
@@ -25,6 +22,14 @@ export default function AboutPage() {
     { name: 'OpenCV', category: 'Computer Vision Pipeline', logo: <OpenCVLogo className="w-9 h-9" /> },
     { name: 'PyTorch / TF', category: 'Edge AI & Deep Learning', logo: <PyTorchLogo className="w-9 h-9" /> },
   ]
+
+  const handleImageError = () => {
+    if (imgSrc === profileData.avatarUrl || imgSrc === '/deepak.png') {
+      setImgSrc(profileData.driveAvatarUrl)
+    } else if (imgSrc === profileData.driveAvatarUrl) {
+      setImgSrc('/profile.jpg')
+    }
+  }
 
   return (
     <main className="min-h-[100dvh] w-full max-w-[100vw] overflow-x-hidden pt-28 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col justify-center transition-colors duration-300 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-cyan-400">
@@ -48,9 +53,10 @@ export default function AboutPage() {
             <div className="flex items-center gap-4 mb-6">
               <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-2 flex-shrink-0 border-blue-700 shadow-md dark:border-cyan-400 dark:shadow-[0_0_15px_#00f0ff]">
                 <img 
-                  src={profileData.avatarUrl} 
+                  src={imgSrc} 
                   alt={profileData.name} 
                   className="w-full h-full object-cover" 
+                  onError={handleImageError}
                 />
               </div>
               <div className="flex flex-col">
