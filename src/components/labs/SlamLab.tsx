@@ -1,5 +1,6 @@
 "use client"
 import { useEffect, useRef, useState, useCallback } from 'react'
+import { FaSyncAlt, FaLayerGroup, FaWaveSquare, FaShieldAlt } from 'react-icons/fa'
 
 interface Obstacle {
   id: number
@@ -14,39 +15,55 @@ interface Point {
   y: number
 }
 
+interface PoseGraphNode {
+  id: number
+  x: number
+  y: number
+  odomX: number
+  odomY: number
+  angle: number
+}
+
 export default function SlamLab() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   // User Interactive Settings
   const [speed, setSpeed] = useState(3.0)
   const [showRays, setShowRays] = useState(true)
-  const [showMap, setShowMap] = useState(true)
-  const [showPathRibbon, setShowPathRibbon] = useState(true)
+  const [showCostmap, setShowCostmap] = useState(true)
+  const [showPoseGraph, setShowPoseGraph] = useState(true)
+  const [simulateDrift, setSimulateDrift] = useState(true)
   const [addObstacleMode, setAddObstacleMode] = useState(false)
   const [statusText, setStatusText] = useState('NAVIGATING')
+  const [loopClosureAlert, setLoopClosureAlert] = useState(false)
   const [mapPointCount, setMapPointCount] = useState(0)
   const [telemetry, setTelemetry] = useState({
     x: 80,
     y: 80,
+    odomX: 80,
+    odomY: 80,
     angle: 0,
     v: 0,
-    w: 0,
-    distToGoal: 0,
+    driftErr: 0,
+    loopClosures: 0,
     waypointsLeft: 0
   })
 
-  // Persistent Refs
+  // Persistent Refs for Animation Loop
   const speedRef = useRef(speed)
   speedRef.current = speed
 
   const showRaysRef = useRef(showRays)
   showRaysRef.current = showRays
 
-  const showMapRef = useRef(showMap)
-  showMapRef.current = showMap
+  const showCostmapRef = useRef(showCostmap)
+  showCostmapRef.current = showCostmap
 
-  const showPathRibbonRef = useRef(showPathRibbon)
-  showPathRibbonRef.current = showPathRibbon
+  const showPoseGraphRef = useRef(showPoseGraph)
+  showPoseGraphRef.current = showPoseGraph
+
+  const simulateDriftRef = useRef(simulateDrift)
+  simulateDriftRef.current = simulateDrift
 
   const addObstacleModeRef = useRef(addObstacleMode)
   addObstacleModeRef.current = addObstacleMode
@@ -58,14 +75,23 @@ export default function SlamLab() {
     vx: 0,
     vy: 0,
     omega: 0,
-    radius: 14
+    radius: 14,
+    odomX: 70,
+    odomY: 70,
+    odomAngle: 0.5,
+    driftX: 0,
+    driftY: 0,
+    loopClosuresCount: 0
   })
 
-  const goalPosRef = useRef<Point>({ x: 380, y: 220 })
+  const goalPosRef = useRef<Point>({ x: 390, y: 220 })
   const plannedPathRef = useRef<Point[]>([])
   const pathHistoryRef = useRef<Point[]>([])
+  const odomHistoryRef = useRef<Point[]>([])
+  const poseGraphRef = useRef<PoseGraphNode[]>([])
   const slamMapRef = useRef<Point[]>([])
   const lidarSweepAngleRef = useRef(0)
+  const activeLoopConstraintRef = useRef<{ from: Point; to: Point; alpha: number } | null>(null)
 
   const obstaclesRef = useRef<Obstacle[]>([
     { id: 1, x: 160, y: 40, w: 55, h: 130 },
@@ -73,13 +99,13 @@ export default function SlamLab() {
     { id: 3, x: 80, y: 190, w: 65, h: 60 }
   ])
 
-  // A* Pathfinding on 2D Grid with Obstacle Clearance Inflation
+  // A* Pathfinding with Costmap Inflation Layer & Strict Diagonal Clearance
   const planAStarPath = useCallback((startX: number, startY: number, targetX: number, targetY: number) => {
     const canvas = canvasRef.current
-    const cw = canvas?.width || 500
-    const ch = canvas?.height || 320
+    const cw = canvas?.width || 520
+    const ch = canvas?.height || 330
 
-    const CELL_SIZE = 16
+    const CELL_SIZE = 14
     const cols = Math.floor(cw / CELL_SIZE)
     const rows = Math.floor(ch / CELL_SIZE)
 
@@ -88,29 +114,45 @@ export default function SlamLab() {
     const targetCol = Math.max(0, Math.min(cols - 1, Math.floor(targetX / CELL_SIZE)))
     const targetRow = Math.max(0, Math.min(rows - 1, Math.floor(targetY / CELL_SIZE)))
 
-    // Build clearance grid (with robot radius inflation: 18px)
-    const ROBOT_CLEARANCE = 20
-    const isBlocked = (c: number, r: number): boolean => {
-      const cx = c * CELL_SIZE + CELL_SIZE / 2
-      const cy = r * CELL_SIZE + CELL_SIZE / 2
+    // 1. Build Nav2 Inflation Costmap Grid
+    // Inscribed lethal radius: 18px (~1.3 cells)
+    // Inflation decay radius: 36px (~2.6 cells)
+    const INSCRIBED_RADIUS = 18
+    const INFLATION_RADIUS = 36
 
-      // Bounds
-      if (cx < ROBOT_CLEARANCE || cx > cw - ROBOT_CLEARANCE || cy < ROBOT_CLEARANCE || cy > ch - ROBOT_CLEARANCE) {
-        return true
-      }
+    const costGrid: number[][] = Array.from({ length: rows }, () => Array(cols).fill(0))
 
-      // Check obstacles
-      for (const obs of obstaclesRef.current) {
-        if (
-          cx >= obs.x - ROBOT_CLEARANCE &&
-          cx <= obs.x + obs.w + ROBOT_CLEARANCE &&
-          cy >= obs.y - ROBOT_CLEARANCE &&
-          cy <= obs.y + obs.h + ROBOT_CLEARANCE
-        ) {
-          return true
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const cx = c * CELL_SIZE + CELL_SIZE / 2
+        const cy = r * CELL_SIZE + CELL_SIZE / 2
+
+        // Check arena boundary distance
+        const boundDist = Math.min(cx, cw - cx, cy, ch - cy)
+        if (boundDist < INSCRIBED_RADIUS) {
+          costGrid[r][c] = 254 // Lethal boundary
+          continue
+        } else if (boundDist < INFLATION_RADIUS) {
+          const decay = Math.exp(-0.15 * (boundDist - INSCRIBED_RADIUS))
+          costGrid[r][c] = Math.max(costGrid[r][c], Math.floor(253 * decay))
+        }
+
+        // Check obstacles
+        for (const obs of obstaclesRef.current) {
+          const closestX = Math.max(obs.x, Math.min(cx, obs.x + obs.w))
+          const closestY = Math.max(obs.y, Math.min(cy, obs.y + obs.h))
+          const dist = Math.hypot(cx - closestX, cy - closestY)
+
+          if (dist <= INSCRIBED_RADIUS) {
+            costGrid[r][c] = 254 // Lethal obstacle
+            break
+          } else if (dist <= INFLATION_RADIUS) {
+            const decay = Math.exp(-0.16 * (dist - INSCRIBED_RADIUS))
+            const inflationCost = Math.floor(253 * decay)
+            costGrid[r][c] = Math.max(costGrid[r][c], inflationCost)
+          }
         }
       }
-      return false
     }
 
     interface Node {
@@ -126,7 +168,12 @@ export default function SlamLab() {
     const closedSet = new Set<string>()
 
     const key = (c: number, r: number) => `${c},${r}`
-    const heuristic = (c1: number, r1: number, c2: number, r2: number) => Math.hypot(c1 - c2, r1 - r2)
+    const heuristic = (c1: number, r1: number, c2: number, r2: number) => {
+      // Octile distance heuristic
+      const dx = Math.abs(c1 - c2)
+      const dy = Math.abs(r1 - r2)
+      return (dx + dy) + (1.414 - 2) * Math.min(dx, dy)
+    }
 
     openList.push({
       c: startCol,
@@ -138,19 +185,19 @@ export default function SlamLab() {
     })
 
     const neighbors = [
-      { dc: 1, dr: 0, cost: 1 },
-      { dc: -1, dr: 0, cost: 1 },
-      { dc: 0, dr: 1, cost: 1 },
-      { dc: 0, dr: -1, cost: 1 },
-      { dc: 1, dr: 1, cost: 1.414 },
-      { dc: -1, dr: 1, cost: 1.414 },
-      { dc: 1, dr: -1, cost: 1.414 },
-      { dc: -1, dr: -1, cost: 1.414 }
+      { dc: 1, dr: 0, cost: 1.0, isDiag: false },
+      { dc: -1, dr: 0, cost: 1.0, isDiag: false },
+      { dc: 0, dr: 1, cost: 1.0, isDiag: false },
+      { dc: 0, dr: -1, cost: 1.0, isDiag: false },
+      { dc: 1, dr: 1, cost: 1.414, isDiag: true },
+      { dc: -1, dr: 1, cost: 1.414, isDiag: true },
+      { dc: 1, dr: -1, cost: 1.414, isDiag: true },
+      { dc: -1, dr: -1, cost: 1.414, isDiag: true }
     ]
 
     let foundNode: Node | null = null
     let iterations = 0
-    const MAX_ITERATIONS = 1200
+    const MAX_ITERATIONS = 1500
 
     while (openList.length > 0 && iterations < MAX_ITERATIONS) {
       iterations++
@@ -170,9 +217,26 @@ export default function SlamLab() {
 
         if (nc < 0 || nc >= cols || nr < 0 || nr >= rows) continue
         if (closedSet.has(key(nc, nr))) continue
-        if (isBlocked(nc, nr) && !(nc === targetCol && nr === targetRow)) continue
 
-        const gScore = current.g + n.cost
+        // Check lethal cost
+        const cellCost = costGrid[nr][nc]
+        if (cellCost >= 254 && !(nc === targetCol && nr === targetRow)) continue
+
+        // B. PREVENT DIAGONAL CORNER-CLIPPING (Wall Squeeze Bug)
+        // For diagonal movement, both orthogonal neighbors MUST be free of lethal obstacles
+        if (n.isDiag) {
+          const ortho1Cost = costGrid[current.r][current.c + n.dc] ?? 254
+          const ortho2Cost = costGrid[current.r + n.dr][current.c] ?? 254
+          if (ortho1Cost >= 254 || ortho2Cost >= 254) {
+            continue // Block cutting through corner vertices
+          }
+        }
+
+        // Inflation layer cost penalty
+        const inflationPenalty = (cellCost / 28) ** 1.8
+        const stepCost = n.cost + inflationPenalty
+        const gScore = current.g + stepCost
+
         let neighborNode = openList.find((node) => node.c === nc && node.r === nr)
 
         if (!neighborNode) {
@@ -205,7 +269,7 @@ export default function SlamLab() {
         curr = curr.parent
       }
 
-      // Smooth path by reducing collinear points
+      // Smooth path for realistic Pure Pursuit tracking
       if (rawPath.length > 2) {
         const smoothed: Point[] = [rawPath[0]]
         for (let i = 1; i < rawPath.length - 1; i += 2) {
@@ -217,23 +281,22 @@ export default function SlamLab() {
         plannedPathRef.current = [{ x: targetX, y: targetY }]
       }
     } else {
-      // Fallback direct target
       plannedPathRef.current = [{ x: targetX, y: targetY }]
     }
   }, [])
 
-  // Regenerate obstacles
+  // Generate randomized obstacles
   const generateObstacles = useCallback(() => {
     const canvas = canvasRef.current
-    const cw = canvas?.width || 500
-    const ch = canvas?.height || 320
+    const cw = canvas?.width || 520
+    const ch = canvas?.height || 330
 
     const newObs: Obstacle[] = []
     const count = 4
 
     for (let i = 0; i < count; i++) {
-      const w = Math.floor(Math.random() * 50) + 45
-      const h = Math.floor(Math.random() * 50) + 45
+      const w = Math.floor(Math.random() * 45) + 45
+      const h = Math.floor(Math.random() * 45) + 45
       const x = Math.floor(Math.random() * (cw - w - 80)) + 40
       const y = Math.floor(Math.random() * (ch - h - 80)) + 40
 
@@ -258,6 +321,8 @@ export default function SlamLab() {
   const clearSlamMap = useCallback(() => {
     slamMapRef.current = []
     pathHistoryRef.current = []
+    odomHistoryRef.current = []
+    poseGraphRef.current = []
     setMapPointCount(0)
   }, [])
 
@@ -268,7 +333,13 @@ export default function SlamLab() {
     robotRef.current.vx = 0
     robotRef.current.vy = 0
     robotRef.current.omega = 0
+    robotRef.current.odomX = 70
+    robotRef.current.odomY = 70
+    robotRef.current.driftX = 0
+    robotRef.current.driftY = 0
     pathHistoryRef.current = []
+    odomHistoryRef.current = []
+    poseGraphRef.current = []
     planAStarPath(70, 70, goalPosRef.current.x, goalPosRef.current.y)
   }, [planAStarPath])
 
@@ -282,8 +353,8 @@ export default function SlamLab() {
       const parent = canvas.parentElement
       if (!parent) return
       const rect = parent.getBoundingClientRect()
-      const w = Math.floor(rect.width > 0 ? rect.width : (parent.clientWidth || 500))
-      const h = Math.floor(rect.height > 0 ? rect.height : (parent.clientHeight || 320))
+      const w = Math.floor(rect.width > 0 ? rect.width : (parent.clientWidth || 520))
+      const h = Math.floor(rect.height > 0 ? rect.height : (parent.clientHeight || 330))
       if (canvas.width !== w || canvas.height !== h) {
         canvas.width = w
         canvas.height = h
@@ -299,7 +370,7 @@ export default function SlamLab() {
     }
     window.addEventListener('resize', fitCanvas)
 
-    // Raycast Line Segment Intersection
+    // Continuous DDA / Ray-Box AABB Intersection for 2D LiDAR (C. Fault Fix)
     const rayAABBIntersection = (
       roX: number,
       roY: number,
@@ -368,24 +439,24 @@ export default function SlamLab() {
     canvas.addEventListener('click', handlePointerAction)
     canvas.addEventListener('touchstart', handlePointerAction, { passive: false })
 
-    // Initial Path Calculation
     planAStarPath(robotRef.current.x, robotRef.current.y, goalPosRef.current.x, goalPosRef.current.y)
 
     let animationFrameId: number
     let lastUiUpdateTime = 0
+    let lastKeyframeDistance = 0
 
     const render = (timestamp: number) => {
       if (!ctx) return
-      const cw = canvas.width || 500
-      const ch = canvas.height || 320
+      const cw = canvas.width || 520
+      const ch = canvas.height || 330
       const robot = robotRef.current
       const goal = goalPosRef.current
       const currentSpeed = speedRef.current
 
       ctx.clearRect(0, 0, cw, ch)
 
-      // 1. Radar Grid & Coordinates
-      ctx.fillStyle = '#060d1f'
+      // 1. Radar Background Grid
+      ctx.fillStyle = '#050b18'
       ctx.fillRect(0, 0, cw, ch)
 
       ctx.strokeStyle = 'rgba(0, 240, 255, 0.08)'
@@ -404,14 +475,38 @@ export default function SlamLab() {
         ctx.stroke()
       }
 
+      // 2. Costmap Inflation Layer Rendering (Visual Feedback for Nav2 Footprint Clearance)
+      if (showCostmapRef.current) {
+        obstaclesRef.current.forEach((obs) => {
+          // Inflation Halo
+          const grad = ctx.createRadialGradient(
+            obs.x + obs.w / 2, obs.y + obs.h / 2, Math.max(obs.w, obs.h) / 2,
+            obs.x + obs.w / 2, obs.y + obs.h / 2, Math.max(obs.w, obs.h) / 2 + 36
+          )
+          grad.addColorStop(0, 'rgba(0, 240, 255, 0.15)')
+          grad.addColorStop(0.5, 'rgba(255, 0, 127, 0.08)')
+          grad.addColorStop(1, 'rgba(0, 240, 255, 0)')
+
+          ctx.fillStyle = grad
+          ctx.fillRect(obs.x - 36, obs.y - 36, obs.w + 72, obs.h + 72)
+
+          // Inscribed Footprint Buffer Border (18px)
+          ctx.strokeStyle = 'rgba(255, 0, 127, 0.35)'
+          ctx.lineWidth = 1
+          ctx.setLineDash([3, 3])
+          ctx.strokeRect(obs.x - 18, obs.y - 18, obs.w + 36, obs.h + 36)
+          ctx.setLineDash([])
+        })
+      }
+
       // Outer Arena Border
-      ctx.strokeStyle = 'rgba(0, 240, 255, 0.35)'
+      ctx.strokeStyle = 'rgba(0, 240, 255, 0.4)'
       ctx.lineWidth = 2
       ctx.strokeRect(1, 1, cw - 2, ch - 2)
 
-      // 2. 360° LiDAR Scan Raycasting
-      const NUM_RAYS = 72
-      const MAX_LIDAR_RANGE = 180
+      // 3. Continuous DDA / Raycasting 2D LiDAR Scan (C. Fault Fix)
+      const NUM_RAYS = 84
+      const MAX_LIDAR_RANGE = 190
       const lidarHits: { x: number; y: number; dist: number; angle: number }[] = []
       lidarSweepAngleRef.current = (lidarSweepAngleRef.current + 0.08) % (Math.PI * 2)
 
@@ -422,14 +517,14 @@ export default function SlamLab() {
 
         let minT = MAX_LIDAR_RANGE
 
-        // Bounds intersection
+        // Canvas boundaries intersection
         if (cos > 0) minT = Math.min(minT, (cw - robot.x) / cos)
         else if (cos < 0) minT = Math.min(minT, (0 - robot.x) / cos)
 
         if (sin > 0) minT = Math.min(minT, (ch - robot.y) / sin)
         else if (sin < 0) minT = Math.min(minT, (0 - robot.y) / sin)
 
-        // Obstacles intersection
+        // Obstacles intersection with strict edge termination
         obstaclesRef.current.forEach((obs) => {
           const t = rayAABBIntersection(robot.x, robot.y, cos, sin, obs.x, obs.y, obs.w, obs.h)
           if (t !== null && t < minT) {
@@ -441,27 +536,25 @@ export default function SlamLab() {
         const hitY = robot.y + sin * minT
         lidarHits.push({ x: hitX, y: hitY, dist: minT, angle: rayAngle })
 
-        // Add to SLAM map if hitting an obstacle within range
-        if (minT < MAX_LIDAR_RANGE - 2 && showMapRef.current) {
-          const isUnique = !slamMapRef.current.some((p) => Math.hypot(p.x - hitX, p.y - hitY) < 6)
+        // SLAM Occupancy Mapping: Record point cloud
+        if (minT < MAX_LIDAR_RANGE - 2) {
+          const isUnique = !slamMapRef.current.some((p) => Math.hypot(p.x - hitX, p.y - hitY) < 5)
           if (isUnique) {
             slamMapRef.current.push({ x: hitX, y: hitY })
-            if (slamMapRef.current.length > 600) slamMapRef.current.shift()
+            if (slamMapRef.current.length > 700) slamMapRef.current.shift()
           }
         }
       }
 
-      // 3. Render SLAM Point Cloud Map
-      if (showMapRef.current) {
-        ctx.fillStyle = '#00f0ff'
-        slamMapRef.current.forEach((p) => {
-          ctx.beginPath()
-          ctx.arc(p.x, p.y, 1.8, 0, Math.PI * 2)
-          ctx.fill()
-        })
-      }
+      // 4. Render SLAM Point Cloud Map
+      ctx.fillStyle = '#00f0ff'
+      slamMapRef.current.forEach((p) => {
+        ctx.beginPath()
+        ctx.arc(p.x, p.y, 1.8, 0, Math.PI * 2)
+        ctx.fill()
+      })
 
-      // 4. Render LiDAR Laser Scan Rays
+      // 5. Render LiDAR Rays
       if (showRaysRef.current) {
         lidarHits.forEach((hit) => {
           const isNear = hit.dist < 50
@@ -480,23 +573,23 @@ export default function SlamLab() {
           }
         })
 
-        // LiDAR Sweep Beam
+        // LiDAR Sweep Cone
         ctx.save()
         ctx.translate(robot.x, robot.y)
         ctx.rotate(lidarSweepAngleRef.current)
-        const sweep = ctx.createRadialGradient(0, 0, 0, 0, 0, 100)
+        const sweep = ctx.createRadialGradient(0, 0, 0, 0, 0, 110)
         sweep.addColorStop(0, 'rgba(0, 240, 255, 0.25)')
         sweep.addColorStop(1, 'rgba(0, 240, 255, 0)')
         ctx.fillStyle = sweep
         ctx.beginPath()
         ctx.moveTo(0, 0)
-        ctx.arc(0, 0, 100, -0.3, 0.3)
+        ctx.arc(0, 0, 110, -0.35, 0.35)
         ctx.closePath()
         ctx.fill()
         ctx.restore()
       }
 
-      // 5. Render Obstacles
+      // 6. Render Obstacles
       obstaclesRef.current.forEach((obs) => {
         ctx.fillStyle = 'rgba(15, 23, 42, 0.95)'
         ctx.strokeStyle = '#00f0ff'
@@ -520,15 +613,14 @@ export default function SlamLab() {
         ctx.restore()
       })
 
-      // 6. Autonomous Navigation (A* Waypoint Tracking + Pure Pursuit)
+      // 7. Navigation & Pure Pursuit Trajectory Tracking
       const path = plannedPathRef.current
       let targetWaypoint: Point | null = null
 
       if (path.length > 0) {
-        // Advance waypoint if close
         const nextWp = path[0]
         const distToWp = Math.hypot(nextWp.x - robot.x, nextWp.y - robot.y)
-        if (distToWp < 18) {
+        if (distToWp < 20) {
           path.shift()
         }
         targetWaypoint = path.length > 0 ? path[0] : goal
@@ -546,7 +638,7 @@ export default function SlamLab() {
         const angleDiff = Math.atan2(Math.sin(targetAngle - robot.angle), Math.cos(targetAngle - robot.angle))
 
         // Smooth steering PID
-        robot.omega = angleDiff * 0.18
+        robot.omega = angleDiff * 0.2
         robot.angle += robot.omega
         robot.angle = Math.atan2(Math.sin(robot.angle), Math.cos(robot.angle))
 
@@ -559,25 +651,79 @@ export default function SlamLab() {
 
         currentNavStatus = path.length > 1 ? 'PATH TRACKING' : 'APPROACHING GOAL'
       } else {
-        // At Goal
         robot.vx *= 0.5
         robot.vy *= 0.5
         robot.omega *= 0.5
         currentNavStatus = 'WAYPOINT REACHED'
       }
 
-      // Step Physics & Safe Push-Back
+      // Physics step
       robot.x += robot.vx
       robot.y += robot.vy
 
-      // Arena boundary collision
+      // D. Odometry Drift Simulation & Pose Graph Accumulation
+      if (simulateDriftRef.current && Math.hypot(robot.vx, robot.vy) > 0.1) {
+        // Accumulate slight rotational and translation odometry drift
+        robot.driftX += (Math.random() - 0.48) * 0.04
+        robot.driftY += (Math.random() - 0.48) * 0.04
+        robot.odomX = robot.x + robot.driftX
+        robot.odomY = robot.y + robot.driftY
+        robot.odomAngle = robot.angle + (Math.random() - 0.5) * 0.01
+
+        odomHistoryRef.current.push({ x: robot.odomX, y: robot.odomY })
+        if (odomHistoryRef.current.length > 200) odomHistoryRef.current.shift()
+      } else {
+        robot.odomX = robot.x + robot.driftX
+        robot.odomY = robot.y + robot.driftY
+      }
+
+      // Pose Graph Keyframe Node Placement (every ~35px)
+      lastKeyframeDistance += Math.hypot(robot.vx, robot.vy)
+      if (lastKeyframeDistance > 35) {
+        lastKeyframeDistance = 0
+        const newNode: PoseGraphNode = {
+          id: poseGraphRef.current.length + 1,
+          x: robot.x,
+          y: robot.y,
+          odomX: robot.odomX,
+          odomY: robot.odomY,
+          angle: robot.angle
+        }
+
+        // Loop Closure Detection (D. Fault Fix)
+        // Check if robot returned to proximity of a historical keyframe
+        if (poseGraphRef.current.length > 6) {
+          const historicalMatch = poseGraphRef.current.slice(0, -5).find((node) => {
+            return Math.hypot(node.x - robot.x, node.y - robot.y) < 36
+          })
+
+          if (historicalMatch) {
+            // Trigger Loop Closure Optimization!
+            robot.driftX *= 0.15
+            robot.driftY *= 0.15
+            robot.loopClosuresCount += 1
+            activeLoopConstraintRef.current = {
+              from: { x: robot.x, y: robot.y },
+              to: { x: historicalMatch.x, y: historicalMatch.y },
+              alpha: 1.0
+            }
+            setLoopClosureAlert(true)
+            setTimeout(() => setLoopClosureAlert(false), 2400)
+          }
+        }
+
+        poseGraphRef.current.push(newNode)
+        if (poseGraphRef.current.length > 40) poseGraphRef.current.shift()
+      }
+
+      // Boundary safety
       const r = robot.radius
       if (robot.x - r < 4) { robot.x = 4 + r; robot.vx = 0 }
       if (robot.x + r > cw - 4) { robot.x = cw - 4 - r; robot.vx = 0 }
       if (robot.y - r < 4) { robot.y = 4 + r; robot.vy = 0 }
       if (robot.y + r > ch - 4) { robot.y = ch - 4 - r; robot.vy = 0 }
 
-      // Obstacle rigid body collision resolution (Never penetrates)
+      // Obstacle rigid body collision resolution
       obstaclesRef.current.forEach((obs) => {
         const closestX = Math.max(obs.x, Math.min(robot.x, obs.x + obs.w))
         const closestY = Math.max(obs.y, Math.min(robot.y, obs.y + obs.h))
@@ -589,19 +735,80 @@ export default function SlamLab() {
           const overlap = r - cdist
           robot.x += (cdx / cdist) * overlap
           robot.y += (cdy / cdist) * overlap
-          // Re-plan around obstacle if bumped
           planAStarPath(robot.x, robot.y, goal.x, goal.y)
         }
       })
 
-      // Path history recording
+      // Ground truth path history
       if (Math.hypot(robot.vx, robot.vy) > 0.2) {
         pathHistoryRef.current.push({ x: robot.x, y: robot.y })
         if (pathHistoryRef.current.length > 250) pathHistoryRef.current.shift()
       }
 
-      // 7. Render Planned A* Path Ribbon
-      if (showPathRibbonRef.current && path.length > 0) {
+      // 8. Render Pose Graph Nodes & Odometry Drift Trajectory (D. Visualizer)
+      if (showPoseGraphRef.current) {
+        // Drifted Odometry trajectory (Red/Cyan dotted)
+        if (simulateDriftRef.current && odomHistoryRef.current.length > 1) {
+          ctx.strokeStyle = 'rgba(255, 0, 127, 0.45)'
+          ctx.lineWidth = 1.2
+          ctx.setLineDash([3, 3])
+          ctx.beginPath()
+          odomHistoryRef.current.forEach((pt, idx) => {
+            if (idx === 0) ctx.moveTo(pt.x, pt.y)
+            else ctx.lineTo(pt.x, pt.y)
+          })
+          ctx.stroke()
+          ctx.setLineDash([])
+        }
+
+        // Pose Graph Edges
+        ctx.strokeStyle = 'rgba(0, 255, 157, 0.4)'
+        ctx.lineWidth = 1.5
+        ctx.beginPath()
+        poseGraphRef.current.forEach((node, idx) => {
+          if (idx === 0) ctx.moveTo(node.x, node.y)
+          else ctx.lineTo(node.x, node.y)
+        })
+        ctx.stroke()
+
+        // Pose Graph Keyframe Nodes
+        poseGraphRef.current.forEach((node) => {
+          ctx.fillStyle = '#00ff9d'
+          ctx.beginPath()
+          ctx.arc(node.x, node.y, 3, 0, Math.PI * 2)
+          ctx.fill()
+
+          ctx.strokeStyle = 'rgba(0, 255, 157, 0.6)'
+          ctx.lineWidth = 1
+          ctx.beginPath()
+          ctx.arc(node.x, node.y, 6, 0, Math.PI * 2)
+          ctx.stroke()
+        })
+
+        // Active Loop Closure Constraint Pulse
+        if (activeLoopConstraintRef.current && activeLoopConstraintRef.current.alpha > 0.05) {
+          const lc = activeLoopConstraintRef.current
+          ctx.strokeStyle = `rgba(255, 230, 0, ${lc.alpha})`
+          ctx.lineWidth = 3
+          ctx.setLineDash([5, 5])
+          ctx.beginPath()
+          ctx.moveTo(lc.from.x, lc.from.y)
+          ctx.lineTo(lc.to.x, lc.to.y)
+          ctx.stroke()
+          ctx.setLineDash([])
+
+          // Flash target node
+          ctx.fillStyle = `rgba(255, 230, 0, ${lc.alpha})`
+          ctx.beginPath()
+          ctx.arc(lc.to.x, lc.to.y, 10, 0, Math.PI * 2)
+          ctx.fill()
+
+          lc.alpha -= 0.02
+        }
+      }
+
+      // 9. Render Planned A* Path Ribbon (Avoids Inscribed Obstacles)
+      if (path.length > 0) {
         ctx.strokeStyle = '#00ff9d'
         ctx.lineWidth = 2.5
         ctx.setLineDash([4, 4])
@@ -611,7 +818,6 @@ export default function SlamLab() {
         ctx.stroke()
         ctx.setLineDash([])
 
-        // Waypoint nodes
         path.forEach((pt, i) => {
           ctx.fillStyle = i === path.length - 1 ? '#00ff9d' : '#00f0ff'
           ctx.beginPath()
@@ -620,19 +826,7 @@ export default function SlamLab() {
         })
       }
 
-      // 8. Render History Trail
-      if (pathHistoryRef.current.length > 1) {
-        ctx.strokeStyle = 'rgba(0, 240, 255, 0.35)'
-        ctx.lineWidth = 1.5
-        ctx.beginPath()
-        pathHistoryRef.current.forEach((pt, i) => {
-          if (i === 0) ctx.moveTo(pt.x, pt.y)
-          else ctx.lineTo(pt.x, pt.y)
-        })
-        ctx.stroke()
-      }
-
-      // 9. Render Goal Waypoint
+      // 10. Render Goal Marker
       ctx.fillStyle = 'rgba(0, 255, 157, 0.15)'
       ctx.beginPath()
       ctx.arc(goal.x, goal.y, 22, 0, Math.PI * 2)
@@ -651,7 +845,7 @@ export default function SlamLab() {
       ctx.arc(goal.x, goal.y, 4.5, 0, Math.PI * 2)
       ctx.fill()
 
-      // 10. Render Robot Hull & Heading
+      // 11. Render Robot Hull & Steering Heading
       ctx.save()
       ctx.translate(robot.x, robot.y)
       ctx.rotate(robot.angle)
@@ -690,7 +884,7 @@ export default function SlamLab() {
 
       ctx.restore()
 
-      // 11. Throttle UI state updates (10Hz)
+      // 12. Throttle UI Telemetry Updates (10Hz)
       if (timestamp - lastUiUpdateTime > 100) {
         lastUiUpdateTime = timestamp
         setStatusText(currentNavStatus)
@@ -698,10 +892,12 @@ export default function SlamLab() {
         setTelemetry({
           x: Math.round(robot.x),
           y: Math.round(robot.y),
+          odomX: Math.round(robot.odomX),
+          odomY: Math.round(robot.odomY),
           angle: Math.round((robot.angle * 180) / Math.PI),
           v: Number((Math.hypot(robot.vx, robot.vy) * 0.8).toFixed(1)),
-          w: Number(robot.omega.toFixed(2)),
-          distToGoal: Number(totalDistToGoal.toFixed(1)),
+          driftErr: Number(Math.hypot(robot.driftX, robot.driftY).toFixed(1)),
+          loopClosures: robot.loopClosuresCount,
           waypointsLeft: path.length
         })
       }
@@ -723,50 +919,60 @@ export default function SlamLab() {
   return (
     <div className="w-full flex flex-col gap-4 font-space">
       {/* Simulation Canvas Container */}
-      <div className="relative w-full aspect-video border-2 border-slate-300 dark:border-cyan-500/40 rounded-xl overflow-hidden bg-slate-950 min-h-[260px] shadow-lg">
+      <div className="relative w-full aspect-video border-2 border-slate-300 dark:border-cyan-500/40 rounded-2xl overflow-hidden bg-slate-950 min-h-[280px] shadow-xl">
         <canvas ref={canvasRef} className="w-full h-full cursor-crosshair block" />
 
-        {/* Live HUD Overlay Badge */}
-        <div className="absolute top-3 left-3 bg-slate-900/90 border border-slate-700 dark:border-cyan-500/40 px-3 py-1 rounded-md text-xs font-mono text-cyan-300 flex items-center gap-2 backdrop-blur-md">
-          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-          <span className="font-bold text-white font-orbitron">NAV2 STACK:</span>
-          <span className={statusText === 'WAYPOINT REACHED' ? 'text-emerald-400 font-bold' : 'text-amber-400 font-bold'}>
-            {statusText}
-          </span>
+        {/* Live HUD Overlay Badges */}
+        <div className="absolute top-3 left-3 flex flex-wrap items-center gap-2 z-10">
+          <div className="bg-slate-900/90 border border-slate-700 dark:border-cyan-500/40 px-3 py-1 rounded-lg text-xs font-mono text-cyan-300 flex items-center gap-2 backdrop-blur-md">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+            <span className="font-bold text-white font-orbitron">NAV2 / SLAM:</span>
+            <span className={statusText === 'WAYPOINT REACHED' ? 'text-emerald-400 font-bold' : 'text-amber-400 font-bold'}>
+              {statusText}
+            </span>
+          </div>
+
+          {loopClosureAlert && (
+            <div className="bg-amber-500/20 border border-amber-400 text-amber-300 px-3 py-1 rounded-lg text-xs font-orbitron font-bold flex items-center gap-1.5 backdrop-blur-md animate-bounce">
+              <FaSyncAlt className="animate-spin text-xs" />
+              <span>LOOP CLOSURE DETECTED (POSE GRAPH OPTIMIZED)</span>
+            </div>
+          )}
         </div>
 
-        <div className="absolute top-3 right-3 bg-slate-900/90 border border-slate-700 dark:border-cyan-500/40 px-3 py-1 rounded-md text-xs font-mono text-white backdrop-blur-md hidden sm:block">
-          MAPPED PTS: <span className="text-emerald-400 font-bold">{mapPointCount}</span> | 72 RAYS
+        <div className="absolute top-3 right-3 bg-slate-900/90 border border-slate-700 dark:border-cyan-500/40 px-3 py-1 rounded-lg text-xs font-mono text-white backdrop-blur-md hidden sm:flex items-center gap-3">
+          <span>POINTS: <strong className="text-emerald-400">{mapPointCount}</strong></span>
+          <span>KEYFRAMES: <strong className="text-cyan-300">{poseGraphRef.current.length}</strong></span>
         </div>
 
         {/* Canvas Click Hint */}
-        <div className="absolute bottom-2 left-3 text-xs font-mono text-slate-300 bg-slate-900/80 px-2.5 py-1 rounded pointer-events-none border border-slate-700">
-          {addObstacleMode ? '📍 CLICK ANYWHERE TO PLACE AN OBSTACLE CRATE' : '🎯 CLICK ANYWHERE TO SET DESTINATION WAYPOINT'}
+        <div className="absolute bottom-2 left-3 text-xs font-mono text-slate-300 bg-slate-900/85 px-3 py-1 rounded-md pointer-events-none border border-slate-700">
+          {addObstacleMode ? '📍 CLICK ANYWHERE TO PLACE OBSTACLE CRATE' : '🎯 CLICK ANYWHERE TO SET DESTINATION WAYPOINT'}
         </div>
       </div>
 
-      {/* High-Contrast Telemetry Dashboard (Clear in Light & Dark Mode) */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-300 dark:border-cyan-500/30 shadow-sm text-xs font-mono">
-        <div className="flex flex-col bg-slate-50 dark:bg-black/50 p-2.5 rounded border border-slate-200 dark:border-cyan-900">
-          <span className="text-slate-600 dark:text-cyan-400 text-[11px] font-bold font-orbitron">ROBOT POSE (X, Y):</span>
-          <span className="text-slate-900 dark:text-white font-bold text-sm">[{telemetry.x}, {telemetry.y}]</span>
+      {/* High-Contrast Telemetry Dashboard */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-300 dark:border-cyan-500/30 shadow-sm text-xs font-mono">
+        <div className="flex flex-col bg-slate-50 dark:bg-black/50 p-3 rounded-xl border border-slate-200 dark:border-cyan-900">
+          <span className="text-slate-600 dark:text-cyan-400 text-[11px] font-bold font-orbitron">GROUND TRUTH POSE:</span>
+          <span className="text-slate-900 dark:text-white font-bold text-sm">[{telemetry.x}, {telemetry.y}] @ {telemetry.angle}°</span>
         </div>
-        <div className="flex flex-col bg-slate-50 dark:bg-black/50 p-2.5 rounded border border-slate-200 dark:border-cyan-900">
-          <span className="text-slate-600 dark:text-cyan-400 text-[11px] font-bold font-orbitron">HEADING (θ):</span>
-          <span className="text-slate-900 dark:text-white font-bold text-sm">{telemetry.angle}°</span>
+        <div className="flex flex-col bg-slate-50 dark:bg-black/50 p-3 rounded-xl border border-slate-200 dark:border-cyan-900">
+          <span className="text-slate-600 dark:text-cyan-400 text-[11px] font-bold font-orbitron">ESTIMATED ODOMETRY:</span>
+          <span className="text-blue-800 dark:text-cyan-300 font-bold text-sm">[{telemetry.odomX}, {telemetry.odomY}] (Δ {telemetry.driftErr}px)</span>
         </div>
-        <div className="flex flex-col bg-slate-50 dark:bg-black/50 p-2.5 rounded border border-slate-200 dark:border-cyan-900">
-          <span className="text-slate-600 dark:text-cyan-400 text-[11px] font-bold font-orbitron">LINEAR VEL (v):</span>
-          <span className="text-emerald-700 dark:text-emerald-400 font-bold text-sm">{telemetry.v} m/s</span>
+        <div className="flex flex-col bg-slate-50 dark:bg-black/50 p-3 rounded-xl border border-slate-200 dark:border-cyan-900">
+          <span className="text-slate-600 dark:text-cyan-400 text-[11px] font-bold font-orbitron">LOOP CLOSURES:</span>
+          <span className="text-emerald-700 dark:text-emerald-400 font-bold text-sm">{telemetry.loopClosures} OPTIMIZATIONS</span>
         </div>
-        <div className="flex flex-col bg-slate-50 dark:bg-black/50 p-2.5 rounded border border-slate-200 dark:border-cyan-900">
+        <div className="flex flex-col bg-slate-50 dark:bg-black/50 p-3 rounded-xl border border-slate-200 dark:border-cyan-900">
           <span className="text-slate-600 dark:text-cyan-400 text-[11px] font-bold font-orbitron">DISTANCE TO GOAL:</span>
-          <span className="text-blue-700 dark:text-cyan-300 font-bold text-sm">{telemetry.distToGoal}px ({telemetry.waypointsLeft} wps)</span>
+          <span className="text-blue-700 dark:text-cyan-300 font-bold text-sm">{telemetry.waypointsLeft} wps left</span>
         </div>
       </div>
 
-      {/* Controls & Interactive Buttons */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white dark:bg-black/60 p-4 rounded-xl border border-slate-300 dark:border-cyan-500/30 shadow-sm">
+      {/* Controls & Interactive Toggles */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white dark:bg-black/60 p-4 rounded-2xl border border-slate-300 dark:border-cyan-500/30 shadow-sm">
         {/* Speed Adjustment */}
         <div className="flex items-center gap-3 flex-grow max-w-xs">
           <label className="text-slate-900 dark:text-cyan-300 font-orbitron text-xs whitespace-nowrap font-bold">
@@ -784,44 +990,35 @@ export default function SlamLab() {
           <span className="text-slate-900 dark:text-cyan-300 font-bold text-xs w-8">{speed}x</span>
         </div>
 
-        {/* Action Buttons with High-Contrast Light & Dark Styling */}
+        {/* Feature Toggles */}
         <div className="flex flex-wrap items-center gap-2">
           <button
-            onClick={() => setShowPathRibbon((prev) => !prev)}
-            className={`px-3 py-1.5 text-xs font-orbitron font-bold rounded-lg border transition-all ${
-              showPathRibbon
+            onClick={() => setShowCostmap((prev) => !prev)}
+            className={`px-3 py-1.5 text-xs font-orbitron font-bold rounded-xl border transition-all flex items-center gap-1.5 ${
+              showCostmap
                 ? 'bg-blue-50 text-blue-800 border-blue-400 dark:bg-cyan-500/20 dark:border-cyan-400 dark:text-cyan-300'
                 : 'bg-slate-100 text-slate-600 border-slate-300 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-400'
             }`}
           >
-            {showPathRibbon ? 'A* PATH: ON' : 'A* PATH: OFF'}
+            <FaLayerGroup className="text-[10px]" />
+            <span>INFLATION: {showCostmap ? 'ON' : 'OFF'}</span>
           </button>
 
           <button
-            onClick={() => setShowRays((prev) => !prev)}
-            className={`px-3 py-1.5 text-xs font-orbitron font-bold rounded-lg border transition-all ${
-              showRays
-                ? 'bg-blue-50 text-blue-800 border-blue-400 dark:bg-cyan-500/20 dark:border-cyan-400 dark:text-cyan-300'
+            onClick={() => setSimulateDrift((prev) => !prev)}
+            className={`px-3 py-1.5 text-xs font-orbitron font-bold rounded-xl border transition-all flex items-center gap-1.5 ${
+              simulateDrift
+                ? 'bg-emerald-50 text-emerald-800 border-emerald-400 dark:bg-emerald-500/20 dark:border-emerald-400 dark:text-emerald-300'
                 : 'bg-slate-100 text-slate-600 border-slate-300 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-400'
             }`}
           >
-            {showRays ? 'RAYS: ON' : 'RAYS: OFF'}
-          </button>
-
-          <button
-            onClick={() => setShowMap((prev) => !prev)}
-            className={`px-3 py-1.5 text-xs font-orbitron font-bold rounded-lg border transition-all ${
-              showMap
-                ? 'bg-blue-50 text-blue-800 border-blue-400 dark:bg-cyan-500/20 dark:border-cyan-400 dark:text-cyan-300'
-                : 'bg-slate-100 text-slate-600 border-slate-300 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-400'
-            }`}
-          >
-            {showMap ? 'SLAM MAP: ON' : 'SLAM MAP: OFF'}
+            <FaWaveSquare className="text-[10px]" />
+            <span>ODOM DRIFT: {simulateDrift ? 'ACTIVE' : 'OFF'}</span>
           </button>
 
           <button
             onClick={() => setAddObstacleMode((prev) => !prev)}
-            className={`px-3 py-1.5 text-xs font-orbitron font-bold rounded-lg border transition-all ${
+            className={`px-3 py-1.5 text-xs font-orbitron font-bold rounded-xl border transition-all ${
               addObstacleMode
                 ? 'bg-amber-100 text-amber-900 border-amber-500 dark:bg-amber-500/30 dark:border-amber-400 dark:text-amber-300 shadow-md'
                 : 'bg-slate-100 text-slate-700 border-slate-300 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-400 hover:border-amber-500'
@@ -832,21 +1029,21 @@ export default function SlamLab() {
 
           <button 
             onClick={generateObstacles} 
-            className="px-3 py-1.5 bg-blue-700 text-white hover:bg-blue-800 dark:bg-cyan-900/40 dark:border dark:border-cyan-500/50 dark:text-cyan-300 dark:hover:bg-cyan-500 dark:hover:text-black transition-colors font-orbitron text-xs font-bold rounded-lg shadow-sm"
+            className="px-3 py-1.5 bg-blue-700 text-white hover:bg-blue-800 dark:bg-cyan-900/40 dark:border dark:border-cyan-500/50 dark:text-cyan-300 dark:hover:bg-cyan-500 dark:hover:text-black transition-colors font-orbitron text-xs font-bold rounded-xl shadow-sm"
           >
             GENERATE
           </button>
 
           <button 
             onClick={clearObstacles} 
-            className="px-3 py-1.5 bg-rose-100 text-rose-800 border border-rose-300 hover:bg-rose-200 dark:bg-rose-950/40 dark:border-rose-500/50 dark:text-rose-300 dark:hover:bg-rose-500 dark:hover:text-black transition-colors font-orbitron text-xs font-bold rounded-lg"
+            className="px-3 py-1.5 bg-rose-100 text-rose-800 border border-rose-300 hover:bg-rose-200 dark:bg-rose-950/40 dark:border-rose-500/50 dark:text-rose-300 dark:hover:bg-rose-500 dark:hover:text-black transition-colors font-orbitron text-xs font-bold rounded-xl"
           >
             CLEAR
           </button>
 
           <button 
             onClick={resetRobotPose} 
-            className="px-3 py-1.5 bg-slate-100 text-slate-800 border border-slate-300 hover:bg-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-300 dark:hover:border-cyan-400 transition-colors font-orbitron text-xs font-bold rounded-lg"
+            className="px-3 py-1.5 bg-slate-100 text-slate-800 border border-slate-300 hover:bg-slate-200 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-300 dark:hover:border-cyan-400 transition-colors font-orbitron text-xs font-bold rounded-xl"
           >
             RESET
           </button>

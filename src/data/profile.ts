@@ -10,6 +10,8 @@ export interface ProfileData {
   affiliation: string;
   graduationYear: string;
   avatarUrl: string;
+  driveAvatarUrl: string;
+  resumeUrl: string;
   socials: {
     github: string;
     linkedin: string;
@@ -30,6 +32,8 @@ export const profileData: ProfileData = {
   affiliation: "Anna University",
   graduationYear: "2024 – 2028",
   avatarUrl: "/deepak.png",
+  driveAvatarUrl: "https://lh3.googleusercontent.com/d/1t6hQ1fs7cHKKlhqdNVc4k9VxU5aJFZ51",
+  resumeUrl: "https://docs.google.com/document/d/1PqoCoVizRO3i-Ws3H4bdJa-0T9DamFOIF7KMSuFDnXM/export?format=pdf",
   socials: {
     github: "https://github.com/Arkz-Deepak",
     linkedin: "https://www.linkedin.com/in/robotics-deepak/",

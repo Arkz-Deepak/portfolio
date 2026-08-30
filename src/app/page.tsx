@@ -165,8 +165,7 @@ export default function Home() {
           {/* Call to Action Buttons */}
           <div className="flex flex-wrap justify-center gap-3 pt-2">
             <a 
-              href="/resume.pdf" 
-              download="Deepak_R_Resume.pdf" 
+              href={profileData.resumeUrl} 
               target="_blank" 
               rel="noopener noreferrer" 
               className="px-5 py-2.5 text-xs font-bold font-orbitron rounded-xl tracking-wider transition-all border bg-emerald-600 hover:bg-emerald-700 text-white border-emerald-600 shadow-md dark:bg-emerald-500/20 dark:hover:bg-emerald-400 dark:hover:text-black dark:border-emerald-400 dark:text-emerald-300 dark:shadow-[0_0_15px_rgba(16,185,129,0.3)] flex items-center gap-2"
