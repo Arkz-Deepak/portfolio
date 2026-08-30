@@ -6,6 +6,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '',
     '/about',
     '/projects',
+    '/projects/autotwin-ai',
+    '/projects/vortex-crawler',
     '/projects/aura',
     '/projects/sih',
     '/projects/edge-ai',

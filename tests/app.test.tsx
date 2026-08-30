@@ -3,7 +3,7 @@ import '@testing-library/jest-dom'
 import Home from '@/app/page'
 import { ThemeProvider } from '@/components/ThemeProvider'
 
-// Mock the ParticleBackground because Three.js canvas in jsdom can be problematic
+// Mock ParticleBackground
 jest.mock('@/components/ParticleBackground', () => {
   return function DummyParticleBackground() {
     return <div data-testid="particle-bg">Particle Background Mock</div>
@@ -11,42 +11,40 @@ jest.mock('@/components/ParticleBackground', () => {
 })
 
 describe('Portfolio Home Page', () => {
-  beforeAll(() => {
+  beforeEach(() => {
     jest.useFakeTimers()
   })
 
-  afterAll(() => {
+  afterEach(() => {
     jest.useRealTimers()
   })
 
-  it('should render the boot sequence initially', () => {
+  it('should render the boot sequence initially and transition to hero', () => {
     render(
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
         <Home />
       </ThemeProvider>
     )
+    
+    // Boot sequence initially visible
     expect(screen.getByText('INITIALIZING DEEPAK.OS V2.0...')).toBeInTheDocument()
-  })
 
-  it('should reveal the hero section after booting in light mode (default)', () => {
-    render(
-      <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-        <Home />
-      </ThemeProvider>
-    )
-    
+    // Advance timer past boot duration (1500ms)
     act(() => {
-      jest.advanceTimersByTime(2500)
+      jest.advanceTimersByTime(2000)
     })
-    
-    // Check if hero title is rendered
+
+    // Hero title
     expect(screen.getByText('DEEPAK')).toBeInTheDocument()
-    expect(screen.getByText(/Autonomous Systems Architect/)).toBeInTheDocument()
-    
-    // Check if project grids are present
-    expect(screen.getByText('VisionX (AURA)')).toBeInTheDocument()
-    expect(screen.getByText('Autonomous ROS 2 Rover')).toBeInTheDocument()
-    expect(screen.getByText('CV Autonomous Robot')).toBeInTheDocument()
+    expect(screen.getAllByText(/Robotics & Automation Engineer/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getByText(/9.2 \/ 10.0/)).toBeInTheDocument()
+
+    // Featured Projects
+    expect(screen.getAllByText(/AutoTwin-AI/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/Hybrid Vortex Crawler/i).length).toBeGreaterThanOrEqual(1)
+
+    // Research Section
+    expect(screen.getAllByText(/Sensor-Fusion Driven Deep Reinforcement Learning/i).length).toBeGreaterThanOrEqual(1)
   })
 
   it('should render particle background when in dark mode', () => {
@@ -55,12 +53,11 @@ describe('Portfolio Home Page', () => {
         <Home />
       </ThemeProvider>
     )
-    
+
     act(() => {
-      jest.advanceTimersByTime(2500)
+      jest.advanceTimersByTime(2000)
     })
-    
-    // Check if the mock background is rendered in dark mode
+
     expect(screen.getByTestId('particle-bg')).toBeInTheDocument()
   })
 })

@@ -5,6 +5,9 @@ export interface ProjectItem {
   category: 'robotics' | 'ai-vision' | 'embedded' | 'fullstack';
   featured: boolean;
   date: string;
+  competition?: string;
+  cadSpecs?: string[];
+  model3dUrl?: string;
   stack: string[];
   stats?: { label: string; value: string }[];
   demoUrl?: string;
@@ -24,6 +27,62 @@ export interface ProjectItem {
 
 export const projectsData: ProjectItem[] = [
   {
+    id: "hybrid-vortex-crawler",
+    title: "Hybrid Vortex Crawler: Multi-Surface Wall-Climbing Robot",
+    subtitle: "Multi-Surface Vertical Scaling & NDE Payload Delivery (NeX-Gen Robotics Challenge 2026 | IDREA)",
+    category: "robotics",
+    featured: true,
+    date: "Aug 2026",
+    competition: "NeX-Gen Robotics Challenge 2026 (IDREA | Round 1 Concept Presentation)",
+    model3dUrl: "/models/vortex-crawler.glb",
+    cadSpecs: [
+      "Autodesk Fusion Parametric Assembly (3mm CNC Carbon Fiber Base Frame)",
+      "70mm Electric Ducted Fan (EDF) Active Vortex Impeller Core",
+      "Pololu Stamped Aluminum Motor Brackets & Custom Standoffs",
+      "Raspberry Pi 4 (ROS 2 Jazzy Supervisor) + ESP32 Node (FreeRTOS)",
+      "Flycolor 60A ESC & Dual HW-411 Buck Converters (12V to 5V Step-Down)",
+      "4x Motorabit 12V 164 RPM Planetary Gear Motors with Optical Encoders",
+      "Pololu 30T Continuous High-Friction Rubber Tread Belt Assembly",
+      "Passive N52 Neodymium Magnetic Arrays for Ferromagnetic Surface Lock"
+    ],
+    stack: [
+      "ROS 2 Jazzy",
+      "Raspberry Pi 4",
+      "ESP32 (FreeRTOS)",
+      "Dual BTS7960 H-Bridges",
+      "70mm EDF",
+      "MPU6050 IMU",
+      "Fusion 360",
+      "Three.js"
+    ],
+    stats: [
+      { label: "Holding Downforce", value: "45 N (EDF Vortex)" },
+      { label: "Payload Capacity", value: "1.5 kg (NDE Probes)" },
+      { label: "Control Dual-Tier", value: "ROS 2 / FreeRTOS" },
+      { label: "Motor PWM Frequency", value: "20 kHz" }
+    ],
+    githubUrl: "https://github.com/Arkz-Deepak",
+    caseStudySlug: "/projects/vortex-crawler",
+    media: {
+      type: "image",
+      url: "/urban-traffic.jpg",
+      aspectRatio: "16:9"
+    },
+    summary: "Engineered an industrial wall-climbing inspection robot utilizing an active aerodynamic vortex 70mm Electric Ducted Fan (EDF) generating 45 N holding force combined with passive N52 magnetic track locking. Implemented a dual-tier control hierarchy: ROS 2 Jazzy on Raspberry Pi 4 for high-level mission logic and ToF telemetry, paired via UART to an ESP32 FreeRTOS controller for deterministic motor actuation and 50Hz tilt stabilization.",
+    highlights: [
+      "Designed in Autodesk Fusion with 3mm CNC carbon fiber plates, Pololu 30T rubber tracks, and 4x 164 RPM planetary gear motors.",
+      "Delivers 1.5 kg payload capacity for Non-Destructive Evaluation (NDE) ultrasound probes and HD thermal inspection.",
+      "Dual-tier control: ROS 2 Jazzy mission supervisor (RPi4) coupled with FreeRTOS 20 kHz deterministic motor PWM (ESP32).",
+      "Qualified for NeX-Gen Robotics Challenge 2026 (IDREA | Round 1 Concept Presentation)."
+    ],
+    architectureMermaid: `graph TD
+      RPi["Raspberry Pi 4 (ROS 2 Jazzy Supervisor)"] -->|UART Telemetry| ESP32["ESP32 (FreeRTOS Controller)"]
+      ESP32 -->|20 kHz PWM| Drivers["Dual BTS7960 43A H-Bridges"]
+      Drivers --> Motors["4x Planetary Gear Motors (164 RPM)"]
+      ESP32 -->|ESC Control| EDF["70mm EDF (45 N Vacuum Downforce)"]
+      Sensors["MPU6050 IMU + ToF LiDAR"] -->|50 Hz Feedback| ESP32`
+  },
+  {
     id: "autotwin-ai",
     title: "AutoTwin-AI: Sim-to-Real Digital Twin",
     subtitle: "Zero-Defect Anomaly Detection in Automotive & Industrial Discrete Manufacturing",
@@ -38,7 +97,7 @@ export const projectsData: ProjectItem[] = [
       { label: "Convergence Loss (MSE)", value: "0.000092" }
     ],
     githubUrl: "https://github.com/Arkz-Deepak",
-    caseStudySlug: "/projects/edge-ai",
+    caseStudySlug: "/projects/autotwin-ai",
     media: {
       type: "image",
       url: "/urban-traffic.jpg",
@@ -56,40 +115,6 @@ export const projectsData: ProjectItem[] = [
       Dataset --> CAE["PyTorch Conv Autoencoder Training (50 Epochs)"]
       CAE --> Edge["TensorRT / FastAPI Edge Node (<42ms)"]
       Edge --> Dashboard["Three.js / WebGL 3-Panel Inspection HUD"]`
-  },
-  {
-    id: "hybrid-vortex-crawler",
-    title: "Hybrid Vortex Crawler: Wall-Climbing Inspection Robot",
-    subtitle: "Multi-Surface Vertical Scaling & NDE Payload Delivery (NeX-Gen 2026 Senior Design)",
-    category: "robotics",
-    featured: true,
-    date: "Aug 2026",
-    stack: ["ROS 2 Jazzy", "Raspberry Pi 4", "ESP32 (FreeRTOS)", "BTS7960 H-Bridges", "70mm EDF", "MPU6050 IMU", "Fusion 360"],
-    stats: [
-      { label: "Holding Downforce", value: "45 N" },
-      { label: "Payload Capacity", value: "1.5 kg" },
-      { label: "Control Dual-Tier", value: "ROS 2 / FreeRTOS" },
-      { label: "Motor PWM Frequency", value: "20 kHz" }
-    ],
-    githubUrl: "https://github.com/Arkz-Deepak",
-    caseStudySlug: "/projects/aura",
-    media: {
-      type: "image",
-      url: "/urban-traffic.jpg",
-      aspectRatio: "16:9"
-    },
-    summary: "Engineered an industrial wall-climbing inspection robot utilizing an active aerodynamic vortex 70mm Electric Ducted Fan (EDF) generating 45 N holding force combined with passive N52 magnetic track locking. Implemented a dual-tier control hierarchy: ROS 2 Jazzy on Raspberry Pi 4 for high-level mission logic and ToF telemetry, paired via UART to an ESP32 FreeRTOS controller for deterministic motor actuation and 50Hz tilt stabilization.",
-    highlights: [
-      "Designed 3mm CNC-machined carbon fiber chassis with Pololu 30T continuous rubber tracks.",
-      "Delivers 1.5 kg payload capacity for Non-Destructive Evaluation (NDE) probes and HD visual inspection.",
-      "Built hardware failsafe engine triggering automatic vacuum boost and regenerative descent braking."
-    ],
-    architectureMermaid: `graph TD
-      RPi["Raspberry Pi 4 (ROS 2 Jazzy Supervisor)"] -->|UART Telemetry| ESP32["ESP32 (FreeRTOS Controller)"]
-      ESP32 -->|20 kHz PWM| Drivers["Dual BTS7960 43A H-Bridges"]
-      Drivers --> Motors["4x Planetary Gear Motors (164 RPM)"]
-      ESP32 -->|ESC Control| EDF["70mm EDF (45 N Vacuum Downforce)"]
-      Sensors["MPU6050 IMU + Optical Encoders"] -->|50 Hz Feedback| ESP32`
   },
   {
     id: "oomwoo-coverage-planner",

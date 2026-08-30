@@ -15,9 +15,9 @@ const PRESET_QUERIES: QueryPreset[] = [
     command: 'whoami',
     output: [
       'IDENTITY: Deepak R.',
-      'ROLE: Autonomous Systems Architect & Robotics Engineer.',
-      'INSTITUTION: Dhaanish Ahmed College of Engineering.',
-      'SPECIALIZATION: ROS 2 Jazzy, YOLO Vision, Skid-Steer Nav2, Edge AI.'
+      'ROLE: Robotics & Automation Engineer | Physical AI & Sim-to-Real Digital Twins.',
+      'INSTITUTION: Dhaanish Ahmed College of Engineering (Anna University) | CGPA: 9.2/10.0.',
+      'SPECIALIZATION: ROS 2 Jazzy, Nav2, SLAM Toolbox, PyTorch Autoencoders, Computer Vision, Embedded RTOS.'
     ]
   },
   {
@@ -25,39 +25,10 @@ const PRESET_QUERIES: QueryPreset[] = [
     label: '> EXECUTE SKILLS_LIST',
     command: 'execute skills_list',
     output: [
-      'CORE LANGUAGES: Python, C++, Bash Shell, SQL.',
-      'ROBOTICS MIDDLEWARE: ROS 2 Jazzy, SLAM Toolbox, Nav2, Gazebo Harmonic.',
-      'PERCEPTION & ML: YOLOv8, OpenCV, PyTorch, Scikit-Learn, SUMO.',
-      'HARDWARE & EMBEDDED: STM32, Arduino, ESP32, LiDAR, CNC/VMC.'
-    ]
-  },
-  {
-    id: 'ros2',
-    label: '> INITIATE ROS2_STACK',
-    command: 'initiate ros2_stack',
-    output: [
-      '[ROS2_NODE]: Telemetry pub/sub initialized at 50Hz.',
-      '[NAV2_MAP]: EKF Sensor fusion active (LiDAR + Wheel Odometry).',
-      '[PATH_PLANNING]: APF & Dynamic Window Approach (DWA) loaded.',
-      'STATUS: AUTONOMOUS ROVER NAVIGATION ACTIVE.'
-    ]
-  },
-  {
-    id: 'experience',
-    label: '> SHOW EXPERIENCE',
-    command: 'show experience',
-    output: [
-      '1. Wildplant Terrestrial Solutions: Artificial Intelligence Intern (Jul 2026 - Present).',
-      '2. KarthiKesh Robotics: 20-Day ROS 2 Industrial Program (Aug 2026).',
-      '3. Precise3DM: Artificial Intelligence Intern - Data Engineering (Jun 2026 - Jul 2026).',
-      '4. Tamizhan Skills: AI for Autonomous System Intern - RISE Program (Dec 2025).',
-      '5. Kodacy: Robotics Intern (Dec 2025).',
-      '6. Chennai Port Authority: Engineering Intern (Dec 2025).',
-      '7. MK Autocomponents: Industrial Manufacturing Intern - CNC/VMC (15-Days).',
-      '8. Build-a-Bot Hackathon: Scholarship Policy Compliance Bot.',
-      '9. Cyber Hackathon v4: Deepfake Detection Pitch.',
-      '10. AURA Research: Published Acoustic-visual Urban Routing Architecture paper.',
-      '11. Novi Tech: 30-day Full-Stack Web Development Course.'
+      'CORE LANGUAGES: Python, C++, C, Rust, Bash, SQL, JavaScript.',
+      'ROBOTICS & SIMULATION: ROS 2 Jazzy, Nav2, SLAM Toolbox, Gazebo / Ignition, MoveIt 2, URDF/Xacro, BCD Coverage.',
+      'AI & COMPUTER VISION: PyTorch, Autoencoders, YOLOv8/v11, OpenCV, MediaPipe, Blender OptiX, Multi-Agent RL.',
+      'EMBEDDED & HARDWARE: Raspberry Pi 4, ESP32 (FreeRTOS), BTS7960 H-Bridges, Arduino, OpenPLC.'
     ]
   },
   {
@@ -65,11 +36,33 @@ const PRESET_QUERIES: QueryPreset[] = [
     label: '> LIST PROJECTS',
     command: 'list projects',
     output: [
-      '• VisionX (AURA): RL & SUMO Traffic Signal Optimization.',
-      '• Autonomous ROS 2 Rover: Skid-Steer Nav2 & EKF Sensor Fusion.',
-      '• CV Autonomous Robot: OpenCV & PD Line Following.',
-      '• Reactive Evasion Rover: 360° LiDAR Scan Slicing in Gazebo.',
-      '• Hybrid AI Scholarship Bot: Isolation Forest Anomaly Detection.'
+      '• AutoTwin-AI: Sim-to-Real Anomaly Detection with 4,851 Blender OptiX Synthetic Renders (MSE: 0.000092).',
+      '• Hybrid Vortex Crawler: 45N EDF Wall-Climbing Inspection Robot (NeX-Gen Robotics 2026 | IDREA).',
+      '• OOMWOO: Autonomous Robot Vacuum System (ROS 2 Jazzy, Nav2, Boustrophedon Coverage Planning).',
+      '• Smart Traffic Controller: SIH25050 Real-Time YOLOv8 Queue Optimization (<30ms latency).',
+      '• Hybrid AI Policy Bot: Anomaly Detection and Automated Document Compliance Engine.'
+    ]
+  },
+  {
+    id: 'experience',
+    label: '> SHOW EXPERIENCE',
+    command: 'show experience',
+    output: [
+      '1. Wildplant Terrestrial Solutions: Frontend & 3D Web Development Intern (Three.js/WebGL - Under NDA).',
+      '2. Precise3DM: AI & Data Engineering Intern (Gemini API, Google Maps API, Playwright/Selenium).',
+      '3. Tamizhan Skills (RISE): AI & Autonomous Systems Intern (ROS 2 Nav2, Sensor Fusion in Gazebo).',
+      '4. Chennai Port Authority: Industrial Engineering Intern (Diesel Powertrains & Industrial PLCs).',
+      '5. MK Autocomponents: Industrial Automation Intern (CNC/VMC Machining).'
+    ]
+  },
+  {
+    id: 'research',
+    label: '> SHOW RESEARCH',
+    command: 'show research',
+    output: [
+      '📄 PREPRINT (Aug 2026): "Sensor-Fusion Driven Deep RL for Dynamic Traffic Signal Optimization".',
+      '   DOI: 10.5281/zenodo.20265628 (Indexed on Zenodo).',
+      '🔬 IN PROGRESS: AURA (Acoustic-visual Urban Routing Architecture for AMRs).'
     ]
   },
   {
@@ -77,10 +70,10 @@ const PRESET_QUERIES: QueryPreset[] = [
     label: '> DISPLAY CERTIFICATIONS',
     command: 'display certifications',
     output: [
-      '✔ IBM SkillsBuild: AI Fundamentals & Advanced Data Analysis',
-      '✔ Cisco Networking Academy: Computer Hardware Basics',
-      '✔ NPTEL: Industrial Robotics & Joy of Computing with Python',
-      '✔ NoviTech: Full Stack Web Development'
+      '✔ Karthikesh Robotics: 20-Day ROS 2 Industrial Program (Nav2, SLAM, Jazzy)',
+      '✔ IBM SkillsBuild: Advanced Python & Machine Learning Track',
+      '✔ The Construct Institute: Linux Basics for Robotics',
+      '✔ IBM SkillsBuild: AI Fundamentals'
     ]
   },
   {
@@ -88,10 +81,11 @@ const PRESET_QUERIES: QueryPreset[] = [
     label: '> TRANSMIT CONTACT_INFO',
     command: 'transmit contact_info',
     output: [
-      'EMAIL: wssedd18@gmail.com',
+      'EMAIL: deepak121289@outlook.com',
+      'PORTFOLIO: https://www.deepak-arkz.me',
       'GITHUB: https://github.com/Arkz-Deepak',
-      'LINKEDIN: https://linkedin.com/in/deepak-r',
-      'LOCATION: Chennai, India'
+      'LINKEDIN: https://www.linkedin.com/in/robotics-deepak/',
+      'LOCATION: Chennai, Tamil Nadu, India'
     ]
   }
 ]

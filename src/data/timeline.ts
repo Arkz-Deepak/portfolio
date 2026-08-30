@@ -1,4 +1,4 @@
-import { experienceData, IndustryExperience } from './experience'
+import { experienceData } from './experience'
 
 export interface TimelineItem {
   id: string

@@ -17,34 +17,35 @@ export const experienceData: IndustryExperience[] = [
   {
     id: "wildplant",
     company: "Wildplant Terrestrial Solutions Pvt Ltd",
-    role: "Web Development Intern",
+    role: "Frontend & 3D Web Development Intern",
     period: "Jul 2026 – Present",
     location: "Remote",
     locationType: "Remote",
     ndaProtected: true,
-    ndaNotice: "Proprietary internal architecture and developer tooling built under strict Non-Disclosure Agreement (NDA).",
-    domainTag: "Full-Stack Web & Internal Tooling",
+    ndaNotice: "Proprietary commercial web platform and 3D UI architectures built under strict Non-Disclosure Agreement (NDA).",
+    domainTag: "Three.js & Full-Stack Web Development",
     responsibilities: [
-      "Architecting responsive full-stack web platforms and developer interfaces for proprietary company systems.",
-      "Designing secure RESTful API routes and backend services in Python and Node.js to optimize data flow and system responsiveness.",
-      "Streamlining client-side telemetry handling and state management for internal dashboards."
+      "Assisting lead engineers in developing responsive frontend user interfaces and modular web components for proprietary internal platforms.",
+      "Implementing 3D graphics rendering pipelines and interactive viewport modules utilizing Three.js and modern WebGL.",
+      "Optimizing client-side state management, asset compression, and cross-browser rendering reliability."
     ],
-    technologies: ["Python", "Node.js", "REST APIs", "React", "TypeScript", "Docker"]
+    technologies: ["Three.js", "WebGL", "TypeScript", "React", "Next.js", "REST APIs"]
   },
   {
     id: "precise3dm",
     company: "Precise3DM",
-    role: "Automation & Data Engineering Intern",
+    role: "AI & Data Engineering Intern",
     period: "Jun 2026 – Jul 2026",
     location: "Chennai, India",
     locationType: "Hybrid",
     ndaProtected: false,
-    domainTag: "Automated ETL & Web Scraping",
+    domainTag: "Autonomous Data Pipelines & AI Scraping",
     responsibilities: [
-      "Engineered automated lead generation pipelines and high-throughput data processing workflows integrating custom scrapers with REST APIs.",
-      "Designed robust ETL ingestion validation routines, eliminating manual entry overhead and ensuring high dataset consistency."
+      "Architected an automated B2B lead generation pipeline integrating Google Maps API with headless browser automation (Playwright/Selenium).",
+      "Engineered an automated prompt pipeline using the Gemini API to identify, filter, and qualify high-potential industrial clients based on geographic and industry criteria.",
+      "Constructed automated data sanitization workflows to aggregate, validate, and export structured lead datasets directly to CSV formats."
     ],
-    technologies: ["Python", "Data Pipelines", "REST APIs", "Web Scraping", "ETL Validation"]
+    technologies: ["Python", "Gemini API", "Google Maps API", "Headless Browsers", "Web Scraping", "Data Pipelines"]
   },
   {
     id: "tamizhan-rise",
