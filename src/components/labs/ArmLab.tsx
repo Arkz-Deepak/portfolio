@@ -35,7 +35,6 @@ export default function ArmLab() {
     let animationFrameId: number
 
     const handleMouseMove = (e: MouseEvent | TouchEvent) => {
-      // Prevent default scrolling when interacting with canvas
       if (e.type === 'touchmove') e.preventDefault()
       
       const rect = canvas.getBoundingClientRect()
@@ -87,6 +86,9 @@ export default function ArmLab() {
     const render = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
+      ctx.fillStyle = '#060d1f'
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+
       const centerX = canvas.width / 2
       const centerY = canvas.height * 0.85
 
@@ -96,7 +98,6 @@ export default function ArmLab() {
       endEffectorPos.current.vx = (endEffectorPos.current.vx + ax) * damping
       endEffectorPos.current.vy = (endEffectorPos.current.vy + ay) * damping
       
-      // Strict caps to prevent glitching
       if (endEffectorPos.current.vx > 50) endEffectorPos.current.vx = 50
       if (endEffectorPos.current.vx < -50) endEffectorPos.current.vx = -50
       if (endEffectorPos.current.vy > 50) endEffectorPos.current.vy = 50
@@ -124,7 +125,7 @@ export default function ArmLab() {
         y: j1.y + l2 * Math.sin(currentAngles.current.theta1 + currentAngles.current.theta2)
       }
 
-      ctx.strokeStyle = 'rgba(0, 240, 255, 0.06)'
+      ctx.strokeStyle = 'rgba(0, 240, 255, 0.08)'
       ctx.lineWidth = 1
       for (let x = 0; x < canvas.width; x += 30) {
         ctx.beginPath()
@@ -226,24 +227,42 @@ export default function ArmLab() {
   }
 
   return (
-    <div className="w-full flex flex-col items-center gap-4">
-      <div className="w-full aspect-video border border-cyan-500/30 rounded-lg overflow-hidden bg-black/50 backdrop-blur">
+    <div className="w-full flex flex-col gap-4 font-space">
+      <div className="w-full aspect-video border-2 border-slate-300 dark:border-cyan-500/40 rounded-xl overflow-hidden bg-slate-950 min-h-[220px] shadow-lg">
         <canvas ref={canvasRef} className="w-full h-full cursor-none" />
       </div>
       
-      <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-4 bg-gray-900/50 p-4 border border-cyan-500/20 rounded font-orbitron text-sm">
-        <div><span className="text-gray-500">X:</span> <span className="text-cyan-400">{telemetry.x.toFixed(1)}</span></div>
-        <div><span className="text-gray-500">Y:</span> <span className="text-cyan-400">{telemetry.y.toFixed(1)}</span></div>
-        <div><span className="text-gray-500">θ1:</span> <span className="text-cyan-400">{telemetry.t1.toFixed(1)}°</span></div>
-        <div><span className="text-gray-500">θ2:</span> <span className="text-cyan-400">{telemetry.t2.toFixed(1)}°</span></div>
+      <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-3 bg-white dark:bg-slate-900 p-3.5 border border-slate-300 dark:border-cyan-500/30 rounded-xl font-mono text-xs shadow-sm">
+        <div className="bg-slate-50 dark:bg-black/50 p-2.5 rounded border border-slate-200 dark:border-cyan-900">
+          <span className="text-slate-600 dark:text-cyan-400 text-[11px] font-bold font-orbitron block">END EFFECTOR X:</span>
+          <span className="text-slate-900 dark:text-white font-bold text-sm">{telemetry.x.toFixed(1)}px</span>
+        </div>
+        <div className="bg-slate-50 dark:bg-black/50 p-2.5 rounded border border-slate-200 dark:border-cyan-900">
+          <span className="text-slate-600 dark:text-cyan-400 text-[11px] font-bold font-orbitron block">END EFFECTOR Y:</span>
+          <span className="text-slate-900 dark:text-white font-bold text-sm">{telemetry.y.toFixed(1)}px</span>
+        </div>
+        <div className="bg-slate-50 dark:bg-black/50 p-2.5 rounded border border-slate-200 dark:border-cyan-900">
+          <span className="text-slate-600 dark:text-cyan-400 text-[11px] font-bold font-orbitron block">JOINT θ1:</span>
+          <span className="text-blue-700 dark:text-cyan-300 font-bold text-sm">{telemetry.t1.toFixed(1)}°</span>
+        </div>
+        <div className="bg-slate-50 dark:bg-black/50 p-2.5 rounded border border-slate-200 dark:border-cyan-900">
+          <span className="text-slate-600 dark:text-cyan-400 text-[11px] font-bold font-orbitron block">JOINT θ2:</span>
+          <span className="text-rose-700 dark:text-rose-400 font-bold text-sm">{telemetry.t2.toFixed(1)}°</span>
+        </div>
       </div>
       
-      <div className="flex gap-4">
-        <button onClick={triggerImpulse} className="px-4 py-2 border border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-black font-bold font-orbitron transition-colors">
+      <div className="flex gap-3">
+        <button 
+          onClick={triggerImpulse} 
+          className="flex-1 py-2.5 border border-rose-400 bg-rose-50 text-rose-800 hover:bg-rose-100 dark:bg-rose-950/40 dark:border-rose-500 dark:text-rose-300 dark:hover:bg-rose-500 dark:hover:text-black font-bold font-orbitron text-xs rounded-lg transition-colors shadow-sm"
+        >
           IMPULSE TEST
         </button>
-        <button onClick={() => { targetPos.current = {x: 140, y: -120}; endEffectorPos.current = {x: 140, y: -120, vx: 0, vy: 0} }} className="px-4 py-2 border border-cyan-500 text-cyan-500 hover:bg-cyan-500 hover:text-black font-bold font-orbitron transition-colors">
-          RESET POS
+        <button 
+          onClick={() => { targetPos.current = {x: 140, y: -120}; endEffectorPos.current = {x: 140, y: -120, vx: 0, vy: 0} }} 
+          className="flex-1 py-2.5 border border-blue-400 bg-blue-50 text-blue-800 hover:bg-blue-100 dark:bg-cyan-950/40 dark:border-cyan-500 dark:text-cyan-300 dark:hover:bg-cyan-500 dark:hover:text-black font-bold font-orbitron text-xs rounded-lg transition-colors shadow-sm"
+        >
+          RESET POSITION
         </button>
       </div>
     </div>

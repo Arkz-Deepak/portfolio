@@ -13,43 +13,79 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Deepak R',
-  jobTitle: 'Robotics & Autonomous Systems Architect',
-  description: 'Official portfolio of Deepak R, a Robotics & Automation Engineering student specializing in ROS 2, YOLO computer vision, and embedded machine learning.',
-  knowsAbout: ['ROS 2', 'YOLO Vision', 'Embedded IoT', 'Machine Learning', 'Robotics', 'Control Systems', 'Computer Vision', 'Autonomous Systems'],
-  almaMater: {
+  url: 'https://www.deepak-arkz.me',
+  jobTitle: 'Robotics & Automation Engineer',
+  description: 'Portfolio of Deepak R — B.E. Robotics & Automation engineer specializing in Physical AI, ROS 2 Jazzy, Autonomous Mobile Robots (AMR), Sim-to-Real Digital Twins, and Computer Vision.',
+  knowsAbout: [
+    'ROS 2 Jazzy',
+    'Physical AI',
+    'Nav2',
+    'SLAM Toolbox',
+    'Autonomous Navigation',
+    'Sim-to-Real Digital Twins',
+    'AutoTwin-AI',
+    'Computer Vision',
+    'Deep Reinforcement Learning',
+    'Embedded RTOS'
+  ],
+  alumniOf: {
     '@type': 'EducationalOrganization',
-    name: 'Dhaanish Ahmed College of Engineering',
+    name: 'Dhaanish Ahmed College of Engineering (Anna University)',
   },
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://arkz-deepak-portfolio.vercel.app'),
-  title: 'Deepak R',
-  description: 'Official portfolio of Deepak R, a Robotics & Automation Engineering student specializing in ROS 2, YOLO computer vision, and embedded machine learning.',
+  metadataBase: new URL('https://www.deepak-arkz.me'),
+  title: {
+    default: 'Deepak R | Robotics & Automation Engineer | Physical AI & ROS 2',
+    template: '%s | Deepak R'
+  },
+  description: 'Portfolio of Deepak R — B.E. Robotics & Automation engineer specializing in Physical AI, ROS 2 Jazzy, Autonomous Mobile Robots (AMR), Sim-to-Real Digital Twins, and Computer Vision.',
   keywords: [
     'Deepak R',
-    'Deepak R portfolio',
     'Robotics Engineer',
-    'ROS 2',
-    'Chennai',
-    'Autonomous Systems'
+    'ROS 2 Jazzy',
+    'Physical AI',
+    'Autonomous Navigation',
+    'Nav2',
+    'SLAM',
+    'AutoTwin-AI',
+    'Sim-to-Real Digital Twin',
+    'Computer Vision',
+    'Deep Reinforcement Learning'
   ],
-  authors: [{ name: 'Deepak R' }],
+  authors: [{ name: 'Deepak R', url: 'https://www.deepak-arkz.me' }],
   creator: 'Deepak R',
+  alternates: {
+    canonical: 'https://www.deepak-arkz.me',
+  },
   openGraph: {
-    title: 'Deepak R',
-    description: 'Official portfolio of Deepak R, a Robotics & Automation Engineering student specializing in ROS 2, YOLO computer vision, and embedded machine learning.',
     type: 'website',
     locale: 'en_US',
+    url: 'https://www.deepak-arkz.me',
+    title: 'Deepak R | Robotics & Automation Engineer',
+    description: 'Physical AI, ROS 2 Jazzy, Autonomous Navigation & Sim-to-Real Digital Twins.',
     siteName: 'Deepak R Portfolio',
+    images: [
+      {
+        url: '/images/og-card.png',
+        width: 1200,
+        height: 630,
+        alt: 'Deepak R Portfolio HUD'
+      }
+    ]
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Deepak R',
-    description: 'Official portfolio of Deepak R, a Robotics & Automation Engineering student specializing in ROS 2, YOLO computer vision, and embedded machine learning.',
+    title: 'Deepak R | Robotics & Automation Engineer',
+    description: 'Physical AI, ROS 2 Jazzy, Autonomous Navigation & Sim-to-Real Digital Twins.',
+    images: ['/images/og-card.png']
   },
   verification: {
     google: 'EKpIS6UNRNpVPF-jDOJP4EqSZTAx_5HKQ-0QaxpFwRo',
+    other: {
+      'msvalidate.01': '7F5D6CB96D38AE70012DCEDBA213D60F',
+    },
   },
   robots: {
     index: true,
@@ -72,6 +108,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${orbitron.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
       <head>
+        <meta name="msvalidate.01" content="7F5D6CB96D38AE70012DCEDBA213D60F" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

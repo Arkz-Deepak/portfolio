@@ -7,10 +7,13 @@ import {
   OpenCVLogo, 
   PyTorchLogo 
 } from '@/components/TechLogos'
+import { profileData } from '@/data/profile'
+import { skillsData } from '@/data/skills'
+import SkillsSection from '@/components/SkillsSection'
 
 export const metadata = {
   title: 'About System Identity | Deepak R.',
-  description: 'Biography, Academic background, and Tech Stack of Deepak R.',
+  description: 'Biography, Academic background, and Tech Stack of Deepak R. (B.E. Robotics & Automation, Anna University).',
 }
 
 export default function AboutPage() {
@@ -24,24 +27,31 @@ export default function AboutPage() {
   ]
 
   return (
-    <main className="min-h-[100dvh] w-full max-w-[100vw] overflow-x-hidden pt-24 pb-16 px-4 md:px-8 max-w-7xl mx-auto flex flex-col justify-center transition-colors duration-300 bg-slate-50 dark:bg-black text-slate-900 dark:text-cyan-400">
+    <main className="min-h-[100dvh] w-full max-w-[100vw] overflow-x-hidden pt-28 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col justify-center transition-colors duration-300 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-cyan-400">
       <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-6xl font-black font-orbitron mb-3 text-slate-900 dark:text-white">
+        <span className="text-xs font-mono tracking-widest text-blue-700 dark:text-cyan-400 font-bold px-3 py-1 rounded-full border border-blue-200 bg-blue-50 dark:bg-cyan-950/40 dark:border-cyan-500/30 mb-2 inline-block">
+          ENGINEERING DOSSIER
+        </span>
+        <h1 className="text-4xl md:text-6xl font-black font-orbitron mb-2 text-slate-900 dark:text-white">
           SYSTEM <span className="text-blue-700 dark:text-cyan-400">IDENTITY</span>
         </h1>
         <p className="text-xs md:text-sm font-space tracking-widest uppercase text-slate-600 dark:text-cyan-300 font-semibold">
-          Academic Background & Technical Stack
+          Academic Background, Research Focus & Comprehensive Technical Stack
         </p>
         <div className="h-1 w-24 mx-auto mt-3 rounded-full bg-blue-600 dark:bg-cyan-400 dark:shadow-[0_0_10px_#00f0ff]" />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-12">
         {/* Left Card: Biography */}
         <div className="lg:col-span-6 border p-8 rounded-2xl backdrop-blur-md flex flex-col justify-between shadow-md transition-colors bg-white border-slate-200 shadow-xl dark:bg-gray-900/60 dark:border-cyan-500/30 dark:shadow-[0_0_25px_rgba(0,240,255,0.05)]">
           <div>
             <div className="flex items-center gap-4 mb-6">
               <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-2 flex-shrink-0 border-blue-700 shadow-md dark:border-cyan-400 dark:shadow-[0_0_15px_#00f0ff]">
-                <img src="/profile.jpg" alt="Deepak R." className="w-full h-full object-cover" />
+                <img 
+                  src={profileData.avatarUrl} 
+                  alt={profileData.name} 
+                  className="w-full h-full object-cover" 
+                />
               </div>
               <div className="flex flex-col">
                 <span className="text-xs font-mono tracking-widest text-amber-700 dark:text-cyan-400 font-semibold">
@@ -51,19 +61,24 @@ export default function AboutPage() {
                   DEEPAK R.
                 </h2>
                 <p className="text-xs md:text-sm font-space text-blue-900 dark:text-cyan-200 font-bold">
-                  Robotics & Automation Engineer
+                  {profileData.tagline}
                 </p>
               </div>
             </div>
 
-            <p className="text-sm md:text-base font-space leading-relaxed p-5 rounded-xl border mb-6 text-slate-700 bg-slate-50 border-slate-200 dark:text-gray-300 dark:bg-black/50 dark:border-cyan-500/20">
-              I am Deepak R., an undergraduate Robotics & Automation student at Dhaanish Ahmed College of Engineering. I specialize in ROS 2, autonomous navigation, and edge AI, building everything from bare-metal Ubuntu setups to full Nav2 stacks.
-            </p>
+            <div className="space-y-4 text-xs md:text-sm font-space leading-relaxed text-slate-700 dark:text-gray-300">
+              <p className="p-4 rounded-xl border bg-slate-50 border-slate-200 dark:bg-black/50 dark:border-cyan-500/20">
+                {profileData.bioSummary}
+              </p>
+              <p className="p-4 rounded-xl border bg-slate-50 border-slate-200 dark:bg-black/50 dark:border-cyan-500/20">
+                🎓 <strong>Academic standing:</strong> {profileData.degree} at {profileData.institution} ({profileData.affiliation}), maintaining a cumulative CGPA of <strong>{profileData.cgpa}</strong>.
+              </p>
+            </div>
           </div>
 
-          <div className="pt-4 border-t flex flex-wrap justify-between items-center text-xs font-mono gap-2 border-slate-200 text-blue-900 dark:border-cyan-500/20 dark:text-cyan-400 font-semibold">
+          <div className="pt-4 mt-6 border-t flex flex-wrap justify-between items-center text-xs font-mono gap-2 border-slate-200 text-blue-900 dark:border-cyan-500/20 dark:text-cyan-400 font-semibold">
             <span>INSTITUTION: DHAANISH AHMED COLLEGE</span>
-            <span>STATUS: ACTIVE UNDERGRADUATE</span>
+            <span>AFFILIATION: ANNA UNIVERSITY</span>
           </div>
         </div>
 
@@ -105,6 +120,17 @@ export default function AboutPage() {
             </span>
           </div>
         </div>
+      </div>
+
+      {/* Full Categorized Skills Matrix */}
+      <div className="w-full mt-4">
+        <div className="text-center mb-8">
+          <h3 className="text-2xl md:text-3xl font-black font-orbitron text-slate-900 dark:text-white">
+            DETAILED <span className="text-blue-700 dark:text-cyan-400">SKILL DOMAINS</span>
+          </h3>
+          <div className="h-1 w-20 mx-auto mt-2 rounded-full bg-blue-600 dark:bg-cyan-400" />
+        </div>
+        <SkillsSection />
       </div>
     </main>
   )
