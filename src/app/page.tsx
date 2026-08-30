@@ -10,6 +10,7 @@ import { certificationsData } from '@/data/certifications'
 import FeaturedProjects from '@/components/FeaturedProjects'
 import ResearchSection from '@/components/ResearchSection'
 import SkillsSection from '@/components/SkillsSection'
+import ProfileAvatar from '@/components/ProfileAvatar'
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaArrowRight, FaShieldAlt } from 'react-icons/fa'
 
 export default function Home() {
@@ -125,17 +126,8 @@ export default function Home() {
         >
           {/* Profile Picture with Glow */}
           <div className="relative w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden border-2 shrink-0 border-blue-700 shadow-xl dark:border-cyan-400 dark:shadow-[0_0_25px_#00f0ff]">
-            <img 
-              src={profileData.avatarUrl} 
-              alt={profileData.name} 
-              onError={(e) => {
-                const target = e.target as HTMLImageElement
-                if (!target.src.includes('googleusercontent')) {
-                  target.src = profileData.driveAvatarUrl
-                } else {
-                  target.src = '/profile.jpg'
-                }
-              }}
+            <ProfileAvatar 
+              priority={true} 
               className="w-full h-full object-cover transition-all duration-500 hover:scale-105" 
             />
           </div>
