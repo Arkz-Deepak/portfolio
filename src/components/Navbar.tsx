@@ -42,7 +42,7 @@ export default function Navbar() {
 
             {/* Resume Download Button */}
             <a
-              href="https://docs.google.com/document/d/1PqoCoVizRO3i-Ws3H4bdJa-0T9DamFOIF7KMSuFDnXM/export?format=pdf"
+              href="https://docs.google.com/document/d/1V8XjDHoHC8vaw_bTTNxZjhv8CYjbHddVax9KLsOTZk8/export?format=pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="px-3 py-1.5 rounded-lg border font-orbitron text-xs font-bold transition-all flex items-center gap-1.5 bg-emerald-600 text-white border-emerald-600 hover:bg-emerald-700 shadow-sm dark:bg-emerald-500/20 dark:border-emerald-400 dark:text-emerald-300 dark:hover:bg-emerald-400 dark:hover:text-black dark:shadow-[0_0_10px_rgba(16,185,129,0.2)]"
@@ -76,7 +76,7 @@ export default function Navbar() {
           {/* Mobile Buttons */}
           <div className="md:hidden flex items-center space-x-2">
             <a
-              href="https://docs.google.com/document/d/1PqoCoVizRO3i-Ws3H4bdJa-0T9DamFOIF7KMSuFDnXM/export?format=pdf"
+              href="https://docs.google.com/document/d/1V8XjDHoHC8vaw_bTTNxZjhv8CYjbHddVax9KLsOTZk8/export?format=pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="px-2.5 py-1.5 rounded-lg border font-orbitron text-xs font-bold transition-all flex items-center gap-1 bg-emerald-600 text-white border-emerald-600 dark:bg-emerald-500/20 dark:border-emerald-400 dark:text-emerald-300"

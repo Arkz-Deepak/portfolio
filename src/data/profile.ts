@@ -12,6 +12,7 @@ export interface ProfileData {
   avatarUrl: string;
   driveAvatarUrl: string;
   resumeUrl: string;
+  resumeViewUrl: string;
   socials: {
     github: string;
     linkedin: string;
@@ -33,7 +34,8 @@ export const profileData: ProfileData = {
   graduationYear: "2024 – 2028",
   avatarUrl: "/deepak.png",
   driveAvatarUrl: "https://lh3.googleusercontent.com/d/1t6hQ1fs7cHKKlhqdNVc4k9VxU5aJFZ51",
-  resumeUrl: "https://docs.google.com/document/d/1PqoCoVizRO3i-Ws3H4bdJa-0T9DamFOIF7KMSuFDnXM/export?format=pdf",
+  resumeUrl: "https://docs.google.com/document/d/1V8XjDHoHC8vaw_bTTNxZjhv8CYjbHddVax9KLsOTZk8/export?format=pdf",
+  resumeViewUrl: "https://docs.google.com/document/d/1V8XjDHoHC8vaw_bTTNxZjhv8CYjbHddVax9KLsOTZk8/edit?usp=sharing",
   socials: {
     github: "https://github.com/Arkz-Deepak",
     linkedin: "https://www.linkedin.com/in/robotics-deepak/",
