@@ -45,10 +45,21 @@ export default function VortexCrawlerProject() {
 
       {/* 3D Robot Digital Twin Viewer */}
       <div className="mb-12">
-        <h2 className="text-lg font-orbitron font-bold text-slate-900 dark:text-cyan-300 mb-3 flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-blue-600 dark:bg-cyan-400 animate-pulse" />
-          INTERACTIVE 3D CAD DIGITAL TWIN
-        </h2>
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
+          <h2 className="text-lg font-orbitron font-bold text-slate-900 dark:text-cyan-300 flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-blue-600 dark:bg-cyan-400 animate-pulse" />
+            INTERACTIVE 3D CAD DIGITAL TWIN
+          </h2>
+          <a
+            href="https://a360.co/3TZt13C"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-3.5 py-1.5 rounded-xl border border-blue-400 bg-blue-50 text-blue-800 hover:bg-blue-100 dark:bg-cyan-950/60 dark:border-cyan-400 dark:text-cyan-300 dark:hover:bg-cyan-400 dark:hover:text-black font-orbitron font-bold text-xs transition-all flex items-center gap-2 shadow-sm"
+          >
+            <span>AUTODESK A360 CLOUD VIEWER</span>
+            <span className="text-[10px]">↗</span>
+          </a>
+        </div>
         <RobotViewer modelUrl="/models/vortex-crawler.glb" height="460px" />
       </div>
 

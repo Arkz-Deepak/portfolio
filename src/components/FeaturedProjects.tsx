@@ -99,7 +99,17 @@ export default function FeaturedProjects() {
                 <FaArrowRight className="text-[10px]" />
               </Link>
 
-              {project.githubUrl && (
+              {project.cadUrl ? (
+                <a
+                  href={project.cadUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3.5 py-2 border border-blue-400 bg-blue-50 text-blue-800 hover:bg-blue-100 dark:bg-cyan-950/50 dark:border-cyan-400 dark:text-cyan-300 dark:hover:bg-cyan-400 dark:hover:text-black font-orbitron font-bold text-xs rounded-xl transition-all flex items-center gap-2 shadow-sm"
+                >
+                  <FaCogs className="text-xs" />
+                  <span>AUTODESK CAD (A360)</span>
+                </a>
+              ) : project.githubUrl ? (
                 <a
                   href={project.githubUrl}
                   target="_blank"
@@ -109,7 +119,7 @@ export default function FeaturedProjects() {
                   <FaGithub />
                   <span>SOURCE CODE</span>
                 </a>
-              )}
+              ) : null}
             </div>
           </motion.div>
         ))}

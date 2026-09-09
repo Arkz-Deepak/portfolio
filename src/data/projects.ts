@@ -11,6 +11,7 @@ export interface ProjectItem {
   stack: string[];
   stats?: { label: string; value: string }[];
   demoUrl?: string;
+  cadUrl?: string;
   githubUrl?: string;
   paperUrl?: string;
   caseStudySlug?: string;
@@ -61,7 +62,8 @@ export const projectsData: ProjectItem[] = [
       { label: "Control Dual-Tier", value: "ROS 2 / FreeRTOS" },
       { label: "Motor PWM Frequency", value: "20 kHz" }
     ],
-    githubUrl: "https://github.com/Arkz-Deepak",
+    cadUrl: "https://a360.co/3TZt13C",
+    githubUrl: "https://a360.co/3TZt13C",
     caseStudySlug: "/projects/vortex-crawler",
     media: {
       type: "image",
