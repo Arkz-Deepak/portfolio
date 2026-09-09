@@ -13,9 +13,43 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Deepak R',
+  givenName: 'Deepak',
+  familyName: 'R',
+  additionalName: 'Rajender',
+  alternateName: [
+    'Deepak R',
+    'Robotics Deepak',
+    'Deepak Robotics',
+    'Deepak Rajender',
+    'Arkz Deepak',
+    'DACE Deepak',
+    'Deepak DACE',
+    'Deepak R DACE',
+    'Deepak R Dhaanish Ahmed College of Engineering',
+    'Deepak R (Robotics & Automation)'
+  ],
   url: 'https://www.deepak-arkz.me',
+  image: 'https://www.deepak-arkz.me/deepak.png',
   jobTitle: 'Robotics & Automation Engineer',
-  description: 'Portfolio of Deepak R — B.E. Robotics & Automation engineer specializing in Physical AI, ROS 2 Jazzy, Autonomous Mobile Robots (AMR), Sim-to-Real Digital Twins, and Computer Vision.',
+  description: 'Official engineering portfolio of Deepak R (Robotics Deepak) — B.E. Robotics & Automation engineer at Dhaanish Ahmed College of Engineering (DACE, Anna University) specializing in Physical AI, ROS 2 Jazzy, Autonomous Mobile Robots, Sim-to-Real Digital Twins, and Computer Vision.',
+  sameAs: [
+    'https://www.linkedin.com/in/robotics-deepak/',
+    'https://github.com/Arkz-Deepak',
+    'https://www.deepak-arkz.me'
+  ],
+  alumniOf: [
+    {
+      '@type': 'EducationalOrganization',
+      name: 'Dhaanish Ahmed College of Engineering',
+      alternateName: 'DACE',
+      url: 'https://dhaanish.org/'
+    },
+    {
+      '@type': 'EducationalOrganization',
+      name: 'Anna University',
+      url: 'https://www.annauniv.edu/'
+    }
+  ],
   knowsAbout: [
     'ROS 2 Jazzy',
     'Physical AI',
@@ -26,12 +60,9 @@ const jsonLd = {
     'AutoTwin-AI',
     'Computer Vision',
     'Deep Reinforcement Learning',
-    'Embedded RTOS'
-  ],
-  alumniOf: {
-    '@type': 'EducationalOrganization',
-    name: 'Dhaanish Ahmed College of Engineering (Anna University)',
-  },
+    'Embedded RTOS',
+    'Robotics Engineering'
+  ]
 }
 
 export const metadata: Metadata = {
@@ -40,10 +71,22 @@ export const metadata: Metadata = {
     default: 'Deepak R | Robotics & Automation Engineer | Physical AI & ROS 2',
     template: '%s | Deepak R'
   },
-  description: 'Portfolio of Deepak R — B.E. Robotics & Automation engineer specializing in Physical AI, ROS 2 Jazzy, Autonomous Mobile Robots (AMR), Sim-to-Real Digital Twins, and Computer Vision.',
+  description: 'Official portfolio of Deepak R (Robotics Deepak) — B.E. Robotics & Automation engineer at Dhaanish Ahmed College of Engineering (DACE, Anna University) specializing in Physical AI, ROS 2 Jazzy, Autonomous Mobile Robots (AMR), Sim-to-Real Digital Twins, and Computer Vision.',
   keywords: [
     'Deepak R',
-    'Robotics Engineer',
+    'Deepak R Robotics',
+    'Robotics Deepak',
+    'Deepak Robotics',
+    'Deepak Rajender',
+    'Arkz Deepak',
+    'DACE Deepak',
+    'Deepak DACE',
+    'Dhaanish Ahmed College of Engineering Deepak',
+    'Dhaanish College Deepak',
+    'Danish College of Engineering Deepak',
+    'Deepak R Engineer',
+    'Deepak R Portfolio',
+    'Robotics Engineer Chennai',
     'ROS 2 Jazzy',
     'Physical AI',
     'Autonomous Navigation',
@@ -56,15 +99,16 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Deepak R', url: 'https://www.deepak-arkz.me' }],
   creator: 'Deepak R',
+  publisher: 'Deepak R',
   alternates: {
     canonical: 'https://www.deepak-arkz.me',
   },
   openGraph: {
-    type: 'website',
+    type: 'profile',
     locale: 'en_US',
     url: 'https://www.deepak-arkz.me',
     title: 'Deepak R | Robotics & Automation Engineer',
-    description: 'Physical AI, ROS 2 Jazzy, Autonomous Navigation & Sim-to-Real Digital Twins.',
+    description: 'Official portfolio of Deepak R (Robotics Deepak) — Physical AI, ROS 2 Jazzy, Autonomous Systems & Sim-to-Real Digital Twins.',
     siteName: 'Deepak R Portfolio',
     images: [
       {
@@ -78,7 +122,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Deepak R | Robotics & Automation Engineer',
-    description: 'Physical AI, ROS 2 Jazzy, Autonomous Navigation & Sim-to-Real Digital Twins.',
+    description: 'Physical AI, ROS 2 Jazzy, Autonomous Systems & Sim-to-Real Digital Twins.',
     images: ['/images/og-card.png']
   },
   verification: {
@@ -108,6 +152,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${orbitron.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
       <head>
+        <meta name="author" content="Deepak R" />
+        <meta name="profile:first_name" content="Deepak" />
+        <meta name="profile:last_name" content="R" />
+        <meta name="profile:username" content="Arkz-Deepak" />
         <meta name="msvalidate.01" content="7F5D6CB96D38AE70012DCEDBA213D60F" />
         <script
           type="application/ld+json"
