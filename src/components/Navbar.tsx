@@ -7,20 +7,14 @@ import { useTheme } from '@/components/ThemeProvider'
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
+  const { isDark, toggleTheme } = useTheme()
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  const isDark = theme === 'dark'
-
   const handleToggle = () => {
-    if (isDark) {
-      setTheme('light')
-    } else {
-      setTheme('dark')
-    }
+    toggleTheme()
   }
 
   return (
@@ -111,8 +105,7 @@ export default function Navbar() {
             <Link href="/internships" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-800 hover:bg-slate-100 hover:text-blue-900 dark:text-gray-300 dark:hover:bg-cyan-900/50 dark:hover:text-cyan-400">TIMELINE</Link>
             <Link href="/contact" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-sm text-slate-800 hover:bg-slate-100 hover:text-blue-900 dark:text-gray-300 dark:hover:bg-cyan-900/50 dark:hover:text-cyan-400">TERMINAL</Link>
             <a
-              href="/resume.pdf"
-              download="Deepak_R_Resume.pdf"
+              href="https://docs.google.com/document/d/1V8XjDHoHC8vaw_bTTNxZjhv8CYjbHddVax9KLsOTZk8/export?format=pdf"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}

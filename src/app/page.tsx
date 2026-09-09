@@ -15,8 +15,7 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaArrowRight, FaShieldAlt
 
 export default function Home() {
   const [booting, setBooting] = useState(true)
-  const { theme } = useTheme()
-  const isDark = theme === 'dark'
+  const { isDark } = useTheme()
 
   // Web3Forms State
   const [formState, setFormState] = useState({

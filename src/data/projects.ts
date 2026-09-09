@@ -96,7 +96,7 @@ export const projectsData: ProjectItem[] = [
       { label: "Edge Latency", value: "<42 ms" },
       { label: "Convergence Loss (MSE)", value: "0.000092" }
     ],
-    githubUrl: "https://github.com/Arkz-Deepak",
+    githubUrl: "https://github.com/Arkz-Deepak/AutoTwin-AI",
     caseStudySlug: "/projects/autotwin-ai",
     media: {
       type: "image",
@@ -129,7 +129,7 @@ export const projectsData: ProjectItem[] = [
       { label: "ROS 2 Distribution", value: "Jazzy Jalisco" },
       { label: "Simulation", value: "Gazebo / Nav2" }
     ],
-    githubUrl: "https://github.com/Arkz-Deepak",
+    githubUrl: "https://github.com/Arkz-Deepak/oomwoo-clean-and-map-arkz",
     caseStudySlug: "/projects",
     media: {
       type: "image",
@@ -154,7 +154,7 @@ export const projectsData: ProjectItem[] = [
       { label: "Latency", value: "<30 ms" },
       { label: "Model", value: "YOLO Vehicle Detection" }
     ],
-    githubUrl: "https://github.com/Arkz-Deepak",
+    githubUrl: "https://github.com/Arkz-Deepak/Traffic-Management-System",
     caseStudySlug: "/projects/sih",
     media: {
       type: "image",
@@ -179,7 +179,7 @@ export const projectsData: ProjectItem[] = [
       { label: "Hackathon", value: "CIT Build-a-Bot" },
       { label: "Engine", value: "Hybrid ML / Rule Engine" }
     ],
-    githubUrl: "https://github.com/Arkz-Deepak",
+    githubUrl: "https://github.com/Arkz-Deepak/Scholarship-Policy-Compliance-Bot",
     caseStudySlug: "/projects",
     media: {
       type: "image",
