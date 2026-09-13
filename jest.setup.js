@@ -52,3 +52,15 @@ jest.mock('framer-motion', () => {
     AnimatePresence: ({ children }) => children,
   }
 })
+
+// Mock RobotViewer component for JSDOM environments where WebGL is unavailable
+jest.mock('@/components/RobotViewer', () => {
+  return function DummyRobotViewer(props) {
+    return (
+      <div data-testid="robot-viewer" className="mock-robot-viewer">
+        Mocked 3D Robot Viewer
+      </div>
+    )
+  }
+})
+

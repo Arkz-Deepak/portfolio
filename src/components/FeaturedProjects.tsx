@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { projectsData } from '@/data/projects'
 import { FaGithub, FaArrowRight, FaCogs } from 'react-icons/fa'
+import RobotViewer from '@/components/RobotViewer'
 
 export default function FeaturedProjects() {
   return (
@@ -37,6 +38,13 @@ export default function FeaturedProjects() {
               <p className="text-xs md:text-sm font-space font-semibold text-blue-800 dark:text-cyan-300 mb-4">
                 {project.subtitle}
               </p>
+
+              {/* 3D Robot Digital Twin Viewer for 3D Projects */}
+              {project.model3dUrl && (
+                <div className="mb-5">
+                  <RobotViewer modelUrl={project.model3dUrl} height="280px" compact={true} />
+                </div>
+              )}
 
               {/* Key Metrics Grid */}
               {project.stats && (
