@@ -28,6 +28,49 @@ export interface ProjectItem {
 
 export const projectsData: ProjectItem[] = [
   {
+    id: "edgevision-npu-profiler",
+    title: "EdgeVision NPU Profiler",
+    subtitle: "Bare-Metal On-Device Edge AI Evaluation Testbench (iQOO Hackathon 2026 Grand Finale)",
+    category: "ai-vision",
+    featured: true,
+    date: "Sep 2026",
+    stack: [
+      "Snapdragon NPU",
+      "Qualcomm Neural Processing SDK",
+      "TensorFlow Lite",
+      "ONNX Runtime",
+      "React Native",
+      "FastAPI",
+      "TypeScript"
+    ],
+    stats: [
+      { label: "Track", value: "Dev Tools / Edge AI" },
+      { label: "Deployment", value: "Zero-ADB Cable" },
+      { label: "Camera Loop", value: "30–60 FPS Zero-Copy" },
+      { label: "Telemetry", value: "Real-time Latency & RAM" }
+    ],
+    githubUrl: "https://github.com/Arkz-Deepak",
+    demoUrl: "https://docs.google.com/presentation/d/1wtzB97O7d21n2auHoZLjmvhmmsDoqVhJRXfHKcaKpe8/edit?usp=drivesdk&ouid=104707271718142286385",
+    caseStudySlug: "/projects/edgevision",
+    media: {
+      type: "image",
+      url: "/images/projects/edgevision-preview.png",
+      aspectRatio: "16:9"
+    },
+    summary: "Eliminates the deployment bottleneck between desktop AI training and physical mobile/edge hardware. Turns commercial Snapdragon NPU smartphones into live bare-metal evaluation testbenches, executing custom .tflite and ONNX models directly on NPU tensor cores using native camera streams with real-time latency and memory telemetry streaming back to a desktop terminal.",
+    highlights: [
+      "Integrated a zero-cable wireless sync bridge to drag-and-drop compiled models directly from laptop to device.",
+      "Bypassed CPU bottlenecks with a zero-copy native camera pipeline delivering 30–60 FPS video frames straight into the NPU buffer.",
+      "Built a live telemetry stream monitoring true inference latency (ms), frame rate stability, and thermal limits."
+    ],
+    architectureMermaid: `graph LR
+      Dev["Laptop Dev Environment (PyTorch / ONNX)"] -->|Wireless Office Kit Bridge| Phone["iQOO Flagship (Snapdragon NPU)"]
+      Phone --> Runtime["TFLite / ONNX NPU Delegate"]
+      Camera["Native Camera (30-60 FPS)"] -->|Zero-Copy Tensor Feed| Runtime
+      Runtime --> Telemetry["Real-time Telemetry Engine (ms / FPS / RAM)"]
+      Telemetry -->|Live WebSocket Stream| Dashboard["Developer Terminal Dashboard"]`
+  },
+  {
     id: "hybrid-vortex-crawler",
     title: "Hybrid Vortex Crawler: Multi-Surface Wall-Climbing Robot",
     subtitle: "Multi-Surface Vertical Scaling & NDE Payload Delivery (NeX-Gen Robotics Challenge 2026 | IDREA)",

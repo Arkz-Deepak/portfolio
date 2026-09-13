@@ -13,22 +13,33 @@ describe('Data Store Integrity Tests', () => {
     expect(profileData.socials.portfolio).toBe('https://www.deepak-arkz.me')
     expect(profileData.socials.github).toContain('Arkz-Deepak')
     expect(profileData.socials.linkedin).toContain('robotics-deepak')
+    expect(profileData.resumeUrl).toContain('1PqoCoVizRO3i-Ws3H4bdJa-0T9DamFOIF7KMSuFDnXM')
   })
 
-  test('skillsData has populated categories and valid skill items', () => {
+  test('skillsData has populated categories and valid skill items including mobile NPU tools', () => {
     expect(skillsData.length).toBeGreaterThanOrEqual(4)
     skillsData.forEach(category => {
       expect(category.category).toBeTruthy()
       expect(category.skills.length).toBeGreaterThan(0)
     })
+
+    const allSkills = skillsData.flatMap(c => c.skills.map(s => s.name))
+    expect(allSkills).toContain('Snapdragon NPU / QNN')
+    expect(allSkills).toContain('TFLite & ONNX Runtime')
+    expect(allSkills).toContain('Decentralized Mesh Protocols')
   })
 
-  test('projectsData contains AutoTwin-AI and Hybrid Vortex Crawler', () => {
+  test('projectsData contains EdgeVision NPU Profiler, AutoTwin-AI, and Hybrid Vortex Crawler', () => {
     const projectIds = projectsData.map(p => p.id)
+    expect(projectIds).toContain('edgevision-npu-profiler')
     expect(projectIds).toContain('autotwin-ai')
     expect(projectIds).toContain('hybrid-vortex-crawler')
     expect(projectIds).toContain('oomwoo-coverage-planner')
     
+    const edgevision = projectsData.find(p => p.id === 'edgevision-npu-profiler')
+    expect(edgevision?.stats?.length).toBeGreaterThanOrEqual(4)
+    expect(edgevision?.stack).toContain('Snapdragon NPU')
+
     const crawler = projectsData.find(p => p.id === 'hybrid-vortex-crawler')
     expect(crawler?.stats?.length).toBeGreaterThanOrEqual(4)
     expect(crawler?.cadSpecs?.length).toBeGreaterThan(0)

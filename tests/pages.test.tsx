@@ -5,6 +5,7 @@ import ProjectsPage from '@/app/projects/page'
 import InternshipsPage from '@/app/internships/page'
 import VortexCrawlerProject from '@/app/projects/vortex-crawler/page'
 import AutoTwinProject from '@/app/projects/autotwin-ai/page'
+import EdgeVisionProject from '@/app/projects/edgevision/page'
 
 // Mock RobotViewer because WebGL Canvas is mocked in jsdom
 jest.mock('@/components/RobotViewer', () => {
@@ -49,5 +50,13 @@ describe('Page Routes Suite Tests', () => {
     expect(screen.getAllByText(/AutoTwin-AI/i).length).toBeGreaterThanOrEqual(1)
     expect(screen.getAllByText(/Residual Loss/i).length).toBeGreaterThanOrEqual(1)
     expect(screen.getAllByText(/4,851/).length).toBeGreaterThanOrEqual(1)
+  })
+
+  test('EdgeVisionProject renders on-device NPU metrics and hackathon track', () => {
+    render(<EdgeVisionProject />)
+    expect(screen.getAllByText(/EdgeVision NPU Profiler/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/Snapdragon NPU/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/Zero-ADB Cable/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/HACKATHON PITCH DECK/i).length).toBeGreaterThanOrEqual(1)
   })
 })
