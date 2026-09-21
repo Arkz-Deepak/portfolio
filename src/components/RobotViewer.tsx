@@ -37,6 +37,7 @@ export default function RobotViewer({
 
   const [webglSupported, setWebglSupported] = useState(true)
   const [loading, setLoading] = useState(true)
+  const [loadProgress, setLoadProgress] = useState<number | null>(null)
   const [modelType, setModelType] = useState<'glb' | 'procedural-cad'>('procedural-cad')
   const [isRotating, setIsRotating] = useState(true)
   const [rotX, setRotX] = useState<number>(-Math.PI / 2) // Default -90 deg to lay flat horizontally
@@ -281,11 +282,18 @@ export default function RobotViewer({
         robotGroup.add(loadedScene)
         setModelType('glb')
         setLoading(false)
+        setLoadProgress(null)
       },
-      undefined,
+      (xhr) => {
+        if (xhr.total > 0) {
+          const percent = Math.min(100, Math.round((xhr.loaded / xhr.total) * 100))
+          setLoadProgress(percent)
+        }
+      },
       (error) => {
         console.warn('GLTF loading notice: using high-performance procedural CAD model', error)
         setLoading(false)
+        setLoadProgress(null)
       }
     )
 
@@ -481,7 +489,7 @@ export default function RobotViewer({
         {loading && (
           <div className="absolute bottom-2.5 right-2.5 z-10 flex items-center gap-2 bg-white/90 border border-blue-200 text-blue-800 dark:bg-slate-900/90 dark:border-cyan-500/30 dark:text-cyan-400 px-2.5 py-1 rounded-lg text-[10px] font-mono backdrop-blur-md shadow-md">
             <FaCube className="animate-spin text-blue-600 dark:text-cyan-400 text-xs" />
-            <span>STREAMING HIGH-POLY CAD MESH...</span>
+            <span>STREAMING HIGH-POLY CAD MESH{loadProgress !== null ? ` (${loadProgress}%)` : '...'}</span>
           </div>
         )}
 
