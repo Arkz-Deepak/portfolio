@@ -4,6 +4,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { FaCube, FaSyncAlt, FaRedo, FaUndo } from 'react-icons/fa'
+import { useTheme } from '@/components/ThemeProvider'
 
 interface RobotViewerProps {
   modelUrl?: string
@@ -20,6 +21,7 @@ export default function RobotViewer({
   compact = false,
   showControls = true
 }: RobotViewerProps) {
+  const { isDark } = useTheme()
   const containerRef = useRef<HTMLDivElement>(null)
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null)
   const sceneRef = useRef<THREE.Scene | null>(null)
@@ -29,6 +31,9 @@ export default function RobotViewer({
   const loadedModelRef = useRef<THREE.Group | null>(null)
   const proceduralModelRef = useRef<THREE.Group | null>(null)
   const edfBladesRef = useRef<THREE.Mesh | null>(null)
+  const gridHelperRef = useRef<THREE.GridHelper | null>(null)
+  const ambientLightRef = useRef<THREE.AmbientLight | null>(null)
+  const mainLightRef = useRef<THREE.DirectionalLight | null>(null)
 
   const [webglSupported, setWebglSupported] = useState(true)
   const [loading, setLoading] = useState(true)
@@ -60,7 +65,7 @@ export default function RobotViewer({
 
     // Scene
     const scene = new THREE.Scene()
-    scene.background = new THREE.Color(0x030712) // Slate-950 CAD Viewport
+    scene.background = new THREE.Color(isDark ? 0x030712 : 0xf8fafc)
     sceneRef.current = scene
 
     // Camera
@@ -88,31 +93,39 @@ export default function RobotViewer({
     controls.maxDistance = 12
     controlsRef.current = controls
 
-    // Lighting Setup
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.3)
+    // Lighting Setup (Adaptive to Theme)
+    const ambientLight = new THREE.AmbientLight(0xffffff, isDark ? 1.3 : 1.7)
     scene.add(ambientLight)
+    ambientLightRef.current = ambientLight
 
-    const mainLight = new THREE.DirectionalLight(0x00f0ff, 2.8)
+    const mainLight = new THREE.DirectionalLight(isDark ? 0x00f0ff : 0x2563eb, isDark ? 2.8 : 2.2)
     mainLight.position.set(5, 8, 5)
     mainLight.castShadow = true
     scene.add(mainLight)
+    mainLightRef.current = mainLight
 
-    const rimLight = new THREE.DirectionalLight(0xff007f, 2.2)
+    const rimLight = new THREE.DirectionalLight(isDark ? 0xff007f : 0x4f46e5, isDark ? 2.2 : 1.6)
     rimLight.position.set(-5, 5, -4)
     scene.add(rimLight)
 
-    const fillLight = new THREE.DirectionalLight(0xffffff, 1.4)
+    const fillLight = new THREE.DirectionalLight(0xffffff, isDark ? 1.4 : 1.8)
     fillLight.position.set(0, -3, 4)
     scene.add(fillLight)
 
-    const pointLight = new THREE.PointLight(0x00ff9d, 1.8, 8)
+    const pointLight = new THREE.PointLight(isDark ? 0x00ff9d : 0x0ea5e9, isDark ? 1.8 : 1.4, 8)
     pointLight.position.set(0, 2, 0)
     scene.add(pointLight)
 
-    // Ground Grid
-    const gridHelper = new THREE.GridHelper(10, 20, 0x00f0ff, 0x1e293b)
+    // Ground Grid (Adaptive to Theme)
+    const gridHelper = new THREE.GridHelper(
+      10,
+      20,
+      isDark ? 0x00f0ff : 0x2563eb,
+      isDark ? 0x1e293b : 0xcbd5e1
+    )
     gridHelper.position.y = -0.01
     scene.add(gridHelper)
+    gridHelperRef.current = gridHelper
 
     // Root Group
     const robotGroup = new THREE.Group()
@@ -329,6 +342,33 @@ export default function RobotViewer({
     }
   }, [rotX, rotY, rotZ])
 
+  // Decoupled Theme Update Effect (Dynamically changes background & grid when theme toggles)
+  useEffect(() => {
+    if (sceneRef.current) {
+      sceneRef.current.background = new THREE.Color(isDark ? 0x030712 : 0xf8fafc)
+    }
+    if (gridHelperRef.current && sceneRef.current) {
+      sceneRef.current.remove(gridHelperRef.current)
+      gridHelperRef.current.geometry.dispose()
+      const newGrid = new THREE.GridHelper(
+        10,
+        20,
+        isDark ? 0x00f0ff : 0x2563eb,
+        isDark ? 0x1e293b : 0xcbd5e1
+      )
+      newGrid.position.y = -0.01
+      sceneRef.current.add(newGrid)
+      gridHelperRef.current = newGrid
+    }
+    if (ambientLightRef.current) {
+      ambientLightRef.current.intensity = isDark ? 1.3 : 1.7
+    }
+    if (mainLightRef.current) {
+      mainLightRef.current.color.set(isDark ? 0x00f0ff : 0x2563eb)
+      mainLightRef.current.intensity = isDark ? 2.8 : 2.2
+    }
+  }, [isDark])
+
   // Quick Orientation Actions
   const setHorizontalFlat = () => {
     setRotX(-Math.PI / 2)
@@ -358,20 +398,20 @@ export default function RobotViewer({
       <div 
         data-testid="robot-viewer"
         style={{ height }}
-        className="w-full rounded-2xl flex flex-col items-center justify-center border-2 border-slate-300 dark:border-cyan-500/40 bg-slate-950 p-6 text-center text-white font-space"
+        className="w-full rounded-2xl flex flex-col items-center justify-center border-2 border-slate-300 dark:border-cyan-500/40 bg-slate-100 dark:bg-slate-950 p-6 text-center text-slate-900 dark:text-white font-space"
       >
-        <FaCube className="text-4xl text-cyan-400 mb-3" />
-        <span className="font-orbitron font-bold text-sm text-cyan-300 mb-1">
+        <FaCube className="text-4xl text-blue-600 dark:text-cyan-400 mb-3" />
+        <span className="font-orbitron font-bold text-sm text-blue-900 dark:text-cyan-300 mb-1">
           3D CAD DIGITAL TWIN: HYBRID VORTEX CRAWLER
         </span>
-        <p className="text-xs text-slate-400 max-w-sm">
+        <p className="text-xs text-slate-600 dark:text-slate-400 max-w-sm">
           WebGL acceleration disabled. Explore full 3D assembly in Autodesk A360 Cloud Viewer.
         </p>
         <a
           href="https://a360.co/3TZt13C"
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-3 px-4 py-2 rounded-xl border border-cyan-400 bg-cyan-500/20 text-cyan-300 text-xs font-orbitron font-bold hover:bg-cyan-400 hover:text-black transition-all"
+          className="mt-3 px-4 py-2 rounded-xl border border-blue-500 bg-blue-50 text-blue-800 hover:bg-blue-100 dark:border-cyan-400 dark:bg-cyan-500/20 dark:text-cyan-300 text-xs font-orbitron font-bold dark:hover:bg-cyan-400 dark:hover:text-black transition-all"
         >
           LAUNCH AUTODESK CLOUD VIEWER ↗
         </a>
@@ -385,13 +425,13 @@ export default function RobotViewer({
       <div 
         ref={containerRef} 
         style={{ height }}
-        className="relative w-full rounded-2xl overflow-hidden border-2 border-slate-300 dark:border-cyan-500/40 bg-slate-950 shadow-xl cursor-grab active:cursor-grabbing select-none"
+        className="relative w-full rounded-2xl overflow-hidden border-2 border-slate-300 dark:border-cyan-500/40 bg-slate-50 dark:bg-slate-950 shadow-xl cursor-grab active:cursor-grabbing select-none"
       >
         {/* Top-Left Telemetry Badge */}
-        <div className="absolute top-2.5 left-2.5 z-10 flex items-center gap-2 bg-slate-900/90 border border-slate-700 dark:border-cyan-500/40 px-2.5 py-1.5 rounded-lg text-[11px] font-mono text-cyan-300 backdrop-blur-md shadow-md">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="font-bold text-white font-orbitron text-[10px] sm:text-xs">3D DIGITAL TWIN:</span>
-          <span className="text-cyan-300 text-[10px] sm:text-xs font-semibold">
+        <div className="absolute top-2.5 left-2.5 z-10 flex items-center gap-2 bg-white/90 border border-slate-300 text-slate-900 dark:bg-slate-900/90 dark:border-cyan-500/40 dark:text-cyan-300 px-2.5 py-1.5 rounded-lg text-[11px] font-mono backdrop-blur-md shadow-md">
+          <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-emerald-400 animate-pulse" />
+          <span className="font-bold text-slate-900 dark:text-white font-orbitron text-[10px] sm:text-xs">3D DIGITAL TWIN:</span>
+          <span className="text-blue-700 dark:text-cyan-300 text-[10px] sm:text-xs font-semibold">
             {modelType === 'glb' ? 'AUTODESK CAD (HORIZONTAL)' : 'PROCEDURAL FUSION CAD'}
           </span>
         </div>
@@ -401,7 +441,7 @@ export default function RobotViewer({
           <div className="absolute top-2.5 right-2.5 z-10 flex items-center gap-1.5 flex-wrap justify-end">
             <button
               onClick={setHorizontalFlat}
-              className="px-2.5 py-1 rounded-lg border bg-slate-900/90 border-slate-700 text-[10px] sm:text-xs font-orbitron font-bold text-cyan-300 hover:border-cyan-400 hover:bg-cyan-950/50 transition-all flex items-center gap-1 shadow-sm"
+              className="px-2.5 py-1 rounded-lg border bg-white/90 border-slate-300 text-[10px] sm:text-xs font-orbitron font-bold text-blue-700 hover:border-blue-500 hover:bg-blue-50 dark:bg-slate-900/90 dark:border-slate-700 dark:text-cyan-300 dark:hover:border-cyan-400 dark:hover:bg-cyan-950/50 transition-all flex items-center gap-1 shadow-sm"
               title="Reset to Horizontal Belly Placement"
             >
               <span>FLAT</span>
@@ -409,7 +449,7 @@ export default function RobotViewer({
 
             <button
               onClick={rotate90X}
-              className="px-2 py-1 rounded-lg border bg-slate-900/90 border-slate-700 text-[10px] sm:text-xs font-orbitron font-bold text-slate-300 hover:border-cyan-400 hover:text-white transition-all shadow-sm"
+              className="px-2 py-1 rounded-lg border bg-white/90 border-slate-300 text-[10px] sm:text-xs font-orbitron font-bold text-slate-700 hover:border-blue-500 hover:text-blue-900 dark:bg-slate-900/90 dark:border-slate-700 dark:text-slate-300 dark:hover:border-cyan-400 dark:hover:text-white transition-all shadow-sm"
               title="Rotate +90° Pitch"
             >
               PITCH
@@ -417,7 +457,7 @@ export default function RobotViewer({
 
             <button
               onClick={rotate90Y}
-              className="px-2 py-1 rounded-lg border bg-slate-900/90 border-slate-700 text-[10px] sm:text-xs font-orbitron font-bold text-slate-300 hover:border-cyan-400 hover:text-white transition-all shadow-sm"
+              className="px-2 py-1 rounded-lg border bg-white/90 border-slate-300 text-[10px] sm:text-xs font-orbitron font-bold text-slate-700 hover:border-blue-500 hover:text-blue-900 dark:bg-slate-900/90 dark:border-slate-700 dark:text-slate-300 dark:hover:border-cyan-400 dark:hover:text-white transition-all shadow-sm"
               title="Rotate +90° Yaw"
             >
               YAW
@@ -427,8 +467,8 @@ export default function RobotViewer({
               onClick={() => setIsRotating((prev) => !prev)}
               className={`p-1.5 px-2 rounded-lg border text-[10px] sm:text-xs font-orbitron font-bold transition-all shadow-sm ${
                 isRotating
-                  ? 'bg-blue-600 text-white border-blue-500 dark:bg-cyan-500/30 dark:border-cyan-400 dark:text-cyan-300'
-                  : 'bg-slate-900/80 text-slate-400 border-slate-700 hover:text-white'
+                  ? 'bg-blue-600 text-white border-blue-600 dark:bg-cyan-500/30 dark:border-cyan-400 dark:text-cyan-300'
+                  : 'bg-white/90 text-slate-600 border-slate-300 hover:text-slate-900 dark:bg-slate-900/80 dark:text-slate-400 dark:border-slate-700 dark:hover:text-white'
               }`}
               title="Toggle Auto-Rotation"
             >
@@ -439,14 +479,14 @@ export default function RobotViewer({
 
         {/* Streaming Background Badge */}
         {loading && (
-          <div className="absolute bottom-2.5 right-2.5 z-10 flex items-center gap-2 bg-slate-900/90 border border-cyan-500/30 px-2.5 py-1 rounded-lg text-[10px] font-mono text-cyan-400 backdrop-blur-md">
-            <FaCube className="animate-spin text-cyan-400 text-xs" />
+          <div className="absolute bottom-2.5 right-2.5 z-10 flex items-center gap-2 bg-white/90 border border-blue-200 text-blue-800 dark:bg-slate-900/90 dark:border-cyan-500/30 dark:text-cyan-400 px-2.5 py-1 rounded-lg text-[10px] font-mono backdrop-blur-md shadow-md">
+            <FaCube className="animate-spin text-blue-600 dark:text-cyan-400 text-xs" />
             <span>STREAMING HIGH-POLY CAD MESH...</span>
           </div>
         )}
 
         {/* Bottom Hint */}
-        <div className="absolute bottom-2.5 left-2.5 z-10 text-[10px] sm:text-[11px] font-mono text-slate-300 bg-slate-900/80 px-2.5 py-1 rounded-md border border-slate-700 pointer-events-none">
+        <div className="absolute bottom-2.5 left-2.5 z-10 text-[10px] sm:text-[11px] font-mono text-slate-600 bg-white/90 border border-slate-300 dark:text-slate-300 dark:bg-slate-900/80 dark:border-slate-700 px-2.5 py-1 rounded-md pointer-events-none shadow-sm">
           💡 DRAG TO ORBIT • SCROLL TO ZOOM • RIGHT-CLICK TO PAN
         </div>
       </div>
