@@ -22,6 +22,8 @@ export const skillsData: SkillCategory[] = [
     category: "AI, Vision & Machine Learning",
     description: "Deep learning models, unsupervised anomaly detection, and vision pipelines",
     skills: [
+      { name: "ConvLSTM / Spatiotemporal Modeling", level: "Advanced" },
+      { name: "TimeDistributed CNNs", level: "Advanced" },
       { name: "Snapdragon NPU / QNN", level: "Advanced" },
       { name: "TFLite & ONNX Runtime", level: "Advanced" },
       { name: "PyTorch & Autoencoders", level: "Advanced" },
@@ -55,6 +57,7 @@ export const skillsData: SkillCategory[] = [
       { name: "C++", level: "Advanced" },
       { name: "C", level: "Advanced" },
       { name: "Rust", level: "Proficient" },
+      { name: "ROS 2 CI/CD (GitHub Actions)", level: "Advanced" },
       { name: "Decentralized Mesh Protocols", level: "Proficient" },
       { name: "FastAPI / Node.js", level: "Advanced" },
       { name: "Three.js / WebGL", level: "Proficient" },

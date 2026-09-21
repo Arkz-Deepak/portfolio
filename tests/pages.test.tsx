@@ -45,11 +45,12 @@ describe('Page Routes Suite Tests', () => {
     expect(screen.getAllByText(/Autodesk Fusion/i).length).toBeGreaterThanOrEqual(1)
   })
 
-  test('AutoTwinProject renders mathematical formulation and metrics', () => {
+  test('AutoTwinProject renders spatiotemporal ConvLSTM formulation and metrics', () => {
     render(<AutoTwinProject />)
     expect(screen.getAllByText(/AutoTwin-AI/i).length).toBeGreaterThanOrEqual(1)
-    expect(screen.getAllByText(/Residual Loss/i).length).toBeGreaterThanOrEqual(1)
-    expect(screen.getAllByText(/4,851/).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/SPATIOTEMPORAL 5D TENSOR/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/ConvLSTM/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/HACKNIMA PITCH DECK/i).length).toBeGreaterThanOrEqual(1)
   })
 
   test('EdgeVisionProject renders on-device NPU metrics and hackathon track', () => {

@@ -27,6 +27,9 @@ describe('Data Store Integrity Tests', () => {
     expect(allSkills).toContain('Snapdragon NPU / QNN')
     expect(allSkills).toContain('TFLite & ONNX Runtime')
     expect(allSkills).toContain('Decentralized Mesh Protocols')
+    expect(allSkills).toContain('ConvLSTM / Spatiotemporal Modeling')
+    expect(allSkills).toContain('TimeDistributed CNNs')
+    expect(allSkills).toContain('ROS 2 CI/CD (GitHub Actions)')
   })
 
   test('projectsData contains EdgeVision NPU Profiler, AutoTwin-AI, and Hybrid Vortex Crawler', () => {
@@ -39,6 +42,10 @@ describe('Data Store Integrity Tests', () => {
     const edgevision = projectsData.find(p => p.id === 'edgevision-npu-profiler')
     expect(edgevision?.stats?.length).toBeGreaterThanOrEqual(4)
     expect(edgevision?.stack).toContain('Snapdragon NPU')
+
+    const autotwin = projectsData.find(p => p.id === 'autotwin-ai')
+    expect(autotwin?.stats?.length).toBeGreaterThanOrEqual(4)
+    expect(autotwin?.stack).toContain('ConvLSTM2d')
 
     const crawler = projectsData.find(p => p.id === 'hybrid-vortex-crawler')
     expect(crawler?.stats?.length).toBeGreaterThanOrEqual(4)

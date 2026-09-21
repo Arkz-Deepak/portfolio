@@ -129,37 +129,49 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "autotwin-ai",
-    title: "AutoTwin-AI: Sim-to-Real Digital Twin",
-    subtitle: "Zero-Defect Anomaly Detection in Automotive & Industrial Discrete Manufacturing",
+    title: "AutoTwin-AI: Spatiotemporal ConvLSTM Welding Inspection",
+    subtitle: "In-Situ Predictive Robotic Weld Monitoring & 3D Digital Twin (HackNIMA 2026 Round 2)",
     category: "ai-vision",
     featured: true,
-    date: "Aug 2026",
-    stack: ["PyTorch", "Convolutional Autoencoder (CAE)", "Blender OptiX", "FastAPI", "TensorRT", "Three.js", "WebGL", "Docker"],
-    stats: [
-      { label: "Defect Photos Needed", value: "0 (CAD Only)" },
-      { label: "Synthetic Renders", value: "4,851" },
-      { label: "Edge Latency", value: "<42 ms" },
-      { label: "Convergence Loss (MSE)", value: "0.000092" }
+    date: "Sep 2026",
+    stack: [
+      "PyTorch",
+      "ConvLSTM2d",
+      "TimeDistributed CNN",
+      "LWIR Radiometric Thermography",
+      "TensorRT",
+      "FastAPI",
+      "Three.js",
+      "ROS 2"
     ],
-    githubUrl: "https://github.com/Arkz-Deepak/AutoTwin-AI",
+    stats: [
+      { label: "Architecture", value: "Spatiotemporal 5D Tensor" },
+      { label: "Inference Latency", value: "<40 ms (TensorRT)" },
+      { label: "Defect Isolation", value: "Next-Frame MSE Spike" },
+      { label: "Sensing", value: "Eye-in-Hand TCP Thermal" }
+    ],
+    githubUrl: "https://github.com/Arkz-Deepak",
+    demoUrl: "https://docs.google.com/presentation/d/1sPcQ4e1_jjpj0JXypPtbesnlkwDpOdKaJvuFtlF2hcU/edit?usp=drivesdk&ouid=104707271718142286385",
+    paperUrl: "https://docs.google.com/document/d/1AuqkxuTheMNYmw5k6l56dOAPQ29gaJuoj3zMCOB1v1M/edit?usp=drivesdk&ouid=104707271718142286385",
     caseStudySlug: "/projects/autotwin-ai",
     media: {
       type: "image",
-      url: "/urban-traffic.jpg",
+      url: "/images/projects/autotwin-convlstm-preview.png",
       aspectRatio: "16:9"
     },
-    summary: "Proprietary Sim-to-Real Digital Twin pipeline eliminating the physical defect collection bottleneck. Ingests native 3D CAD files, generates 4,851 ray-traced domain-randomized synthetic renders under extreme illumination/camera noise, and trains an unsupervised PyTorch Autoencoder to localize micro-anomalies in sub-millimeter precision via reconstruction residual errors (L = ||X - X̂||²).",
+    summary: "Upgraded AutoTwin-AI from static frame inspection to an in-situ spatiotemporal video deep learning framework for robotic arc welding cells. Ingests 30 FPS thermal video streams as 5D tensors (Batch, Time, Channels, Height, Width) from an end-effector mounted LWIR camera tracking the Tool Center Point (TCP). Uses TimeDistributed CNNs and ConvLSTM2d recurrent cells for unsupervised next-frame prediction; sudden Mean Squared Error (MSE) divergences detect subsurface voids, spatter bursts, and cooling rate anomalies in under 40ms, synchronized with a real-time Three.js 3D digital twin HUD.",
     highlights: [
-      "Trained across 50 epochs on NVIDIA RTX 3050 Laptop GPU in ~128.8 min with MSE loss reaching 0.000092.",
-      "Engineered FastAPI / TensorRT edge inference node delivering frame evaluation under 42ms.",
-      "Constructed a 3-panel WebGL dashboard (Live Camera, AI Reconstruction, Residual Heatmap) for instant PLC line-trip alerts."
+      "Overcomes static 2D vision limitations by modeling continuous fluid-thermal weld pool dynamics across time.",
+      "Engineered a sliding-window queue buffering 5D PyTorch tensors for real-time inference on NVIDIA TensorRT.",
+      "Integrated telemetry pipelines computing active arc duration and spatter density index (S_dot) streamed via FastAPI to a 3D WebGL dashboard."
     ],
     architectureMermaid: `graph LR
-      CAD["3D CAD (STEP/IGES)"] --> Blender["Blender OptiX Ray-Tracing Engine"]
-      Blender --> Dataset["4,851 Synthetic Renders (Domain Randomization)"]
-      Dataset --> CAE["PyTorch Conv Autoencoder Training (50 Epochs)"]
-      CAE --> Edge["TensorRT / FastAPI Edge Node (<42ms)"]
-      Edge --> Dashboard["Three.js / WebGL 3-Panel Inspection HUD"]`
+      TCP["Eye-in-Hand LWIR Thermal Camera (30 FPS)"] -->|Sliding Buffer| Tensors["5D Tensors (B, T, C, H, W)"]
+      Tensors --> TDCNN["TimeDistributed 2D CNN (Spatial Geometry)"]
+      TDCNN --> ConvLSTM["ConvLSTM2d Recurrent Layers (Temporal Dynamics)"]
+      ConvLSTM --> Pred["Next-Frame Prediction (t+1)"]
+      Pred --> MSE["MSE Anomaly Head (<40ms TensorRT)"]
+      MSE --> Dashboard["React 18 + Three.js 3D Digital Twin HUD"]`
   },
   {
     id: "oomwoo-coverage-planner",

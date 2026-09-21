@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import { projectsData } from '@/data/projects'
 import Link from 'next/link'
-import { FaArrowLeft, FaCheck, FaBrain, FaCamera } from 'react-icons/fa'
+import { FaArrowLeft, FaCheck, FaBrain, FaCamera, FaEye, FaChartLine, FaRobot } from 'react-icons/fa'
 
 export const metadata: Metadata = {
-  title: 'AutoTwin-AI | Sim-to-Real Digital Twin Case Study | Deepak R.',
-  description: 'Unsupervised convolutional autoencoder anomaly detection with 4,851 Blender OptiX ray-traced domain-randomized synthetic renders.',
+  title: 'AutoTwin-AI v2: Spatiotemporal ConvLSTM | HackNIMA 2026 Case Study | Deepak R.',
+  description: 'In-situ predictive robotic weld monitoring fusing eye-in-hand thermal imaging with ConvLSTM2d networks, next-frame MSE anomaly spikes (<40ms TensorRT), and Three.js 3D Digital Twin HUD.',
 }
 
 export default function AutoTwinProject() {
@@ -26,7 +26,7 @@ export default function AutoTwinProject() {
       <div className="mb-8">
         <div className="flex flex-wrap items-center gap-2 mb-2">
           <span className="text-[10px] font-orbitron font-bold px-2.5 py-1 rounded-full bg-blue-50 text-blue-800 border border-blue-200 dark:bg-cyan-950/60 dark:text-cyan-300 dark:border-cyan-500/50">
-            SIM-TO-REAL DIGITAL TWIN
+            HACKNIMA 2026 ROUND 2 (DOMAIN 2: AI ENHANCEMENT)
           </span>
           <span className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400">
             {project.date}
@@ -40,6 +40,43 @@ export default function AutoTwinProject() {
           {project.subtitle}
         </p>
         <div className="h-1 w-24 bg-blue-600 dark:bg-cyan-400 rounded-full dark:shadow-[0_0_10px_#00f0ff]" />
+      </div>
+
+      {/* Action Links Bar */}
+      <div className="flex flex-wrap items-center gap-3 mb-8">
+        {project.demoUrl && (
+          <a
+            href={project.demoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2 rounded-xl border border-blue-600 bg-blue-600 text-white hover:bg-blue-700 dark:bg-cyan-500/20 dark:border-cyan-400 dark:text-cyan-300 dark:hover:bg-cyan-400 dark:hover:text-black font-orbitron font-bold text-xs transition-all flex items-center gap-2 shadow-md"
+          >
+            <span>HACKNIMA PITCH DECK</span>
+            <span className="text-[10px]">↗</span>
+          </a>
+        )}
+        {project.paperUrl && (
+          <a
+            href={project.paperUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2 rounded-xl border border-indigo-600 bg-indigo-50 text-indigo-800 hover:bg-indigo-100 dark:bg-indigo-950/50 dark:border-indigo-400 dark:text-indigo-300 dark:hover:bg-indigo-400 dark:hover:text-black font-orbitron font-bold text-xs transition-all flex items-center gap-2 shadow-sm"
+          >
+            <span>TECHNICAL SPECIFICATION</span>
+            <span className="text-[10px]">↗</span>
+          </a>
+        )}
+        {project.githubUrl && (
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2 rounded-xl border border-slate-300 bg-white text-slate-800 hover:bg-slate-100 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-300 dark:hover:border-cyan-400 dark:hover:text-cyan-300 font-orbitron font-bold text-xs transition-all flex items-center gap-2 shadow-sm"
+          >
+            <span>VIEW SOURCE CODE</span>
+            <span className="text-[10px]">↗</span>
+          </a>
+        )}
       </div>
 
       {/* Key Metrics Grid */}
@@ -59,23 +96,62 @@ export default function AutoTwinProject() {
         ))}
       </div>
 
-      {/* Theoretical Formulation */}
+      {/* Theoretical & Spatiotemporal Formulation */}
       <div className="p-6 rounded-2xl border bg-white border-slate-200 shadow-md dark:bg-gray-900/60 dark:border-cyan-500/30 mb-10">
         <h2 className="text-xl font-orbitron font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
           <FaBrain className="text-blue-600 dark:text-cyan-400" />
-          MATHEMATICAL & UNSUPERVISED FORMULATION
+          SPATIOTEMPORAL 5D TENSOR & NEXT-FRAME PREDICTION
         </h2>
         <p className="text-xs md:text-sm leading-relaxed text-slate-700 dark:text-gray-300 mb-4">
-          AutoTwin-AI sidesteps the costly requirement of capturing physical defective parts by training an unsupervised deep convolutional autoencoder on <strong>4,851 ray-traced pristine CAD renders</strong> under randomized lux (200–1200), specular noise, and camera poses. Anomaly localization is derived directly from the reconstruction residual error:
+          AutoTwin-AI v2 advances beyond static 2D image analysis into a continuous predictive spatiotemporal deep learning framework. Streaming 30 FPS radiometric thermal video is ingested into 5D PyTorch tensors:
         </p>
 
         <div className="p-4 rounded-xl border bg-slate-100 border-slate-300 dark:bg-black/60 dark:border-cyan-500/40 text-center font-mono text-xs md:text-sm font-bold text-slate-900 dark:text-cyan-300 mb-4">
-          Residual Loss L(X) = || X - X̂ ||² = ∑ ( x_(i,j) - x̂_(i,j) )²
+          Tensor Shape: [Batch, Time, Channels, Height, Width] = (B, T, C, H, W)
+        </div>
+
+        <p className="text-xs md:text-sm leading-relaxed text-slate-700 dark:text-gray-300 mb-4">
+          The network couples <strong>TimeDistributed 2D CNNs</strong> (which extract spatial molten weld pool boundary geometries) with <strong>ConvLSTM2d recurrent layers</strong> (which model thermodynamic fluid flow and non-linear cooling rates across time). The model operates via unsupervised next-frame prediction:
+        </p>
+
+        <div className="p-4 rounded-xl border bg-slate-100 border-slate-300 dark:bg-black/60 dark:border-cyan-500/40 text-center font-mono text-xs md:text-sm font-bold text-slate-900 dark:text-cyan-300 mb-4">
+          Prediction Loss: L_MSE = (1 / (C × H × W)) ∑ || X_(t+1) - X̂_(t+1) ||²
         </div>
 
         <p className="text-xs md:text-sm leading-relaxed text-slate-700 dark:text-gray-300">
-          When an anomaly (crack, dent, misaligned weld, or surface flaw) passes under the inspection line camera, the autoencoder fails to reconstruct the unfamiliar defect geometry, generating a sharp spike in residual loss that instantly triggers automated PLC line-trip alerts.
+          Under nominal steady-state welding, predicted thermal frames match the actual cooling curve, maintaining a near-zero MSE residual. When a transient anomaly occurs—such as a subsurface porosity void, spatter burst, or lack of sidewall fusion—the ConvLSTM prediction diverges sharply, triggering real-time line-trip alerts in <strong>under 40ms on NVIDIA TensorRT</strong>.
         </p>
+      </div>
+
+      {/* Eye-in-Hand TCP Telemetry & Digital Twin HUD */}
+      <div className="p-6 rounded-2xl border bg-white border-slate-200 shadow-md dark:bg-gray-900/60 dark:border-cyan-500/30 mb-10">
+        <h2 className="text-xl font-orbitron font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+          <FaRobot className="text-blue-600 dark:text-cyan-400" />
+          EYE-IN-HAND TCP TELEMETRY & 3D DIGITAL TWIN HUD
+        </h2>
+        <p className="text-xs md:text-sm leading-relaxed text-slate-700 dark:text-gray-300 mb-4">
+          The physical sensing rig features a Long-Wave Infrared (LWIR) radiometric thermal camera mounted directly on the robotic manipulator end-effector, locked to the <strong>Tool Center Point (TCP)</strong>. Real-time telemetry is streamed via FastAPI and WebSockets into a React 18 + Three.js 3D inspection dashboard:
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+          <div className="p-4 rounded-xl border bg-slate-50 border-slate-200 dark:bg-black/50 dark:border-cyan-900/40">
+            <span className="font-orbitron font-bold text-xs text-blue-700 dark:text-cyan-400 block mb-1">
+              EYE-IN-HAND TCP STABILIZATION
+            </span>
+            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              Maintains constant focal distance and viewing angle relative to the active arc regardless of 6-DOF robot arm kinematic maneuvers.
+            </p>
+          </div>
+
+          <div className="p-4 rounded-xl border bg-slate-50 border-slate-200 dark:bg-black/50 dark:border-cyan-900/40">
+            <span className="font-orbitron font-bold text-xs text-blue-700 dark:text-cyan-400 block mb-1">
+              REAL-TIME SPATTER DENSITY (S_DOT)
+            </span>
+            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              Computes active arc duration, localized peak temperature gradients, and spatter ejection rate mapped directly onto the 3D digital twin mesh.
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Engineering Highlights */}
