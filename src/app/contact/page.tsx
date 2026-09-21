@@ -113,7 +113,7 @@ export default function ContactPage() {
                 value={formState.name}
                 onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                 placeholder="e.g. Commander Sheppard" 
-                className="w-full border rounded-xl p-3 text-xs outline-none transition-colors bg-slate-50 border-slate-300 focus:border-blue-600 text-slate-900 dark:bg-black/60 dark:border-cyan-900 dark:focus:border-cyan-400 dark:text-cyan-300" 
+                className="w-full border rounded-xl p-3 text-base sm:text-xs outline-none transition-colors bg-slate-50 border-slate-300 focus:border-blue-600 text-slate-900 dark:bg-black/60 dark:border-cyan-900 dark:focus:border-cyan-400 dark:text-cyan-300" 
               />
             </div>
             <div>
@@ -126,7 +126,7 @@ export default function ContactPage() {
                 value={formState.email}
                 onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                 placeholder="e.g. signal@domain.com" 
-                className="w-full border rounded-xl p-3 text-xs outline-none transition-colors bg-slate-50 border-slate-300 focus:border-blue-600 text-slate-900 dark:bg-black/60 dark:border-cyan-900 dark:focus:border-cyan-400 dark:text-cyan-300" 
+                className="w-full border rounded-xl p-3 text-base sm:text-xs outline-none transition-colors bg-slate-50 border-slate-300 focus:border-blue-600 text-slate-900 dark:bg-black/60 dark:border-cyan-900 dark:focus:border-cyan-400 dark:text-cyan-300" 
               />
             </div>
             <div>
@@ -139,7 +139,7 @@ export default function ContactPage() {
                 onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                 placeholder="Write message details..." 
                 rows={4} 
-                className="w-full border rounded-xl p-3 text-xs outline-none transition-colors resize-none bg-slate-50 border-slate-300 focus:border-blue-600 text-slate-900 dark:bg-black/60 dark:border-cyan-900 dark:focus:border-cyan-400 dark:text-cyan-300" 
+                className="w-full border rounded-xl p-3 text-base sm:text-xs outline-none transition-colors resize-none bg-slate-50 border-slate-300 focus:border-blue-600 text-slate-900 dark:bg-black/60 dark:border-cyan-900 dark:focus:border-cyan-400 dark:text-cyan-300" 
               />
             </div>
             <button 

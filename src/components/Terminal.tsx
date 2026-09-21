@@ -210,7 +210,7 @@ export default function Terminal() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           disabled={isTyping}
-          className="bg-transparent border-none outline-none text-cyan-300 text-xs md:text-sm flex-1 placeholder-cyan-700 font-mono"
+          className="bg-transparent border-none outline-none text-cyan-300 text-base sm:text-xs md:text-sm flex-1 placeholder-cyan-700 font-mono"
           placeholder="TYPE DIRECTIVE OR CLICK PRESET ABOVE..."
           autoComplete="off"
           spellCheck="false"

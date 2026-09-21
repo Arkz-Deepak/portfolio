@@ -1043,8 +1043,18 @@ export default function SlamLab() {
         </div>
 
         {/* Canvas Click Hint */}
-        <div className="absolute bottom-2 left-3 text-xs font-mono text-slate-200 bg-slate-900/90 px-3 py-1 rounded-md pointer-events-none border border-slate-700">
-          {addObstacleMode ? '📍 CLICK ANYWHERE TO PLACE HAZARD ZONE' : '🎯 CLICK ANYWHERE TO SET DESTINATION (HAZARD ZONES ARE PROTECTED)'}
+        <div className="absolute bottom-2 left-3 text-[11px] sm:text-xs font-mono text-slate-200 bg-slate-900/90 px-2.5 sm:px-3 py-1 rounded-md pointer-events-none border border-slate-700">
+          {addObstacleMode ? (
+            <>
+              <span className="hidden sm:inline">📍 CLICK ANYWHERE TO PLACE HAZARD ZONE</span>
+              <span className="sm:hidden">📍 TAP TO PLACE HAZARD</span>
+            </>
+          ) : (
+            <>
+              <span className="hidden sm:inline">🎯 CLICK ANYWHERE TO SET DESTINATION (HAZARD ZONES ARE PROTECTED)</span>
+              <span className="sm:hidden">🎯 TAP TO SET WAYPOINT</span>
+            </>
+          )}
         </div>
       </div>
 

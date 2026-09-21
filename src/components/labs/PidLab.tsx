@@ -210,7 +210,8 @@ export default function PidLab() {
         onClick={handleStep}
         className="w-full py-3 bg-blue-700 hover:bg-blue-800 text-white dark:bg-cyan-500/20 dark:border dark:border-cyan-400 dark:text-cyan-300 dark:hover:bg-cyan-400 dark:hover:text-black font-orbitron font-bold text-xs tracking-wider rounded-xl transition-all shadow-md"
       >
-        TRIGGER STEP DISTURBANCE (TEST DAMPING RESPONSE)
+        <span>TRIGGER STEP DISTURBANCE</span>
+        <span className="hidden sm:inline"> (TEST DAMPING RESPONSE)</span>
       </button>
     </div>
   )

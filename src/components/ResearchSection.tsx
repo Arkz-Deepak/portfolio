@@ -46,7 +46,7 @@ export default function ResearchSection() {
 
               {paper.doi && paper.doi !== 'In Progress' && (
                 <div className="mb-3 flex items-center gap-2">
-                  <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-900 border border-blue-200 dark:bg-cyan-950 dark:text-cyan-300 dark:border-cyan-500/40">
+                  <span className="text-[11px] font-mono font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-900 border border-blue-200 dark:bg-cyan-950 dark:text-cyan-300 dark:border-cyan-500/40 break-all">
                     DOI: {paper.doi}
                   </span>
                 </div>

@@ -889,8 +889,9 @@ export default function VisionLab() {
         </div>
 
         {/* Bottom Click Hint */}
-        <div className="absolute bottom-2 left-3 text-xs font-mono text-slate-300 bg-slate-900/80 px-2.5 py-1 rounded pointer-events-none border border-slate-700">
-          💡 HOVER OVER OBJECTS TO INSPECT | CLICK TO PIN / LOCK TRACKING TARGET
+        <div className="absolute bottom-2 left-3 text-[10px] sm:text-xs font-mono text-slate-300 bg-slate-900/80 px-2.5 py-1 rounded pointer-events-none border border-slate-700">
+          <span className="hidden sm:inline">💡 HOVER OVER OBJECTS TO INSPECT | CLICK TO PIN / LOCK TRACKING TARGET</span>
+          <span className="sm:hidden">💡 TAP TO LOCK TRACKING TARGET</span>
         </div>
       </div>
 

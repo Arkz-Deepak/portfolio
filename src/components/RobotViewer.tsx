@@ -436,20 +436,23 @@ export default function RobotViewer({
         className="relative w-full rounded-2xl overflow-hidden border-2 border-slate-300 dark:border-cyan-500/40 bg-slate-50 dark:bg-slate-950 shadow-xl cursor-grab active:cursor-grabbing select-none"
       >
         {/* Top-Left Telemetry Badge */}
-        <div className="absolute top-2.5 left-2.5 z-10 flex items-center gap-2 bg-white/90 border border-slate-300 text-slate-900 dark:bg-slate-900/90 dark:border-cyan-500/40 dark:text-cyan-300 px-2.5 py-1.5 rounded-lg text-[11px] font-mono backdrop-blur-md shadow-md">
-          <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-emerald-400 animate-pulse" />
-          <span className="font-bold text-slate-900 dark:text-white font-orbitron text-[10px] sm:text-xs">3D DIGITAL TWIN:</span>
-          <span className="text-blue-700 dark:text-cyan-300 text-[10px] sm:text-xs font-semibold">
-            {modelType === 'glb' ? 'AUTODESK CAD (HORIZONTAL)' : 'PROCEDURAL FUSION CAD'}
+        <div className="absolute top-2.5 left-2.5 z-10 flex items-center gap-1.5 sm:gap-2 bg-white/90 border border-slate-300 text-slate-900 dark:bg-slate-900/90 dark:border-cyan-500/40 dark:text-cyan-300 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg text-[10px] sm:text-[11px] font-mono backdrop-blur-md shadow-md">
+          <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-emerald-400 animate-pulse shrink-0" />
+          <span className="font-bold text-slate-900 dark:text-white font-orbitron text-[10px] sm:text-xs">
+            3D TWIN<span className="hidden sm:inline"> DIGITAL TWIN:</span>
+          </span>
+          <span className="text-blue-700 dark:text-cyan-300 text-[10px] sm:text-xs font-semibold hidden xs:inline sm:inline">
+            {modelType === 'glb' ? 'CAD' : 'PROCEDURAL'}
+            <span className="hidden sm:inline"> {modelType === 'glb' ? '(HORIZONTAL)' : 'FUSION'}</span>
           </span>
         </div>
 
         {/* Top-Right Interactive Controls */}
         {showControls && (
-          <div className="absolute top-2.5 right-2.5 z-10 flex items-center gap-1.5 flex-wrap justify-end">
+          <div className="absolute top-2.5 right-2.5 z-10 flex items-center gap-1 sm:gap-1.5 flex-wrap justify-end">
             <button
               onClick={setHorizontalFlat}
-              className="px-2.5 py-1 rounded-lg border bg-white/90 border-slate-300 text-[10px] sm:text-xs font-orbitron font-bold text-blue-700 hover:border-blue-500 hover:bg-blue-50 dark:bg-slate-900/90 dark:border-slate-700 dark:text-cyan-300 dark:hover:border-cyan-400 dark:hover:bg-cyan-950/50 transition-all flex items-center gap-1 shadow-sm"
+              className="px-2 sm:px-2.5 py-1 rounded-lg border bg-white/90 border-slate-300 text-[10px] sm:text-xs font-orbitron font-bold text-blue-700 hover:border-blue-500 hover:bg-blue-50 dark:bg-slate-900/90 dark:border-slate-700 dark:text-cyan-300 dark:hover:border-cyan-400 dark:hover:bg-cyan-950/50 transition-all flex items-center gap-1 shadow-sm"
               title="Reset to Horizontal Belly Placement"
             >
               <span>FLAT</span>
@@ -457,7 +460,7 @@ export default function RobotViewer({
 
             <button
               onClick={rotate90X}
-              className="px-2 py-1 rounded-lg border bg-white/90 border-slate-300 text-[10px] sm:text-xs font-orbitron font-bold text-slate-700 hover:border-blue-500 hover:text-blue-900 dark:bg-slate-900/90 dark:border-slate-700 dark:text-slate-300 dark:hover:border-cyan-400 dark:hover:text-white transition-all shadow-sm"
+              className="px-1.5 sm:px-2 py-1 rounded-lg border bg-white/90 border-slate-300 text-[10px] sm:text-xs font-orbitron font-bold text-slate-700 hover:border-blue-500 hover:text-blue-900 dark:bg-slate-900/90 dark:border-slate-700 dark:text-slate-300 dark:hover:border-cyan-400 dark:hover:text-white transition-all shadow-sm"
               title="Rotate +90° Pitch"
             >
               PITCH
@@ -465,7 +468,7 @@ export default function RobotViewer({
 
             <button
               onClick={rotate90Y}
-              className="px-2 py-1 rounded-lg border bg-white/90 border-slate-300 text-[10px] sm:text-xs font-orbitron font-bold text-slate-700 hover:border-blue-500 hover:text-blue-900 dark:bg-slate-900/90 dark:border-slate-700 dark:text-slate-300 dark:hover:border-cyan-400 dark:hover:text-white transition-all shadow-sm"
+              className="px-1.5 sm:px-2 py-1 rounded-lg border bg-white/90 border-slate-300 text-[10px] sm:text-xs font-orbitron font-bold text-slate-700 hover:border-blue-500 hover:text-blue-900 dark:bg-slate-900/90 dark:border-slate-700 dark:text-slate-300 dark:hover:border-cyan-400 dark:hover:text-white transition-all shadow-sm"
               title="Rotate +90° Yaw"
             >
               YAW
@@ -473,7 +476,7 @@ export default function RobotViewer({
 
             <button
               onClick={() => setIsRotating((prev) => !prev)}
-              className={`p-1.5 px-2 rounded-lg border text-[10px] sm:text-xs font-orbitron font-bold transition-all shadow-sm ${
+              className={`p-1 sm:p-1.5 px-1.5 sm:px-2 rounded-lg border text-[10px] sm:text-xs font-orbitron font-bold transition-all shadow-sm ${
                 isRotating
                   ? 'bg-blue-600 text-white border-blue-600 dark:bg-cyan-500/30 dark:border-cyan-400 dark:text-cyan-300'
                   : 'bg-white/90 text-slate-600 border-slate-300 hover:text-slate-900 dark:bg-slate-900/80 dark:text-slate-400 dark:border-slate-700 dark:hover:text-white'
@@ -489,14 +492,17 @@ export default function RobotViewer({
         {loading && (
           <div className="absolute bottom-2.5 right-2.5 z-10 flex items-center gap-2 bg-white/90 border border-blue-200 text-blue-800 dark:bg-slate-900/90 dark:border-cyan-500/30 dark:text-cyan-400 px-2.5 py-1 rounded-lg text-[10px] font-mono backdrop-blur-md shadow-md">
             <FaCube className="animate-spin text-blue-600 dark:text-cyan-400 text-xs" />
-            <span>STREAMING HIGH-POLY CAD MESH{loadProgress !== null ? ` (${loadProgress}%)` : '...'}</span>
+            <span>STREAMING CAD{loadProgress !== null ? ` (${loadProgress}%)` : '...'}</span>
           </div>
         )}
 
         {/* Bottom Hint */}
-        <div className="absolute bottom-2.5 left-2.5 z-10 text-[10px] sm:text-[11px] font-mono text-slate-600 bg-white/90 border border-slate-300 dark:text-slate-300 dark:bg-slate-900/80 dark:border-slate-700 px-2.5 py-1 rounded-md pointer-events-none shadow-sm">
-          💡 DRAG TO ORBIT • SCROLL TO ZOOM • RIGHT-CLICK TO PAN
-        </div>
+        {!loading && (
+          <div className="absolute bottom-2.5 left-2.5 z-10 text-[10px] sm:text-[11px] font-mono text-slate-600 bg-white/90 border border-slate-300 dark:text-slate-300 dark:bg-slate-900/80 dark:border-slate-700 px-2.5 py-1 rounded-md pointer-events-none shadow-sm">
+            <span className="hidden sm:inline">💡 DRAG TO ORBIT • SCROLL TO ZOOM • RIGHT-CLICK TO PAN</span>
+            <span className="sm:hidden">💡 1-FINGER ROTATE • 2-FINGER PINCH ZOOM</span>
+          </div>
+        )}
       </div>
     </div>
   )

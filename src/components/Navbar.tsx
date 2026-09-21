@@ -87,7 +87,11 @@ export default function Navbar() {
                 {isDark ? <Sun size={18} /> : <Moon size={18} />}
               </button>
             )}
-            <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-blue-900 dark:text-cyan-400">
+            <button 
+              onClick={() => setIsOpen(!isOpen)} 
+              aria-label={isOpen ? "Close Navigation Menu" : "Open Navigation Menu"}
+              className="p-2 text-blue-900 dark:text-cyan-400"
+            >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>

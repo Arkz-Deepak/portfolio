@@ -228,8 +228,12 @@ export default function ArmLab() {
 
   return (
     <div className="w-full flex flex-col gap-4 font-space">
-      <div className="w-full aspect-video border-2 border-slate-300 dark:border-cyan-500/40 rounded-xl overflow-hidden bg-slate-950 min-h-[220px] shadow-lg">
+      <div className="relative w-full aspect-video border-2 border-slate-300 dark:border-cyan-500/40 rounded-xl overflow-hidden bg-slate-950 min-h-[220px] shadow-lg">
         <canvas ref={canvasRef} className="w-full h-full cursor-none" />
+        <div className="absolute bottom-2 left-3 text-[10px] sm:text-xs font-mono text-slate-300 bg-slate-900/80 px-2.5 py-1 rounded pointer-events-none border border-slate-700">
+          <span className="hidden sm:inline">💡 MOVE CURSOR INSIDE WORKSPACE FOR REAL-TIME IK SOLVER</span>
+          <span className="sm:hidden">💡 DRAG FINGER TO MOVE ROBOTIC ARM</span>
+        </div>
       </div>
       
       <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-3 bg-white dark:bg-slate-900 p-3.5 border border-slate-300 dark:border-cyan-500/30 rounded-xl font-mono text-xs shadow-sm">
