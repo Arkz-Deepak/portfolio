@@ -28,6 +28,54 @@ export interface ProjectItem {
 
 export const projectsData: ProjectItem[] = [
   {
+    id: "sih-space-debris-cleaner",
+    title: "Orbital ADR: Autonomous Space Debris Cleaning Robot",
+    subtitle: "Active Debris Removal (ADR) & Orbital Logistics Platform (Smart India Hackathon 2026 — PS SIH26226)",
+    category: "robotics",
+    featured: true,
+    date: "Sep 2026",
+    competition: "Smart India Hackathon 2026 (Hardware Edition | Space Technology Theme)",
+    stack: [
+      "ROS 2",
+      "NVIDIA Jetson Nano",
+      "STM32 Microcontroller",
+      "SpaceYOLO",
+      "OpenCV",
+      "Autodesk Fusion 360",
+      "Electroadhesion",
+      "Three.js",
+      "FastAPI"
+    ],
+    stats: [
+      { label: "Challenge", value: "SIH 2026 (Space Tech)" },
+      { label: "Team", value: "ARKZ (Lead: Deepak R)" },
+      { label: "Capture Mechanism", value: "Electroadhesive + 4-Piston CS" },
+      { label: "Mission Telemetry", value: "Three.js WebGL Live HUD" }
+    ],
+    cadUrl: "https://a360.co/3V6CWF7",
+    githubUrl: "https://github.com/Arkz-Deepak/sih2026-isro-space-tech",
+    demoUrl: "http://sih-space-tech.deepak-arkz.me/",
+    caseStudySlug: "/projects/space-debris-cleaner",
+    media: {
+      type: "image",
+      url: "/images/projects/sih-space-debris-preview.png",
+      aspectRatio: "16:9"
+    },
+    summary: "Engineered an autonomous Active Debris Removal (ADR) spacecraft architecture designed for Low Earth Orbit (LEO) debris remediation under SIH Problem Statement SIH26226. Combines a custom octagonal CAD bus with a 4-piston mechanical Compression System to dampen docking kinetics, alongside an electroadhesive capture plate capable of gripping non-conductive, irregular space debris. Uses a segregated dual-compute architecture: NVIDIA Jetson Nano running ROS 2 and SpaceYOLO for non-cooperative tumbling target pose estimation, linked to an STM32 MCU for microsecond cold-gas thruster firings, backed by a live Three.js orbital mission control interface.",
+    highlights: [
+      "Designed 3-phase orbital flight plan: autonomous chaser rendezvous, mothership deployable deorbit braking modules, and reusable orbital tug logistics.",
+      "Bypassed traditional magnetic grapple limitations using high-voltage electroadhesion to adhere to carbon fiber, composite casings, and glass.",
+      "Deployed an interactive WebGL mission control simulator providing real-time 3D telemetry and docking trajectory visualization."
+    ],
+    architectureMermaid: `graph LR
+      Sensors["Stereo Vision + SpaceYOLO (Jetson Nano)"] -->|Pose Estimation| ROS2["ROS 2 Guidance & Rendezvous Stack"]
+      ROS2 -->|UART Actuation Commands| STM32["STM32 Real-Time Controller"]
+      STM32 --> Thrusters["Cold-Gas Reaction Control Thrusters"]
+      STM32 --> CS["4-Piston Kinetic Damping System"]
+      CS --> Capture["Electroadhesive Capture Plate"]
+      ROS2 -->|Telemetry Stream| Telemetry["Three.js Live Mission Control WebGL"]`
+  },
+  {
     id: "edgevision-npu-profiler",
     title: "EdgeVision NPU Profiler",
     subtitle: "Bare-Metal On-Device Edge AI Evaluation Testbench (iQOO Hackathon 2026 Grand Finale)",
@@ -130,7 +178,7 @@ export const projectsData: ProjectItem[] = [
   {
     id: "autotwin-ai",
     title: "AutoTwin-AI: Spatiotemporal ConvLSTM Welding Inspection",
-    subtitle: "In-Situ Predictive Robotic Weld Monitoring & 3D Digital Twin (HackNIMA 2026 Round 2)",
+    subtitle: "In-Situ Predictive Robotic Weld Monitoring & 3D Digital Twin (HackNIMA 2026 Finalist — Presented Sep 26, 2026)",
     category: "ai-vision",
     featured: true,
     date: "Sep 2026",
@@ -161,6 +209,7 @@ export const projectsData: ProjectItem[] = [
     },
     summary: "Upgraded AutoTwin-AI from static frame inspection to an in-situ spatiotemporal video deep learning framework for robotic arc welding cells. Ingests 30 FPS thermal video streams as 5D tensors (Batch, Time, Channels, Height, Width) from an end-effector mounted LWIR camera tracking the Tool Center Point (TCP). Uses TimeDistributed CNNs and ConvLSTM2d recurrent cells for unsupervised next-frame prediction; sudden Mean Squared Error (MSE) divergences detect subsurface voids, spatter bursts, and cooling rate anomalies in under 40ms, synchronized with a real-time Three.js 3D digital twin HUD.",
     highlights: [
+      "Presented live to the international jury panel during the HackNIMA 2026 Final Round on September 26, 2026.",
       "Overcomes static 2D vision limitations by modeling continuous fluid-thermal weld pool dynamics across time.",
       "Engineered a sliding-window queue buffering 5D PyTorch tensors for real-time inference on NVIDIA TensorRT.",
       "Integrated telemetry pipelines computing active arc duration and spatter density index (S_dot) streamed via FastAPI to a 3D WebGL dashboard."

@@ -6,6 +6,7 @@ import InternshipsPage from '@/app/internships/page'
 import VortexCrawlerProject from '@/app/projects/vortex-crawler/page'
 import AutoTwinProject from '@/app/projects/autotwin-ai/page'
 import EdgeVisionProject from '@/app/projects/edgevision/page'
+import SpaceDebrisCleanerProject from '@/app/projects/space-debris-cleaner/page'
 
 // Mock RobotViewer because WebGL Canvas is mocked in jsdom
 jest.mock('@/components/RobotViewer', () => {
@@ -59,5 +60,14 @@ describe('Page Routes Suite Tests', () => {
     expect(screen.getAllByText(/Snapdragon NPU/i).length).toBeGreaterThanOrEqual(1)
     expect(screen.getAllByText(/Zero-ADB Cable/i).length).toBeGreaterThanOrEqual(1)
     expect(screen.getAllByText(/HACKATHON PITCH DECK/i).length).toBeGreaterThanOrEqual(1)
+  })
+
+  test('SpaceDebrisCleanerProject renders orbital ADR architecture, CAD link, and metrics', () => {
+    render(<SpaceDebrisCleanerProject />)
+    expect(screen.getAllByText(/Orbital ADR/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/Space Debris/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/MISSION CONTROL HUD/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/AUTODESK FUSION 3D CAD/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/Electroadhesion/i).length).toBeGreaterThanOrEqual(1)
   })
 })

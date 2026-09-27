@@ -10,6 +10,7 @@ export const skillsData: SkillCategory[] = [
     description: "Autonomous navigation, kinematics, and spatial simulation environments",
     skills: [
       { name: "ROS 2 (Jazzy)", level: "Advanced" },
+      { name: "Space Robotics & Orbital Rendezvous", level: "Proficient" },
       { name: "Nav2 Navigation Stack", level: "Advanced" },
       { name: "SLAM Toolbox", level: "Advanced" },
       { name: "Gazebo / Ignition", level: "Advanced" },
@@ -40,6 +41,9 @@ export const skillsData: SkillCategory[] = [
     category: "Embedded Systems & Hardware",
     description: "Real-time microcontrollers, motor drivers, and industrial automation",
     skills: [
+      { name: "STM32 Microcontrollers", level: "Advanced" },
+      { name: "ESP-NOW & LoRa Mesh OTA", level: "Advanced" },
+      { name: "Electroadhesive Actuation", level: "Advanced" },
       { name: "Raspberry Pi 4", level: "Advanced" },
       { name: "ESP32 / ESP8266 (FreeRTOS)", level: "Advanced" },
       { name: "BTS7960 43A Motor Drivers", level: "Advanced" },

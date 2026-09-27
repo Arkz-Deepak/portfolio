@@ -30,15 +30,25 @@ describe('Data Store Integrity Tests', () => {
     expect(allSkills).toContain('ConvLSTM / Spatiotemporal Modeling')
     expect(allSkills).toContain('TimeDistributed CNNs')
     expect(allSkills).toContain('ROS 2 CI/CD (GitHub Actions)')
+    expect(allSkills).toContain('Space Robotics & Orbital Rendezvous')
+    expect(allSkills).toContain('STM32 Microcontrollers')
+    expect(allSkills).toContain('ESP-NOW & LoRa Mesh OTA')
   })
 
-  test('projectsData contains EdgeVision NPU Profiler, AutoTwin-AI, and Hybrid Vortex Crawler', () => {
+  test('projectsData contains SIH Space Debris Cleaner, EdgeVision, AutoTwin-AI, and Vortex Crawler', () => {
     const projectIds = projectsData.map(p => p.id)
+    expect(projectIds).toContain('sih-space-debris-cleaner')
     expect(projectIds).toContain('edgevision-npu-profiler')
     expect(projectIds).toContain('autotwin-ai')
     expect(projectIds).toContain('hybrid-vortex-crawler')
     expect(projectIds).toContain('oomwoo-coverage-planner')
     
+    const spaceDebris = projectsData.find(p => p.id === 'sih-space-debris-cleaner')
+    expect(spaceDebris?.stats?.length).toBeGreaterThanOrEqual(4)
+    expect(spaceDebris?.stack).toContain('SpaceYOLO')
+    expect(spaceDebris?.stack).toContain('STM32 Microcontroller')
+    expect(spaceDebris?.cadUrl).toContain('a360.co')
+
     const edgevision = projectsData.find(p => p.id === 'edgevision-npu-profiler')
     expect(edgevision?.stats?.length).toBeGreaterThanOrEqual(4)
     expect(edgevision?.stack).toContain('Snapdragon NPU')

@@ -46,6 +46,28 @@ export default function FeaturedProjects() {
                 </div>
               )}
 
+              {/* Media Preview Banner for Projects without interactive 3D model */}
+              {project.media && !project.model3dUrl && (
+                <div className="mb-5 relative w-full h-[220px] rounded-xl overflow-hidden border border-slate-200 dark:border-cyan-500/30 group bg-slate-950">
+                  <img
+                    src={project.media.url}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  {project.demoUrl && (
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute bottom-2.5 right-2.5 bg-slate-900/90 hover:bg-black border border-cyan-400/40 text-cyan-300 px-3 py-1 rounded-lg text-[10px] font-orbitron font-bold backdrop-blur-md transition-all shadow-md flex items-center gap-1.5"
+                    >
+                      <span>LIVE TELEMETRY HUD</span>
+                      <span className="text-xs">↗</span>
+                    </a>
+                  )}
+                </div>
+              )}
+
               {/* Key Metrics Grid */}
               {project.stats && (
                 <div className="grid grid-cols-2 gap-2.5 mb-4 font-mono text-xs">

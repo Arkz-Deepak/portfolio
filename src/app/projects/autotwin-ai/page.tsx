@@ -26,7 +26,7 @@ export default function AutoTwinProject() {
       <div className="mb-8">
         <div className="flex flex-wrap items-center gap-2 mb-2">
           <span className="text-[10px] font-orbitron font-bold px-2.5 py-1 rounded-full bg-blue-50 text-blue-800 border border-blue-200 dark:bg-cyan-950/60 dark:text-cyan-300 dark:border-cyan-500/50">
-            HACKNIMA 2026 ROUND 2 (DOMAIN 2: AI ENHANCEMENT)
+            HACKNIMA 2026 FINAL ROUND (DOMAIN 2: AI ENHANCEMENT)
           </span>
           <span className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400">
             {project.date}
