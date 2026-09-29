@@ -134,6 +134,8 @@ export default function PidLab() {
     massState.current.v += (Math.random() - 0.5) * 40
   }
 
+  const [showMath, setShowMath] = useState(false)
+
   return (
     <div className="w-full flex flex-col gap-4 font-space">
       {/* Canvas Viewport */}
@@ -213,6 +215,42 @@ export default function PidLab() {
         <span>TRIGGER STEP DISTURBANCE</span>
         <span className="hidden sm:inline"> (TEST DAMPING RESPONSE)</span>
       </button>
+
+      {/* Control Systems Math Drawer */}
+      <div className="border border-slate-200 dark:border-cyan-500/20 rounded-xl bg-slate-50 dark:bg-black/40 overflow-hidden text-xs">
+        <button
+          onClick={() => setShowMath(!showMath)}
+          className="w-full px-3.5 py-2 flex items-center justify-between text-left font-orbitron font-bold text-[11px] text-slate-800 dark:text-cyan-300 hover:bg-slate-100 dark:hover:bg-cyan-950/30 transition-colors"
+        >
+          <span className="flex items-center gap-1.5">
+            <span>📐</span> CONTROL LOOP TRANSFER FUNCTION & DISCRETE DYNAMICS
+          </span>
+          <span className="text-xs">{showMath ? '▲ HIDE' : '▼ SHOW MATH'}</span>
+        </button>
+
+        {showMath && (
+          <div className="p-3.5 border-t border-slate-200 dark:border-cyan-500/20 font-mono text-[11px] space-y-2.5 bg-white dark:bg-black/70 text-slate-700 dark:text-slate-300">
+            <div>
+              <span className="text-blue-700 dark:text-cyan-400 font-bold block">1. Continuous PID Control Law:</span>
+              <p className="mt-0.5 text-slate-800 dark:text-slate-200">
+                u(t) = K_p · e(t) + K_i · ∫₀ᵗ e(τ) dτ + K_d · (de(t) / dt)
+              </p>
+            </div>
+            <div>
+              <span className="text-blue-700 dark:text-cyan-400 font-bold block">2. Discrete-Time Numerical Implementation (Δt = 40ms):</span>
+              <p className="mt-0.5 text-slate-800 dark:text-slate-200">
+                u[k] = K_p · e[k] + K_i · ∑ e[j]·Δt + K_d · (e[k] − e[k−1]) / Δt
+              </p>
+            </div>
+            <div>
+              <span className="text-blue-700 dark:text-cyan-400 font-bold block">3. Mass-Spring-Damper Physical Plant Dynamics:</span>
+              <p className="mt-0.5 text-slate-800 dark:text-slate-200">
+                m · ẍ(t) + c · ẋ(t) = u(t) &nbsp;(m = 2.5 kg, c = 0.45 N·s/m)
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   )
 }

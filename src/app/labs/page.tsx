@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import SlamLab from '@/components/labs/SlamLab'
 import VisionLab from '@/components/labs/VisionLab'
 import PidLab from '@/components/labs/PidLab'
@@ -13,7 +14,7 @@ export default function LabsPage() {
   return (
     <main className="min-h-[100dvh] w-full max-w-[100vw] overflow-x-hidden pt-24 pb-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col items-center justify-center transition-colors duration-300 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white">
       {/* Header Banner */}
-      <div className="text-center mb-12">
+      <div className="text-center mb-10 w-full max-w-3xl">
         <span className="text-xs font-mono tracking-widest text-blue-700 dark:text-cyan-400 font-bold px-3 py-1 rounded-full border border-blue-200 bg-blue-50 dark:bg-cyan-950/40 dark:border-cyan-500/30 mb-3 inline-block">
           DEEPAK.OS :: INTERACTIVE SIMULATION LABS
         </span>
@@ -24,6 +25,19 @@ export default function LabsPage() {
           Test real-time autonomous navigation, neural computer vision perception, and closed-loop feedback control systems in an interactive browser sandbox.
         </p>
         <div className="h-1 w-24 mx-auto rounded-full bg-blue-600 dark:bg-cyan-400 mt-4 dark:shadow-[0_0_10px_#00f0ff]" />
+
+        {/* Real-vs-Sim Notice */}
+        <div className="mt-6 p-4 rounded-xl border border-blue-200 bg-blue-50/70 text-slate-800 dark:border-cyan-500/30 dark:bg-black/40 dark:text-slate-300 font-mono text-xs flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left shadow-sm">
+          <span className="text-2xl shrink-0">🔬</span>
+          <div className="flex-1">
+            <span className="font-orbitron font-bold text-blue-900 dark:text-cyan-300 block mb-0.5">
+              SIMULATION VS. HARDWARE IMPLEMENTATION:
+            </span>
+            <span>
+              These interactive modules are educational browser sandboxes modeling kinematic solvers, A* costmaps, and PID transfer functions. For production ROS 2 Jazzy architectures, Autodesk Fusion CAD assemblies, and STM32 firmware, explore the <Link href="/projects" className="text-blue-700 dark:text-cyan-400 font-bold underline hover:opacity-80">Hardware Projects Archive ↗</Link>.
+            </span>
+          </div>
+        </div>
       </div>
 
       {/* Lab 1 & 2 Grid */}

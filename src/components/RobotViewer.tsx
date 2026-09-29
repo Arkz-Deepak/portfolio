@@ -66,7 +66,7 @@ export default function RobotViewer({
 
     // Scene
     const scene = new THREE.Scene()
-    scene.background = new THREE.Color(isDark ? 0x030712 : 0xf8fafc)
+    scene.background = new THREE.Color(isDark ? 0x030712 : 0xe2e8f0)
     sceneRef.current = scene
 
     // Camera

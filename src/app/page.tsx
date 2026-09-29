@@ -463,21 +463,54 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="space-y-4 overflow-y-auto max-h-[500px] pr-1">
-                  <iframe 
-                    src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7487740372673232896" 
-                    className="w-full h-[380px] rounded-xl border border-slate-200 dark:border-slate-800 bg-white/5" 
-                    frameBorder="0" 
-                    allowFullScreen 
-                    title="20-Day ROS 2 Training"
-                  />
-                  <iframe 
-                    src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7464295823774736384" 
-                    className="w-full h-[380px] rounded-xl border border-slate-200 dark:border-slate-800 bg-white/5" 
-                    frameBorder="0" 
-                    allowFullScreen 
-                    title="DEFTECH Bharat"
-                  />
+                <div className="space-y-4 overflow-y-auto max-h-[520px] pr-1">
+                  <div className="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden bg-slate-50 dark:bg-black/30">
+                    <div className="px-3.5 py-2 bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs">
+                      <span className="font-orbitron font-bold text-slate-800 dark:text-cyan-300 text-[11px]">
+                        ROS 2 INDUSTRIAL PROGRAM — KARTHIKESH ROBOTICS
+                      </span>
+                      <a 
+                        href="https://www.linkedin.com/feed/update/urn:li:ugcPost:7487740372673232896" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-[10px] font-mono font-bold text-blue-700 hover:text-blue-900 dark:text-cyan-400 dark:hover:text-cyan-200 flex items-center gap-1"
+                      >
+                        <span>VIEW ON LINKEDIN</span>
+                        <span>↗</span>
+                      </a>
+                    </div>
+                    <iframe 
+                      src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7487740372673232896" 
+                      className="w-full h-[400px] border-none bg-white/5" 
+                      frameBorder="0" 
+                      allowFullScreen 
+                      title="20-Day ROS 2 Training Post"
+                    />
+                  </div>
+
+                  <div className="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden bg-slate-50 dark:bg-black/30">
+                    <div className="px-3.5 py-2 bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs">
+                      <span className="font-orbitron font-bold text-slate-800 dark:text-cyan-300 text-[11px]">
+                        DEFTECH BHARAT 2026 — BENGALURU DEFENSE EXPO
+                      </span>
+                      <a 
+                        href="https://www.linkedin.com/feed/update/urn:li:ugcPost:7464295823774736384" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-[10px] font-mono font-bold text-blue-700 hover:text-blue-900 dark:text-cyan-400 dark:hover:text-cyan-200 flex items-center gap-1"
+                      >
+                        <span>VIEW ON LINKEDIN</span>
+                        <span>↗</span>
+                      </a>
+                    </div>
+                    <iframe 
+                      src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7464295823774736384" 
+                      className="w-full h-[400px] border-none bg-white/5" 
+                      frameBorder="0" 
+                      allowFullScreen 
+                      title="DEFTECH Bharat Defense Expo Post"
+                    />
+                  </div>
                 </div>
               </div>
             </div>

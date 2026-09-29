@@ -42,7 +42,27 @@ export default function FeaturedProjects() {
               {/* 3D Robot Digital Twin Viewer for 3D Projects */}
               {project.model3dUrl && (
                 <div className="mb-5">
-                  <RobotViewer modelUrl={project.model3dUrl} height="280px" compact={true} />
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="text-[11px] font-orbitron font-bold text-slate-800 dark:text-cyan-300 flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-cyan-400 animate-pulse" />
+                      INTERACTIVE 3D DIGITAL TWIN
+                    </span>
+                    {project.cadUrl && (
+                      <a
+                        href={project.cadUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[10px] font-mono font-bold text-blue-700 hover:text-blue-900 dark:text-cyan-400 dark:hover:text-cyan-300 flex items-center gap-1 transition-colors"
+                      >
+                        <span>AUTODESK A360 CAD</span>
+                        <span>↗</span>
+                      </a>
+                    )}
+                  </div>
+                  <RobotViewer modelUrl={project.model3dUrl} height="260px" compact={true} />
+                  <p className="text-[11px] font-space text-slate-600 dark:text-slate-400 mt-1.5 leading-relaxed">
+                    Active aerodynamic vortex wall-climbing inspection robot generating 45N holding force via 70mm EDF and N52 magnetic tracks.
+                  </p>
                 </div>
               )}
 

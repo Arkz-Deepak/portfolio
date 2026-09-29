@@ -36,11 +36,11 @@ const PRESET_QUERIES: QueryPreset[] = [
     label: '> LIST PROJECTS',
     command: 'list projects',
     output: [
-      '• AutoTwin-AI: Sim-to-Real Anomaly Detection with 4,851 Blender OptiX Synthetic Renders (MSE: 0.000092).',
-      '• Hybrid Vortex Crawler: 45N EDF Wall-Climbing Inspection Robot (NeX-Gen Robotics 2026 | IDREA).',
-      '• OOMWOO: Autonomous Robot Vacuum System (ROS 2 Jazzy, Nav2, Boustrophedon Coverage Planning).',
-      '• Smart Traffic Controller: SIH25050 Real-Time YOLOv8 Queue Optimization (<30ms latency).',
-      '• Hybrid AI Policy Bot: Anomaly Detection and Automated Document Compliance Engine.'
+      '• SIH 2026: Orbital ADR Autonomous Space Debris Cleaner (Active Debris Removal, Electroadhesive capture).',
+      '• EdgeVision NPU Profiler: Bare-metal Qualcomm NPU evaluation testbench (iQOO Hackathon Grand Finale).',
+      '• AutoTwin-AI v2: Spatiotemporal ConvLSTM Robotic Welding Inspection & 3D Digital Twin (HackNIMA 2026).',
+      '• Hybrid Vortex Crawler: 45N Active Vortex EDF Wall-Climber (NeX-Gen Robotics 2026 | IDREA).',
+      '• OOMWOO: Autonomous Robot Vacuum System (ROS 2 Jazzy, Nav2, Boustrophedon Coverage Planning).'
     ]
   },
   {
@@ -144,6 +144,75 @@ export default function Terminal() {
 
     setHistory(prev => [...prev, { type: 'input', text: `> ${rawInput}` }])
 
+    // Special commands & Easter eggs
+    if (cmd === 'help') {
+      typeWriterOutput([
+        'DEEPAK.OS TERMINAL HELP DIRECTIVES:',
+        '• Directives: whoami, skills, projects, experience, research, certs, contact, clear',
+        '• Easter Eggs: try "easteregg", "matrix", "sudo", "arkz", "cat", "robot"',
+        '• Click any directive button above for instant telemetry.'
+      ])
+      return
+    }
+
+    if (cmd === 'easteregg' || cmd === 'egg') {
+      typeWriterOutput([
+        '🥚 [EASTER EGG DETECTED]',
+        'Reviewer: "Is the interactive 3D Digital Twin the Easter egg?!"',
+        'DEEPAK.OS: "The 3D CAD viewer is standard engineering rigor. The real Easter egg is here in the terminal!"',
+        'Bonus triggers unlocked: try typing "matrix", "sudo", "arkz", "cat", or "robot"!'
+      ])
+      return
+    }
+
+    if (cmd === 'matrix') {
+      typeWriterOutput([
+        'Wake up, Neo...',
+        'Follow the white rabbit. 🐇',
+        '01000100 01000101 01000101 01010000 01000001 01001011 (D-E-E-P-A-K)',
+        '[DEEPAK.OS KERNEL]: Physical AI & Autonomous Robotics Systems Online.'
+      ])
+      return
+    }
+
+    if (cmd === 'sudo') {
+      typeWriterOutput([
+        'root@deepak-os:~$ sudo rm -rf /',
+        'ACCESS DENIED: User "visitor" is not in the sudoers file.',
+        'This incident has been logged and reported to Deepak R.'
+      ])
+      return
+    }
+
+    if (cmd === 'arkz') {
+      typeWriterOutput([
+        '   _   ___  _  ______',
+        '  /_\ | _ \\| |/ /_  /',
+        ' / _ \\|   /| \' < / / ',
+        '/_/ \\_\\_|_\\_|_|\\_\\/___|',
+        'ARKZ LABS :: Autonomous Robotics, Kinematics & Zero-G Orbital Systems.'
+      ])
+      return
+    }
+
+    if (cmd === 'cat') {
+      typeWriterOutput([
+        '(=^･ω･^=) Robotic Quadruped / Cat node online.',
+        'CAN bus heartbeat: Nominal. Ultrasonic whiskers: Active. Purring at 45Hz.'
+      ])
+      return
+    }
+
+    if (cmd === 'robot') {
+      typeWriterOutput([
+        '🤖 [HYBRID VORTEX CRAWLER TELEMETRY]',
+        'Hold-down Force: 45N Active Vortex EDF LOCKED.',
+        'Tread Actuation: 4x 164 RPM Planetary Motors Nominal.',
+        'Surface Orientation: Vertical Steel Wall (Pitch: 90.0°).'
+      ])
+      return
+    }
+
     const matchedPreset = PRESET_QUERIES.find(
       p => p.command === cmd || p.id === cmd || p.label.toLowerCase().includes(cmd)
     )
@@ -153,7 +222,7 @@ export default function Terminal() {
     } else {
       typeWriterOutput([
         `COMMAND UNRECOGNIZED: "${rawInput}"`,
-        'TYPE "help" OR CLICK ONE OF THE 7 PRESET QUERY BUTTONS BELOW.'
+        'TYPE "help" TO VIEW ALL DIRECTIVES & EASTER EGGS, OR CLICK A PRESET ABOVE.'
       ])
     }
   }
@@ -211,7 +280,7 @@ export default function Terminal() {
           onChange={(e) => setInput(e.target.value)}
           disabled={isTyping}
           className="bg-transparent border-none outline-none text-cyan-300 text-base sm:text-xs md:text-sm flex-1 placeholder-cyan-700 font-mono"
-          placeholder="TYPE DIRECTIVE OR CLICK PRESET ABOVE..."
+          placeholder="TYPE DIRECTIVE (e.g., 'help', 'easteregg', 'whoami')..."
           autoComplete="off"
           spellCheck="false"
         />
@@ -223,6 +292,23 @@ export default function Terminal() {
           EXECUTE
         </button>
       </form>
+
+      {/* Interactive Command Suggestion Bar */}
+      <div className="px-3 py-1.5 bg-slate-950 border-t border-slate-800 text-[10px] font-mono text-slate-400 flex items-center justify-between flex-wrap gap-1">
+        <span className="text-cyan-400/90 font-semibold">💡 DIRECTIVES & SECRETS:</span>
+        <div className="flex gap-1.5 flex-wrap">
+          {['help', 'whoami', 'projects', 'easteregg', 'matrix', 'clear'].map((hint) => (
+            <button
+              key={hint}
+              type="button"
+              onClick={() => setInput(hint)}
+              className="text-[10px] px-1.5 py-0.5 rounded bg-slate-900 border border-slate-700 hover:border-cyan-400 hover:text-cyan-300 transition-colors"
+            >
+              {hint}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }

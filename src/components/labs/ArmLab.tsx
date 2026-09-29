@@ -226,6 +226,8 @@ export default function ArmLab() {
     }
   }
 
+  const [showMath, setShowMath] = useState(false)
+
   return (
     <div className="w-full flex flex-col gap-4 font-space">
       <div className="relative w-full aspect-video border-2 border-slate-300 dark:border-cyan-500/40 rounded-xl overflow-hidden bg-slate-950 min-h-[220px] shadow-lg">
@@ -268,6 +270,45 @@ export default function ArmLab() {
         >
           RESET POSITION
         </button>
+      </div>
+
+      {/* Kinematics Math Drawer */}
+      <div className="border border-slate-200 dark:border-cyan-500/20 rounded-xl bg-slate-50 dark:bg-black/40 overflow-hidden text-xs">
+        <button
+          onClick={() => setShowMath(!showMath)}
+          className="w-full px-3.5 py-2 flex items-center justify-between text-left font-orbitron font-bold text-[11px] text-slate-800 dark:text-cyan-300 hover:bg-slate-100 dark:hover:bg-cyan-950/30 transition-colors"
+        >
+          <span className="flex items-center gap-1.5">
+            <span>📐</span> KINEMATIC FORMULATION & CLOSED-FORM IK EQUATIONS
+          </span>
+          <span className="text-xs">{showMath ? '▲ HIDE' : '▼ SHOW MATH'}</span>
+        </button>
+
+        {showMath && (
+          <div className="p-3.5 border-t border-slate-200 dark:border-cyan-500/20 font-mono text-[11px] space-y-2.5 bg-white dark:bg-black/70 text-slate-700 dark:text-slate-300">
+            <div>
+              <span className="text-blue-700 dark:text-cyan-400 font-bold block">1. Forward Kinematics (FK):</span>
+              <p className="mt-0.5 text-slate-800 dark:text-slate-200">
+                x = L₁·cos(θ₁) + L₂·cos(θ₁ + θ₂)<br />
+                y = L₁·sin(θ₁) + L₂·sin(θ₁ + θ₂)
+              </p>
+            </div>
+            <div>
+              <span className="text-blue-700 dark:text-cyan-400 font-bold block">2. Inverse Kinematics (IK - Geometric Law of Cosines):</span>
+              <p className="mt-0.5 text-slate-800 dark:text-slate-200">
+                D = (x² + y² − L₁² − L₂²) / (2 · L₁ · L₂)<br />
+                θ₂ = atan2(−√(1 − D²), D) &nbsp;[elbow-down configuration]<br />
+                θ₁ = atan2(y, x) − atan2(L₂·sin(θ₂), L₁ + L₂·cos(θ₂))
+              </p>
+            </div>
+            <div>
+              <span className="text-blue-700 dark:text-cyan-400 font-bold block">3. Joint Inertia & Dynamic Damping:</span>
+              <p className="mt-0.5 text-slate-800 dark:text-slate-200">
+                a = (x_target − x_current) · k_m &nbsp;(k_m = 0.22, damping = 0.82)
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
