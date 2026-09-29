@@ -24,7 +24,7 @@ export interface ProfileData {
 export const profileData: ProfileData = {
   name: "Deepak R",
   legalName: "Deepak Rajender",
-  tagline: "Robotics & Automation Engineer | Physical AI, ROS 2 Jazzy, Autonomous Systems & Sim-to-Real Digital Twins",
+  tagline: "Robotics & Automation Engineering Student | Physical AI, ROS 2 Jazzy & Sim-to-Real Digital Twins",
   location: "Chennai, Tamil Nadu, India",
   email: "deepak121289@outlook.com",
   cgpa: "9.2 / 10.0",
@@ -41,5 +41,5 @@ export const profileData: ProfileData = {
     linkedin: "https://www.linkedin.com/in/robotics-deepak/",
     portfolio: "https://www.deepak-arkz.me"
   },
-  bioSummary: "Dedicated and research-oriented Robotics & Automation engineer specializing in Physical AI, ROS 2 Jazzy, Autonomous Mobile Robots (AMR), Gazebo simulations, and Sim-to-Real unsupervised anomaly detection pipelines. Proven track record bridging low-level embedded RTOS actuation with high-level deep learning and computer vision architectures."
+  bioSummary: "Dedicated and research-oriented Robotics & Automation engineering student specializing in Physical AI, ROS 2 Jazzy, Autonomous Mobile Robots (AMR), Gazebo simulations, and Sim-to-Real unsupervised anomaly detection pipelines. Proven track record bridging low-level embedded RTOS actuation with high-level deep learning and computer vision architectures."
 };

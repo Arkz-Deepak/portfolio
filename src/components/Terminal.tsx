@@ -15,7 +15,7 @@ const PRESET_QUERIES: QueryPreset[] = [
     command: 'whoami',
     output: [
       'IDENTITY: Deepak R.',
-      'ROLE: Robotics & Automation Engineer | Physical AI & Sim-to-Real Digital Twins.',
+      'ROLE: Robotics & Automation Engineering Student | Physical AI & Sim-to-Real Digital Twins.',
       'INSTITUTION: Dhaanish Ahmed College of Engineering (Anna University) | CGPA: 9.2/10.0.',
       'SPECIALIZATION: ROS 2 Jazzy, Nav2, SLAM Toolbox, PyTorch Autoencoders, Computer Vision, Embedded RTOS.'
     ]

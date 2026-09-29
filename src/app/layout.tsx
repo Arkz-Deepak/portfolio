@@ -40,8 +40,8 @@ const jsonLd = {
   ],
   url: 'https://www.deepak-arkz.me',
   image: 'https://www.deepak-arkz.me/deepak.png',
-  jobTitle: 'Robotics & Automation Engineer',
-  description: 'Official engineering portfolio of Deepak R (Robotics Deepak) — B.E. Robotics & Automation engineer at Dhaanish Ahmed College of Engineering (DACE, Anna University) specializing in Physical AI, ROS 2 Jazzy, Autonomous Mobile Robots, Sim-to-Real Digital Twins, and Computer Vision.',
+  jobTitle: 'Robotics & Automation Engineering Student',
+  description: 'Official engineering portfolio of Deepak R (Robotics Deepak) — B.E. Robotics & Automation engineering student at Dhaanish Ahmed College of Engineering (DACE, Anna University) specializing in Physical AI, ROS 2 Jazzy, Autonomous Mobile Robots, Sim-to-Real Digital Twins, and Computer Vision.',
   sameAs: [
     'https://www.linkedin.com/in/robotics-deepak/',
     'https://github.com/Arkz-Deepak',
