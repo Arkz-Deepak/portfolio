@@ -64,14 +64,4 @@ jest.mock('@/components/RobotViewer', () => {
   }
 })
 
-// Mock CinematicViewer component for JSDOM environments where WebGL is unavailable
-jest.mock('@/components/CinematicViewer', () => {
-  return function DummyCinematicViewer(props) {
-    return (
-      <div data-testid="cinematic-viewer" className="mock-cinematic-viewer">
-        Mocked 3D Cinematic Viewer
-      </div>
-    )
-  }
-})
 

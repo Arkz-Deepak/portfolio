@@ -157,37 +157,6 @@ export default function Home() {
             {profileData.bioSummary}
           </p>
 
-          {/* 3D Cinematic Experience Mode Switch Banner */}
-          <div className="w-full max-w-2xl mx-auto my-1">
-            <Link
-              href="/cinematic"
-              className="group relative flex items-center justify-between p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-blue-700 via-indigo-700 to-cyan-600 text-white font-orbitron font-bold text-xs sm:text-sm tracking-wider shadow-lg shadow-blue-500/20 hover:shadow-cyan-500/40 hover:scale-[1.01] active:scale-[0.99] transition-all border border-cyan-300/40 overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-              <div className="flex items-center gap-3">
-                <span className="relative flex h-3 w-3 shrink-0">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-300 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-400"></span>
-                </span>
-                <div className="flex flex-col text-left">
-                  <span className="flex items-center gap-2 text-white drop-shadow">
-                    <span>⚡ SWITCH TO 3D CINEMATIC MODE</span>
-                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-black/40 border border-cyan-300/40 font-mono text-cyan-200 uppercase">
-                      60 FPS WebGL
-                    </span>
-                  </span>
-                  <span className="text-[11px] text-cyan-100 font-mono font-normal">
-                    Interactive CAD • Space Debris Robot • ConvLSTM Weld Telemetry
-                  </span>
-                </div>
-              </div>
-              <div className="flex items-center gap-1.5 text-cyan-200 group-hover:translate-x-1 transition-transform shrink-0 ml-2">
-                <span className="text-xs font-mono hidden sm:inline">LAUNCH</span>
-                <span className="text-base sm:text-lg">→</span>
-              </div>
-            </Link>
-          </div>
-
           {/* Call to Action Buttons */}
           <div className="flex flex-wrap justify-center gap-3 pt-2">
             <a 

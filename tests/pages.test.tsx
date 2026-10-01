@@ -7,19 +7,11 @@ import VortexCrawlerProject from '@/app/projects/vortex-crawler/page'
 import AutoTwinProject from '@/app/projects/autotwin-ai/page'
 import EdgeVisionProject from '@/app/projects/edgevision/page'
 import SpaceDebrisCleanerProject from '@/app/projects/space-debris-cleaner/page'
-import CinematicPage from '@/app/cinematic/page'
 
 // Mock RobotViewer because WebGL Canvas is mocked in jsdom
 jest.mock('@/components/RobotViewer', () => {
   return function DummyRobotViewer() {
     return <div data-testid="robot-viewer">Mocked 3D Robot Viewer</div>
-  }
-})
-
-// Mock CinematicViewer because WebGL Canvas is mocked in jsdom
-jest.mock('@/components/CinematicViewer', () => {
-  return function DummyCinematicViewer() {
-    return <div data-testid="cinematic-viewer">Mocked 3D Cinematic Viewer</div>
   }
 })
 
@@ -77,10 +69,5 @@ describe('Page Routes Suite Tests', () => {
     expect(screen.getAllByText(/MISSION CONTROL HUD/i).length).toBeGreaterThanOrEqual(1)
     expect(screen.getAllByText(/AUTODESK FUSION 3D CAD/i).length).toBeGreaterThanOrEqual(1)
     expect(screen.getAllByText(/Electroadhesion/i).length).toBeGreaterThanOrEqual(1)
-  })
-
-  test('CinematicPage renders 3D cinematic viewer and metadata', () => {
-    render(<CinematicPage />)
-    expect(screen.getByTestId('cinematic-viewer')).toBeInTheDocument()
   })
 })
