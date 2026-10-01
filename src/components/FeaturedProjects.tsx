@@ -26,9 +26,23 @@ export default function FeaturedProjects() {
                 <span className="text-[10px] font-orbitron font-bold px-2.5 py-1 rounded-full bg-blue-50 text-blue-800 border border-blue-300 dark:bg-cyan-950/60 dark:text-cyan-300 dark:border-cyan-500/50">
                   {project.category === 'ai-vision' ? 'PHYSICAL AI & DIGITAL TWIN' : 'ROBOTICS & HARDWARE'}
                 </span>
-                <span className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400">
-                  {project.date}
-                </span>
+                <div className="flex items-center gap-2">
+                  {project.docsUrl && (
+                    <a
+                      href={project.docsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-300 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-500/40 flex items-center gap-1 hover:underline"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      <span>{project.jekyllTheme ? `${project.jekyllTheme.toUpperCase()} DOCS` : 'LIVE DOCS'}</span>
+                      <span>↗</span>
+                    </a>
+                  )}
+                  <span className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400">
+                    {project.date}
+                  </span>
+                </div>
               </div>
 
               {/* Title & Subtitle */}
@@ -141,13 +155,27 @@ export default function FeaturedProjects() {
 
             {/* Action Buttons */}
             <div className="pt-4 border-t border-slate-200 dark:border-cyan-500/30 flex flex-wrap items-center justify-between gap-3">
-              <Link
-                href={project.caseStudySlug || '/projects'}
-                className="px-4 py-2 bg-blue-700 hover:bg-blue-800 text-white dark:bg-cyan-500/20 dark:border dark:border-cyan-400 dark:text-cyan-300 dark:hover:bg-cyan-400 dark:hover:text-black font-orbitron font-bold text-xs rounded-xl transition-all flex items-center gap-2 shadow-md"
-              >
-                <span>VIEW CASE STUDY & SPECS</span>
-                <FaArrowRight className="text-[10px]" />
-              </Link>
+              <div className="flex flex-wrap items-center gap-2">
+                <Link
+                  href={project.caseStudySlug || '/projects'}
+                  className="px-4 py-2 bg-blue-700 hover:bg-blue-800 text-white dark:bg-cyan-500/20 dark:border dark:border-cyan-400 dark:text-cyan-300 dark:hover:bg-cyan-400 dark:hover:text-black font-orbitron font-bold text-xs rounded-xl transition-all flex items-center gap-2 shadow-md"
+                >
+                  <span>VIEW CASE STUDY & SPECS</span>
+                  <FaArrowRight className="text-[10px]" />
+                </Link>
+
+                {project.docsUrl && (
+                  <a
+                    href={project.docsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3.5 py-2 border border-emerald-500 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:border-emerald-400 dark:text-emerald-300 dark:hover:bg-emerald-400 dark:hover:text-black font-orbitron font-bold text-xs rounded-xl transition-all flex items-center gap-1.5 shadow-sm"
+                  >
+                    <span>LIVE DOCS</span>
+                    <span className="text-[10px]">↗</span>
+                  </a>
+                )}
+              </div>
 
               {project.cadUrl ? (
                 <a
@@ -220,11 +248,31 @@ export default function FeaturedProjects() {
                 <span>VIEW ARCHIVE</span>
                 <span>→</span>
               </Link>
-              {project.githubUrl && (
-                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 dark:hover:text-white">
-                  <FaGithub className="text-sm" />
-                </a>
-              )}
+              <div className="flex items-center gap-3">
+                {project.docsUrl && (
+                  <a
+                    href={project.docsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[11px] font-mono font-bold text-emerald-700 hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300 flex items-center gap-1"
+                    title="Live Jekyll Documentation"
+                  >
+                    <span>DOCS</span>
+                    <span className="text-[9px]">↗</span>
+                  </a>
+                )}
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-slate-900 dark:hover:text-white"
+                    title="GitHub Repository"
+                  >
+                    <FaGithub className="text-sm" />
+                  </a>
+                )}
+              </div>
             </div>
           </motion.div>
         ))}

@@ -55,6 +55,17 @@ export default function AutoTwinProject() {
             <span className="text-[10px]">↗</span>
           </a>
         )}
+        {project.docsUrl && (
+          <a
+            href={project.docsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2 rounded-xl border border-emerald-600 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:border-emerald-400 dark:text-emerald-300 dark:hover:bg-emerald-400 dark:hover:text-black font-orbitron font-bold text-xs transition-all flex items-center gap-2 shadow-sm"
+          >
+            <span>LIVE JEKYLL DOCS</span>
+            <span className="text-[10px]">↗</span>
+          </a>
+        )}
         {project.paperUrl && (
           <a
             href={project.paperUrl}

@@ -24,6 +24,41 @@ export default function ProjectsPage() {
         <div className="h-1 w-24 bg-blue-600 dark:bg-cyan-400 mx-auto mt-3 rounded-full dark:shadow-[0_0_10px_#00f0ff]" />
       </div>
 
+      {/* Automated Documentation Hub Banner */}
+      <div className="mb-12 p-5 rounded-2xl border border-emerald-300 bg-emerald-50/80 dark:border-emerald-500/40 dark:bg-black/60 shadow-md backdrop-blur-md flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-3.5">
+          <div className="w-12 h-12 rounded-xl bg-emerald-600/10 border border-emerald-500/30 flex items-center justify-center text-2xl shrink-0">
+            📚
+          </div>
+          <div>
+            <div className="flex items-center gap-2 mb-1 flex-wrap">
+              <span className="text-[10px] font-orbitron font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 dark:border dark:border-emerald-500/50">
+                17+ ACTIVE REPOSITORIES
+              </span>
+              <span className="text-xs font-mono font-bold text-slate-700 dark:text-cyan-300">
+                lab.deepak-arkz.me
+              </span>
+            </div>
+            <h2 className="text-sm md:text-base font-bold font-orbitron text-slate-900 dark:text-white">
+              AUTOMATED JEKYLL DOCUMENTATION ECOSYSTEM
+            </h2>
+            <p className="text-xs font-space text-slate-600 dark:text-slate-300 max-w-2xl mt-0.5">
+              Every production ROS 2 package, space robotics model, and edge AI pipeline is accompanied by automated architectural specifications and deployment blueprints hosted under our custom engineering documentation hub.
+            </p>
+          </div>
+        </div>
+
+        <a
+          href="https://lab.deepak-arkz.me"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-5 py-2.5 rounded-xl border border-emerald-600 bg-emerald-600 text-white hover:bg-emerald-700 dark:border-emerald-400 dark:bg-emerald-500/20 dark:text-emerald-300 dark:hover:bg-emerald-400 dark:hover:text-black font-orbitron font-bold text-xs tracking-wider transition-all shadow-md flex items-center gap-2 shrink-0"
+        >
+          <span>OPEN LAB HUB</span>
+          <span>↗</span>
+        </a>
+      </div>
+
       {/* Featured Projects Grid */}
       <div className="mb-20">
         <FeaturedProjects />

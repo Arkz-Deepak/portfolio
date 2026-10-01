@@ -83,6 +83,7 @@ const PRESET_QUERIES: QueryPreset[] = [
     output: [
       'EMAIL: deepak121289@outlook.com',
       'PORTFOLIO: https://www.deepak-arkz.me',
+      'DOCS HUB: https://lab.deepak-arkz.me (17+ Repositories Deployed)',
       'GITHUB: https://github.com/Arkz-Deepak',
       'LINKEDIN: https://www.linkedin.com/in/robotics-deepak/',
       'LOCATION: Chennai, Tamil Nadu, India'
@@ -148,9 +149,25 @@ export default function Terminal() {
     if (cmd === 'help') {
       typeWriterOutput([
         'DEEPAK.OS TERMINAL HELP DIRECTIVES:',
-        '• Directives: whoami, skills, projects, experience, research, certs, contact, clear',
+        '• Directives: whoami, skills, projects, docs, experience, research, certs, contact, clear',
+        '• Documentation: type "docs" or "lab" for automated Jekyll repository specifications.',
         '• Easter Eggs: try "easteregg", "matrix", "sudo", "arkz", "cat", "robot"',
         '• Click any directive button above for instant telemetry.'
+      ])
+      return
+    }
+
+    if (cmd === 'docs' || cmd === 'lab' || cmd === 'documentation') {
+      typeWriterOutput([
+        '📚 ARKZ ENGINEERING DOCUMENTATION HUB ONLINE:',
+        'HUB URL: https://lab.deepak-arkz.me (17+ Repositories Deployed)',
+        '• ISRO Space Debris (Architect): https://lab.deepak-arkz.me/sih2026-isro-space-tech/',
+        '• Schneider Melter AI (Slate): https://lab.deepak-arkz.me/yuva-yodha-hackathon/',
+        '• AutoTwin-AI: https://lab.deepak-arkz.me/AutoTwin-AI/',
+        '• OOMWOO Clean & Map (Slate): https://lab.deepak-arkz.me/oomwoo-clean-and-map-arkz/',
+        '• 4WD ROS 2 AMR (Cayman): https://lab.deepak-arkz.me/wheeled_robot_ros2/',
+        '• Multi-Agent Supply Chain (Cayman): https://lab.deepak-arkz.me/agentic-supply-chain/',
+        '• Luminous Inverter PdM (Cayman): https://lab.deepak-arkz.me/luminous-pdm-command-center/'
       ])
       return
     }
@@ -297,7 +314,7 @@ export default function Terminal() {
       <div className="px-3 py-1.5 bg-slate-950 border-t border-slate-800 text-[10px] font-mono text-slate-400 flex items-center justify-between flex-wrap gap-1">
         <span className="text-cyan-400/90 font-semibold">💡 DIRECTIVES & SECRETS:</span>
         <div className="flex gap-1.5 flex-wrap">
-          {['help', 'whoami', 'projects', 'easteregg', 'matrix', 'clear'].map((hint) => (
+          {['help', 'whoami', 'projects', 'docs', 'easteregg', 'matrix', 'clear'].map((hint) => (
             <button
               key={hint}
               type="button"

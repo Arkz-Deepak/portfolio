@@ -48,6 +48,8 @@ describe('Data Store Integrity Tests', () => {
     expect(spaceDebris?.stack).toContain('SpaceYOLO')
     expect(spaceDebris?.stack).toContain('STM32 Microcontroller')
     expect(spaceDebris?.cadUrl).toContain('a360.co')
+    expect(spaceDebris?.docsUrl).toContain('lab.deepak-arkz.me')
+    expect(spaceDebris?.jekyllTheme).toBe('Architect')
 
     const edgevision = projectsData.find(p => p.id === 'edgevision-npu-profiler')
     expect(edgevision?.stats?.length).toBeGreaterThanOrEqual(4)
@@ -56,6 +58,7 @@ describe('Data Store Integrity Tests', () => {
     const autotwin = projectsData.find(p => p.id === 'autotwin-ai')
     expect(autotwin?.stats?.length).toBeGreaterThanOrEqual(4)
     expect(autotwin?.stack).toContain('ConvLSTM2d')
+    expect(autotwin?.docsUrl).toContain('lab.deepak-arkz.me')
 
     const crawler = projectsData.find(p => p.id === 'hybrid-vortex-crawler')
     expect(crawler?.stats?.length).toBeGreaterThanOrEqual(4)
