@@ -34,6 +34,15 @@ export default function Navbar() {
             <Link href="/internships" className="text-sm font-semibold transition-colors text-slate-700 hover:text-blue-800 dark:text-gray-300 dark:hover:text-cyan-400">TIMELINE</Link>
             <Link href="/contact" className="text-sm font-semibold transition-colors text-slate-700 hover:text-blue-800 dark:text-gray-300 dark:hover:text-cyan-400">TERMINAL</Link>
 
+            {/* 3D Cinematic Mode Launch Link */}
+            <Link
+              href="/cinematic"
+              className="px-2.5 py-1.5 rounded-lg border font-orbitron text-xs font-bold transition-all flex items-center gap-1.5 bg-gradient-to-r from-blue-700 to-indigo-700 text-white hover:from-blue-800 hover:to-indigo-800 shadow-sm dark:from-cyan-950/80 dark:to-blue-950/80 dark:border-cyan-400 dark:text-cyan-300 dark:hover:bg-cyan-400 dark:hover:text-black dark:shadow-[0_0_12px_rgba(0,240,255,0.3)] animate-pulse"
+              title="Launch Fullscreen 3D Digital Twin Experience"
+            >
+              <span>⚡ 3D MODE</span>
+            </Link>
+
             {/* Resume Download Button */}
             <a
               href="https://docs.google.com/document/d/1V8XjDHoHC8vaw_bTTNxZjhv8CYjbHddVax9KLsOTZk8/export?format=pdf"
@@ -69,6 +78,13 @@ export default function Navbar() {
 
           {/* Mobile Buttons */}
           <div className="md:hidden flex items-center space-x-2">
+            <Link
+              href="/cinematic"
+              className="px-2 py-1.5 rounded-lg border font-orbitron text-xs font-bold transition-all flex items-center gap-1 bg-blue-700 text-white border-blue-700 dark:bg-cyan-500/20 dark:border-cyan-400 dark:text-cyan-300"
+              title="3D Cinematic Mode"
+            >
+              <span>⚡ 3D</span>
+            </Link>
             <a
               href="https://docs.google.com/document/d/1V8XjDHoHC8vaw_bTTNxZjhv8CYjbHddVax9KLsOTZk8/export?format=pdf"
               target="_blank"

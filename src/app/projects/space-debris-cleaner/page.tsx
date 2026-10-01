@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { projectsData } from '@/data/projects'
 import Link from 'next/link'
 import { FaArrowLeft, FaCheck, FaRocket, FaSatellite, FaBolt, FaMicrochip, FaGlobe, FaShieldAlt } from 'react-icons/fa'
+import PresentationViewer from '@/components/PresentationViewer'
 
 export const metadata: Metadata = {
   title: 'Orbital ADR: Autonomous Space Debris Cleaner | SIH 2026 Case Study | Deepak R.',
@@ -131,6 +132,15 @@ export default function SpaceDebrisCleanerProject() {
           </div>
         ))}
       </div>
+
+      {/* Embedded SIH Presentation Pitch Deck */}
+      <PresentationViewer
+        title="Autonomous LEO Space Debris Cleaner — SIH 2026 Presentation"
+        embedUrl="https://drive.google.com/file/d/12JVw7FkFINbGMeh3Hg4Ox7ZEKTkyOzMo/preview"
+        sourceUrl="https://drive.google.com/file/d/12JVw7FkFINbGMeh3Hg4Ox7ZEKTkyOzMo/view?usp=drivesdk"
+        competition="Smart India Hackathon 2026 (Hardware Edition | PS SIH26226)"
+        defaultOpen={true}
+      />
 
       {/* System Overview */}
       <div className="p-6 rounded-2xl border bg-white border-slate-200 shadow-md dark:bg-gray-900/60 dark:border-cyan-500/30 mb-10">

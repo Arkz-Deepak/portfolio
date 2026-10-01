@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { projectsData } from '@/data/projects'
 import Link from 'next/link'
 import { FaArrowLeft, FaCheck, FaMicrochip, FaBolt, FaWifi, FaVideo, FaChartLine } from 'react-icons/fa'
+import PresentationViewer from '@/components/PresentationViewer'
 
 export const metadata: Metadata = {
   title: 'EdgeVision NPU Profiler | iQOO Hackathon 2026 Case Study | Deepak R.',
@@ -84,6 +85,15 @@ export default function EdgeVisionProject() {
           </div>
         ))}
       </div>
+
+      {/* Embedded Hackathon Pitch Deck */}
+      <PresentationViewer
+        title="EdgeVision NPU Profiler — Pitch Deck"
+        embedUrl="https://docs.google.com/presentation/d/1wtzB97O7d21n2auHoZLjmvhmmsDoqVhJRXfHKcaKpe8/embed?start=false&loop=false&delayms=3000"
+        sourceUrl="https://docs.google.com/presentation/d/1wtzB97O7d21n2auHoZLjmvhmmsDoqVhJRXfHKcaKpe8/edit"
+        competition="iQOO Hackathon 2026 Grand Finale (Dev Tools Track)"
+        defaultOpen={true}
+      />
 
       {/* System Architecture Overview */}
       <div className="p-6 rounded-2xl border bg-white border-slate-200 shadow-md dark:bg-gray-900/60 dark:border-cyan-500/30 mb-10">

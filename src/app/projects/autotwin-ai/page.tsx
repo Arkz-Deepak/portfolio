@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { projectsData } from '@/data/projects'
 import Link from 'next/link'
 import { FaArrowLeft, FaCheck, FaBrain, FaCamera, FaEye, FaChartLine, FaRobot } from 'react-icons/fa'
+import PresentationViewer from '@/components/PresentationViewer'
 
 export const metadata: Metadata = {
   title: 'AutoTwin-AI v2: Spatiotemporal ConvLSTM | HackNIMA 2026 Case Study | Deepak R.',
@@ -106,6 +107,15 @@ export default function AutoTwinProject() {
           </div>
         ))}
       </div>
+
+      {/* Embedded HackNIMA Pitch Deck */}
+      <PresentationViewer
+        title="AutoTwin-AI v2: Spatiotemporal ConvLSTM Welding Inspection"
+        embedUrl="https://docs.google.com/presentation/d/1sPcQ4e1_jjpj0JXypPtbesnlkwDpOdKaJvuFtlF2hcU/embed?start=false&loop=false&delayms=3000"
+        sourceUrl="https://docs.google.com/presentation/d/1sPcQ4e1_jjpj0JXypPtbesnlkwDpOdKaJvuFtlF2hcU/edit"
+        competition="HackNIMA 2026 International Online Hackathon (Finalist Presentation)"
+        defaultOpen={true}
+      />
 
       {/* Theoretical & Spatiotemporal Formulation */}
       <div className="p-6 rounded-2xl border bg-white border-slate-200 shadow-md dark:bg-gray-900/60 dark:border-cyan-500/30 mb-10">

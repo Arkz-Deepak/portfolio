@@ -60,7 +60,7 @@ export default function VortexCrawlerProject() {
             <span className="text-[10px]">↗</span>
           </a>
         </div>
-        <RobotViewer modelUrl="/models/vortex-crawler.glb" height="460px" />
+        <RobotViewer modelUrl="/models/vortex-crawler.glb" height="460px" showSubsystems={true} />
       </div>
 
       {/* Key Metrics Grid */}

@@ -6,12 +6,62 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { FaCube, FaSyncAlt, FaRedo, FaUndo } from 'react-icons/fa'
 import { useTheme } from '@/components/ThemeProvider'
 
+export interface Subsystem {
+  id: string
+  name: string
+  tag: string
+  spec: string
+  description: string
+  camPos: [number, number, number]
+  camTarget: [number, number, number]
+}
+
+export const CRAWLER_SUBSYSTEMS: Subsystem[] = [
+  {
+    id: 'overview',
+    name: 'FULL ASSEMBLY',
+    tag: 'ALL SUBSYSTEMS',
+    spec: '45N Downforce • 2.6 kg Dry Mass • 350 mm Span',
+    description: 'Complete hybrid amphibious crawler combining active aerodynamic negative pressure with dual magnetic track locomotion for non-ferrous and ferrous surfaces.',
+    camPos: [3.4, 2.5, 3.6],
+    camTarget: [0, 0, 0]
+  },
+  {
+    id: 'edf',
+    name: '70mm EDF CORE',
+    tag: 'AERODYNAMIC ADHESION',
+    spec: '28,000 RPM • 45N Negative Vacuum • Venturi CFD Duct',
+    description: 'Custom converging-diverging venturi suction cowl creating high-velocity aerodynamic low-pressure zone for inverted vertical wall and ceiling adhesion.',
+    camPos: [0.3, 1.8, 0.9],
+    camTarget: [0, 0.65, 0]
+  },
+  {
+    id: 'treads',
+    name: 'MAGNETIC TRACKS',
+    tag: 'FERROUS TRACTION',
+    spec: 'N52 Neodymium Array • 4x Planetary Gear Motors • 0.35 m/s',
+    description: 'Continuous dual rubber treads embedded with N52 rare-earth magnets delivering slip-resistant traction across vertical steel plates and ship hulls.',
+    camPos: [1.8, 0.8, 1.5],
+    camTarget: [0, 0.25, 0.75]
+  },
+  {
+    id: 'compute',
+    name: 'COMPUTE & TELEMETRY',
+    tag: 'DUAL-TIER EMBEDDED',
+    spec: 'ESP32-S3 (240MHz) • 1kHz FreeRTOS Loop • 6-DOF IMU',
+    description: 'Sub-millisecond stabilization handled by real-time FreeRTOS tasks while publishing micro-ROS odometry, attitude, and thermal diagnostics to DEEPAK.OS.',
+    camPos: [-1.4, 1.4, 0.8],
+    camTarget: [-0.55, 0.48, 0]
+  }
+]
+
 interface RobotViewerProps {
   modelUrl?: string
   autoRotateSpeed?: number
   height?: string
   compact?: boolean
   showControls?: boolean
+  showSubsystems?: boolean
 }
 
 export default function RobotViewer({
@@ -19,7 +69,8 @@ export default function RobotViewer({
   autoRotateSpeed = 1.2,
   height = '440px',
   compact = false,
-  showControls = true
+  showControls = true,
+  showSubsystems = false
 }: RobotViewerProps) {
   const { isDark } = useTheme()
   const containerRef = useRef<HTMLDivElement>(null)
@@ -43,6 +94,8 @@ export default function RobotViewer({
   const [rotX, setRotX] = useState<number>(-Math.PI / 2) // Default -90 deg to lay flat horizontally
   const [rotY, setRotY] = useState<number>(0)
   const [rotZ, setRotZ] = useState<number>(0)
+  const [activeSubsystem, setActiveSubsystem] = useState<string>('overview')
+  const targetCamRef = useRef<{ pos: THREE.Vector3; target: THREE.Vector3 } | null>(null)
 
   useEffect(() => {
     const container = containerRef.current
@@ -92,6 +145,10 @@ export default function RobotViewer({
     controls.maxPolarAngle = Math.PI / 2 + 0.1
     controls.minDistance = 1.0
     controls.maxDistance = 12
+    controls.addEventListener('start', () => {
+      // Manual touch/mouse interaction cancels programmatic camera lerping
+      targetCamRef.current = null
+    })
     controlsRef.current = controls
 
     // Lighting Setup (Adaptive to Theme)
@@ -306,6 +363,18 @@ export default function RobotViewer({
         edfBladesRef.current.rotation.y += 0.15
       }
 
+      // Smooth camera interpolation for subsystem focus
+      if (targetCamRef.current && cameraRef.current && controlsRef.current) {
+        cameraRef.current.position.lerp(targetCamRef.current.pos, 0.08)
+        controlsRef.current.target.lerp(targetCamRef.current.target, 0.08)
+        if (
+          cameraRef.current.position.distanceTo(targetCamRef.current.pos) < 0.02 &&
+          controlsRef.current.target.distanceTo(targetCamRef.current.target) < 0.02
+        ) {
+          targetCamRef.current = null
+        }
+      }
+
       controls.update()
       renderer.render(scene, camera)
     }
@@ -392,12 +461,22 @@ export default function RobotViewer({
     setRotY((prev) => (prev + Math.PI / 2) % (Math.PI * 2))
   }
 
+  const selectSubsystem = (sub: Subsystem) => {
+    setActiveSubsystem(sub.id)
+    setIsRotating(false)
+    targetCamRef.current = {
+      pos: new THREE.Vector3(...sub.camPos),
+      target: new THREE.Vector3(...sub.camTarget)
+    }
+  }
+
   const resetCamera = () => {
     if (cameraRef.current && controlsRef.current) {
       cameraRef.current.position.set(3.4, 2.5, 3.6)
       controlsRef.current.target.set(0, 0, 0)
       controlsRef.current.update()
       setHorizontalFlat()
+      setActiveSubsystem('overview')
     }
   }
 
@@ -504,6 +583,61 @@ export default function RobotViewer({
           </div>
         )}
       </div>
+
+      {/* Strategy 1: Interactive Subsystem Teardown Navigation */}
+      {showSubsystems && (
+        <div className="flex flex-col gap-2.5 mt-1">
+          {/* Subsystem Selector Buttons */}
+          <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 scrollbar-none">
+            <span className="text-[10px] font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest shrink-0 hidden sm:inline">
+              FOCUS MODE:
+            </span>
+            {CRAWLER_SUBSYSTEMS.map((sub, idx) => {
+              const isActive = activeSubsystem === sub.id
+              return (
+                <button
+                  key={sub.id}
+                  onClick={() => selectSubsystem(sub)}
+                  className={`px-3 py-1.5 rounded-xl text-[10px] sm:text-xs font-orbitron font-bold transition-all whitespace-nowrap border shrink-0 flex items-center gap-1.5 ${
+                    isActive
+                      ? 'bg-blue-600 border-blue-600 text-white shadow-md dark:bg-cyan-500/30 dark:border-cyan-400 dark:text-cyan-300 dark:shadow-[0_0_15px_rgba(0,240,255,0.3)]'
+                      : 'bg-white/90 border-slate-300 text-slate-700 hover:border-blue-400 hover:text-blue-900 dark:bg-slate-900/80 dark:border-slate-800 dark:text-slate-300 dark:hover:border-cyan-400/50 dark:hover:text-white'
+                  }`}
+                >
+                  <span className="opacity-60 text-[9px] font-mono">{idx + 1}.</span>
+                  <span>{sub.name}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Active Subsystem Breakdown Card */}
+          {(() => {
+            const currentSub = CRAWLER_SUBSYSTEMS.find((s) => s.id === activeSubsystem) || CRAWLER_SUBSYSTEMS[0]
+            return (
+              <div className="p-3.5 sm:p-4 rounded-xl border bg-white/95 border-slate-200 dark:bg-slate-900/90 dark:border-cyan-500/30 shadow-sm transition-all">
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-cyan-400 animate-pulse" />
+                    <span className="font-orbitron font-bold text-xs sm:text-sm text-slate-900 dark:text-white">
+                      {currentSub.name}
+                    </span>
+                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full border bg-blue-50 text-blue-700 border-blue-200 dark:bg-cyan-950/60 dark:text-cyan-300 dark:border-cyan-500/40">
+                      {currentSub.tag}
+                    </span>
+                  </div>
+                  <span className="text-[11px] font-mono font-bold text-emerald-600 dark:text-emerald-400">
+                    {currentSub.spec}
+                  </span>
+                </div>
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-space">
+                  {currentSub.description}
+                </p>
+              </div>
+            )
+          })()}
+        </div>
+      )}
     </div>
   )
 }
