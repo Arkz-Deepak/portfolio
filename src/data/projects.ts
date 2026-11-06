@@ -123,6 +123,94 @@ export const projectsData: ProjectItem[] = [
       Telemetry -->|Live WebSocket Stream| Dashboard["Developer Terminal Dashboard"]`
   },
   {
+    id: "vga-robotic-manipulation",
+    title: "VGA Policy: Vision-Geometry-Action Robotic Manipulation",
+    subtitle: "Hard Real-Time Embodied AI Policy with Kinematic Jerk Suppression (LIBERO-Spatial & RoboCasa)",
+    category: "robotics",
+    featured: true,
+    date: "Oct 2026",
+    competition: "Embodied AI / LIBERO-Spatial Benchmark",
+    stack: [
+      "PyTorch",
+      "LeRobot",
+      "MuJoCo",
+      "SigLIP",
+      "SmolLM2",
+      "Flow Matching DiT",
+      "CentroidRayRoPE"
+    ],
+    stats: [
+      { label: "Parameter Footprint", value: "298.3M (36.3M Head)" },
+      { label: "Control Frequency", value: "154–215 Hz (4.6ms)" },
+      { label: "Jerk Reduction", value: "89.1% Annealed" },
+      { label: "Physical Status", value: "Closed-Loop Success" }
+    ],
+    githubUrl: "https://github.com/Arkz-Deepak/vga-poc",
+    media: {
+      type: "image",
+      url: "/images/projects/vga-manipulation-preview.png",
+      aspectRatio: "16:9"
+    },
+    summary: "Engineered an embodied AI manipulation policy under a strict <=0.5B parameter budget capable of hard real-time execution in closed-loop MuJoCo physics. Employs frozen SigLIP-B/16 vision tokens and SmolLM2 language representations integrated via CentroidRayRoPE into a 12-layer Action Diffusion Transformer (DiT) with Flow Matching. Physics-guided finite-difference kinematic loss annealing eliminates joint vibration and motor chatter, culminating in autonomous physical pick-and-place task completion at Step 118 on LIBERO-Spatial.",
+    highlights: [
+      "Operates at 154–215 Hz control rate (4.64–6.46 ms latency), beating baseline SmolVLA-450M by 8.7x.",
+      "Achieved 89.1% trajectory jerk reduction via finite-difference acceleration/jerk loss constraints.",
+      "Demonstrated full closed-loop pick-and-place success in MuJoCo simulation from few-shot demonstrations."
+    ],
+    architectureMermaid: `graph LR
+      RGB["Camera RGB (256x256)"] --> SigLIP["SigLIP-B/16 (Frozen)"]
+      Task["Task Language Prompt"] --> SmolLM["SmolLM2-135M (Frozen)"]
+      SigLIP --> CrossAttn["Cross-Attention + RayRoPE"]
+      SmolLM --> CrossAttn
+      CrossAttn --> DiT["12-Layer Action DiT (36.3M Trainable)"]
+      Noise["Gaussian Noise"] --> DiT
+      DiT --> FlowMatching["Flow Matching (NFE=4)"]
+      FlowMatching --> Actions["16-Step Chunk Actions"]`
+  },
+  {
+    id: "neurocode-ai",
+    title: "NeuroCode: On-Device Code-Graph Slicing Framework",
+    subtitle: "Heterogeneous Neuro-Symbolic Model Context Protocol (MCP) Server for Local LLM Repository Repair",
+    category: "fullstack",
+    featured: true,
+    date: "Nov 2026",
+    stack: [
+      "Python",
+      "Model Context Protocol (MCP)",
+      "Tree-sitter",
+      "NetworkX",
+      "PyTorch",
+      "SWE-bench",
+      "Ollama"
+    ],
+    stats: [
+      { label: "PyPI Package", value: "neurocode-ai" },
+      { label: "Hardware Verified", value: "4GB Laptop GPU" },
+      { label: "SWE-bench Lite", value: "41.4% Valid / 0 OOMs" },
+      { label: "RepoBench-R", value: "100% Recall @ 428 Tokens" }
+    ],
+    githubUrl: "https://github.com/Arkz-Deepak",
+    demoUrl: "https://pypi.org/project/neurocode-ai/",
+    media: {
+      type: "image",
+      url: "/images/projects/neurocode-architecture.png",
+      aspectRatio: "16:9"
+    },
+    summary: "Authored and published neurocode-ai on PyPI with a Model Context Protocol (MCP) server that enables local small language models (1.5B–14B) to solve multi-file repository software engineering bugs on consumer laptops (4GB VRAM) without cloud API dependency or Out-of-Memory (OOM) crashes. Divides cognitive labor across the PC hardware boundary: deterministic host CPU graph engine constructs topological Code Property Graphs (CPG) with 0/1 knapsack budget optimization, while the device GPU executes bounded neural patch generation.",
+    highlights: [
+      "Eliminated GPU OOM cliff failure on everyday 4GB VRAM laptop GPUs (961MB active peak VRAM) across SWE-bench Lite.",
+      "Achieved 100% recall on RepoBench-R cross-file retrieval with a 42.6% token reduction over dense vector retrieval.",
+      "Published as open-source Python library on PyPI (neurocode-ai) with native Claude Desktop/Ollama MCP integration."
+    ],
+    architectureMermaid: `graph LR
+      Repo["Target Codebase"] --> TreeSitter["Host CPU: Tree-sitter + NetworkX"]
+      TreeSitter --> CPG["Code Property Graph (CPG)"]
+      CPG --> Knapsack["0/1 Knapsack Bounded Token Slicer"]
+      Knapsack -->|Bounded Subtrees (B <= 1200 Tokens)| GPU["Device GPU: Local LLM Synthesis"]
+      GPU --> Diff["SEARCH/REPLACE Diffs"]
+      Diff --> Patch["Deterministic Patch Verification"]`
+  },
+  {
     id: "hybrid-vortex-crawler",
     title: "Hybrid Vortex Crawler: Multi-Surface Wall-Climbing Robot",
     subtitle: "Multi-Surface Vertical Scaling & NDE Payload Delivery (NeX-Gen Robotics Challenge 2026 | IDREA)",
@@ -259,15 +347,17 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "sih-smart-traffic",
-    title: "Smart Traffic Management System (SIH25050)",
-    subtitle: "Real-Time Computer Vision Adaptive Signal Controller for Smart India Hackathon",
+    title: "AURA / Smart Traffic Management System (SIH25050)",
+    subtitle: "Semi-Markov Decision Process (SMDP) RL & Rolling Emergency Vehicle Preemption ( TraCI / SUMO )",
     category: "ai-vision",
     featured: false,
-    date: "Nov 2025",
-    stack: ["Python", "YOLOv8", "OpenCV", "FastAPI", "Edge Computing"],
+    date: "Aug 2026 – Nov 2026",
+    stack: ["PyTorch", "SUMO / TraCI", "YOLOv8", "FastAPI", "React", "Node.js DDS"],
     stats: [
-      { label: "Latency", value: "<30 ms" },
-      { label: "Model", value: "YOLO Vehicle Detection" }
+      { label: "Algorithm", value: "SMDP Deep Q-Network" },
+      { label: "Preemption", value: "Rolling EVP Green-Wave" },
+      { label: "Benchmark", value: "177-TLS Manhattan Map" },
+      { label: "Preprint DOI", value: "10.5281/zenodo.20265628" }
     ],
     githubUrl: "https://github.com/Arkz-Deepak/Traffic-Management-System",
     docsUrl: "https://lab.deepak-arkz.me/Traffic-Management-System/",
@@ -275,14 +365,14 @@ export const projectsData: ProjectItem[] = [
     caseStudySlug: "/projects/sih",
     media: {
       type: "image",
-      url: "/urban-traffic.jpg",
+      url: "/images/projects/aura-manhattan-preview.png",
       aspectRatio: "16:9"
     },
-    summary: "Built a vision-based adaptive traffic signal controller utilizing YOLO object detection to dynamically calculate vehicular queue density across multi-lane intersections and modulate green-light intervals.",
+    summary: "Evolved the SIH smart traffic architecture into AURA (Adaptive Urban Routing and Actuation), integrating a Semi-Markov Decision Process (SMDP) DQN with rolling emergency vehicle preemption (EVP) and post-preemption shockwave mitigation. Validated across TraCI microscopic simulations on both a 10-node grid and a 177-intersection Midtown Manhattan network, backed by a full IEEE conference paper and live dual-mode tactical dashboard.",
     highlights: [
-      "Reduced simulated intersection idling delay by over 35% compared to static fixed-timer intervals.",
-      "Optimized inference pipeline for low-power edge compute deployment with OpenCV hardware acceleration.",
-      "Integrated automated repository documentation on lab.deepak-arkz.me."
+      "Replaced fixed-time controllers with an SMDP DQN enforcing statutory clearance and queue-adaptive green limits.",
+      "Engineered rolling emergency vehicle preemption with shockwave mitigation to restore starved cross-arterials.",
+      "Indexed under Zenodo DOI 10.5281/zenodo.20265628 with automated documentation on lab.deepak-arkz.me."
     ]
   },
   {

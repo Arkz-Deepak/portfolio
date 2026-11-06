@@ -24,7 +24,7 @@ export interface ProfileData {
 export const profileData: ProfileData = {
   name: "Deepak R",
   legalName: "Deepak Rajender",
-  tagline: "Robotics & Automation Engineering Student | Physical AI, ROS 2 Jazzy & Sim-to-Real Digital Twins",
+  tagline: "Robotics & Automation Engineering Student | Physical AI, Embodied Robotics (MuJoCo/LeRobot), Neuro-Symbolic Graph Slicing & ROS 2 Jazzy",
   location: "Chennai, Tamil Nadu, India",
   email: "deepak121289@outlook.com",
   cgpa: "9.2 / 10.0",
@@ -41,5 +41,5 @@ export const profileData: ProfileData = {
     linkedin: "https://www.linkedin.com/in/robotics-deepak/",
     portfolio: "https://www.deepak-arkz.me"
   },
-  bioSummary: "Dedicated and research-oriented Robotics & Automation engineering student specializing in Physical AI, ROS 2 Jazzy, Autonomous Mobile Robots (AMR), Gazebo simulations, and Sim-to-Real unsupervised anomaly detection pipelines. Proven track record bridging low-level embedded RTOS actuation with high-level deep learning and computer vision architectures."
+  bioSummary: "Research-oriented Robotics & Automation engineering student and open-source systems builder. Author of the NeuroCode neuro-symbolic graph framework (published on PyPI: neurocode-ai), Kaggle Top 100 competitor (Rank #72), and ARC Prize 2026 contender. Specializes in Embodied Physical AI (VGA manipulation policies in MuJoCo/LeRobot), real-time ROS 2 Jazzy & MoveIt 2 motion planning, and edge-constrained neural synthesis."
 };

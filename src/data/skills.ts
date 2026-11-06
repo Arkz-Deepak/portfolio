@@ -7,22 +7,31 @@ export interface SkillCategory {
 export const skillsData: SkillCategory[] = [
   {
     category: "Robotics & Simulation Middleware",
-    description: "Autonomous navigation, kinematics, and spatial simulation environments",
+    description: "Autonomous navigation, kinematic solvers, physical manipulation, and simulation environments",
     skills: [
       { name: "ROS 2 (Jazzy)", level: "Advanced" },
+      { name: "MoveIt 2 & OMPL Kinematics", level: "Advanced" },
+      { name: "MuJoCo Physics Simulation", level: "Advanced" },
+      { name: "LeRobot Embodied Manipulation", level: "Advanced" },
+      { name: "SUMO & TraCI Microscopic Traffic", level: "Advanced" },
       { name: "Space Robotics & Orbital Rendezvous", level: "Proficient" },
       { name: "Nav2 Navigation Stack", level: "Advanced" },
       { name: "SLAM Toolbox", level: "Advanced" },
       { name: "Gazebo / Ignition", level: "Advanced" },
-      { name: "MoveIt 2", level: "Proficient" },
       { name: "URDF / Xacro Modeling", level: "Advanced" },
       { name: "Coverage Path Planning (BCD)", level: "Advanced" }
     ]
   },
   {
     category: "AI, Vision & Machine Learning",
-    description: "Deep learning models, unsupervised anomaly detection, and vision pipelines",
+    description: "Deep learning models, diffusion transformers, neuro-symbolic slicing, and vision pipelines",
     skills: [
+      { name: "Diffusion Transformers (DiT) & Flow Matching", level: "Advanced" },
+      { name: "Neuro-Symbolic Heterogeneous Slicing", level: "Expert" },
+      { name: "Model Context Protocol (MCP)", level: "Expert" },
+      { name: "Tree-sitter Code Property Graphs (CPG)", level: "Expert" },
+      { name: "Dual 14B LoRA Fine-Tuning & Quantization", level: "Advanced" },
+      { name: "Semi-Markov Decision Processes (SMDP / TraCI)", level: "Advanced" },
       { name: "ConvLSTM / Spatiotemporal Modeling", level: "Advanced" },
       { name: "TimeDistributed CNNs", level: "Advanced" },
       { name: "Snapdragon NPU / QNN", level: "Advanced" },
@@ -32,7 +41,7 @@ export const skillsData: SkillCategory[] = [
       { name: "OpenCV", level: "Advanced" },
       { name: "YOLO (v8 / v11)", level: "Advanced" },
       { name: "MediaPipe", level: "Advanced" },
-      { name: "Multi-Agent Reinforcement Learning", level: "Proficient" },
+      { name: "Multi-Agent Reinforcement Learning", level: "Advanced" },
       { name: "Scikit-Learn", level: "Advanced" },
       { name: "Blender OptiX Ray-Tracing", level: "Advanced" }
     ]
@@ -55,17 +64,19 @@ export const skillsData: SkillCategory[] = [
   },
   {
     category: "Software Engineering & Full-Stack",
-    description: "Programming languages, backends, and development infrastructure",
+    description: "Programming languages, backends, compilers, and development infrastructure",
     skills: [
       { name: "Python", level: "Expert" },
       { name: "C++", level: "Advanced" },
       { name: "C", level: "Advanced" },
+      { name: "Flex & Bison (Lexer/Parser Architecture)", level: "Advanced" },
       { name: "Rust", level: "Proficient" },
       { name: "ROS 2 CI/CD (GitHub Actions)", level: "Advanced" },
+      { name: "PyPI Package Authoring (neurocode-ai)", level: "Advanced" },
       { name: "Decentralized Mesh Protocols", level: "Proficient" },
       { name: "FastAPI / Node.js", level: "Advanced" },
       { name: "Three.js / WebGL", level: "Proficient" },
-      { name: "Linux (Ubuntu 24.04 / WSL2)", level: "Advanced" },
+      { name: "Linux (Ubuntu 24.04 / WSL2)", level: "Expert" },
       { name: "Docker & Containerization", level: "Advanced" },
       { name: "Git / GitHub Version Control", level: "Advanced" },
       { name: "Autodesk Fusion 360 / SolidWorks", level: "Proficient" },

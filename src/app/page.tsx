@@ -160,13 +160,21 @@ export default function Home() {
           {/* Call to Action Buttons */}
           <div className="flex flex-wrap justify-center gap-3 pt-2">
             <a 
-              href={profileData.resumeUrl} 
-              target="_blank" 
-              rel="noopener noreferrer" 
+              href="/resume.pdf" 
+              download="Deepak_R_Resume.pdf"
               className="px-5 py-2.5 text-xs font-bold font-orbitron rounded-xl tracking-wider transition-all border bg-emerald-600 hover:bg-emerald-700 text-white border-emerald-600 shadow-md dark:bg-emerald-500/20 dark:hover:bg-emerald-400 dark:hover:text-black dark:border-emerald-400 dark:text-emerald-300 dark:shadow-[0_0_15px_rgba(16,185,129,0.3)] flex items-center gap-2"
             >
               <FaDownload className="text-xs" />
-              <span>DOWNLOAD RESUME</span>
+              <span>DOWNLOAD RESUME (PDF)</span>
+            </a>
+            <a 
+              href="/resume.tex" 
+              download="Deepak_R_Resume.tex"
+              className="px-4 py-2.5 text-xs font-bold font-orbitron rounded-xl tracking-wider transition-all border bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-800 shadow-sm dark:bg-black/60 dark:hover:bg-cyan-950 dark:border-cyan-500/40 dark:text-cyan-300 flex items-center gap-1.5"
+              title="Download 1-Page LaTeX Source Code (.tex)"
+            >
+              <FaDownload className="text-xs" />
+              <span>RESUME (.TEX)</span>
             </a>
             <a 
               href="#projects" 
