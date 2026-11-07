@@ -3,6 +3,7 @@ import { Orbitron, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import BackToTop from '@/components/BackToTop'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { Analytics } from '@vercel/analytics/next'
 
@@ -21,57 +22,89 @@ const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Deepak R',
-  givenName: 'Deepak',
-  familyName: 'R',
-  additionalName: 'Rajender',
-  alternateName: [
-    'Deepak R',
-    'Robotics Deepak',
-    'Deepak Robotics',
-    'Deepak Rajender',
-    'Arkz Deepak',
-    'DACE Deepak',
-    'Deepak DACE',
-    'Deepak R DACE',
-    'Deepak R Dhaanish Ahmed College of Engineering',
-    'Deepak R (Robotics & Automation)'
-  ],
-  url: 'https://www.deepak-arkz.me',
-  image: 'https://www.deepak-arkz.me/deepak.png',
-  jobTitle: 'Robotics & Automation Engineering Student',
-  description: 'Official engineering portfolio of Deepak R (Robotics Deepak) — B.E. Robotics & Automation engineering student at Dhaanish Ahmed College of Engineering (DACE, Anna University) specializing in Physical AI, ROS 2 Jazzy, Autonomous Mobile Robots, Sim-to-Real Digital Twins, and Computer Vision.',
-  sameAs: [
-    'https://www.linkedin.com/in/robotics-deepak/',
-    'https://github.com/Arkz-Deepak',
-    'https://www.deepak-arkz.me'
-  ],
-  alumniOf: [
+  '@graph': [
     {
-      '@type': 'EducationalOrganization',
-      name: 'Dhaanish Ahmed College of Engineering',
-      alternateName: 'DACE',
-      url: 'https://dhaanish.org/'
+      '@type': 'Person',
+      '@id': 'https://www.deepak-arkz.me/#person',
+      name: 'Deepak R',
+      givenName: 'Deepak',
+      familyName: 'R',
+      additionalName: 'Rajender',
+      alternateName: [
+        'Deepak R',
+        'Robotics Deepak',
+        'Deepak Robotics',
+        'Deepak Rajender',
+        'Arkz Deepak',
+        'DACE Deepak',
+        'Deepak DACE',
+        'Deepak R DACE',
+        'Deepak R Dhaanish Ahmed College of Engineering',
+        'Deepak R (Robotics & Automation)'
+      ],
+      url: 'https://www.deepak-arkz.me',
+      image: 'https://www.deepak-arkz.me/deepak.png',
+      jobTitle: 'Robotics & Automation Engineer | Physical AI Researcher',
+      description: 'Official engineering portfolio and research archives of Deepak R (Robotics Deepak) — B.E. Robotics & Automation engineering student at Dhaanish Ahmed College of Engineering (DACE, Anna University) specializing in Physical AI, Embodied Robotics (MuJoCo/LeRobot), ROS 2 Jazzy, Autonomous Mobile Robots, Sim-to-Real Digital Twins, and Computer Vision.',
+      sameAs: [
+        'https://www.linkedin.com/in/robotics-deepak/',
+        'https://github.com/Arkz-Deepak',
+        'https://orcid.org/0009-0000-2500-9093',
+        'https://openreview.net/profile?id=~Deepak_R2',
+        'https://huggingface.co/Arkz121',
+        'https://www.deepak-arkz.me'
+      ],
+      alumniOf: [
+        {
+          '@type': 'EducationalOrganization',
+          name: 'Dhaanish Ahmed College of Engineering',
+          alternateName: 'DACE',
+          url: 'https://dhaanish.org/'
+        },
+        {
+          '@type': 'EducationalOrganization',
+          name: 'Anna University',
+          url: 'https://www.annauniv.edu/'
+        }
+      ],
+      award: [
+        'Top Finalist — Build 2026 × ByteAsk Open Source Challenge',
+        'Finalist — HackNIMA 2026 International Hackathon (AutoTwin-AI)',
+        'Team Lead — Smart India Hackathon 2026 (Problem Statement SIH26226)',
+        'Selected Interviewee — IIT Mandi CAIR Project RAHAT (Trauma Robotics)'
+      ],
+      knowsAbout: [
+        'ROS 2 Jazzy',
+        'Physical AI',
+        'Embodied AI',
+        'MuJoCo',
+        'LeRobot',
+        'Nav2',
+        'SLAM Toolbox',
+        'Autonomous Navigation',
+        'Sim-to-Real Digital Twins',
+        'AutoTwin-AI',
+        'Computer Vision',
+        'YOLOv8',
+        'Deep Reinforcement Learning',
+        'Verilog HDL',
+        'VGA Signal Generation',
+        'Embedded RTOS',
+        'Aerodynamic Wall-Climbing Robotics',
+        'Robotics Engineering'
+      ]
     },
     {
-      '@type': 'EducationalOrganization',
-      name: 'Anna University',
-      url: 'https://www.annauniv.edu/'
+      '@type': 'WebSite',
+      '@id': 'https://www.deepak-arkz.me/#website',
+      url: 'https://www.deepak-arkz.me',
+      name: 'Deepak R | Robotics & Automation Engineer',
+      description: 'Official portfolio, project archives, and research publications of Deepak R — Physical AI, ROS 2 Jazzy, Autonomous Systems & Sim-to-Real Digital Twins.',
+      publisher: {
+        '@id': 'https://www.deepak-arkz.me/#person'
+      },
+      inLanguage: 'en-US'
     }
-  ],
-  knowsAbout: [
-    'ROS 2 Jazzy',
-    'Physical AI',
-    'Nav2',
-    'SLAM Toolbox',
-    'Autonomous Navigation',
-    'Sim-to-Real Digital Twins',
-    'AutoTwin-AI',
-    'Computer Vision',
-    'Deep Reinforcement Learning',
-    'Embedded RTOS',
-    'Robotics Engineering'
   ]
 }
 
@@ -112,6 +145,11 @@ export const metadata: Metadata = {
   publisher: 'Deepak R',
   alternates: {
     canonical: 'https://www.deepak-arkz.me',
+  },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/deepak.png',
   },
   openGraph: {
     type: 'profile',
@@ -178,6 +216,7 @@ export default function RootLayout({
           <div className="flex-grow w-full bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-white transition-colors duration-300">
             {children}
           </div>
+          <BackToTop />
           <Footer />
         </ThemeProvider>
         <Analytics />

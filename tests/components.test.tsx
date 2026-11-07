@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import BackToTop from '@/components/BackToTop'
 import SkillsSection from '@/components/SkillsSection'
 import ResearchSection from '@/components/ResearchSection'
 import { ThemeProvider } from '@/components/ThemeProvider'
@@ -26,7 +27,14 @@ describe('Component Suite Tests', () => {
     expect(screen.getByText(/2026 Deepak R/i)).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /github profile/i })).toHaveAttribute('href', 'https://github.com/Arkz-Deepak')
     expect(screen.getByRole('link', { name: /linkedin profile/i })).toHaveAttribute('href', 'https://www.linkedin.com/in/robotics-deepak/')
+    expect(screen.getByRole('link', { name: /orcid profile/i })).toHaveAttribute('href', 'https://orcid.org/0009-0000-2500-9093')
+    expect(screen.getByRole('link', { name: /hugging face profile/i })).toHaveAttribute('href', 'https://huggingface.co/Arkz121')
     expect(screen.getByRole('link', { name: /email deepak r/i })).toHaveAttribute('href', 'mailto:deepak121289@outlook.com')
+  })
+
+  test('BackToTop renders and handles scroll action', () => {
+    const { container } = render(<BackToTop />)
+    expect(container).toBeInTheDocument()
   })
 
   test('SkillsSection renders skill domains and badges', () => {

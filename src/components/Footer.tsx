@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'
+import { SiOrcid, SiHuggingface } from 'react-icons/si'
 
 export default function Footer() {
   return (
@@ -8,12 +9,13 @@ export default function Footer() {
         <p className="font-medium">
           © 2026 Deepak R. All rights reserved. | B.E. Robotics & Automation
         </p>
-        <div className="flex items-center space-x-6 text-lg">
+        <div className="flex items-center space-x-5 text-lg">
           <a
             href="https://github.com/Arkz-Deepak"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub Profile"
+            title="GitHub: Arkz-Deepak"
             className="transition-colors hover:text-blue-700 dark:hover:text-white"
           >
             <FaGithub />
@@ -23,13 +25,35 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn Profile"
+            title="LinkedIn: robotics-deepak"
             className="transition-colors hover:text-blue-700 dark:hover:text-white"
           >
             <FaLinkedin />
           </a>
           <a
+            href="https://orcid.org/0009-0000-2500-9093"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="ORCID Profile"
+            title="ORCID: 0009-0000-2500-9093"
+            className="transition-colors hover:text-blue-700 dark:hover:text-white"
+          >
+            <SiOrcid />
+          </a>
+          <a
+            href="https://huggingface.co/Arkz121"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Hugging Face Profile"
+            title="Hugging Face: Arkz121"
+            className="transition-colors hover:text-blue-700 dark:hover:text-white"
+          >
+            <SiHuggingface />
+          </a>
+          <a
             href="mailto:deepak121289@outlook.com"
             aria-label="Email Deepak R"
+            title="Email: deepak121289@outlook.com"
             className="transition-colors hover:text-blue-700 dark:hover:text-white"
           >
             <FaEnvelope />

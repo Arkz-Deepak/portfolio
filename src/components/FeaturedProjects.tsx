@@ -222,7 +222,7 @@ export default function FeaturedProjects() {
       </div>
 
       {/* Additional Key Projects */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projectsData.slice(4).map((project, idx) => (
           <motion.div
             key={project.id}

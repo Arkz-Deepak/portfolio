@@ -59,8 +59,8 @@ export default function Navbar() {
             DEEPAK<span className="text-amber-600 dark:text-white">.OS</span>
           </Link>
           
-          {/* Desktop Menu & Theme Toggle */}
-          <div className="hidden md:flex items-center space-x-5 lg:space-x-6 font-space">
+          {/* Desktop & Tablet Menu & Theme Toggle */}
+          <div className="hidden md:flex items-center space-x-2.5 lg:space-x-6 font-space">
             <Link href="/" className="text-xs lg:text-sm font-semibold transition-colors text-slate-700 hover:text-blue-800 dark:text-gray-300 dark:hover:text-cyan-400">HOME</Link>
             <Link href="/about" className="text-xs lg:text-sm font-semibold transition-colors text-slate-700 hover:text-blue-800 dark:text-gray-300 dark:hover:text-cyan-400">ABOUT</Link>
             <Link href="/labs" className="text-xs lg:text-sm font-semibold transition-colors text-slate-700 hover:text-blue-800 dark:text-gray-300 dark:hover:text-cyan-400">LABS</Link>
@@ -72,7 +72,7 @@ export default function Navbar() {
             <a
               href="/resume.pdf"
               download="Deepak_R_Resume.pdf"
-              className="px-3 py-1.5 rounded-lg border font-orbitron text-xs font-bold transition-all flex items-center gap-1.5 bg-emerald-600 text-white border-emerald-600 hover:bg-emerald-700 shadow-sm dark:bg-emerald-500/20 dark:border-emerald-400 dark:text-emerald-300 dark:hover:bg-emerald-400 dark:hover:text-black dark:shadow-[0_0_10px_rgba(16,185,129,0.2)]"
+              className="px-2.5 lg:px-3 py-1.5 rounded-lg border font-orbitron text-xs font-bold transition-all flex items-center gap-1.5 bg-emerald-600 text-white border-emerald-600 hover:bg-emerald-700 shadow-sm dark:bg-emerald-500/20 dark:border-emerald-400 dark:text-emerald-300 dark:hover:bg-emerald-400 dark:hover:text-black dark:shadow-[0_0_10px_rgba(16,185,129,0.2)]"
             >
               <span>RESUME</span>
               <span className="text-[10px]">⤓</span>
@@ -88,12 +88,12 @@ export default function Navbar() {
                 {isDark ? (
                   <>
                     <Sun size={15} className="text-amber-400 animate-spin-slow" />
-                    <span>LIGHT</span>
+                    <span className="hidden lg:inline">LIGHT</span>
                   </>
                 ) : (
                   <>
                     <Moon size={15} className="text-blue-900" />
-                    <span>DARK</span>
+                    <span className="hidden lg:inline">DARK</span>
                   </>
                 )}
               </button>
