@@ -211,6 +211,49 @@ export const projectsData: ProjectItem[] = [
       Diff --> Patch["Deterministic Patch Verification"]`
   },
   {
+    id: "project-tara",
+    title: "Project TARA: Embodied Multimodal Assistive Robot",
+    subtitle: "Modular Architecture for Autonomous Nav2 Mobility, On-Device LLM Reasoning & Telemetry",
+    category: "robotics",
+    featured: true,
+    date: "Oct 2026",
+    stack: [
+      "ROS 2 Jazzy",
+      "Nav2 Stack",
+      "SLAM Toolbox",
+      "Edge Multimodal LLMs",
+      "Embedded Hardware Controllers",
+      "Next.js Touch HUD",
+      "Python / C++"
+    ],
+    stats: [
+      { label: "Architecture", value: "Modular Quad-Subsystem" },
+      { label: "Navigation", value: "Autonomous ROS 2 Nav2" },
+      { label: "Reasoning", value: "On-Device Multimodal LLM" },
+      { label: "Interface", value: "Interactive Touch Telemetry" }
+    ],
+    githubUrl: "https://github.com/Arkz-Deepak",
+    caseStudySlug: "/projects/project-tara",
+    media: {
+      type: "image",
+      url: "/images/projects/project-tara-preview.png",
+      aspectRatio: "16:9"
+    },
+    summary: "Architected a modular embodied assistive robotics platform partitioning complex service tasks into four decoupled subsystems: autonomous Nav2 lidar mobility, on-device multimodal language model reasoning for real-time spatial instruction parsing, deterministic low-level actuator and sensor controllers, and an interactive telemetry display HUD.",
+    highlights: [
+      "Modularized software into four isolated layers: Navigation, LLM Reasoning, Hardware Components, and Display HUD.",
+      "Engineered autonomous room mapping and dynamic obstacle avoidance utilizing ROS 2 Jazzy and SLAM Toolbox.",
+      "Integrated local edge model command execution to parse natural user instructions directly into discrete waypoint goals."
+    ],
+    architectureMermaid: `graph TD
+      User["User Natural Language / Touch Input"] --> Display["Display & UI Layer (Interactive HUD)"]
+      User --> LLM["LLM Reasoning Subsystem (On-Device Model)"]
+      LLM --> Nav["Navigation Subsystem (ROS 2 Jazzy & Nav2)"]
+      Nav --> Hardware["Component & Actuation Subsystem (Motor Drivers & Sensors)"]
+      Hardware --> Telemetry["Real-time Telemetry Feedback"]
+      Telemetry --> Display`
+  },
+  {
     id: "hybrid-vortex-crawler",
     title: "Hybrid Vortex Crawler: Multi-Surface Wall-Climbing Robot",
     subtitle: "Multi-Surface Vertical Scaling & NDE Payload Delivery (NeX-Gen Robotics Challenge 2026 | IDREA)",

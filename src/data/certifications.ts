@@ -9,6 +9,19 @@ export interface CertificationItem {
 
 export const certificationsData: CertificationItem[] = [
   {
+    id: "abb-robotstudio-rapid",
+    title: "Basics of Robotics & Simulation in RobotStudio",
+    issuer: "ABB Robotics Training Team",
+    issueDate: "Oct 2026",
+    skillsCovered: [
+      "ABB RobotStudio Simulation",
+      "RAPID Programming (MoveJ, MoveL, MoveC)",
+      "Tool Center Point (TCP) Calibration",
+      "WorkObject & ToolData Coordinate Systems",
+      "Industrial Workcell Cycle Optimization"
+    ]
+  },
+  {
     id: "ros2-industrial",
     title: "ROS 2 Industrial Program (20-Day Intensive)",
     issuer: "Karthikesh Robotics Private Limited",

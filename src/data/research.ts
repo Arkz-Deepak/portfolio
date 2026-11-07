@@ -74,7 +74,8 @@ export const researchData: ResearchPublication[] = [
     keyContributions: [
       "Sub-0.5B (298M) architecture operating at 3x-4.3x industrial 50 Hz control rate threshold.",
       "Physics-guided finite-difference kinematic loss annealing suppressing robot joint vibration by 89.1%.",
-      "Validated closed-loop physical pick-and-place task completion at Step 118 in MuJoCo simulation."
+      "Validated closed-loop physical pick-and-place task completion at Step 118 in MuJoCo simulation.",
+      "Collaborating on lightweight Vision-Language-Action (VLA) architectures and embodied policy optimization with researchers from Technical University of Denmark (DTU)."
     ],
     citationBibtex: `@techreport{deepak2026vga,
   title={Vision-Geometry-Action (VGA) Robotic Manipulation with Kinematic Jerk Suppression},
