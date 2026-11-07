@@ -9,9 +9,9 @@ import RobotViewer from '@/components/RobotViewer'
 export default function FeaturedProjects() {
   return (
     <div className="w-full max-w-7xl mx-auto flex flex-col gap-8">
-      {/* Top 2 Hero Projects */}
+      {/* Flagship Hero Projects */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {projectsData.slice(0, 2).map((project, idx) => (
+        {projectsData.slice(0, 4).map((project, idx) => (
           <motion.div
             key={project.id}
             initial={{ opacity: 0, y: 20 }}
@@ -83,17 +83,35 @@ export default function FeaturedProjects() {
               {/* Media Preview Banner for Projects without interactive 3D model */}
               {project.media && !project.model3dUrl && (
                 <div className="mb-5 relative w-full h-[220px] rounded-xl overflow-hidden border border-slate-200 dark:border-cyan-500/30 group bg-slate-950">
-                  <img
-                    src={project.media.url}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+                  {project.media.type === 'video' ? (
+                    <div className="relative w-full h-full">
+                      <video
+                        src={project.media.url}
+                        poster={project.media.poster}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md bg-black/80 border border-cyan-500/40 text-[10px] font-mono font-bold text-cyan-300 backdrop-blur-md flex items-center gap-1.5 shadow-md">
+                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                        <span>CLOSED-LOOP SIMULATION</span>
+                      </div>
+                    </div>
+                  ) : (
+                    <img
+                      src={project.media.url}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  )}
                   {project.demoUrl && (
                     <a
                       href={project.demoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="absolute bottom-2.5 right-2.5 bg-slate-900/90 hover:bg-black border border-cyan-400/40 text-cyan-300 px-3 py-1 rounded-lg text-[10px] font-orbitron font-bold backdrop-blur-md transition-all shadow-md flex items-center gap-1.5"
+                      className="absolute bottom-2.5 right-2.5 bg-slate-900/90 hover:bg-black border border-cyan-400/40 text-cyan-300 px-3 py-1 rounded-lg text-[10px] font-orbitron font-bold backdrop-blur-md transition-all shadow-md flex items-center gap-1.5 z-10"
                     >
                       <span>LIVE TELEMETRY HUD</span>
                       <span className="text-xs">↗</span>
@@ -205,7 +223,7 @@ export default function FeaturedProjects() {
 
       {/* Additional Key Projects */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {projectsData.slice(2).map((project, idx) => (
+        {projectsData.slice(4).map((project, idx) => (
           <motion.div
             key={project.id}
             initial={{ opacity: 0, y: 15 }}
@@ -227,6 +245,29 @@ export default function FeaturedProjects() {
               <h4 className="text-base font-bold font-orbitron text-slate-900 dark:text-white mb-1.5">
                 {project.title}
               </h4>
+
+              {project.media && (
+                <div className="mb-3 relative w-full h-36 rounded-lg overflow-hidden border border-slate-200 dark:border-cyan-900/60 bg-slate-950">
+                  {project.media.type === 'video' ? (
+                    <video
+                      src={project.media.url}
+                      poster={project.media.poster}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <img
+                      src={project.media.url}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                    />
+                  )}
+                </div>
+              )}
+
               <p className="text-xs font-space text-slate-600 dark:text-gray-300 leading-relaxed mb-4">
                 {project.summary}
               </p>

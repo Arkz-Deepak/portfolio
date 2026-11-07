@@ -7,6 +7,7 @@ import VortexCrawlerProject from '@/app/projects/vortex-crawler/page'
 import AutoTwinProject from '@/app/projects/autotwin-ai/page'
 import EdgeVisionProject from '@/app/projects/edgevision/page'
 import SpaceDebrisCleanerProject from '@/app/projects/space-debris-cleaner/page'
+import VgaManipulationProject from '@/app/projects/vga-manipulation/page'
 
 // Mock RobotViewer because WebGL Canvas is mocked in jsdom
 jest.mock('@/components/RobotViewer', () => {
@@ -69,5 +70,13 @@ describe('Page Routes Suite Tests', () => {
     expect(screen.getAllByText(/MISSION CONTROL HUD/i).length).toBeGreaterThanOrEqual(1)
     expect(screen.getAllByText(/AUTODESK FUSION 3D CAD/i).length).toBeGreaterThanOrEqual(1)
     expect(screen.getAllByText(/Electroadhesion/i).length).toBeGreaterThanOrEqual(1)
+  })
+
+  test('VgaManipulationProject renders policy architecture, MuJoCo videos, and benchmark metrics', () => {
+    render(<VgaManipulationProject />)
+    expect(screen.getAllByText(/VGA Policy/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/MUJOCO SIMULATION/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/CentroidRayRoPE/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/SmolVLA-450M/i).length).toBeGreaterThanOrEqual(1)
   })
 })

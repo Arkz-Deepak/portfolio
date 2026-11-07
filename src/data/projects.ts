@@ -30,6 +30,53 @@ export interface ProjectItem {
 
 export const projectsData: ProjectItem[] = [
   {
+    id: "vga-robotic-manipulation",
+    title: "VGA Policy: Vision-Geometry-Action Robotic Manipulation",
+    subtitle: "Hard Real-Time Embodied AI Policy with Kinematic Jerk Suppression (LIBERO-Spatial & RoboCasa)",
+    category: "robotics",
+    featured: true,
+    date: "Oct 2026",
+    competition: "Embodied AI / LIBERO-Spatial Benchmark",
+    stack: [
+      "PyTorch",
+      "LeRobot",
+      "MuJoCo",
+      "SigLIP",
+      "SmolLM2",
+      "Flow Matching DiT",
+      "CentroidRayRoPE"
+    ],
+    stats: [
+      { label: "Parameter Footprint", value: "298.3M (36.3M Head)" },
+      { label: "Control Frequency", value: "154–215 Hz (4.6ms)" },
+      { label: "Jerk Reduction", value: "89.1% Annealed" },
+      { label: "Physical Status", value: "Closed-Loop Success" }
+    ],
+    githubUrl: "https://github.com/Arkz-Deepak/vga-poc",
+    caseStudySlug: "/projects/vga-manipulation",
+    media: {
+      type: "video",
+      url: "/videos/vga-mujoco-pickplace.mp4",
+      poster: "/images/projects/vga-manipulation-preview.png",
+      aspectRatio: "16:9"
+    },
+    summary: "Engineered an embodied AI manipulation policy under a strict <=0.5B parameter budget capable of hard real-time execution in closed-loop MuJoCo physics. Employs frozen SigLIP-B/16 vision tokens and SmolLM2 language representations integrated via CentroidRayRoPE into a 12-layer Action Diffusion Transformer (DiT) with Flow Matching. Physics-guided finite-difference kinematic loss annealing eliminates joint vibration and motor chatter, culminating in autonomous physical pick-and-place task completion at Step 118 on LIBERO-Spatial.",
+    highlights: [
+      "Operates at 154–215 Hz control rate (4.64–6.46 ms latency), beating baseline SmolVLA-450M by 8.7x.",
+      "Achieved 89.1% trajectory jerk reduction via finite-difference acceleration/jerk loss constraints.",
+      "Demonstrated full closed-loop pick-and-place success in MuJoCo simulation from few-shot demonstrations."
+    ],
+    architectureMermaid: `graph LR
+      RGB["Camera RGB (256x256)"] --> SigLIP["SigLIP-B/16 (Frozen)"]
+      Task["Task Language Prompt"] --> SmolLM["SmolLM2-135M (Frozen)"]
+      SigLIP --> CrossAttn["Cross-Attention + RayRoPE"]
+      SmolLM --> CrossAttn
+      CrossAttn --> DiT["12-Layer Action DiT (36.3M Trainable)"]
+      Noise["Gaussian Noise"] --> DiT
+      DiT --> FlowMatching["Flow Matching (NFE=4)"]
+      FlowMatching --> Actions["16-Step Chunk Actions"]`
+  },
+  {
     id: "sih-space-debris-cleaner",
     title: "Orbital ADR: Autonomous Space Debris Cleaning Robot",
     subtitle: "Active Debris Removal (ADR) & Orbital Logistics Platform (Smart India Hackathon 2026 — PS SIH26226)",
@@ -121,51 +168,6 @@ export const projectsData: ProjectItem[] = [
       Camera["Native Camera (30-60 FPS)"] -->|Zero-Copy Tensor Feed| Runtime
       Runtime --> Telemetry["Real-time Telemetry Engine (ms / FPS / RAM)"]
       Telemetry -->|Live WebSocket Stream| Dashboard["Developer Terminal Dashboard"]`
-  },
-  {
-    id: "vga-robotic-manipulation",
-    title: "VGA Policy: Vision-Geometry-Action Robotic Manipulation",
-    subtitle: "Hard Real-Time Embodied AI Policy with Kinematic Jerk Suppression (LIBERO-Spatial & RoboCasa)",
-    category: "robotics",
-    featured: true,
-    date: "Oct 2026",
-    competition: "Embodied AI / LIBERO-Spatial Benchmark",
-    stack: [
-      "PyTorch",
-      "LeRobot",
-      "MuJoCo",
-      "SigLIP",
-      "SmolLM2",
-      "Flow Matching DiT",
-      "CentroidRayRoPE"
-    ],
-    stats: [
-      { label: "Parameter Footprint", value: "298.3M (36.3M Head)" },
-      { label: "Control Frequency", value: "154–215 Hz (4.6ms)" },
-      { label: "Jerk Reduction", value: "89.1% Annealed" },
-      { label: "Physical Status", value: "Closed-Loop Success" }
-    ],
-    githubUrl: "https://github.com/Arkz-Deepak/vga-poc",
-    media: {
-      type: "image",
-      url: "/images/projects/vga-manipulation-preview.png",
-      aspectRatio: "16:9"
-    },
-    summary: "Engineered an embodied AI manipulation policy under a strict <=0.5B parameter budget capable of hard real-time execution in closed-loop MuJoCo physics. Employs frozen SigLIP-B/16 vision tokens and SmolLM2 language representations integrated via CentroidRayRoPE into a 12-layer Action Diffusion Transformer (DiT) with Flow Matching. Physics-guided finite-difference kinematic loss annealing eliminates joint vibration and motor chatter, culminating in autonomous physical pick-and-place task completion at Step 118 on LIBERO-Spatial.",
-    highlights: [
-      "Operates at 154–215 Hz control rate (4.64–6.46 ms latency), beating baseline SmolVLA-450M by 8.7x.",
-      "Achieved 89.1% trajectory jerk reduction via finite-difference acceleration/jerk loss constraints.",
-      "Demonstrated full closed-loop pick-and-place success in MuJoCo simulation from few-shot demonstrations."
-    ],
-    architectureMermaid: `graph LR
-      RGB["Camera RGB (256x256)"] --> SigLIP["SigLIP-B/16 (Frozen)"]
-      Task["Task Language Prompt"] --> SmolLM["SmolLM2-135M (Frozen)"]
-      SigLIP --> CrossAttn["Cross-Attention + RayRoPE"]
-      SmolLM --> CrossAttn
-      CrossAttn --> DiT["12-Layer Action DiT (36.3M Trainable)"]
-      Noise["Gaussian Noise"] --> DiT
-      DiT --> FlowMatching["Flow Matching (NFE=4)"]
-      FlowMatching --> Actions["16-Step Chunk Actions"]`
   },
   {
     id: "neurocode-ai",
