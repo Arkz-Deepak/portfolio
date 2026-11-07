@@ -23,6 +23,13 @@ export interface ProjectItem {
     poster?: string;
     aspectRatio: '16:9' | '4:3' | '1:1';
   };
+  gallery?: {
+    title: string;
+    type: 'video' | 'image';
+    url: string;
+    poster?: string;
+    caption?: string;
+  }[];
   summary: string;
   highlights: string[];
   architectureMermaid?: string;
@@ -60,10 +67,49 @@ export const projectsData: ProjectItem[] = [
       poster: "/images/projects/vga-manipulation-preview.png",
       aspectRatio: "16:9"
     },
+    gallery: [
+      {
+        title: "Task 0: Multi-Variant Rollout Matrix",
+        type: "video",
+        url: "/videos/vga-libero-t0-multitile.mp4",
+        caption: "Side-by-side rollout matrix on LIBERO-Spatial Task 0 comparing Baseline, +Depth, +Rays, +Smooth Chunk Joins, All Three, and SmolVLA-450M."
+      },
+      {
+        title: "Task 4: Articulated Spatial Insertion",
+        type: "video",
+        url: "/videos/vga-libero-t4-multitile.mp4",
+        caption: "Multi-variant policy comparison on Task 4 demonstrating smooth chunk joins preventing chunk-boundary jerking."
+      },
+      {
+        title: "Task 6: Precision Push & Alignment",
+        type: "video",
+        url: "/videos/vga-libero-t6-multitile.mp4",
+        caption: "Task 6 rollout matrix showing wrist-camera tracking and trajectory stability."
+      },
+      {
+        title: "Task 9: Complex Manipulation Sequence",
+        type: "video",
+        url: "/videos/vga-libero-t9-multitile.mp4",
+        caption: "Task 9 multi-policy rollouts verifying autonomous task completion across 16-step action horizons."
+      },
+      {
+        title: "SmolVLA Comparative Benchmark",
+        type: "video",
+        url: "/videos/vga-vs-smolvla-comparison.mp4",
+        caption: "Direct head-to-head execution showing 89.1% jerk reduction and 8.7x faster control frequency compared to SmolVLA."
+      },
+      {
+        title: "Workstation Telemetry Screencast",
+        type: "video",
+        url: "/videos/vga-live-simulation-screencast.webm",
+        caption: "Workstation screencast showing live MuJoCo physics simulation, 4.6ms inference telemetry, and GPU resource footprint."
+      }
+    ],
     summary: "Engineered an embodied AI manipulation policy under a strict <=0.5B parameter budget capable of hard real-time execution in closed-loop MuJoCo physics. Employs frozen SigLIP-B/16 vision tokens and SmolLM2 language representations integrated via CentroidRayRoPE into a 12-layer Action Diffusion Transformer (DiT) with Flow Matching. Physics-guided finite-difference kinematic loss annealing eliminates joint vibration and motor chatter, culminating in autonomous physical pick-and-place task completion at Step 118 on LIBERO-Spatial.",
     highlights: [
       "Operates at 154–215 Hz control rate (4.64–6.46 ms latency), beating baseline SmolVLA-450M by 8.7x.",
       "Achieved 89.1% trajectory jerk reduction via finite-difference acceleration/jerk loss constraints.",
+      "Smooth chunk joins cut chunk-boundary jumps from 2.88x to 1.05x normal step.",
       "Demonstrated full closed-loop pick-and-place success in MuJoCo simulation from few-shot demonstrations."
     ],
     architectureMermaid: `graph LR

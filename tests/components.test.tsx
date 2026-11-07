@@ -5,6 +5,7 @@ import Footer from '@/components/Footer'
 import BackToTop from '@/components/BackToTop'
 import SkillsSection from '@/components/SkillsSection'
 import ResearchSection from '@/components/ResearchSection'
+import VgaRolloutGallery from '@/components/VgaRolloutGallery'
 import { ThemeProvider } from '@/components/ThemeProvider'
 
 describe('Component Suite Tests', () => {
@@ -50,5 +51,12 @@ describe('Component Suite Tests', () => {
     expect(screen.getByText(/DOI: 10.5281\/zenodo.20265628/i)).toBeInTheDocument()
     expect(screen.getAllByText(/OPEN PREPRINT \/ DOI/).length).toBeGreaterThanOrEqual(1)
     expect(screen.getAllByText(/COPY BIBTEX/).length).toBeGreaterThanOrEqual(1)
+  })
+
+  test('VgaRolloutGallery renders task switcher and table', () => {
+    render(<VgaRolloutGallery />)
+    expect(screen.getByText(/LIBERO-SPATIAL MULTI-POLICY ROLLOUT MATRIX/i)).toBeInTheDocument()
+    expect(screen.getByText('TASK 0')).toBeInTheDocument()
+    expect(screen.getByText('TASK 4')).toBeInTheDocument()
   })
 })

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { projectsData } from '@/data/projects'
 import Link from 'next/link'
 import { FaArrowLeft, FaCheck, FaRobot, FaBrain, FaWaveSquare, FaChartLine, FaGithub, FaPlay } from 'react-icons/fa'
+import VgaRolloutGallery from '@/components/VgaRolloutGallery'
 
 export const metadata: Metadata = {
   title: 'VGA Policy: Vision-Geometry-Action Robotic Manipulation | Case Study | Deepak R.',
@@ -84,6 +85,9 @@ export default function VgaManipulationProject() {
           </div>
         ))}
       </div>
+
+      {/* Multi-Policy Rollout Matrix Gallery & Empirical Benchmark Table */}
+      <VgaRolloutGallery />
 
       {/* Video Demonstration 1: Closed-Loop MuJoCo Pick-and-Place */}
       <section className="mb-12 p-6 rounded-2xl border bg-white border-slate-200 shadow-md dark:bg-gray-900/50 dark:border-cyan-500/30 backdrop-blur-md">
