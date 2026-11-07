@@ -1,6 +1,8 @@
 %-------------------------------------------------------------------------------
 % Deepak R - Single-Page Engineering & Robotics Resume
 % Formatted strictly in pure black, matching Resume (8).pdf layout
+% Complete with embedded hyperlinks on all institutions, projects, & publications
+% Perfectly balanced vertical distribution across the full single page
 %-------------------------------------------------------------------------------
 
 \documentclass[letterpaper,10pt]{article}
@@ -17,10 +19,10 @@
 \usepackage{geometry}
 
 \geometry{
-  top=0.35in,
-  bottom=0.35in,
-  left=0.44in,
-  right=0.44in
+  top=0.42in,
+  bottom=0.42in,
+  left=0.45in,
+  right=0.45in
 }
 
 \pagestyle{fancy}
@@ -36,73 +38,68 @@
 
 % Section Titles formatting: Bold Uppercase with horizontal rule
 \titleformat{\section}{
-  \vspace{-7pt}\bfseries\scshape\normalsize
-}{}{0em}{}[\vspace{-2pt}\hrule height 0.5pt \vspace{3pt}]
+  \vspace{-2pt}\bfseries\scshape\normalsize
+}{}{0em}{}[\vspace{-1pt}\hrule height 0.5pt \vspace{4pt}]
 
-\titlespacing*{\section}{0pt}{7pt}{2pt}
+\titlespacing*{\section}{0pt}{10pt}{3pt}
 
-% Custom list spacing
-\setlist[itemize]{leftmargin=12pt, label=$\bullet$, itemsep=-1.5pt, topsep=1pt, parsep=0pt, partopsep=0pt}
+% Custom list spacing for uniform single-page breathing room
+\setlist[itemize]{leftmargin=12pt, label=$\bullet$, itemsep=1.2pt, topsep=2pt, parsep=0pt, partopsep=0pt}
 
 \begin{document}
 
 %----------HEADING----------
 \begin{center}
-    {\LARGE \textbf{Deepak R}} \\ \vspace{2pt}
-    \small Chennai, TN $|$ +91 63696 14424 $|$ \href{mailto:deepak121289@outlook.com}{deepak121289@outlook.com} \\ \vspace{1pt}
+    {\LARGE \textbf{Deepak R}} \\ \vspace{3pt}
+    \small Chennai, TN $|$ \href{tel:+916369614424}{+91 63696 14424} $|$ \href{mailto:deepak121289@outlook.com}{deepak121289@outlook.com} \\ \vspace{2pt}
     \href{https://github.com/Arkz-Deepak}{github.com/Arkz-Deepak} $|$ 
     \href{https://linkedin.com/in/robotics-deepak}{linkedin.com/in/robotics-deepak} $|$ 
-    \href{https://deepak-arkz.me}{deepak-arkz.me}
+    \href{https://deepak-arkz.me}{deepak-arkz.me} $|$
+    \href{https://orcid.org/0009-0000-2500-9093}{ORCID: 0009-0000-2500-9093}
 \end{center}
-\vspace{-9pt}
+\vspace{-6pt}
 
 %-----------PROFESSIONAL SUMMARY-----------
 \section{Professional Summary}
-\small{Dedicated B.E. Robotics and Automation undergraduate student (CGPA: 9.2/10.0) with practical experience across ROS 2 (Jazzy), Embodied AI (VGA / LeRobot), Autonomous Navigation (Nav2, SLAM), Computer Vision, and Embedded Systems. Demonstrated capabilities across multi-sensor fusion, edge AI deployment, and industrial robotics through internships, hackathons, open-source contributions, and published preprint research.}
-\vspace{1pt}
+\small{Dedicated B.E. Robotics and Automation undergraduate student (CGPA: 9.2/10.0) with practical experience across ROS 2 (Jazzy), Embodied AI (\href{https://github.com/Arkz-Deepak/vga-poc}{VGA Policy} / LeRobot), Autonomous Navigation (Nav2, SLAM), Computer Vision, and Embedded RTOS Systems. Demonstrated capabilities across multi-sensor fusion, edge AI deployment, and industrial robotics through internships, hackathons, open-source contributions, and peer-reviewed preprint research.}
 
 %-----------EDUCATION-----------
 \section{Education}
 \noindent
-\textbf{Dhaanish Ahmed College of Engineering (Anna University)} \hfill \textbf{Chennai, India} \\
+\href{https://dhaanish.org}{\textbf{Dhaanish Ahmed College of Engineering}} (\href{https://www.annauniv.edu}{\textbf{Anna University}}) \hfill \textbf{Chennai, India} \\
 \textit{Bachelor of Engineering (B.E.) in Robotics and Automation -- CGPA: 9.2/10.0} \hfill \textit{May 2024 -- May 2028} \\
-\vspace{-3pt}
 \begin{itemize}
-    \item \textbf{Relevant Coursework:} Industrial Robotics, Autonomous Mobile Robots, Control Systems, Digital Circuits, Machine Learning, Embedded Systems, ROS 2 Navigation, Kinematics \& Dynamics.
+    \item \textbf{Relevant Coursework:} Industrial Robotics, Autonomous Mobile Robots, Control Systems, Digital Circuits, Machine Learning, Embedded Systems, ROS 2 Navigation, Kinematics \& Dynamics, Computer Integrated Manufacturing.
 \end{itemize}
 
 %-----------WORK EXPERIENCE-----------
 \section{Work Experience}
 \noindent
-\textbf{Wildplant Terrestrial Solutions Pvt Ltd} -- \textit{Web Development Intern (Under NDA)} \hfill \textbf{Remote $|$ Jul 2026 -- Aug 2026} \\
-\vspace{-3pt}
+\href{https://wildplant.in}{\textbf{Wildplant Terrestrial Solutions Pvt Ltd}} -- \textit{Web Development Intern (Under NDA)} \hfill \textbf{Remote $|$ Jul 2026 -- Aug 2026} \\
 \begin{itemize}
     \item Architected full-stack platforms and secure RESTful backend APIs in Python/Node.js for proprietary internal systems under NDA.
     \item Optimized client-side data flows and integrated real-time telemetry streaming for internal developer dashboards.
 \end{itemize}
-\vspace{2pt}
+\vspace{3pt}
 
 \noindent
-\textbf{Precise3DM} -- \textit{Automation \& Data Engineering Intern} \hfill \textbf{Chennai, India (Hybrid) $|$ Jun 2026 -- Jul 2026} \\
-\vspace{-3pt}
+\href{https://precise3dm.com}{\textbf{Precise3DM}} -- \textit{Automation \& Data Engineering Intern} \hfill \textbf{Chennai, India (Hybrid) $|$ Jun 2026 -- Jul 2026} \\
 \begin{itemize}
     \item Developed automated ETL data processing pipelines and web scrapers integrating REST API services, eliminating manual ingestion.
     \item Built structured validation logic and automated logging routines to ensure high pipeline reliability and data integrity.
 \end{itemize}
-\vspace{2pt}
+\vspace{3pt}
 
 \noindent
-\textbf{Tamizhan Skills (RISE Programs)} -- \textit{AI \& Autonomous Systems Intern} \hfill \textbf{Remote $|$ Dec 2025 -- Mar 2026} \\
-\vspace{-3pt}
+\href{https://tamizhanskill.com}{\textbf{Tamizhan Skills (RISE Programs)}} -- \textit{AI \& Autonomous Systems Intern} \hfill \textbf{Remote $|$ Dec 2025 -- Mar 2026} \\
 \begin{itemize}
     \item Configured ROS 2 Nav2 navigation stacks, costmaps, and multi-sensor fusion (LiDAR, IMU, Odometry) in Gazebo simulations.
     \item Trained CNN models in TensorFlow/Keras for image classification and engineered NLP text anomaly detection classifiers.
 \end{itemize}
-\vspace{2pt}
+\vspace{3pt}
 
 \noindent
-\textbf{Chennai Port Authority} -- \textit{Industrial Engineering Intern} \hfill \textbf{Chennai, India $|$ Dec 2025} \\
-\vspace{-3pt}
+\href{https://chennaiport.gov.in}{\textbf{Chennai Port Authority}} -- \textit{Industrial Engineering Intern} \hfill \textbf{Chennai, India $|$ Dec 2025} \\
 \begin{itemize}
     \item Diagnosed and serviced diesel locomotive powertrains; analyzed PLC-driven port logistics and automation systems.
 \end{itemize}
@@ -110,54 +107,49 @@
 %-----------PUBLICATIONS-----------
 \section{Publications}
 \noindent
-\textbf{''Sensor-Fusion Driven Deep RL for Dynamic Traffic Signal Optimization''} \hfill \href{https://doi.org/10.5281/zenodo.20265628}{\textbf{doi.org/10.5281/zenodo.20265628}} \\
+\href{https://doi.org/10.5281/zenodo.20265628}{\textbf{''Sensor-Fusion Driven Deep RL for Dynamic Traffic Signal Optimization''}} \hfill \href{https://doi.org/10.5281/zenodo.20265628}{\textbf{doi.org/10.5281/zenodo.20265628}} \\
 \textit{Zenodo Preprint} \hfill \textit{Aug 2026} \\
-\vspace{-3pt}
 \begin{itemize}
     \item Formulated decentralized traffic management combining CV telemetry with multi-agent reinforcement learning (MARL).
-    \item Authored AutoTwin-AI Sim-to-Real Digital Twin research for defect inspection ($<$42 ms inference); active on AURA.
+    \item Authored \href{https://deepak-arkz.me/projects/autotwin-ai}{AutoTwin-AI} Sim-to-Real Digital Twin research for defect inspection ($<$42 ms inference); active on \href{https://deepak-arkz.me/projects/aura}{AURA}.
 \end{itemize}
 
 %-----------PROJECTS-----------
 \section{Projects}
 \noindent
-\textbf{VGA Policy: Vision-Geometry-Action Robotic Manipulation} -- \textit{PyTorch, LeRobot, MuJoCo, Flow Matching} \hfill \textbf{Oct 2026} \\
-\vspace{-3pt}
+\href{https://github.com/Arkz-Deepak/vga-poc}{\textbf{VGA Policy: Vision-Geometry-Action Robotic Manipulation}} -- \textit{PyTorch, LeRobot, MuJoCo} \hfill \textbf{Oct 2026} \\
 \begin{itemize}
-    \item Developed $\le$0.5B (298M) embodied manipulation policy operating at \textbf{154--215 Hz} control rate with 89.1\% jerk reduction; verified autonomous pick-and-place completion at Step 118 in MuJoCo physics (LIBERO-Spatial benchmark).
+    \item Developed $\le$0.5B (298M) embodied manipulation policy operating at \textbf{154--215 Hz} with 89.1\% jerk reduction; verified autonomous pick-and-place at Step 118 in MuJoCo physics on \href{https://github.com/Arkz-Deepak/vga-poc}{LIBERO-Spatial}; collaborating with DTU researchers.
 \end{itemize}
-\vspace{2pt}
+\vspace{3pt}
 
 \noindent
-\textbf{NeuroCode: Heterogeneous Code-Graph Slicing Framework} -- \textit{Python, MCP, Tree-sitter, NetworkX} \hfill \textbf{Nov 2026} \\
-\vspace{-3pt}
+\href{https://pypi.org/project/neurocode-ai/}{\textbf{NeuroCode: Heterogeneous Code-Graph Slicing Framework}} -- \textit{Python, MCP, Tree-sitter} \hfill \textbf{Nov 2026} \\
 \begin{itemize}
-    \item Authored \textbf{neurocode-ai} on PyPI with Model Context Protocol (MCP) server for local LLMs; resolved SWE-bench Lite on 4GB VRAM laptop GPUs (961MB peak) with 0 OOMs, and achieved 100\% recall on RepoBench-R (-42.6\% tokens).
+    \item Published \href{https://pypi.org/project/neurocode-ai/}{\textbf{neurocode-ai}} on PyPI with Model Context Protocol (MCP) server for local LLMs; resolved SWE-bench Lite on 4GB VRAM laptop GPUs (961MB peak) with 0 OOMs, and achieved 100\% recall on RepoBench-R (-42.6\% tokens).
 \end{itemize}
-\vspace{2pt}
+\vspace{3pt}
 
 \noindent
-\textbf{Orbital ADR: Autonomous Space Debris Cleaner} -- \textit{ROS 2, Jetson Nano, STM32, Fusion 360} \hfill \textbf{Sep 2026} \\
-\vspace{-3pt}
+\href{https://github.com/Arkz-Deepak/sih2026-isro-space-tech}{\textbf{Orbital ADR: Autonomous Space Debris Cleaner}} -- \textit{ROS 2, Jetson Nano, STM32, Fusion 360} \hfill \textbf{Sep 2026} \\
 \begin{itemize}
-    \item Smart India Hackathon 2026 (PS SIH26226) space tech platform; combined SpaceYOLO target pose estimation with STM32 cold-gas thruster actuation and electroadhesive capture plate for non-cooperative orbital debris capture.
+    \item Smart India Hackathon 2026 (PS SIH26226) space tech platform; combined SpaceYOLO pose estimation with STM32 cold-gas thruster firings and electroadhesive capture plate for non-cooperative orbital debris capture.
 \end{itemize}
-\vspace{2pt}
+\vspace{3pt}
 
 \noindent
-\textbf{Project TARA: Embodied Multimodal Assistive Robot} -- \textit{ROS 2 Jazzy, Nav2, SLAM Toolbox, Edge LLM} \hfill \textbf{Oct 2026} \\
-\vspace{-3pt}
+\href{https://github.com/Arkz-Deepak}{\textbf{Project TARA: Embodied Multimodal Assistive Robot}} -- \textit{ROS 2 Jazzy, Nav2, SLAM, Edge LLM} \hfill \textbf{Oct 2026} \\
 \begin{itemize}
-    \item Architected a modular quad-subsystem assistive robot decoupling autonomous Nav2 mobility, on-device multimodal LLM spatial command reasoning, real-time motor actuation, and an interactive touch telemetry display HUD.
+    \item Architected a modular quad-subsystem assistive robot decoupling autonomous Nav2 mobility, on-device multimodal LLM spatial reasoning, real-time motor actuation, and an interactive touch telemetry display HUD.
 \end{itemize}
 
 %-----------TECHNICAL SKILLS-----------
 \section{Technical Skills}
 \begin{itemize}
     \item \textbf{Languages:} Python, C++, C, SQL, Rust, Bash, JavaScript, HTML/CSS.
-    \item \textbf{Robotics \& Simulation:} ROS 2 (Jazzy), Gazebo Harmonic, Nav2, SLAM Toolbox, MoveIt 2, MuJoCo Physics, LeRobot, ABB RobotStudio \& RAPID, URDF/Xacro, Path Planning (RRT/PRM/A*), Coverage Planning (BCD).
-    \item \textbf{AI, CV \& Web:} PyTorch, Diffusion Transformers (DiT), Flow Matching, Model Context Protocol (MCP), OpenCV, YOLO (v8/v11), MediaPipe, TensorFlow, Scikit-learn, FastAPI, Node.js.
-    \item \textbf{Embedded Systems \& Tools:} STM32, Raspberry Pi 4, ESP32, ESP8266, Arduino, Linux (Ubuntu 24.04/WSL2), Docker, Git, Fusion 360, \LaTeX.
+    \item \textbf{Robotics \& Simulation:} ROS 2 (Jazzy), Gazebo Harmonic, Nav2 Stack, SLAM Toolbox, MoveIt 2, MuJoCo Physics, LeRobot, ABB RobotStudio \& RAPID, URDF/Xacro, Path Planning (RRT/PRM/A*), Coverage Planning (BCD).
+    \item \textbf{AI, CV \& Web:} PyTorch, Diffusion Transformers (DiT), Flow Matching, Model Context Protocol (MCP), OpenCV, YOLO (v8/v11), MediaPipe, TensorFlow, Scikit-learn, FastAPI, Node.js, Next.js.
+    \item \textbf{Embedded Systems \& Tools:} STM32, Raspberry Pi 4, ESP32, ESP8266, Arduino, Linux (Ubuntu 24.04/WSL2), Docker, Git, Fusion 360, \LaTeX, \href{https://huggingface.co/Arkz121}{Hugging Face (@Arkz121)}, \href{https://openreview.net/profile?id=~Deepak_R2}{OpenReview (\textasciitilde Deepak\_R2)}.
 \end{itemize}
 
 \end{document}
