@@ -16,7 +16,7 @@ describe('Data Store Integrity Tests', () => {
     expect(profileData.resumeUrl).toContain('1PqoCoVizRO3i-Ws3H4bdJa-0T9DamFOIF7KMSuFDnXM')
   })
 
-  test('skillsData has populated categories and valid skill items including mobile NPU tools', () => {
+  test('skillsData has populated categories and valid skill items', () => {
     expect(skillsData.length).toBeGreaterThanOrEqual(4)
     skillsData.forEach(category => {
       expect(category.category).toBeTruthy()
@@ -24,41 +24,40 @@ describe('Data Store Integrity Tests', () => {
     })
 
     const allSkills = skillsData.flatMap(c => c.skills.map(s => s.name))
-    expect(allSkills).toContain('Snapdragon NPU / QNN')
+    expect(allSkills).toContain('PyTorch & Autoencoders')
+    expect(allSkills).toContain('Blender OptiX Ray-Tracing')
     expect(allSkills).toContain('TFLite & ONNX Runtime')
     expect(allSkills).toContain('Decentralized Mesh Protocols')
     expect(allSkills).toContain('ConvLSTM / Spatiotemporal Modeling')
     expect(allSkills).toContain('TimeDistributed CNNs')
     expect(allSkills).toContain('ROS 2 CI/CD (GitHub Actions)')
-    expect(allSkills).toContain('Space Robotics & Orbital Rendezvous')
+    expect(allSkills).toContain('CentroidRayRoPE Geometric Embeddings')
     expect(allSkills).toContain('STM32 Microcontrollers')
     expect(allSkills).toContain('ESP-NOW & LoRa Mesh OTA')
   })
 
-  test('projectsData contains SIH Space Debris Cleaner, EdgeVision, AutoTwin-AI, and Vortex Crawler', () => {
+  test('projectsData contains AutoTwin-AI, WeldGuard-AI, and Vortex Crawler, and excludes purged projects', () => {
     const projectIds = projectsData.map(p => p.id)
-    expect(projectIds).toContain('sih-space-debris-cleaner')
-    expect(projectIds).toContain('edgevision-npu-profiler')
+    expect(projectIds).not.toContain('sih-space-debris-cleaner')
+    expect(projectIds).not.toContain('edgevision-npu-profiler')
+    expect(projectIds).not.toContain('project-tara')
+    expect(projectIds).not.toContain('twindeo-industrial-digital-twin')
     expect(projectIds).toContain('autotwin-ai')
+    expect(projectIds).toContain('weldguard-ai')
     expect(projectIds).toContain('hybrid-vortex-crawler')
     expect(projectIds).toContain('oomwoo-coverage-planner')
-    
-    const spaceDebris = projectsData.find(p => p.id === 'sih-space-debris-cleaner')
-    expect(spaceDebris?.stats?.length).toBeGreaterThanOrEqual(4)
-    expect(spaceDebris?.stack).toContain('SpaceYOLO')
-    expect(spaceDebris?.stack).toContain('STM32 Microcontroller')
-    expect(spaceDebris?.cadUrl).toContain('a360.co')
-    expect(spaceDebris?.docsUrl).toContain('lab.deepak-arkz.me')
-    expect(spaceDebris?.jekyllTheme).toBe('Architect')
-
-    const edgevision = projectsData.find(p => p.id === 'edgevision-npu-profiler')
-    expect(edgevision?.stats?.length).toBeGreaterThanOrEqual(4)
-    expect(edgevision?.stack).toContain('Snapdragon NPU')
+    expect(projectIds).toContain('vga-robotic-manipulation')
 
     const autotwin = projectsData.find(p => p.id === 'autotwin-ai')
     expect(autotwin?.stats?.length).toBeGreaterThanOrEqual(4)
-    expect(autotwin?.stack).toContain('ConvLSTM2d')
+    expect(autotwin?.stack).toContain('Convolutional Autoencoders')
+    expect(autotwin?.stack).toContain('Blender Cycles OptiX')
     expect(autotwin?.docsUrl).toContain('lab.deepak-arkz.me')
+
+    const weldguard = projectsData.find(p => p.id === 'weldguard-ai')
+    expect(weldguard?.stats?.length).toBeGreaterThanOrEqual(4)
+    expect(weldguard?.stack).toContain('Geometric Ellipse Fitting')
+    expect(weldguard?.stack).toContain('ConvLSTM')
 
     const crawler = projectsData.find(p => p.id === 'hybrid-vortex-crawler')
     expect(crawler?.stats?.length).toBeGreaterThanOrEqual(4)

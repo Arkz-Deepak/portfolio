@@ -36,9 +36,10 @@ const PRESET_QUERIES: QueryPreset[] = [
     label: '> LIST PROJECTS',
     command: 'list projects',
     output: [
-      '• SIH 2026: Orbital ADR Autonomous Space Debris Cleaner (Active Debris Removal, Electroadhesive capture).',
-      '• EdgeVision NPU Profiler: Bare-metal Qualcomm NPU evaluation testbench (iQOO Hackathon Grand Finale).',
-      '• AutoTwin-AI v2: Spatiotemporal ConvLSTM Robotic Welding Inspection & 3D Digital Twin (HackNIMA 2026).',
+      '• VGA Policy: Vision-Geometry-Action Robotic Manipulation with Kinematic Jerk Suppression (MuJoCo/LeRobot).',
+      '• NeuroCode: On-Device Code-Graph Slicing & Heterogeneous Neuro-Symbolic MCP Server (PyPI: neurocode-ai).',
+      '• AutoTwin-AI: Automotive Chassis Digital Twin & Structural Defect Detection (PyTorch & Blender Cycles).',
+      '• WeldGuard-AI: In-Situ Universal Robotic Welding Surveillance & Safety Trip Platform.',
       '• Hybrid Vortex Crawler: 45N Active Vortex EDF Wall-Climber (NeX-Gen Robotics 2026 | IDREA).',
       '• OOMWOO: Autonomous Robot Vacuum System (ROS 2 Jazzy, Nav2, Boustrophedon Coverage Planning).'
     ]

@@ -5,8 +5,6 @@ import ProjectsPage from '@/app/projects/page'
 import InternshipsPage from '@/app/internships/page'
 import VortexCrawlerProject from '@/app/projects/vortex-crawler/page'
 import AutoTwinProject from '@/app/projects/autotwin-ai/page'
-import EdgeVisionProject from '@/app/projects/edgevision/page'
-import SpaceDebrisCleanerProject from '@/app/projects/space-debris-cleaner/page'
 import VgaManipulationProject from '@/app/projects/vga-manipulation/page'
 
 // Mock RobotViewer because WebGL Canvas is mocked in jsdom
@@ -30,6 +28,7 @@ describe('Page Routes Suite Tests', () => {
     expect(screen.getByText('ENGINEERING')).toBeInTheDocument()
     expect(screen.getAllByText(/AutoTwin-AI/i).length).toBeGreaterThanOrEqual(1)
     expect(screen.getAllByText(/Hybrid Vortex Crawler/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/WeldGuard-AI/i).length).toBeGreaterThanOrEqual(1)
   })
 
   test('InternshipsPage renders operational timeline and NDA notices', () => {
@@ -47,29 +46,13 @@ describe('Page Routes Suite Tests', () => {
     expect(screen.getAllByText(/Autodesk Fusion/i).length).toBeGreaterThanOrEqual(1)
   })
 
-  test('AutoTwinProject renders spatiotemporal ConvLSTM formulation and metrics', () => {
+  test('AutoTwinProject renders automotive chassis digital twin and metrics', () => {
     render(<AutoTwinProject />)
     expect(screen.getAllByText(/AutoTwin-AI/i).length).toBeGreaterThanOrEqual(1)
-    expect(screen.getAllByText(/SPATIOTEMPORAL 5D TENSOR/i).length).toBeGreaterThanOrEqual(1)
-    expect(screen.getAllByText(/ConvLSTM/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/AUTOMOTIVE CHASSIS INSPECTION/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/CONVOLUTIONAL AUTOENCODER/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/361,174 CAD VERTICES/i).length).toBeGreaterThanOrEqual(1)
     expect(screen.getAllByText(/HACKNIMA PITCH DECK/i).length).toBeGreaterThanOrEqual(1)
-  })
-
-  test('EdgeVisionProject renders on-device NPU metrics and hackathon track', () => {
-    render(<EdgeVisionProject />)
-    expect(screen.getAllByText(/EdgeVision NPU Profiler/i).length).toBeGreaterThanOrEqual(1)
-    expect(screen.getAllByText(/Snapdragon NPU/i).length).toBeGreaterThanOrEqual(1)
-    expect(screen.getAllByText(/Zero-ADB Cable/i).length).toBeGreaterThanOrEqual(1)
-    expect(screen.getAllByText(/HACKATHON PITCH DECK/i).length).toBeGreaterThanOrEqual(1)
-  })
-
-  test('SpaceDebrisCleanerProject renders orbital ADR architecture, CAD link, and metrics', () => {
-    render(<SpaceDebrisCleanerProject />)
-    expect(screen.getAllByText(/Orbital ADR/i).length).toBeGreaterThanOrEqual(1)
-    expect(screen.getAllByText(/Space Debris/i).length).toBeGreaterThanOrEqual(1)
-    expect(screen.getAllByText(/MISSION CONTROL HUD/i).length).toBeGreaterThanOrEqual(1)
-    expect(screen.getAllByText(/AUTODESK FUSION 3D CAD/i).length).toBeGreaterThanOrEqual(1)
-    expect(screen.getAllByText(/Electroadhesion/i).length).toBeGreaterThanOrEqual(1)
   })
 
   test('VgaManipulationProject renders policy architecture, MuJoCo videos, and benchmark metrics', () => {

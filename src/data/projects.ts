@@ -123,99 +123,6 @@ export const projectsData: ProjectItem[] = [
       FlowMatching --> Actions["16-Step Chunk Actions"]`
   },
   {
-    id: "sih-space-debris-cleaner",
-    title: "Orbital ADR: Autonomous Space Debris Cleaning Robot",
-    subtitle: "Active Debris Removal (ADR) & Orbital Logistics Platform (Smart India Hackathon 2026 — PS SIH26226)",
-    category: "robotics",
-    featured: true,
-    date: "Sep 2026",
-    competition: "Smart India Hackathon 2026 (Hardware Edition | Space Technology Theme)",
-    stack: [
-      "ROS 2",
-      "NVIDIA Jetson Nano",
-      "STM32 Microcontroller",
-      "SpaceYOLO",
-      "OpenCV",
-      "Autodesk Fusion 360",
-      "Electroadhesion",
-      "Three.js",
-      "FastAPI"
-    ],
-    stats: [
-      { label: "Challenge", value: "SIH 2026 (Space Tech)" },
-      { label: "Team", value: "ARKZ (Lead: Deepak R)" },
-      { label: "Capture Mechanism", value: "Electroadhesive + 4-Piston CS" },
-      { label: "Mission Telemetry", value: "Three.js WebGL Live HUD" }
-    ],
-    cadUrl: "https://a360.co/3V6CWF7",
-    githubUrl: "https://github.com/Arkz-Deepak/sih2026-isro-space-tech",
-    docsUrl: "https://lab.deepak-arkz.me/sih2026-isro-space-tech/",
-    jekyllTheme: "Architect",
-    demoUrl: "http://sih-space-tech.deepak-arkz.me/",
-    caseStudySlug: "/projects/space-debris-cleaner",
-    media: {
-      type: "image",
-      url: "/images/projects/sih-space-debris-preview.png",
-      aspectRatio: "16:9"
-    },
-    summary: "Engineered an autonomous Active Debris Removal (ADR) spacecraft architecture designed for Low Earth Orbit (LEO) debris remediation under SIH Problem Statement SIH26226. Combines a custom octagonal CAD bus with a 4-piston mechanical Compression System to dampen docking kinetics, alongside an electroadhesive capture plate capable of gripping non-conductive, irregular space debris. Uses a segregated dual-compute architecture: NVIDIA Jetson Nano running ROS 2 and SpaceYOLO for non-cooperative tumbling target pose estimation, linked to an STM32 MCU for microsecond cold-gas thruster firings, backed by a live Three.js orbital mission control interface.",
-    highlights: [
-      "Designed 3-phase orbital flight plan: autonomous chaser rendezvous, mothership deployable deorbit braking modules, and reusable orbital tug logistics.",
-      "Bypassed traditional magnetic grapple limitations using high-voltage electroadhesion to adhere to carbon fiber, composite casings, and glass.",
-      "Deployed an interactive WebGL mission control simulator providing real-time 3D telemetry and docking trajectory visualization."
-    ],
-    architectureMermaid: `graph LR
-      Sensors["Stereo Vision + SpaceYOLO (Jetson Nano)"] -->|Pose Estimation| ROS2["ROS 2 Guidance & Rendezvous Stack"]
-      ROS2 -->|UART Actuation Commands| STM32["STM32 Real-Time Controller"]
-      STM32 --> Thrusters["Cold-Gas Reaction Control Thrusters"]
-      STM32 --> CS["4-Piston Kinetic Damping System"]
-      CS --> Capture["Electroadhesive Capture Plate"]
-      ROS2 -->|Telemetry Stream| Telemetry["Three.js Live Mission Control WebGL"]`
-  },
-  {
-    id: "edgevision-npu-profiler",
-    title: "EdgeVision NPU Profiler",
-    subtitle: "Bare-Metal On-Device Edge AI Evaluation Testbench (iQOO Hackathon 2026 Grand Finale)",
-    category: "ai-vision",
-    featured: true,
-    date: "Sep 2026",
-    stack: [
-      "Snapdragon NPU",
-      "Qualcomm Neural Processing SDK",
-      "TensorFlow Lite",
-      "ONNX Runtime",
-      "React Native",
-      "FastAPI",
-      "TypeScript"
-    ],
-    stats: [
-      { label: "Track", value: "Dev Tools / Edge AI" },
-      { label: "Deployment", value: "Zero-ADB Cable" },
-      { label: "Camera Loop", value: "30–60 FPS Zero-Copy" },
-      { label: "Telemetry", value: "Real-time Latency & RAM" }
-    ],
-    githubUrl: "https://github.com/Arkz-Deepak",
-    demoUrl: "https://docs.google.com/presentation/d/1wtzB97O7d21n2auHoZLjmvhmmsDoqVhJRXfHKcaKpe8/edit?usp=drivesdk&ouid=104707271718142286385",
-    caseStudySlug: "/projects/edgevision",
-    media: {
-      type: "image",
-      url: "/images/projects/edgevision-preview.png",
-      aspectRatio: "16:9"
-    },
-    summary: "Eliminates the deployment bottleneck between desktop AI training and physical mobile/edge hardware. Turns commercial Snapdragon NPU smartphones into live bare-metal evaluation testbenches, executing custom .tflite and ONNX models directly on NPU tensor cores using native camera streams with real-time latency and memory telemetry streaming back to a desktop terminal.",
-    highlights: [
-      "Integrated a zero-cable wireless sync bridge to drag-and-drop compiled models directly from laptop to device.",
-      "Bypassed CPU bottlenecks with a zero-copy native camera pipeline delivering 30–60 FPS video frames straight into the NPU buffer.",
-      "Built a live telemetry stream monitoring true inference latency (ms), frame rate stability, and thermal limits."
-    ],
-    architectureMermaid: `graph LR
-      Dev["Laptop Dev Environment (PyTorch / ONNX)"] -->|Wireless Office Kit Bridge| Phone["iQOO Flagship (Snapdragon NPU)"]
-      Phone --> Runtime["TFLite / ONNX NPU Delegate"]
-      Camera["Native Camera (30-60 FPS)"] -->|Zero-Copy Tensor Feed| Runtime
-      Runtime --> Telemetry["Real-time Telemetry Engine (ms / FPS / RAM)"]
-      Telemetry -->|Live WebSocket Stream| Dashboard["Developer Terminal Dashboard"]`
-  },
-  {
     id: "neurocode-ai",
     title: "NeuroCode: On-Device Code-Graph Slicing Framework",
     subtitle: "Heterogeneous Neuro-Symbolic Model Context Protocol (MCP) Server for Local LLM Repository Repair",
@@ -257,49 +164,6 @@ export const projectsData: ProjectItem[] = [
       Knapsack -->|Bounded Subtrees (B <= 1200 Tokens)| GPU["Device GPU: Local LLM Synthesis"]
       GPU --> Diff["SEARCH/REPLACE Diffs"]
       Diff --> Patch["Deterministic Patch Verification"]`
-  },
-  {
-    id: "project-tara",
-    title: "Project TARA: Embodied Multimodal Assistive Robot",
-    subtitle: "Modular Architecture for Autonomous Nav2 Mobility, On-Device LLM Reasoning & Telemetry",
-    category: "robotics",
-    featured: true,
-    date: "Oct 2026",
-    stack: [
-      "ROS 2 Jazzy",
-      "Nav2 Stack",
-      "SLAM Toolbox",
-      "Edge Multimodal LLMs",
-      "Embedded Hardware Controllers",
-      "Next.js Touch HUD",
-      "Python / C++"
-    ],
-    stats: [
-      { label: "Architecture", value: "Modular Quad-Subsystem" },
-      { label: "Navigation", value: "Autonomous ROS 2 Nav2" },
-      { label: "Reasoning", value: "On-Device Multimodal LLM" },
-      { label: "Interface", value: "Interactive Touch Telemetry" }
-    ],
-    githubUrl: "https://github.com/Arkz-Deepak",
-    caseStudySlug: "/projects/project-tara",
-    media: {
-      type: "image",
-      url: "/images/projects/project-tara-preview.png",
-      aspectRatio: "16:9"
-    },
-    summary: "Architected a modular embodied assistive robotics platform partitioning complex service tasks into four decoupled subsystems: autonomous Nav2 lidar mobility, on-device multimodal language model reasoning for real-time spatial instruction parsing, deterministic low-level actuator and sensor controllers, and an interactive telemetry display HUD.",
-    highlights: [
-      "Modularized software into four isolated layers: Navigation, LLM Reasoning, Hardware Components, and Display HUD.",
-      "Engineered autonomous room mapping and dynamic obstacle avoidance utilizing ROS 2 Jazzy and SLAM Toolbox.",
-      "Integrated local edge model command execution to parse natural user instructions directly into discrete waypoint goals."
-    ],
-    architectureMermaid: `graph TD
-      User["User Natural Language / Touch Input"] --> Display["Display & UI Layer (Interactive HUD)"]
-      User --> LLM["LLM Reasoning Subsystem (On-Device Model)"]
-      LLM --> Nav["Navigation Subsystem (ROS 2 Jazzy & Nav2)"]
-      Nav --> Hardware["Component & Actuation Subsystem (Motor Drivers & Sensors)"]
-      Hardware --> Telemetry["Real-time Telemetry Feedback"]
-      Telemetry --> Display`
   },
   {
     id: "hybrid-vortex-crawler",
@@ -360,26 +224,25 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "autotwin-ai",
-    title: "AutoTwin-AI: Spatiotemporal ConvLSTM Welding Inspection",
-    subtitle: "In-Situ Predictive Robotic Weld Monitoring & 3D Digital Twin (HackNIMA 2026 Finalist — Presented Sep 26, 2026)",
+    title: "AutoTwin-AI: Automotive Chassis Digital Twin & Structural Defect Detection",
+    subtitle: "Sim-to-Real Inspection Platform for Vehicle Ladder-Frame Chassis Assemblies (PyTorch & Blender Cycles)",
     category: "ai-vision",
     featured: true,
     date: "Sep 2026",
     stack: [
       "PyTorch",
-      "ConvLSTM2d",
-      "TimeDistributed CNN",
-      "LWIR Radiometric Thermography",
-      "TensorRT",
+      "Convolutional Autoencoders",
+      "Blender Cycles OptiX",
       "FastAPI",
+      "React Three Fiber",
       "Three.js",
-      "ROS 2"
+      "Docker"
     ],
     stats: [
-      { label: "Architecture", value: "Spatiotemporal 5D Tensor" },
-      { label: "Inference Latency", value: "<40 ms (TensorRT)" },
-      { label: "Defect Isolation", value: "Next-Frame MSE Spike" },
-      { label: "Sensing", value: "Eye-in-Hand TCP Thermal" }
+      { label: "Dataset Pipeline", value: "5,000+ OptiX Renders" },
+      { label: "CAD Vertices", value: "361,174 Spatial Voxels" },
+      { label: "Anomaly Head", value: "|I - Î| Error Heatmap" },
+      { label: "3D Visualization", value: "WebGL Digital Twin HUD" }
     ],
     githubUrl: "https://github.com/Arkz-Deepak/AutoTwin-AI",
     docsUrl: "https://lab.deepak-arkz.me/AutoTwin-AI/",
@@ -389,23 +252,78 @@ export const projectsData: ProjectItem[] = [
     caseStudySlug: "/projects/autotwin-ai",
     media: {
       type: "image",
-      url: "/images/projects/autotwin-convlstm-preview.png",
+      url: "/images/projects/autotwin-reconstruction-analysis.png",
       aspectRatio: "16:9"
     },
-    summary: "Upgraded AutoTwin-AI from static frame inspection to an in-situ spatiotemporal video deep learning framework for robotic arc welding cells. Ingests 30 FPS thermal video streams as 5D tensors (Batch, Time, Channels, Height, Width) from an end-effector mounted LWIR camera tracking the Tool Center Point (TCP). Uses TimeDistributed CNNs and ConvLSTM2d recurrent cells for unsupervised next-frame prediction; sudden Mean Squared Error (MSE) divergences detect subsurface voids, spatter bursts, and cooling rate anomalies in under 40ms, synchronized with a real-time Three.js 3D digital twin HUD.",
+    gallery: [
+      {
+        title: "Chassis Top-Down Orthographic View",
+        type: "image",
+        url: "/images/projects/autotwin-chassis-top-view.png",
+        caption: "Orthographic top-down render of vehicle ladder-frame chassis generated in Blender Cycles."
+      },
+      {
+        title: "Autoencoder Reconstruction & Anomaly Heatmap",
+        type: "image",
+        url: "/images/projects/autotwin-reconstruction-analysis.png",
+        caption: "PyTorch autoencoder reconstruction residual isolating weld slag, spatter, and porosity."
+      }
+    ],
+    summary: "Engineered an end-to-end AI-powered digital twin and visual inspection platform specifically for vehicle structural ladder-frame chassis assemblies. Combines high-throughput GPU synthetic data generation in Blender Cycles (OptiX engine, 5,000+ baseline renders) with physics-informed domain randomization, 3D spatial voxel clustering isolating load-bearing junctions from 361,174 CAD vertices, and deep convolutional autoencoders for microscopic weld defect and structural crack detection with absolute pixel reconstruction error heatmaps (|I - Î|), linked to an interactive React + Three.js 3D WebGL dashboard.",
     highlights: [
-      "Presented live to the international jury panel during the HackNIMA 2026 Final Round on September 26, 2026.",
-      "Overcomes static 2D vision limitations by modeling continuous fluid-thermal weld pool dynamics across time.",
-      "Engineered a sliding-window queue buffering 5D PyTorch tensors for real-time inference on NVIDIA TensorRT.",
-      "Integrated telemetry pipelines computing active arc duration and spatter density index (S_dot) streamed via FastAPI to a 3D WebGL dashboard."
+      "Trained PyTorch Convolutional Autoencoders detecting weld slag, spatter bursts, and porosity via |I - Î| pixel residual error maps.",
+      "High-density 3D spatial voxel clustering isolates critical load-bearing suspension junctions from 361,174 CAD vertices.",
+      "Synthesized 5,000+ domain-randomized training images with procedural lighting, camera framing, and material roughness in Blender Cycles.",
+      "Deployed an interactive React Three Fiber 3D digital twin cockpit providing live telemetry and joint anomaly locator."
     ],
     architectureMermaid: `graph LR
-      TCP["Eye-in-Hand LWIR Thermal Camera (30 FPS)"] -->|Sliding Buffer| Tensors["5D Tensors (B, T, C, H, W)"]
-      Tensors --> TDCNN["TimeDistributed 2D CNN (Spatial Geometry)"]
-      TDCNN --> ConvLSTM["ConvLSTM2d Recurrent Layers (Temporal Dynamics)"]
-      ConvLSTM --> Pred["Next-Frame Prediction (t+1)"]
-      Pred --> MSE["MSE Anomaly Head (<40ms TensorRT)"]
-      MSE --> Dashboard["React 18 + Three.js 3D Digital Twin HUD"]`
+      CAD["Chassis CAD (361,174 Vertices)"] --> Blender["Blender Cycles OptiX (5,000+ Synthetic Renders)"]
+      Blender --> CAE["PyTorch Convolutional Autoencoder"]
+      CAE --> Heatmap["Residual Error Heatmap (|I - Î|)"]
+      Heatmap --> Dashboard["React + Three.js 3D Digital Twin HUD"]`
+  },
+  {
+    id: "weldguard-ai",
+    title: "WeldGuard-AI: In-Situ Universal Robotic Welding Surveillance",
+    subtitle: "Edge Deep Learning Surveillance & Automated Industrial Defect Mitigation Platform",
+    category: "ai-vision",
+    featured: true,
+    date: "Oct 2026",
+    stack: [
+      "PyTorch",
+      "ConvLSTM",
+      "OpenCV",
+      "FastAPI",
+      "GMAW Arc Process",
+      "CUDA",
+      "Geometric Ellipse Fitting"
+    ],
+    stats: [
+      { label: "Glare Exclusion", value: "T_0 Ambient Mask" },
+      { label: "Inference Speedup", value: "13.6x Adaptive ROI" },
+      { label: "Pool Geometry", value: "WPGM Ellipse Fitting" },
+      { label: "Safety Trip", value: "Zero-Flapping E-STOP" }
+    ],
+    githubUrl: "https://github.com/Arkz-Deepak/WeldGuard-AI",
+    caseStudySlug: "/projects",
+    media: {
+      type: "image",
+      url: "/images/projects/weldguard-training-loss.png",
+      aspectRatio: "16:9"
+    },
+    summary: "A deep learning and computer vision system engineered for in-situ factory surveillance, robotic welding quality assurance, and automated defect mitigation. Operates at low latency on edge GPUs to detect defects, eliminate false glare alarms, and execute automated emergency stops (E-STOP) when cumulative defect stressors breach safety bounds. Features T_0 environment baseline lighting calibration, standby torch tip tracking with 400x400 adaptive ROI yielding a 13.6x inference speedup, and Weld Pool Geometry Monitoring (WPGM) via real-time geometric ellipse fitting.",
+    highlights: [
+      "T_0 Ambient Calibration: Excludes shop skylights and reflective steel reflections (17,500+ px) using an ambient illumination map and dilated glare exclusion mask.",
+      "Adaptive ROI Tracking: 250x250 standby tip tracking smoothly zooms to 400x400 welding mode, yielding a 13.6x edge speedup by evaluating only 7.7% of full-frame pixels.",
+      "Weld Pool Geometry Monitoring (WPGM): Real-time geometric ellipse fitting flags burn-through, lack of fusion, and humping bead (aspect ratio L/W > 2.8).",
+      "Zero-Flapping E-STOP: Cumulative defect stressor accumulator and hysteresis-based line-trip engine preventing industrial alert flapping."
+    ],
+    architectureMermaid: `graph LR
+      Camera["Factory Camera Stream"] --> Calib["T_0 Ambient Glare Exclusion Mask"]
+      Calib --> ROI["Adaptive Torch-Tip ROI (400x400 px, 13.6x Speedup)"]
+      ROI --> WPGM["Weld Pool Geometry Monitoring (Ellipse Fitting)"]
+      WPGM --> ConvLSTM["PyTorch ConvLSTM Defect Head"]
+      ConvLSTM --> ESTOP["Zero-Flapping Industrial Safety E-STOP Trip"]`
   },
   {
     id: "oomwoo-coverage-planner",
@@ -521,33 +439,6 @@ export const projectsData: ProjectItem[] = [
     highlights: [
       "Designed predictive control algorithms for the Schneider Electric Yuva Yodha energy innovation track.",
       "Automated architecture and deployment specifications under Jekyll Slate theme at lab.deepak-arkz.me/yuva-yodha-hackathon."
-    ]
-  },
-  {
-    id: "twindeo-industrial-digital-twin",
-    title: "Twindeo: Federated 3D Industrial Digital Twin",
-    subtitle: "High-Concurrency WebSocket Telemetry & Three.js Multi-Robot WebGL Cockpit",
-    category: "robotics",
-    featured: false,
-    date: "Aug 2026",
-    stack: ["Three.js", "WebSockets", "ROS 2", "TypeScript", "FastAPI"],
-    stats: [
-      { label: "Visualization", value: "Three.js WebGL" },
-      { label: "Documentation", value: "Slate Theme" }
-    ],
-    githubUrl: "https://github.com/Arkz-Deepak/twindeo",
-    docsUrl: "https://lab.deepak-arkz.me/twindeo/",
-    jekyllTheme: "Slate",
-    caseStudySlug: "/projects",
-    media: {
-      type: "image",
-      url: "/urban-traffic.jpg",
-      aspectRatio: "16:9"
-    },
-    summary: "Built a federated digital twin engine streaming live 3D joint states, kinematics, and spatial heatmaps from multi-robot manufacturing workcells into a low-latency WebGL browser HUD.",
-    highlights: [
-      "Simulates real-time robot arm trajectories and mobile AMR costmaps in synchronized 3D space.",
-      "Full API and protocol architecture documented on lab.deepak-arkz.me/twindeo with Jekyll Slate theme."
     ]
   },
   {

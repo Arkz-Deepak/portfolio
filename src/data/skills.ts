@@ -19,7 +19,6 @@ export const skillsData: SkillCategory[] = [
       { name: "ABB RobotStudio & RAPID Programming", level: "Proficient" },
       { name: "Industrial Manipulator TCP Calibration", level: "Proficient" },
       { name: "SUMO & TraCI Microscopic Traffic", level: "Advanced" },
-      { name: "Space Robotics & Orbital Rendezvous", level: "Proficient" },
       { name: "Nav2 Navigation Stack", level: "Advanced" },
       { name: "SLAM Toolbox", level: "Advanced" },
       { name: "Gazebo / Ignition", level: "Advanced" },
@@ -42,7 +41,6 @@ export const skillsData: SkillCategory[] = [
       { name: "Semi-Markov Decision Processes (SMDP / TraCI)", level: "Advanced" },
       { name: "ConvLSTM / Spatiotemporal Modeling", level: "Advanced" },
       { name: "TimeDistributed CNNs", level: "Advanced" },
-      { name: "Snapdragon NPU / QNN", level: "Advanced" },
       { name: "TFLite & ONNX Runtime", level: "Advanced" },
       { name: "PyTorch & Autoencoders", level: "Advanced" },
       { name: "TensorFlow / Keras", level: "Proficient" },
@@ -60,7 +58,6 @@ export const skillsData: SkillCategory[] = [
     skills: [
       { name: "STM32 Microcontrollers", level: "Advanced" },
       { name: "ESP-NOW & LoRa Mesh OTA", level: "Advanced" },
-      { name: "Electroadhesive Actuation", level: "Advanced" },
       { name: "Raspberry Pi 4", level: "Advanced" },
       { name: "ESP32 / ESP8266 (FreeRTOS)", level: "Advanced" },
       { name: "BTS7960 43A Motor Drivers", level: "Advanced" },
