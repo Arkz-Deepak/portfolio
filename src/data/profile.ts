@@ -38,8 +38,8 @@ export const profileData: ProfileData = {
   graduationYear: "2024 – 2028",
   avatarUrl: "/deepak.png",
   driveAvatarUrl: "https://lh3.googleusercontent.com/d/1t6hQ1fs7cHKKlhqdNVc4k9VxU5aJFZ51",
-  resumeUrl: "https://docs.google.com/document/d/1PqoCoVizRO3i-Ws3H4bdJa-0T9DamFOIF7KMSuFDnXM/export?format=pdf",
-  resumeViewUrl: "https://docs.google.com/document/d/1DW0Ua1k6mZE0o88sl-J6GOJIQ1RZGmMz1MLBC5SLuX0/edit?usp=drivesdk",
+  resumeUrl: "/resume.pdf",
+  resumeViewUrl: "/resume",
   socials: {
     github: "https://github.com/Arkz-Deepak",
     linkedin: "https://www.linkedin.com/in/robotics-deepak/",

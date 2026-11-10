@@ -13,7 +13,8 @@ describe('Data Store Integrity Tests', () => {
     expect(profileData.socials.portfolio).toBe('https://www.deepak-arkz.me')
     expect(profileData.socials.github).toContain('Arkz-Deepak')
     expect(profileData.socials.linkedin).toContain('robotics-deepak')
-    expect(profileData.resumeUrl).toContain('1PqoCoVizRO3i-Ws3H4bdJa-0T9DamFOIF7KMSuFDnXM')
+    expect(profileData.resumeUrl).toBe('/resume.pdf')
+    expect(profileData.resumeViewUrl).toBe('/resume')
   })
 
   test('skillsData has populated categories and valid skill items', () => {

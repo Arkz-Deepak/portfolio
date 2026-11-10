@@ -78,6 +78,18 @@ const PRESET_QUERIES: QueryPreset[] = [
     ]
   },
   {
+    id: 'resume',
+    label: '> LOAD RESUME',
+    command: 'resume',
+    output: [
+      '📄 MASTER RESUME: 1-Page LaTeX XeTeX Engine | Pure-Black Compact Layout.',
+      '• PDF Download: /resume.pdf',
+      '• Source TeX: /resume.tex',
+      '• Online Viewer: /resume',
+      '• Core: Physical AI, LeRobot/MuJoCo Manipulation, NeuroCode Slicing, ROS 2 Jazzy, STM32.'
+    ]
+  },
+  {
     id: 'contact',
     label: '> TRANSMIT CONTACT_INFO',
     command: 'transmit contact_info',
@@ -150,10 +162,23 @@ export default function Terminal() {
     if (cmd === 'help') {
       typeWriterOutput([
         'DEEPAK.OS TERMINAL HELP DIRECTIVES:',
-        '• Directives: whoami, skills, projects, docs, experience, research, certs, contact, clear',
+        '• Directives: whoami, skills, projects, docs, resume, experience, research, certs, contact, clear',
+        '• Resume: type "resume" or "cv" to view & download the latest 1-page LaTeX CV.',
         '• Documentation: type "docs" or "lab" for automated Jekyll repository specifications.',
         '• Easter Eggs: try "easteregg", "matrix", "sudo", "arkz", "cat", "robot"',
         '• Click any directive button above for instant telemetry.'
+      ])
+      return
+    }
+
+    if (cmd === 'resume' || cmd === 'cv') {
+      typeWriterOutput([
+        '📄 DEEPAK R. // MASTER CURRICULUM VITAE (1-PAGE LATEX XE-TEX):',
+        '• Direct PDF Download: /resume.pdf (Single-page, pure-black layout)',
+        '• Direct LaTeX Source: /resume.tex',
+        '• Live Interactive Viewer: /resume',
+        '• Academic Standing: B.E. Robotics & Automation (Anna Univ / DACE) | CGPA: 9.2/10.0',
+        '• Core Track: Physical AI, Embodied Manipulation (LeRobot/MuJoCo), NeuroCode MCP, ROS 2 Jazzy'
       ])
       return
     }
@@ -162,9 +187,9 @@ export default function Terminal() {
       typeWriterOutput([
         '📚 ARKZ ENGINEERING DOCUMENTATION HUB ONLINE:',
         'HUB URL: https://lab.deepak-arkz.me (17+ Repositories Deployed)',
-        '• ISRO Space Debris (Architect): https://lab.deepak-arkz.me/sih2026-isro-space-tech/',
         '• Schneider Melter AI (Slate): https://lab.deepak-arkz.me/yuva-yodha-hackathon/',
         '• AutoTwin-AI: https://lab.deepak-arkz.me/AutoTwin-AI/',
+        '• WeldGuard-AI: https://lab.deepak-arkz.me/WeldGuard-AI/',
         '• OOMWOO Clean & Map (Slate): https://lab.deepak-arkz.me/oomwoo-clean-and-map-arkz/',
         '• 4WD ROS 2 AMR (Cayman): https://lab.deepak-arkz.me/wheeled_robot_ros2/',
         '• Multi-Agent Supply Chain (Cayman): https://lab.deepak-arkz.me/agentic-supply-chain/',

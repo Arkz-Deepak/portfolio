@@ -6,6 +6,7 @@ import InternshipsPage from '@/app/internships/page'
 import VortexCrawlerProject from '@/app/projects/vortex-crawler/page'
 import AutoTwinProject from '@/app/projects/autotwin-ai/page'
 import VgaManipulationProject from '@/app/projects/vga-manipulation/page'
+import ResumePage from '@/app/resume/page'
 
 // Mock RobotViewer because WebGL Canvas is mocked in jsdom
 jest.mock('@/components/RobotViewer', () => {
@@ -61,5 +62,13 @@ describe('Page Routes Suite Tests', () => {
     expect(screen.getAllByText(/MUJOCO SIMULATION/i).length).toBeGreaterThanOrEqual(1)
     expect(screen.getAllByText(/CentroidRayRoPE/i).length).toBeGreaterThanOrEqual(1)
     expect(screen.getAllByText(/SmolVLA-450M/i).length).toBeGreaterThanOrEqual(1)
+  })
+
+  test('ResumePage renders 1-page LaTeX master resume and action buttons', () => {
+    render(<ResumePage />)
+    expect(screen.getByText(/ENGINEERING CURRICULUM VITAE/i)).toBeInTheDocument()
+    expect(screen.getByText(/DOWNLOAD RESUME \(PDF\)/i)).toBeInTheDocument()
+    expect(screen.getByText(/LATEX SOURCE \(\.TEX\)/i)).toBeInTheDocument()
+    expect(screen.getByText(/VERIFIED 1-PAGE LATEX MASTER/i)).toBeInTheDocument()
   })
 })

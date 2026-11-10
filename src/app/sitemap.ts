@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/projects/sih', priority: 0.75, changeFrequency: 'monthly' },
     { path: '/projects/edge-ai', priority: 0.75, changeFrequency: 'monthly' },
     { path: '/internships', priority: 0.8, changeFrequency: 'monthly' },
+    { path: '/resume', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/labs', priority: 0.8, changeFrequency: 'monthly' },
     { path: '/contact', priority: 0.7, changeFrequency: 'monthly' },
   ]
