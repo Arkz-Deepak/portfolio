@@ -47,7 +47,7 @@ describe('Component Suite Tests', () => {
 
   test('ResearchSection renders Zenodo preprint and BibTeX copy action', () => {
     render(<ResearchSection />)
-    expect(screen.getByText(/Sensor-Fusion Driven Deep Reinforcement Learning/i)).toBeInTheDocument()
+    expect(screen.getByText(/AURA: Resilient Urban Traffic Signal Control/i)).toBeInTheDocument()
     expect(screen.getByText(/DOI: 10.5281\/zenodo.20265628/i)).toBeInTheDocument()
     expect(screen.getAllByText(/OPEN PREPRINT \/ DOI/).length).toBeGreaterThanOrEqual(1)
     expect(screen.getAllByText(/COPY BIBTEX/).length).toBeGreaterThanOrEqual(1)

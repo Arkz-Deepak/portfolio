@@ -48,6 +48,12 @@ describe('Data Store Integrity Tests', () => {
     expect(projectIds).toContain('hybrid-vortex-crawler')
     expect(projectIds).toContain('oomwoo-coverage-planner')
     expect(projectIds).toContain('vga-robotic-manipulation')
+    expect(projectIds).toContain('tbo-onedesk')
+
+    const tbo = projectsData.find(p => p.id === 'tbo-onedesk')
+    expect(tbo?.stats?.length).toBeGreaterThanOrEqual(4)
+    expect(tbo?.stack).toContain('FastAPI')
+    expect(tbo?.stack).toContain('Finite State Machine')
 
     const autotwin = projectsData.find(p => p.id === 'autotwin-ai')
     expect(autotwin?.stats?.length).toBeGreaterThanOrEqual(4)
@@ -71,6 +77,13 @@ describe('Data Store Integrity Tests', () => {
     expect(preprint?.doi).toBe('10.5281/zenodo.20265628')
     expect(preprint?.doiUrl).toContain('10.5281/zenodo.20265628')
     expect(preprint?.citationBibtex).toContain('@article')
+
+    const vga = researchData.find(r => r.id === 'vga-robotic-manipulation')
+    expect(vga?.authors).toContain('Deepak R')
+    expect(vga?.pdfUrl).toBe('/papers/VGA_RSS_2027_Manuscript.pdf')
+
+    const neurocode = researchData.find(r => r.id === 'neurocode-framework')
+    expect(neurocode?.pdfUrl).toBe('/papers/NeuroCode_JPDC_Manuscript.pdf')
   })
 
   test('experienceData contains all 5 industrial experiences with NDA notices where applicable', () => {

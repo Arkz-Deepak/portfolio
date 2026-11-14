@@ -44,7 +44,7 @@ describe('Portfolio Home Page', () => {
     expect(screen.getAllByText(/Hybrid Vortex Crawler/i).length).toBeGreaterThanOrEqual(1)
 
     // Research Section
-    expect(screen.getAllByText(/Sensor-Fusion Driven Deep Reinforcement Learning/i).length).toBeGreaterThanOrEqual(1)
+    expect(screen.getAllByText(/AURA: Resilient Urban Traffic Signal Control/i).length).toBeGreaterThanOrEqual(1)
   })
 
   it('should render particle background when in dark mode', () => {

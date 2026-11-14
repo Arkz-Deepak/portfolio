@@ -32,18 +32,20 @@ export interface ResearchPublication {
 export const researchData: ResearchPublication[] = [
   {
     id: "traffic-rl-preprint",
-    title: "Sensor-Fusion Driven Deep Reinforcement Learning for Dynamic Traffic Signal Optimization",
+    title: "AURA: Resilient Urban Traffic Signal Control via Semi-Markov Reinforcement Learning with Action-Duration Bounds and Shockwave-Mitigated Preemption",
     authors: ["Deepak R"],
-    venue: "Zenodo Preprint",
+    venue: "IEEE Transactions on Intelligent Transportation Systems (TITS Under Review: dbb571bd) / Zenodo: 10.5281/zenodo.20265628",
     doi: "10.5281/zenodo.20265628",
     doiUrl: "https://doi.org/10.5281/zenodo.20265628",
-    publicationDate: "August 2026",
-    status: "Published Preprint",
-    abstract: "This paper presents a closed-loop, decentralized urban traffic management architecture integrating real-time computer vision telemetry with multi-agent reinforcement learning (MARL). By ingesting optical density metrics and vehicle queue trajectories, the policy dynamically adjusts signal timing to maximize arterial throughput while minimizing waiting variance.",
+    publicationDate: "November 2026",
+    status: "Under Review",
+    pdfUrl: "/papers/AURA_IEEE_TITS_Manuscript.pdf",
+    abstract: "This paper presents AURA, a closed-loop, decentralized urban traffic management architecture integrating real-time computer vision telemetry with semi-Markov decision process reinforcement learning (SMDP-RL). Featuring action-duration bounds and shockwave-mitigated emergency vehicle preemption, AURA dynamically adjusts signal timing to maximize arterial throughput while reducing emergency transit delays and dissipating shockwaves 42% faster than actuated baselines.",
     keyContributions: [
       "Closed-loop telemetry pipeline fusing edge vision detections directly into policy state space.",
-      "Multi-agent reward formulation preventing congestion spillover across adjacent intersections.",
-      "Open access publication and dataset schema indexed under Zenodo DOI 10.5281/zenodo.20265628."
+      "Semi-Markov decision formulation with action-duration bounds preventing arterial starvation.",
+      "Shockwave-mitigated emergency vehicle preemption with 42% faster network queue recovery.",
+      "Submitted to IEEE Transactions on Intelligent Transportation Systems (IEEE TITS, Submission ID dbb571bd)."
     ],
     figures: [
       {
@@ -82,18 +84,20 @@ export const researchData: ResearchPublication[] = [
   },
   {
     id: "neurocode-framework",
-    title: "NeuroCode: Heterogeneous Code-Graph Slicing for On-Device Autonomous Software Engineering",
+    title: "On-Device Autonomous Software Engineering: In-Memory Code Property Graph Reachability Slicing under Edge VRAM Constraints",
     authors: ["Deepak R"],
-    venue: "Target: IEEE Transactions on Software Engineering / PyPI: neurocode-ai",
+    venue: "Journal of Parallel and Distributed Computing (JPDC Under Review — Manuscript # JPDC-S-26-02633)",
     doi: "PyPI: neurocode-ai",
     doiUrl: "https://pypi.org/project/neurocode-ai/",
     publicationDate: "November 2026",
     status: "Under Review",
+    pdfUrl: "/papers/NeuroCode_JPDC_Manuscript.pdf",
     abstract: "A lightweight, heterogeneous neuro-symbolic framework and Model Context Protocol (MCP) server enabling small language models (1.5B–14B) to solve multi-file repository bugs on consumer laptop GPUs (4GB VRAM) without OOM crashes by dividing cognitive labor between host CPU graph engines and device GPU neural synthesis.",
     keyContributions: [
       "Topological Code Property Graph (CPG) slicing with bounded 0/1 knapsack token-budget optimization.",
       "Empirical validation on SWE-bench Lite (41.4% diff apply / 9.5% resolved on 4GB VRAM) with 93.2% VRAM reduction.",
-      "100% recall on RepoBench-R cross-file retrieval with 42.6% token reduction."
+      "100% recall on RepoBench-R cross-file retrieval with 42.6% token reduction.",
+      "Submitted to Journal of Parallel and Distributed Computing (JPDC, Manuscript # JPDC-S-26-02633)."
     ],
     figures: [
       {
@@ -137,19 +141,21 @@ export const researchData: ResearchPublication[] = [
   },
   {
     id: "vga-robotic-manipulation",
-    title: "VGA Policy: Vision-Geometry-Action Robotic Manipulation with Kinematic Jerk Suppression",
-    authors: ["Deepak R"],
-    venue: "Technical Report & Benchmark Validation (LIBERO-Spatial & RoboCasa)",
+    title: "VGA: Vision-Geometry-Action Policy with Continuous 3D Ray-RoPE for Smooth and Camera-Invariant Robot Manipulation",
+    authors: ["Shafeeq Sadiq", "Trishanth Mellimi", "Deepak R", "Tran Nguyen Le"],
+    venue: "Target: Robotics: Science and Systems (RSS 2027) / IEEE RA-L Submission",
     doi: "Repo: Arkz-Deepak/vga-poc",
     doiUrl: "https://github.com/Arkz-Deepak/vga-poc",
-    publicationDate: "October 2026",
-    status: "Published Preprint",
-    abstract: "Documents the design and empirical validation of the Vision-Geometry-Action (VGA) robotic manipulation policy under a strict <=0.5B parameter budget. Couplings of SigLIP and SmolLM2 backbones with a 12-layer Action DiT and Flow Matching yield 154–215 Hz hard real-time control (4.6ms motor latency) and 89.1% jerk reduction, verified by autonomous pick-and-place success in MuJoCo.",
+    publicationDate: "November 2026",
+    status: "Under Review",
+    pdfUrl: "/papers/VGA_RSS_2027_Manuscript.pdf",
+    abstract: "Documents the design and empirical validation of Vision-Geometry-Action (VGA), a lightweight (375M parameter) manipulation policy that directly couples visual semantics with metric 3D scene geometry and kinematically smooth trajectory generation. Integrates continuous 3D Ray-RoPE into transformer attention layers, projecting physical camera ray geometry directly into latent spatial representations without requiring explicit depth sensors. Prior-action conditioning with boundary velocity-matching loss (L_smooth) eliminates inter-chunk trajectory discontinuities. Evaluated on LIBERO-Spatial, VGA achieves an 85.0% verified success rate under 10-shot fine-tuning, reduces trajectory RMS jerk by 35.4% (from 11.38 to 7.35 m/s³), suppresses chunk-boundary acceleration jumps from 2.83× to 1.05×, and retains 74.5% success under severe camera extrinsics perturbations in LIBERO-MAX.",
     keyContributions: [
-      "Sub-0.5B (298M) architecture operating at 3x-4.3x industrial 50 Hz control rate threshold.",
-      "Physics-guided finite-difference kinematic loss annealing suppressing robot joint vibration by 89.1%.",
-      "Smooth chunk joins cut chunk-boundary jumps from 2.88x to 1.05x normal step.",
-      "Retains ~82% success under mid-task camera perturbation in LIBERO-MAX, whereas X-VLA collapses losing 61–69%."
+      "Lightweight 375M VLA architecture with continuous 3D Ray-RoPE achieving camera extrinsics invariance.",
+      "85.0% verified success rate under 10-shot fine-tuning on LIBERO-Spatial benchmark.",
+      "Boundary velocity-matching loss (L_smooth) reducing RMS jerk by 35.4% and chunk jump acceleration to 1.05x.",
+      "Retains 74.5% success under out-of-distribution camera extrinsics perturbation where monolithic models collapse (-67.5%).",
+      "Sub-3.0 GB VRAM footprint with 152 ms chunk latency on edge NVIDIA T4 GPU."
     ],
     video: {
       url: "/videos/vga-libero-t0-multitile.mp4",
@@ -164,11 +170,11 @@ export const researchData: ResearchPublication[] = [
         alt: "VGA Policy closed-loop simulation architecture preview"
       }
     ],
-    citationBibtex: `@techreport{deepak2026vga,
-  title={Vision-Geometry-Action (VGA) Robotic Manipulation with Kinematic Jerk Suppression},
-  author={Deepak, R.},
-  institution={ARKZ Autonomous Systems},
-  year={2026},
+    citationBibtex: `@inproceedings{sadiq2027vga,
+  title={VGA: Vision-Geometry-Action Policy with Continuous 3D Ray-RoPE for Smooth and Camera-Invariant Robot Manipulation},
+  author={Sadiq, Shafeeq and Mellimi, Trishanth and Deepak, R. and Le, Tran Nguyen},
+  booktitle={Robotics: Science and Systems (RSS Under Review)},
+  year={2027},
   url={https://github.com/Arkz-Deepak/vga-poc}
 }`
   },

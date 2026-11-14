@@ -39,11 +39,12 @@ export const projectsData: ProjectItem[] = [
   {
     id: "vga-robotic-manipulation",
     title: "VGA Policy: Vision-Geometry-Action Robotic Manipulation",
-    subtitle: "Hard Real-Time Embodied AI Policy with Kinematic Jerk Suppression (LIBERO-Spatial & RoboCasa)",
+    subtitle: "Continuous 3D Ray-RoPE & Kinematic Velocity-Matching Policy for Camera-Invariant Manipulation (RSS 2027 / IEEE RA-L)",
     category: "robotics",
     featured: true,
-    date: "Oct 2026",
-    competition: "Embodied AI / LIBERO-Spatial Benchmark",
+    date: "Nov 2026",
+    competition: "Robotics: Science and Systems (RSS 2027 Submission)",
+    paperUrl: "/papers/VGA_RSS_2027_Manuscript.pdf",
     stack: [
       "PyTorch",
       "LeRobot",
@@ -51,13 +52,13 @@ export const projectsData: ProjectItem[] = [
       "SigLIP",
       "SmolLM2",
       "Flow Matching DiT",
-      "CentroidRayRoPE"
+      "Continuous 3D Ray-RoPE"
     ],
     stats: [
-      { label: "Parameter Footprint", value: "298.3M (36.3M Head)" },
-      { label: "Control Frequency", value: "154–215 Hz (4.6ms)" },
-      { label: "Jerk Reduction", value: "89.1% Annealed" },
-      { label: "Physical Status", value: "Closed-Loop Success" }
+      { label: "Parameter Footprint", value: "375M Parameters" },
+      { label: "LIBERO-Spatial", value: "85.0% (10-Shot)" },
+      { label: "LIBERO-MAX Camera Inv", value: "74.5% (-4.5% Drop)" },
+      { label: "Jerk Suppression", value: "35.4% RMS / 1.05x Boundary" }
     ],
     githubUrl: "https://github.com/Arkz-Deepak/vga-poc",
     caseStudySlug: "/projects/vga-manipulation",
@@ -125,10 +126,11 @@ export const projectsData: ProjectItem[] = [
   {
     id: "neurocode-ai",
     title: "NeuroCode: On-Device Code-Graph Slicing Framework",
-    subtitle: "Heterogeneous Neuro-Symbolic Model Context Protocol (MCP) Server for Local LLM Repository Repair",
+    subtitle: "Heterogeneous Neuro-Symbolic Model Context Protocol (MCP) Server (JPDC Journal # JPDC-S-26-02633 & PyPI v1.4.0)",
     category: "fullstack",
     featured: true,
     date: "Nov 2026",
+    paperUrl: "/papers/NeuroCode_JPDC_Manuscript.pdf",
     stack: [
       "Python",
       "Model Context Protocol (MCP)",
@@ -139,8 +141,8 @@ export const projectsData: ProjectItem[] = [
       "Ollama"
     ],
     stats: [
-      { label: "PyPI Package", value: "neurocode-ai" },
-      { label: "Hardware Verified", value: "4GB Laptop GPU" },
+      { label: "Journal Submission", value: "JPDC-S-26-02633" },
+      { label: "PyPI Package", value: "neurocode-ai v1.4.0" },
       { label: "SWE-bench Lite", value: "41.4% Valid / 0 OOMs" },
       { label: "RepoBench-R", value: "100% Recall @ 428 Tokens" }
     ],
@@ -353,6 +355,51 @@ export const projectsData: ProjectItem[] = [
       "Validated complete coverage trajectories and dynamic replanning inside Gazebo simulation environments.",
       "Published automated engineering documentation using Jekyll Slate theme under lab.deepak-arkz.me."
     ]
+  },
+  {
+    id: "tbo-onedesk",
+    title: "TBO OneDesk (OpsOS): AI-Native Enterprise Operations & Service Orchestration Platform",
+    subtitle: "Unified B2B Travel Ops (Zendesk) & Internal People Ops (Darwinbox) with DPDP Act 2023 Compliance & Event-Driven Engine",
+    category: "fullstack",
+    featured: true,
+    date: "Nov 2026",
+    competition: "TBO Hackathon 2026 (OpsOS & Enterprise Automation Track)",
+    stack: [
+      "FastAPI",
+      "Python",
+      "Pydantic",
+      "Finite State Machine",
+      "DPDP Act 2023 PII Sanitizer",
+      "Docker",
+      "Event-Driven Architecture"
+    ],
+    stats: [
+      { label: "Replaces", value: "Zendesk + Darwinbox" },
+      { label: "Extensibility", value: "<5 Min Dynamic YAML" },
+      { label: "Safety Gate", value: "Human Reserved Approval" },
+      { label: "Compliance", value: "DPDP Act 2023 PII Mask" }
+    ],
+    githubUrl: "https://github.com/Arkz-Deepak",
+    media: {
+      type: "image",
+      url: "/images/research/neurocode-architecture.png",
+      aspectRatio: "16:9"
+    },
+    summary: "Architected TBO OneDesk (OpsOS), an AI-native operations and service orchestration platform that unifies external B2B travel operations (Zendesk replacement) and internal employee operations (Darwinbox replacement) into a single, policy-governed event-driven engine. Features multi-factor ticket routing, travel-aware dynamic SLAs, autonomous cross-team loops with mock IT/Admin/Finance APIs, non-negotiable Human Reserved Gates for sensitive actions, and DPDP Act 2023 PII sanitization. Built with a declarative YAML plugin registry allowing new enterprise service lines to be registered live on stage in under 5 minutes without engine recompilation.",
+    highlights: [
+      "Replaced disconnected Zendesk and Darwinbox SaaS silos into a unified event-driven engine with dynamic context-aware SLAs.",
+      "Implemented DPDP Act 2023 PII masking, statutory compliance checks, and instant administrative kill-switch.",
+      "Engineered autonomous IT/Admin/Finance reconciliation loops backed by human-in-the-loop reserved gates for sensitive operations.",
+      "Designed extensible declarative YAML plugin architecture satisfying the <5-minute Round 3 live extension challenge."
+    ],
+    architectureMermaid: `graph TD
+      Request["Inbound Case (Travel / HR)"] --> Sanitizer["DPDP Act PII Sanitizer & Ingestion"]
+      Sanitizer --> Dispatcher["Multi-Factor Dispatcher & Dynamic SLAs"]
+      Dispatcher --> Gate{"Reserved Human Gate?"}
+      Gate -->|Yes| Approver["Human Reserved Approval Queue"]
+      Gate -->|No| AutoLoop["Autonomous Execution Loop (IT / Admin / Finance APIs)"]
+      Approver --> AutoLoop
+      AutoLoop --> Audit["Audit Log & Real-Time Telemetry"]`
   },
   {
     id: "sih-smart-traffic",
