@@ -164,7 +164,7 @@ export default function ResumePage() {
             Physical AI & Robotics
           </h3>
           <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-space">
-            VGA Manipulation Policy (MuJoCo), NeuroCode (PyPI), AutoTwin-AI, WeldGuard-AI, Hybrid Vortex Crawler.
+            NeuroCode (PyPI), AutoTwin-AI, WeldGuard-AI, Hybrid Vortex Crawler, OOMWOO.
           </p>
         </div>
 

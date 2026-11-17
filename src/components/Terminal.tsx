@@ -36,7 +36,6 @@ const PRESET_QUERIES: QueryPreset[] = [
     label: '> LIST PROJECTS',
     command: 'list projects',
     output: [
-      '• VGA Policy: Vision-Geometry-Action 375M VLA Policy with Continuous 3D Ray-RoPE (RSS 2027 Submission).',
       '• NeuroCode: On-Device Code-Graph Slicing & Heterogeneous Neuro-Symbolic MCP Server (JPDC Journal # JPDC-S-26-02633).',
       '• TBO OneDesk (OpsOS): AI-Native Enterprise Operations & Service Orchestration Platform (Zendesk & Darwinbox replacement).',
       '• AutoTwin-AI: Automotive Chassis Digital Twin & Structural Defect Detection (PyTorch & Blender Cycles).',
@@ -62,8 +61,6 @@ const PRESET_QUERIES: QueryPreset[] = [
     label: '> SHOW RESEARCH',
     command: 'show research',
     output: [
-      '🔬 UNDER REVIEW (RSS 2027 / IEEE RA-L): "VGA: Vision-Geometry-Action Policy with Continuous 3D Ray-RoPE".',
-      '   Authors: Shafeeq Sadiq, Trishanth Mellimi, Deepak R (3rd Author), Tran Nguyen Le.',
       '📄 UNDER REVIEW (JPDC-S-26-02633): "On-Device Autonomous Software Engineering (NeuroCode)".',
       '   First & Corresponding Author: Deepak R (Journal of Parallel and Distributed Computing).',
       '🚦 UNDER REVIEW (IEEE TITS dbb571bd): "AURA: Resilient Urban Traffic Signal Control via SMDP-RL".',

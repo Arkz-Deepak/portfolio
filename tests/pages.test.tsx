@@ -5,7 +5,6 @@ import ProjectsPage from '@/app/projects/page'
 import InternshipsPage from '@/app/internships/page'
 import VortexCrawlerProject from '@/app/projects/vortex-crawler/page'
 import AutoTwinProject from '@/app/projects/autotwin-ai/page'
-import VgaManipulationProject from '@/app/projects/vga-manipulation/page'
 import ResumePage from '@/app/resume/page'
 
 // Mock RobotViewer because WebGL Canvas is mocked in jsdom
@@ -54,14 +53,6 @@ describe('Page Routes Suite Tests', () => {
     expect(screen.getAllByText(/CONVOLUTIONAL AUTOENCODER/i).length).toBeGreaterThanOrEqual(1)
     expect(screen.getAllByText(/361,174 CAD VERTICES/i).length).toBeGreaterThanOrEqual(1)
     expect(screen.getAllByText(/HACKNIMA PITCH DECK/i).length).toBeGreaterThanOrEqual(1)
-  })
-
-  test('VgaManipulationProject renders policy architecture, MuJoCo videos, and benchmark metrics', () => {
-    render(<VgaManipulationProject />)
-    expect(screen.getAllByText(/VGA Policy/i).length).toBeGreaterThanOrEqual(1)
-    expect(screen.getAllByText(/MUJOCO SIMULATION/i).length).toBeGreaterThanOrEqual(1)
-    expect(screen.getAllByText(/CentroidRayRoPE/i).length).toBeGreaterThanOrEqual(1)
-    expect(screen.getAllByText(/SmolVLA-450M/i).length).toBeGreaterThanOrEqual(1)
   })
 
   test('ResumePage renders 1-page LaTeX master resume and action buttons', () => {

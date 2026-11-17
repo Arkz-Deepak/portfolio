@@ -7,7 +7,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '', priority: 1.0, changeFrequency: 'daily' },
     { path: '/about', priority: 0.9, changeFrequency: 'weekly' },
     { path: '/projects', priority: 0.9, changeFrequency: 'weekly' },
-    { path: '/projects/vga-manipulation', priority: 0.85, changeFrequency: 'monthly' },
     { path: '/projects/autotwin-ai', priority: 0.8, changeFrequency: 'monthly' },
     { path: '/projects/vortex-crawler', priority: 0.8, changeFrequency: 'monthly' },
     { path: '/projects/aura', priority: 0.8, changeFrequency: 'monthly' },

@@ -140,45 +140,6 @@ export const researchData: ResearchPublication[] = [
 }`
   },
   {
-    id: "vga-robotic-manipulation",
-    title: "VGA: Vision-Geometry-Action Policy with Continuous 3D Ray-RoPE for Smooth and Camera-Invariant Robot Manipulation",
-    authors: ["Shafeeq Sadiq", "Trishanth Mellimi", "Deepak R", "Tran Nguyen Le"],
-    venue: "Target: Robotics: Science and Systems (RSS 2027) / IEEE RA-L Submission",
-    doi: "Repo: Arkz-Deepak/vga-poc",
-    doiUrl: "https://github.com/Arkz-Deepak/vga-poc",
-    publicationDate: "November 2026",
-    status: "Under Review",
-    pdfUrl: "/papers/VGA_RSS_2027_Manuscript.pdf",
-    abstract: "Documents the design and empirical validation of Vision-Geometry-Action (VGA), a lightweight (375M parameter) manipulation policy that directly couples visual semantics with metric 3D scene geometry and kinematically smooth trajectory generation. Integrates continuous 3D Ray-RoPE into transformer attention layers, projecting physical camera ray geometry directly into latent spatial representations without requiring explicit depth sensors. Prior-action conditioning with boundary velocity-matching loss (L_smooth) eliminates inter-chunk trajectory discontinuities. Evaluated on LIBERO-Spatial, VGA achieves an 85.0% verified success rate under 10-shot fine-tuning, reduces trajectory RMS jerk by 35.4% (from 11.38 to 7.35 m/s³), suppresses chunk-boundary acceleration jumps from 2.83× to 1.05×, and retains 74.5% success under severe camera extrinsics perturbations in LIBERO-MAX.",
-    keyContributions: [
-      "Lightweight 375M VLA architecture with continuous 3D Ray-RoPE achieving camera extrinsics invariance.",
-      "85.0% verified success rate under 10-shot fine-tuning on LIBERO-Spatial benchmark.",
-      "Boundary velocity-matching loss (L_smooth) reducing RMS jerk by 35.4% and chunk jump acceleration to 1.05x.",
-      "Retains 74.5% success under out-of-distribution camera extrinsics perturbation where monolithic models collapse (-67.5%).",
-      "Sub-3.0 GB VRAM footprint with 152 ms chunk latency on edge NVIDIA T4 GPU."
-    ],
-    video: {
-      url: "/videos/vga-libero-t0-multitile.mp4",
-      title: "LIBERO-Spatial Multi-Variant Rollout Matrix",
-      caption: "Side-by-side rollout evaluation on LIBERO-Spatial Task 0 comparing Baseline, +Depth, +Rays, +Smooth Chunk Joins, All Three, and SmolVLA-450M with wrist camera insets."
-    },
-    figures: [
-      {
-        url: "/images/projects/vga-manipulation-preview.png",
-        title: "Closed-Loop MuJoCo Architecture",
-        caption: "Sub-0.5B (298M) flow-matching architecture achieving 154–215 Hz inference control rate with 89.1% annealed jerk reduction.",
-        alt: "VGA Policy closed-loop simulation architecture preview"
-      }
-    ],
-    citationBibtex: `@inproceedings{sadiq2027vga,
-  title={VGA: Vision-Geometry-Action Policy with Continuous 3D Ray-RoPE for Smooth and Camera-Invariant Robot Manipulation},
-  author={Sadiq, Shafeeq and Mellimi, Trishanth and Deepak, R. and Le, Tran Nguyen},
-  booktitle={Robotics: Science and Systems (RSS Under Review)},
-  year={2027},
-  url={https://github.com/Arkz-Deepak/vga-poc}
-}`
-  },
-  {
     id: "neuroarc-fluid-intelligence",
     title: "NeuroARC: Heterogeneous Spatial-Graph Slicing for Interactive ARC-AGI-3 Environments",
     authors: ["Deepak R"],

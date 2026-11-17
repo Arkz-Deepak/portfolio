@@ -55,5 +55,5 @@ export const profileData: ProfileData = {
     "Finalist — HackNIMA 2026 International Hackathon (AutoTwin-AI)",
     "Team Lead — Smart India Hackathon 2026 (Problem Statement SIH26226)"
   ],
-  bioSummary: "Research-oriented Robotics & Automation engineering student and open-source systems builder. Author of the NeuroCode neuro-symbolic graph framework (published on PyPI: neurocode-ai), Kaggle Top 100 competitor (Rank #72), and ARC Prize 2026 contender. Specializes in Embodied Physical AI (VGA manipulation policies in MuJoCo/LeRobot), real-time ROS 2 Jazzy & MoveIt 2 motion planning, and edge-constrained neural synthesis."
+  bioSummary: "Research-oriented Robotics & Automation engineering student and open-source systems builder. Author of the NeuroCode neuro-symbolic graph framework (published on PyPI: neurocode-ai), Kaggle Top 100 competitor (Rank #72), and ARC Prize 2026 contender. Specializes in Embodied Physical AI (robot manipulation & simulation in MuJoCo/ROS 2), real-time ROS 2 Jazzy & MoveIt 2 motion planning, and edge-constrained neural synthesis."
 };

@@ -43,11 +43,11 @@ describe('Data Store Integrity Tests', () => {
     expect(projectIds).not.toContain('edgevision-npu-profiler')
     expect(projectIds).not.toContain('project-tara')
     expect(projectIds).not.toContain('twindeo-industrial-digital-twin')
+    expect(projectIds).not.toContain('vga-robotic-manipulation')
     expect(projectIds).toContain('autotwin-ai')
     expect(projectIds).toContain('weldguard-ai')
     expect(projectIds).toContain('hybrid-vortex-crawler')
     expect(projectIds).toContain('oomwoo-coverage-planner')
-    expect(projectIds).toContain('vga-robotic-manipulation')
     expect(projectIds).toContain('tbo-onedesk')
 
     const tbo = projectsData.find(p => p.id === 'tbo-onedesk')
@@ -79,8 +79,7 @@ describe('Data Store Integrity Tests', () => {
     expect(preprint?.citationBibtex).toContain('@article')
 
     const vga = researchData.find(r => r.id === 'vga-robotic-manipulation')
-    expect(vga?.authors).toContain('Deepak R')
-    expect(vga?.pdfUrl).toBe('/papers/VGA_RSS_2027_Manuscript.pdf')
+    expect(vga).toBeUndefined()
 
     const neurocode = researchData.find(r => r.id === 'neurocode-framework')
     expect(neurocode?.pdfUrl).toBe('/papers/NeuroCode_JPDC_Manuscript.pdf')

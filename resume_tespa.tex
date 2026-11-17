@@ -1,0 +1,149 @@
+%-------------------------------------------------------------------------------
+% Deepak R - Tailored Industrial Robotics & Automation Resume for Tespa Robotics
+% Formatted strictly in pure black, single-page layout matching Resume (8).pdf
+% Optimized for: Industrial Robot Integration, Welding Automation, Machine Vision, PLC & Simulation
+%-------------------------------------------------------------------------------
+
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{geometry}
+
+\geometry{
+  top=0.38in,
+  bottom=0.38in,
+  left=0.45in,
+  right=0.45in
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins & styles
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Section Titles formatting: Bold Uppercase with horizontal rule
+\titleformat{\section}{
+  \vspace{-2pt}\bfseries\scshape\normalsize
+}{}{0em}{}[\vspace{-1pt}\hrule height 0.5pt \vspace{3pt}]
+
+\titlespacing*{\section}{0pt}{8pt}{2pt}
+
+% Custom list spacing for uniform single-page breathing room
+\setlist[itemize]{leftmargin=12pt, label=$\bullet$, itemsep=1.0pt, topsep=1.5pt, parsep=0pt, partopsep=0pt}
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    {\LARGE \textbf{Deepak R}} \\ \vspace{2.5pt}
+    \small Chennai, Tamil Nadu $|$ \href{tel:+916369614424}{+91 63696 14424} $|$ \href{mailto:deepak121289@outlook.com}{deepak121289@outlook.com} \\ \vspace{2pt}
+    \href{https://deepak-arkz.me}{deepak-arkz.me} $|$ 
+    \href{https://linkedin.com/in/robotics-deepak}{linkedin.com/in/robotics-deepak} $|$ 
+    \href{https://github.com/Arkz-Deepak}{github.com/Arkz-Deepak} $|$
+    \href{https://orcid.org/0009-0000-2500-9093}{ORCID: 0009-0000-2500-9093}
+\end{center}
+\vspace{-6pt}
+
+%-----------PROFESSIONAL SUMMARY-----------
+\section{Professional Summary}
+\small{Pre-final year B.E. Robotics and Automation student (\textbf{CGPA: 9.2/10.0}, Anna University) seeking an \textbf{Industrial Robotics \& Automation Internship at Tespa Robotics}. Hands-on experience across robotic arc welding surveillance (\href{https://github.com/Arkz-Deepak/WeldGuard-AI}{WeldGuard-AI}), autonomous coverage \& trajectory planning (\href{https://github.com/Arkz-Deepak/oomwoo-clean-and-map-arkz}{OOMWOO} / MoveIt 2), machine vision quality inspection, and shopfloor PLC/CNC machinery. Proficient in industrial robot kinematics, TCP calibration, and simulation, eager to contribute directly to Tespa's turnkey robotic welding cells, material handling systems, and automation integration.}
+
+%-----------EDUCATION-----------
+\section{Education}
+\noindent
+\href{https://dhaanish.org}{\textbf{Dhaanish Ahmed College of Engineering}} (\href{https://www.annauniv.edu}{\textbf{Anna University}}) \hfill \textbf{Chennai, India} \\
+\textit{Bachelor of Engineering (B.E.) in Robotics and Automation -- \textbf{CGPA: 9.2/10.0}} \hfill \textit{May 2024 -- May 2028} \\
+\begin{itemize}
+    \item \textbf{Relevant Coursework:} Industrial Robotics, Kinematics \& Dynamics, Computer Integrated Manufacturing (CIM), Control Systems, Embedded Systems, Machine Learning, ROS 2 Navigation, Sensors \& Actuators, Digital Electronics.
+\end{itemize}
+
+%-----------WORK EXPERIENCE-----------
+\section{Industrial Experience}
+\noindent
+\href{https://chennaiport.gov.in}{\textbf{Chennai Port Authority}} -- \textit{Industrial Automation \& Mechanical Engineering Intern} \hfill \textbf{Chennai, India $|$ Dec 2025} \\
+\begin{itemize}
+    \item Inspected and analyzed PLC-driven port cargo automation infrastructure, pneumatic actuators, and power transmission subsystems.
+    \item Diagnosed industrial diesel locomotive engine powertrains, observing industrial safety protocols, interlocks, and scheduled maintenance.
+\end{itemize}
+\vspace{2pt}
+
+\noindent
+\textbf{MK Autocomponents} -- \textit{Industrial Manufacturing \& Precision Machining Intern} \hfill \textbf{Chennai, India $|$ Aug 2025} \\
+\begin{itemize}
+    \item Operated CNC, VMC, and precision lathe machinery in an active tier-1 automotive component manufacturing plant in Chennai.
+    \item Monitored cutting tool degradation wear, spindle vibrations, and preventive maintenance cycles to sustain production tolerances.
+\end{itemize}
+\vspace{2pt}
+
+\noindent
+\href{https://precise3dm.com}{\textbf{Precise3DM}} -- \textit{Automation \& Systems Engineering Intern} \hfill \textbf{Chennai, India $|$ Jun 2026 -- Jul 2026} \\
+\begin{itemize}
+    \item Built automated data ingestion pipelines, structured error logging, and validation routines to eliminate manual workflow overhead.
+\end{itemize}
+\vspace{2pt}
+
+\noindent
+\href{https://tamizhanskill.com}{\textbf{Tamizhan Skills (RISE Programs)}} -- \textit{Robotics Simulation \& Autonomous Systems Intern} \hfill \textbf{Remote $|$ Dec 2025 -- Mar 2026} \\
+\begin{itemize}
+    \item Simulated mobile manipulator navigation and obstacle avoidance in Gazebo with sensor fusion (LiDAR, IMU, Wheel Odometry).
+\end{itemize}
+
+%-----------KEY PROJECTS-----------
+\section{Robotics \& Industrial Automation Projects}
+\noindent
+\href{https://github.com/Arkz-Deepak/WeldGuard-AI}{\textbf{WeldGuard-AI: In-Situ Robotic Arc Welding Surveillance \& Safety Trip (E-STOP)}} \hfill \textbf{Oct 2026} \\
+\textit{Technologies: PyTorch, ConvLSTM, OpenCV, GMAW Arc Process, Geometric Ellipse Fitting} \hfill \textit{Target: Robotic Welding Cells} \\
+\begin{itemize}
+    \item Engineered real-time welding surveillance with ambient glare exclusion ($T_0$ baseline mask) and adaptive $400\times400$ torch-tip tracking, achieving a \textbf{13.6x processing speedup} on industrial vision feeds.
+    \item Formulated Weld Pool Geometry Monitoring (WPGM) via geometric ellipse fitting (flagging humping bead and burn-through when aspect ratio $L/W > 2.8$), coupled with a zero-flapping hysteresis safety trip to command immediate robot E-STOP.
+\end{itemize}
+\vspace{2pt}
+
+\noindent
+\href{https://github.com/Arkz-Deepak/oomwoo-clean-and-map-arkz}{\textbf{OOMWOO: Autonomous Coverage Planning \& Mobile Robot Navigation}} \hfill \textbf{Jul 2026} \\
+\textit{Technologies: ROS 2 Jazzy, Nav2 Stack, SLAM Toolbox, Boustrophedon Decomposition (BCD)} \hfill \textit{Target: Autonomous Material Handling} \\
+\begin{itemize}
+    \item Implemented complete area coverage planning using Boustrophedon Cellular Decomposition (BCD) with real-time obstacle avoidance and dynamic path replanning under ROS 2 Jazzy.
+    \item Integrated Nav2 costmap layers and SLAM Toolbox for online occupancy grid mapping and deterministic path execution in Gazebo simulation environments.
+\end{itemize}
+\vspace{2pt}
+
+\noindent
+\href{https://github.com/Arkz-Deepak/AutoTwin-AI}{\textbf{AutoTwin-AI: Automotive Chassis Weld Defect Anomaly Detection}} \hfill \textbf{Sep 2026} \\
+\textit{Technologies: PyTorch Convolutional Autoencoders, Blender Cycles OptiX, React Three Fiber 3D} \hfill \textit{Target: Quality Inspection} \\
+\begin{itemize}
+    \item Developed an AI digital twin for automotive ladder-frame chassis; trained autoencoders on 5,000+ OptiX CAD renders to isolate weld slag, spatter bursts, and porosity voids via $|I - \hat{I}|$ residual error heatmaps flagged in $<$42 ms.
+\end{itemize}
+\vspace{2pt}
+
+\noindent
+\href{https://github.com/Arkz-Deepak/vortex-crawler}{\textbf{Hybrid Vortex Crawler: Wall-Climbing Inspection Robot (NeX-Gen Challenge 2026)}} \hfill \textbf{Aug 2026} \\
+\textit{Technologies: ROS 2 Jazzy, Raspberry Pi 4, ESP32 FreeRTOS, 70mm EDF Impeller, BTS7960 Drivers} \hfill \textit{Target: Industrial NDE} \\
+\begin{itemize}
+    \item Designed a vertical climbing robot with 45N aerodynamic holding force; paired ROS 2 supervisor via UART with a FreeRTOS ESP32 node driving 4x 164 RPM planetary motors with optical encoders for industrial non-destructive evaluation (NDE).
+\end{itemize}
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+\begin{itemize}
+    \item \textbf{Industrial Robotics \& Manipulation:} Robot Kinematics (FK/IK, Jacobian), TCP Calibration, Path Planning (RRT/PRM/A*), MoveIt 2, ABB RobotStudio \& RAPID, ROS 2 (Jazzy), MuJoCo Physics Simulation, Gazebo Harmonic, URDF/Xacro Modeling.
+    \item \textbf{Welding \& Manufacturing Systems:} Robotic MIG/TIG/Spot Welding Automation, GMAW Arc Dynamics, Weld Pool Geometry Monitoring (WPGM), CNC/VMC Machining Processes, Precision Tooling, Special Purpose Machines (SPMs).
+    \item \textbf{Computer Vision \& Quality Inspection:} Machine Vision, OpenCV, PyTorch, Convolutional Autoencoders (Defect Heatmaps), YOLOv8/v11, Geometric Ellipse Fitting, Real-Time Edge Video Analytics, In-Process Gauging.
+    \item \textbf{Embedded Systems \& Control:} PLC Automation (Ladder Logic / OpenPLC), STM32, ESP32 (FreeRTOS), Raspberry Pi 4, BTS7960 Motor Drivers, PWM Control, Sensor Telemetry (Optical Encoders, ToF, LiDAR, IMU), Autodesk Fusion 360, Linux.
+\end{itemize}
+
+\end{document}
