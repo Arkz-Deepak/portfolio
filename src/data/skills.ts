@@ -16,7 +16,7 @@ export const skillsData: SkillCategory[] = [
       { name: "Vision-Language-Action (VLA) Frameworks", level: "Advanced" },
       { name: "Robot Path Planning & Sampling (RRT, RRT*, PRM, A*)", level: "Advanced" },
       { name: "LIBERO Robotics Manipulation Benchmark", level: "Advanced" },
-      { name: "ABB RobotStudio & RAPID Programming", level: "Proficient" },
+      { name: "ABB RobotStudio (Simulation Basics)", level: "Proficient" },
       { name: "Industrial Manipulator TCP Calibration", level: "Proficient" },
       { name: "SUMO & TraCI Microscopic Traffic", level: "Advanced" },
       { name: "Nav2 Navigation Stack", level: "Advanced" },
@@ -68,8 +68,8 @@ export const skillsData: SkillCategory[] = [
     ]
   },
   {
-    category: "Software Engineering & Full-Stack",
-    description: "Programming languages, backends, compilers, and development infrastructure",
+    category: "Software Systems & Engineering Infrastructure",
+    description: "Systems programming, backend architectures, compilers, and development workflows",
     skills: [
       { name: "Python", level: "Expert" },
       { name: "C++", level: "Advanced" },
@@ -79,8 +79,7 @@ export const skillsData: SkillCategory[] = [
       { name: "ROS 2 CI/CD (GitHub Actions)", level: "Advanced" },
       { name: "PyPI Package Authoring (neurocode-ai)", level: "Advanced" },
       { name: "Decentralized Mesh Protocols", level: "Proficient" },
-      { name: "FastAPI / Node.js", level: "Advanced" },
-      { name: "Three.js / WebGL", level: "Proficient" },
+      { name: "FastAPI", level: "Advanced" },
       { name: "Linux (Ubuntu 24.04 / WSL2)", level: "Expert" },
       { name: "Docker & Containerization", level: "Advanced" },
       { name: "Git / GitHub Version Control", level: "Advanced" },

@@ -28,7 +28,7 @@ export interface ProfileData {
 export const profileData: ProfileData = {
   name: "Deepak R",
   legalName: "Deepak Rajender",
-  tagline: "Robotics & Automation Engineering Student | Physical AI, Embodied Robotics (MuJoCo/LeRobot), Neuro-Symbolic Graph Slicing & ROS 2 Jazzy",
+  tagline: "Robotics & Automation Engineer | Physical AI, Robot Simulation (MuJoCo/ROS 2 Jazzy), Vision Surveillance & Embedded Systems",
   location: "Chennai, Tamil Nadu, India",
   email: "deepak121289@outlook.com",
   cgpa: "9.2 / 10.0",
@@ -55,5 +55,5 @@ export const profileData: ProfileData = {
     "Finalist — HackNIMA 2026 International Hackathon (AutoTwin-AI)",
     "Team Lead — Smart India Hackathon 2026 (Problem Statement SIH26226)"
   ],
-  bioSummary: "Research-oriented Robotics & Automation engineering student and open-source systems builder. Author of the NeuroCode neuro-symbolic graph framework (published on PyPI: neurocode-ai), Kaggle Top 100 competitor (Rank #72), and ARC Prize 2026 contender. Specializes in Embodied Physical AI (robot manipulation & simulation in MuJoCo/ROS 2), real-time ROS 2 Jazzy & MoveIt 2 motion planning, and edge-constrained neural synthesis."
+  bioSummary: "Robotics & Automation Engineer and open-source systems builder. Author of the NeuroCode neuro-symbolic graph framework (published on PyPI: neurocode-ai), Kaggle Top 100 competitor (Rank #72), and ARC Prize 2026 contender. Specializes in Embodied Physical AI (robot simulation in MuJoCo/ROS 2), real-time ROS 2 Jazzy & MoveIt 2 motion planning, and edge-constrained neural synthesis."
 };

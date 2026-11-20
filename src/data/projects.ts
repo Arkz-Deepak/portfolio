@@ -82,7 +82,7 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "hybrid-vortex-crawler",
-    title: "Hybrid Vortex Crawler: Multi-Surface Wall-Climbing Robot",
+    title: "Hybrid Vortex Crawler: Multi-Surface Wall-Climbing Robot (CAD Concept)",
     subtitle: "Multi-Surface Vertical Scaling & NDE Payload Delivery (NeX-Gen Robotics Challenge 2026 | IDREA)",
     category: "robotics",
     featured: true,
@@ -100,14 +100,13 @@ export const projectsData: ProjectItem[] = [
       "Passive N52 Neodymium Magnetic Arrays for Ferromagnetic Surface Lock"
     ],
     stack: [
+      "Autodesk Fusion 360",
       "ROS 2 Jazzy",
       "Raspberry Pi 4",
       "ESP32 (FreeRTOS)",
       "Dual BTS7960 H-Bridges",
       "70mm EDF",
-      "MPU6050 IMU",
-      "Fusion 360",
-      "Three.js"
+      "MPU6050 IMU"
     ],
     stats: [
       { label: "Holding Downforce", value: "45 N (EDF Vortex)" },
@@ -123,11 +122,11 @@ export const projectsData: ProjectItem[] = [
       url: "/urban-traffic.jpg",
       aspectRatio: "16:9"
     },
-    summary: "Engineered an industrial wall-climbing inspection robot utilizing an active aerodynamic vortex 70mm Electric Ducted Fan (EDF) generating 45 N holding force combined with passive N52 magnetic track locking. Implemented a dual-tier control hierarchy: ROS 2 Jazzy on Raspberry Pi 4 for high-level mission logic and ToF telemetry, paired via UART to an ESP32 FreeRTOS controller for deterministic motor actuation and 50Hz tilt stabilization.",
+    summary: "Designed a 3D parametric CAD concept and mechatronic architecture in Autodesk Fusion 360 for an active aerodynamic vortex wall-climbing robot (70mm EDF generating 45 N holding downforce combined with passive N52 magnetic track locking). Modeled the complete assembly and formulated the dual-tier control hierarchy (ROS 2 Jazzy supervisor and ESP32 FreeRTOS actuation) for vertical Non-Destructive Evaluation (NDE) storage tank inspection, developed for the NeX-Gen Robotics Challenge 2026 concept presentation.",
     highlights: [
-      "Designed in Autodesk Fusion with 3mm CNC carbon fiber plates, Pololu 30T rubber tracks, and 4x 164 RPM planetary gear motors.",
-      "Delivers 1.5 kg payload capacity for Non-Destructive Evaluation (NDE) ultrasound probes and HD thermal inspection.",
-      "Dual-tier control: ROS 2 Jazzy mission supervisor (RPi4) coupled with FreeRTOS 20 kHz deterministic motor PWM (ESP32).",
+      "Engineered complete 3D parametric CAD assembly in Autodesk Fusion 360 with 3mm CNC carbon fiber base plates, Pololu 30T rubber tracks, and 4x 164 RPM planetary gear motors.",
+      "Designed mechanical integration for 1.5 kg payload capacity for Non-Destructive Evaluation (NDE) ultrasound probes and HD thermal inspection.",
+      "Architected dual-tier control scheme: ROS 2 Jazzy mission supervisor (RPi4) coupled with FreeRTOS 20 kHz deterministic motor PWM (ESP32).",
       "Qualified for NeX-Gen Robotics Challenge 2026 (IDREA | Round 1 Concept Presentation)."
     ],
     architectureMermaid: `graph TD
